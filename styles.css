@@ -597,3 +597,41 @@ button {
   .project__header { min-height: auto; padding-block: var(--s-300); }
   .project__back { top: var(--s-100); left: var(--s-100); }
 }
+
+/* ---------- Page transitions ----------
+   "翻书" / page-turn — every page-load runs a directional slide-in with
+   a subtle 3D rotation, evoking a turning book page. Direction is set
+   by a class on <html>:
+     • .vt-forward → project / writing pages slide in from the RIGHT
+       (you're going INTO the book — page comes from the next leaf).
+     • .vt-back    → the index slides in from the LEFT (returning home
+       — page comes back from the previous leaf).
+
+   Pure CSS, runs on EVERY page load. No protocol or browser API
+   requirements — visible identically on file://, localhost, deployed,
+   refreshes, and navigations. The .dock sits outside .page so it stays
+   anchored across the change. */
+@keyframes pageTurnFromRight {
+  0%   { opacity: 0;   transform: translateX(80px); clip-path: inset(0 0 100% 0); }
+  18%  { opacity: 0.9;                              clip-path: inset(0 0 80% 0); }
+  55%  {                                            clip-path: inset(0 0 0 0); }
+  100% { opacity: 1;   transform: translateX(0);   clip-path: inset(0 0 0 0); }
+}
+@keyframes pageTurnFromLeft {
+  0%   { opacity: 0;   transform: translateX(-80px); clip-path: inset(0 0 100% 0); }
+  18%  { opacity: 0.9;                                clip-path: inset(0 0 80% 0); }
+  55%  {                                              clip-path: inset(0 0 0 0); }
+  100% { opacity: 1;   transform: translateX(0);     clip-path: inset(0 0 0 0); }
+}
+
+:root.vt-forward .page {
+  animation: pageTurnFromRight 1.0s cubic-bezier(0.33, 0.05, 0.2, 1) both;
+}
+:root.vt-back .page {
+  animation: pageTurnFromLeft 1.0s cubic-bezier(0.33, 0.05, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root.vt-forward .page,
+  :root.vt-back    .page { animation: none; }
+}
