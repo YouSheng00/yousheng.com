@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" sizes="64x64" href="CompassStufavicon (1).png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motion — CompassStu</title>
+  <style>
+    :root {
+      /* Purple accent — matched to compass-intro.html for visual consistency. */
+      --accent2: #b285ff;
+    }
+
+    /* ─────────────────────────────────────────────────────────────────────
+       Motion · Single-compass cinematic page.
+       Self-contained for iframe embed (no shared.css / shared.js).
+       ───────────────────────────────────────────────────────────────────── */
+
+    body {
+      background: #07050f;
+      color: #ededf2;
+      font-family: 'Inter', system-ui, sans-serif;
+      margin: 0;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    /* ── STAGE — full-viewport canvas ─────────────────────────────────── */
+    .motion-stage {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      isolation: isolate;
+      cursor: crosshair;
+    }
+
+    /* ── Layer 1: deep atmospheric gradient ───────────────────────────── */
+    .ambient-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 50%,
+          rgba(40, 24, 88, 0.55) 0%,
+          rgba(20, 14, 50, 0.30) 35%,
+          rgba(7, 5, 15, 0) 70%),
+        radial-gradient(ellipse 80% 60% at 50% 100%,
+          rgba(124, 92, 252, 0.10) 0%,
+          transparent 60%);
+      animation: hue-drift 24s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes hue-drift {
+      0%, 100% { filter: hue-rotate(0deg)   saturate(1.0); }
+      50%      { filter: hue-rotate(-12deg) saturate(1.15); }
+    }
+
+    /* ── Layer 2: drifting particle field (canvas) ────────────────────── */
+    .ambient-particles {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    /* ── Layer 3: horizon line ─────────────────────────────────────────── */
+    .horizon-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      z-index: 3;
+      pointer-events: none;
+      background: linear-gradient(to right,
+        transparent 0%,
+        rgba(167, 139, 250, 0.18) 25%,
+        rgba(167, 139, 250, 0.32) 50%,
+        rgba(167, 139, 250, 0.18) 75%,
+        transparent 100%);
+      transform: translateY(-0.5px);
+    }
+
+    /* ── Layer 4: cardinal beams (4 rays N/S/E/W from compass centre) ── */
+    .cardinal-beams {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .beams-anchor {
+      position: relative;
+      width: 0;
+      height: 0;
+    }
+    .beam {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: 0 0;
+      pointer-events: none;
+    }
+    .beam.vertical {
+      width: 1px;
+      height: 50vh;
+      background: linear-gradient(to top,
+        rgba(167, 139, 250, 0.0) 0%,
+        rgba(167, 139, 250, 0.22) 18%,
+        rgba(167, 139, 250, 0.06) 60%,
+        transparent 100%);
+    }
+    .beam.horizontal {
+      width: 50vw;
+      height: 1px;
+      background: linear-gradient(to right,
+        rgba(167, 139, 250, 0.0) 0%,
+        rgba(167, 139, 250, 0.22) 18%,
+        rgba(167, 139, 250, 0.06) 60%,
+        transparent 100%);
+    }
+    .beam.bn { transform: rotate(0deg)   translate(0, -100%); }
+    .beam.bs { transform: rotate(180deg) translate(0, -100%); }
+    .beam.be { transform: rotate(0deg);  width: 50vw; height: 1px;
+               background: linear-gradient(to right,
+                 rgba(167,139,250,0) 0%,
+                 rgba(167,139,250,0.22) 18%,
+                 rgba(167,139,250,0.06) 60%,
+                 transparent 100%); }
+    .beam.bw { transform: rotate(180deg); width: 50vw; height: 1px;
+               background: linear-gradient(to right,
+                 rgba(167,139,250,0) 0%,
+                 rgba(167,139,250,0.22) 18%,
+                 rgba(167,139,250,0.06) 60%,
+                 transparent 100%); }
+
+    /* ── Layer 5: pulsing radial glow halo behind the compass ─────────── */
+    .ambient-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 700px; height: 700px;
+      transform: translate(-50%, -50%);
+      z-index: 4;
+      background: radial-gradient(circle at 50% 50%,
+        rgba(196, 181, 253, 0.18) 0%,
+        rgba(167, 139, 250, 0.10) 22%,
+        rgba(124, 92, 252, 0.04) 48%,
+        transparent 70%);
+      filter: blur(30px);
+      animation: glow-pulse 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes glow-pulse {
+      0%, 100% {
+        opacity: 0.65;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.06);
+      }
+    }
+
+    /* ── Layer 6: corner readouts (editorial flight-instrument feel) ─── */
+    .readout {
+      position: absolute;
+      z-index: 6;
+      font-family: 'JetBrains Mono', 'Inter', monospace;
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      line-height: 1.65;
+      color: rgba(196, 181, 253, 0.55);
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+    .readout strong {
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 600;
+    }
+    .readout.tl { top: 32px; left: 40px; }
+    .readout.tr { top: 32px; right: 40px; text-align: right; }
+    .readout.bl { bottom: 32px; left: 40px; }
+    .readout.br { bottom: 32px; right: 40px; text-align: right; }
+
+    .live-dot {
+      display: inline-block;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent2);
+      margin-right: 6px;
+      animation: live-blink 1.6s ease-in-out infinite;
+      vertical-align: middle;
+      transform: translateY(-1px);
+    }
+    @keyframes live-blink {
+      0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--accent2); }
+      50%      { opacity: 0.3; box-shadow: 0 0 0 var(--accent2); }
+    }
+
+    /* ── Layer 7: compass + framing typography (centre stage) ──────────
+       Layout strategy: the .compass-stage is a 0×0 anchor positioned at
+       viewport (50%, 50%) — i.e. exactly on the horizon line. The compass
+       and the surrounding text are absolutely positioned around that
+       anchor point, so the COMPASS centre — not the column's geometric
+       midpoint — sits on the horizon. The whole stage still moves as one
+       under cursor parallax via the inline transform set in JS. */
+    .compass-stage {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 0; height: 0;
+      z-index: 5;
+      will-change: transform;
+    }
+    .compass-wrap {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(324px, 63vw);
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .stage-eyebrow {
+      position: absolute;
+      left: 50%;
+      bottom: calc(min(162px, 31.5vw) + 24px);
+      transform: translateX(-50%);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.4em;
+      color: rgba(196, 181, 253, 0.55);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .stage-bottom {
+      position: absolute;
+      left: 50%;
+      top: calc(min(162px, 31.5vw) + 32px);
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: max-content;
+      max-width: min(480px, 90vw);
+    }
+    .compass-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -8%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%,
+        rgba(167, 139, 250, 0.10) 0%,
+        rgba(124, 92, 252, 0.04) 50%,
+        transparent 75%);
+      filter: blur(8px);
+      pointer-events: none;
+    }
+
+    .cm-svg { width: 100%; height: 100%; display: block; overflow: visible; }
+    .cm-svg .ring-outer {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.22);
+      stroke-width: 1.2;
+    }
+    .cm-svg .ring-inner {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.18);
+      stroke-width: 0.75;
+      stroke-dasharray: 1.5 4;
+      opacity: 0.7;
+    }
+    .cm-svg .tick {
+      stroke: rgba(255, 255, 255, 0.20);
+      stroke-width: 1.2;
+      stroke-linecap: round;
+    }
+    .cm-svg .tick.cardinal {
+      stroke: var(--accent2);
+      stroke-width: 1.4;
+      opacity: 1;
+    }
+    .cm-svg .needle-n { fill: var(--accent2); }
+    .cm-svg .needle-s { fill: rgba(196, 181, 253, 0.45); }
+    .cm-svg .center-glow {
+      fill: var(--accent2);
+      opacity: 0.08;
+    }
+    .cm-svg .pivot-ring {
+      fill: none;
+      stroke: var(--accent2);
+      stroke-width: 1;
+      opacity: 0.85;
+    }
+    .cm-svg .pivot-dot { fill: var(--accent2); }
+    .cm-svg .compass-letter {
+      font-family: 'Inter Tight', 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      fill: var(--accent2);
+    }
+    .cm-svg .ring-rotor {
+      transform-origin: 100px 100px;
+      animation: compassRotorSwing 84s linear infinite;
+    }
+    .cm-svg .needle {
+      transform-origin: 100px 100px;
+      animation: compassNeedleDrift 10s ease-in-out infinite;
+    }
+    @keyframes compassRotorSwing {
+      0%   { transform: rotate(0deg);   animation-timing-function: ease-out; }
+      25%  { transform: rotate(40deg);  animation-timing-function: ease-in; }
+      50%  { transform: rotate(0deg);   animation-timing-function: ease-out; }
+      75%  { transform: rotate(-40deg); animation-timing-function: ease-in; }
+      100% { transform: rotate(0deg); }
+    }
+    @keyframes compassNeedleDrift {
+      0%, 100% { transform: rotate(-2.5deg); }
+      50%      { transform: rotate(2.5deg); }
+    }
+
+    /* ── Tagline below compass ────────────────────────────────────────── */
+    .stage-tagline {
+      font-size: clamp(18px, 2.4vw, 28px);
+      font-weight: 600;
+      letter-spacing: -0.014em;
+      line-height: 1.25;
+      color: rgba(255, 255, 255, 0.95);
+      text-align: center;
+      max-width: 480px;
+      margin: 0;
+    }
+    .stage-tagline em {
+      font-style: normal;
+      color: var(--accent2);
+    }
+    .stage-meta {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.4em;
+      color: rgba(196, 181, 253, 0.4);
+      text-transform: uppercase;
+    }
+
+    /* ── Subtle grid behind everything ────────────────────────────────── */
+    .grid-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background-image:
+        linear-gradient(to right, rgba(167, 139, 250, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(167, 139, 250, 0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+      pointer-events: none;
+    }
+
+    /* ── Reduced motion ──────────────────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      .cm-svg .ring-rotor,
+      .cm-svg .needle,
+      .ambient-glow,
+      .ambient-bg,
+      .live-dot { animation: none !important; }
+    }
+
+    /* ── Mobile ──────────────────────────────────────────────────────── */
+    @media (max-width: 720px) {
+      .readout { font-size: 9px; letter-spacing: 0.14em; }
+      .readout.tl, .readout.bl { left: 20px; }
+      .readout.tr, .readout.br { right: 20px; }
+      .readout.tl, .readout.tr { top: 20px; }
+      .readout.bl, .readout.br { bottom: 20px; }
+      .ambient-glow { width: 500px; height: 500px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="motion-stage" id="stage">
+
+    <div class="ambient-bg"></div>
+    <div class="grid-overlay"></div>
+    <canvas class="ambient-particles" id="particles"></canvas>
+    <div class="horizon-line"></div>
+
+    <div class="cardinal-beams">
+      <div class="beams-anchor">
+        <div class="beam vertical bn"></div>
+        <div class="beam horizontal be"></div>
+        <div class="beam vertical bs"></div>
+        <div class="beam horizontal bw"></div>
+      </div>
+    </div>
+
+    <div class="ambient-glow"></div>
+
+    <div class="readout tl">
+      <span class="live-dot"></span><strong>LIVE</strong><br>
+      LAT 51° 30' N<br>
+      LON 000° 07' W
+    </div>
+    <div class="readout tr">
+      COMPASSSTU<br>
+      <strong>BRAND · MOTION</strong><br>
+      2026 / V.01
+    </div>
+    <div class="readout bl">
+      SWING ±40°<br>
+      CYCLE 84.0s<br>
+      <strong>EASE-IN/OUT</strong>
+    </div>
+    <div class="readout br">
+      NEEDLE DRIFT ±2.5°<br>
+      MODE PENDULUM<br>
+      <strong>STATUS NORMAL</strong>
+    </div>
+
+    <div class="compass-stage" id="compassStage">
+      <span class="stage-eyebrow">Brand Design</span>
+      <div class="compass-wrap">
+        <svg class="cm-svg" viewBox="0 0 200 200">
+          <g class="ring-rotor">
+            <circle class="ring-outer" cx="100" cy="100" r="82"/>
+            <circle class="ring-inner" cx="100" cy="100" r="54"/>
+            <line class="tick cardinal" x1="100" y1="20"  x2="100" y2="32"/>
+            <line class="tick"          x1="141" y1="29"  x2="137" y2="37"/>
+            <line class="tick"          x1="171" y1="59"  x2="164" y2="64"/>
+            <line class="tick cardinal" x1="180" y1="100" x2="168" y2="100"/>
+            <line class="tick"          x1="171" y1="141" x2="164" y2="137"/>
+            <line class="tick"          x1="141" y1="171" x2="137" y2="164"/>
+            <line class="tick cardinal" x1="100" y1="180" x2="100" y2="168"/>
+            <line class="tick"          x1="59"  y1="171" x2="63"  y2="164"/>
+            <line class="tick"          x1="29"  y1="141" x2="36"  y2="137"/>
+            <line class="tick cardinal" x1="20"  y1="100" x2="32"  y2="100"/>
+            <line class="tick"          x1="29"  y1="59"  x2="36"  y2="63"/>
+            <line class="tick"          x1="59"  y1="29"  x2="63"  y2="37"/>
+            <text class="compass-letter" x="100" y="8"
+                  text-anchor="middle" dominant-baseline="middle">N</text>
+          </g>
+          <g class="needle">
+            <polygon class="needle-n" points="100,42 105,100 100,103 95,100"/>
+            <polygon class="needle-s" points="100,158 105,100 100,97 95,100"/>
+          </g>
+          <circle class="center-glow" cx="100" cy="100" r="28"/>
+          <circle class="pivot-ring"  cx="100" cy="100" r="7"/>
+          <circle class="pivot-dot"   cx="100" cy="100" r="3"/>
+        </svg>
+      </div>
+      <div class="stage-bottom">
+        <p class="stage-tagline">From learning to <em>capability.</em></p>
+        <span class="stage-meta">CompassStu</span>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // Drifting particle field — small lavender specks slowly moving with
+    // occasional twinkle. Canvas-based, GPU-friendly.
+    (function () {
+      const canvas = document.getElementById('particles');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let W = canvas.width = window.innerWidth;
+      let H = canvas.height = window.innerHeight;
+
+      const COUNT = Math.min(70, Math.floor((W * H) / 26000));
+      const particles = Array.from({ length: COUNT }, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.2 + 0.4,
+        vx: (Math.random() - 0.5) * 0.08,
+        vy: (Math.random() - 0.5) * 0.08,
+        twinklePhase: Math.random() * Math.PI * 2,
+        baseAlpha: Math.random() * 0.5 + 0.15
+      }));
+
+      window.addEventListener('resize', () => {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      });
+
+      let t = 0;
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        t += 0.012;
+        for (const p of particles) {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < -5) p.x = W + 5;
+          if (p.x > W + 5) p.x = -5;
+          if (p.y < -5) p.y = H + 5;
+          if (p.y > H + 5) p.y = -5;
+
+          const twinkle = (Math.sin(t + p.twinklePhase) + 1) / 2;
+          const alpha = p.baseAlpha * (0.4 + 0.6 * twinkle);
+
+          ctx.fillStyle = `rgba(196, 181, 253, ${alpha})`;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // Cursor parallax — compass shifts subtly toward the cursor.
+    (function () {
+      const stage = document.getElementById('compassStage');
+      if (!stage) return;
+      if (window.matchMedia('(pointer: coarse)').matches) return;
+
+      let targetX = 0, targetY = 0;
+      let currentX = 0, currentY = 0;
+
+      window.addEventListener('mousemove', (e) => {
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight / 2;
+        const nx = (e.clientX - cx) / cx;
+        const ny = (e.clientY - cy) / cy;
+        targetX = nx * 12;
+        targetY = ny * 12;
+      });
+
+      function tick() {
+        currentX += (targetX - currentX) * 0.06;
+        currentY += (targetY - currentY) * 0.06;
+        stage.style.transform =
+          `translate(calc(-50% + ${currentX.toFixed(2)}px), calc(-50% + ${currentY.toFixed(2)}px))`;
+        requestAnimationFrame(tick);
+      }
+      tick();
+    })();
+  </script>
+</body>
+</html>

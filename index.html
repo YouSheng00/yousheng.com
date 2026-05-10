@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Your Name — Portfolio</title>
+    <meta name="description" content="A short description of your practice and work." />
+    <script>
+      // Apply saved theme before paint so there's no flash on page load.
+      (function () {
+        try {
+          if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('theme-light');
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="intro">
+        <h1 class="wordmark">YouSheng</h1>
+        <p class="tagline">
+          I design products, brands, and learning systems for founders building at the edge of AI<br>
+          - built to ship, structured to compound leverage.
+        </p>
+      </header>
+
+      <section class="grid" aria-label="Selected work">
+        <!-- Card: large, left -->
+        <article class="card card--tall" data-tag="Case Study">
+          <a class="card__link" href="project.html" aria-label="Open project: CompassStu">
+            <div class="card__media">
+              <iframe class="card__motion" src="compass-intro.html" title="CompassStu intro" aria-hidden="true" loading="lazy" tabindex="-1"></iframe>
+            </div>
+            <footer class="card__meta">
+              <h2 class="card__title">CompassStu</h2>
+              <p class="card__subtitle">Adaptive AI Learning Platform</p>
+            </footer>
+          </a>
+        </article>
+
+        <!-- Card: 16:9 video loop, right -->
+        <article class="card" data-tag="Case Study" style="--ratio: 1.78;">
+          <a class="card__link" href="project-2.html" aria-label="Open project: SATS Cargo Loading Simulation">
+            <div class="card__media">
+              <video class="card__motion"
+                autoplay muted loop playsinline
+                aria-hidden="true"
+                preload="auto">
+                <source src="Video/SatsApron1.mp4" type="video/mp4">
+              </video>
+            </div>
+            <footer class="card__meta">
+              <h2 class="card__title">SATS Cargo Loading Simulation</h2>
+              <p class="card__subtitle">3D Interactive Training Simulation</p>
+            </footer>
+          </a>
+        </article>
+
+        <!-- Card: Atelier image (vertical) -->
+        <article class="card card--accent" data-tag="Case Study" style="--ratio: 0.94;">
+          <a class="card__link" href="project-3.html" aria-label="Open project: Atelier">
+            <div class="card__media">
+              <img src="Images/Atelierfull.png" alt="Atelier — personal branding studio">
+            </div>
+            <footer class="card__meta">
+              <h2 class="card__title">Atelier</h2>
+              <p class="card__subtitle">Personal Branding Studio</p>
+            </footer>
+          </a>
+        </article>
+
+        <!-- Card: small -->
+        <article class="card card--small" data-tag="Case Study">
+          <a class="card__link" href="project-4.html" aria-label="Open project: Project Four">
+            <div class="card__media">
+              <div class="card__placeholder card__placeholder--light">
+                <span>Light media</span>
+              </div>
+            </div>
+            <footer class="card__meta">
+              <h2 class="card__title">Project Four</h2>
+              <p class="card__subtitle">Print, Identity</p>
+            </footer>
+          </a>
+        </article>
+      </section>
+    </main>
+
+    <nav class="dock" aria-label="Primary">
+      <div class="dock__group">
+        <a class="dock__link is-active" href="#">Work</a>
+        <a class="dock__link" href="writing.html">Writing</a>
+        <a class="dock__link" href="#">About</a>
+      </div>
+      <button class="dock__action" type="button" aria-label="Toggle theme" data-theme-toggle>
+        <svg class="dock__icon dock__icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2.5v2.4M12 19.1v2.4M4.22 4.22l1.7 1.7M18.08 18.08l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.22 19.78l1.7-1.7M18.08 5.92l1.7-1.7"/>
+        </svg>
+        <svg class="dock__icon dock__icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>
+        </svg>
+      </button>
+    </nav>
+
+    <script src="script.js"></script>
+  </body>
+</html>

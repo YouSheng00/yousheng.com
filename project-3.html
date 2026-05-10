@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project Three — YouSheng</title>
+    <meta name="description" content="Project case study." />
+    <script>
+      // Apply saved theme before paint so there's no flash on page load.
+      (function () {
+        try {
+          if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('theme-light');
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page page--project">
+      <header class="project__header">
+        <h1 class="project__title">Project Three</h1>
+      </header>
+
+      <section class="project-grid" aria-label="Project content">
+        <!-- Row 1: full-width -->
+        <div class="project-block project-block--full project-block--hero">
+          <div class="card__placeholder"><span>Hero</span></div>
+        </div>
+
+        <!-- Row 2: full-width -->
+        <div class="project-block project-block--full">
+          <div class="card__placeholder"><span>Section</span></div>
+        </div>
+
+        <!-- Row 3: two halves -->
+        <div class="project-block project-block--half">
+          <div class="card__placeholder"><span>Detail A</span></div>
+        </div>
+        <div class="project-block project-block--half">
+          <div class="card__placeholder"><span>Detail B</span></div>
+        </div>
+
+        <!-- Row 4: full-width -->
+        <div class="project-block project-block--full">
+          <div class="card__placeholder"><span>Section</span></div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="dock" aria-label="Primary">
+      <div class="dock__group">
+        <a class="dock__link" href="index.html" data-back>Back</a>
+        <a class="dock__link" href="#">Calibration</a>
+        <a class="dock__link" href="#">Site</a>
+      </div>
+      <button class="dock__action" type="button" aria-label="Toggle theme" data-theme-toggle>
+        <svg class="dock__icon dock__icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2.5v2.4M12 19.1v2.4M4.22 4.22l1.7 1.7M18.08 18.08l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.22 19.78l1.7-1.7M18.08 5.92l1.7-1.7"/>
+        </svg>
+        <svg class="dock__icon dock__icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>
+        </svg>
+      </button>
+    </nav>
+
+    <script src="script.js"></script>
+  </body>
+</html>

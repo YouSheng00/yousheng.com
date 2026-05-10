@@ -1,0 +1,18 @@
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# AI tooling
+.claude/
+
+# Build / deps (in case you ever add them)
+node_modules/
+dist/

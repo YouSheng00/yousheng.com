@@ -1,0 +1,599 @@
+/* Inter (variable) — closest free analogue to UT Futter Grotesk.
+   Loaded as a full 100..900 axis so font-weight: 350 renders at exactly 350. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+/* ---------- Design tokens (from reference) ---------- */
+:root {
+  --c-light-white: #ffffff;
+  --c-light-gray: #f0f0f0;
+  --c-light-gray-muted: #9b9b9b;
+  --c-light-midgray: #d6d6d6;
+  --c-dark-black: #0b1215;
+  --c-dark-gray: #333333;
+  --c-chroma-red: #ff452c;
+  --c-chroma-green: #48ea2d;
+
+  /* Spacing scale */
+  --s-025: 0.25rem;
+  --s-050: 0.5rem;
+  --s-100: 1rem;
+  --s-150: 1.5rem;
+  --s-200: 2rem;
+  --s-300: 3rem;
+  --s-400: 4rem;
+  --s-500: 5rem;
+
+  --main-inline-s: 1rem;
+  --main-block-s: 1rem;
+
+  /* Surfaces */
+  --c-background: var(--c-dark-black);
+  --c-text: var(--c-light-white);
+  --c-text-muted: var(--c-light-gray-muted);
+  --c-card-background: var(--c-dark-gray);
+  --c-card-foreground: var(--c-light-white);
+  --module-bg-color: #222;
+  --module-bg-color-hover: #2e2e2e;
+
+  /* Component */
+  --site-border-radius: 0.625rem;
+  --site-text-hover-opacity: 0.6;
+  --nav-height: 3rem;
+  --nav-padding-inline: 13px;
+  --section-spacing: 60px;
+  --project-spacing: var(--main-inline-s);
+
+  color-scheme: dark;
+}
+
+/* Light theme — flip background + text. Toggled by JS adding
+   `.theme-light` to <html>. Everything that reads from these tokens
+   (body, wordmark, tagline, card title, card subtitle) flips with it. */
+:root.theme-light {
+  --c-background: #ffffff;
+  --c-text: #000000;
+  --c-text-muted: #555555;
+  --c-card-foreground: #000000;
+  color-scheme: light;
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  background: var(--c-background);
+  color: var(--c-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-font-smoothing: antialiased;
+  font-family: "UT FutterGrotesk", "Inter", "Helvetica Neue", system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1rem;
+  letter-spacing: 0.02rem;
+  /* ss09 is UT FG's set — silently ignored by Inter.
+     cv11 = single-story `a` in Inter, gives a closer grotesk feel. */
+  font-feature-settings: "ss09", "cv11";
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar { display: none; }
+
+a { color: inherit; text-decoration: none; }
+a:hover { opacity: var(--site-text-hover-opacity); transition: opacity 0.2s ease; }
+
+img, video { display: block; max-width: 100%; height: auto; }
+
+button {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+/* ---------- Layout ---------- */
+.page {
+  padding: var(--s-100) var(--main-inline-s) calc(var(--nav-height) + var(--s-300));
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+/* ---------- Intro ----------
+   Reserves the top 50vh so the intro and the project grid each occupy
+   roughly half the viewport on first load. The cards below are free to
+   overflow past the fold. */
+.intro {
+  min-height: 52vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--s-200);
+  max-width: 130ch;
+  margin: 0 auto;
+}
+
+.wordmark {
+  font-size: clamp(1.08rem, 3.24vw, 1.35rem);
+  line-height: 1.15;
+  font-weight: 550;
+  letter-spacing: 0.06em;
+  margin: 0 0 38px;
+  text-transform: uppercase;
+  text-shadow: 0 0 0.4px currentColor;
+  display: inline-block;
+  transform: scaleY(1.05);
+  transform-origin: center bottom;
+}
+
+.tagline {
+  font-size: clamp(1.08rem, 3.24vw, 1.35rem);
+  line-height: 1.15;
+  font-weight: 350;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin: 0;
+  max-width: 120ch;
+  margin-inline: auto;
+  text-shadow: 0 0 0.4px currentColor;
+}
+
+/* ---------- Project grid ---------- */
+/* Two-column. Each card gets `padding: 0 calc(spacing/2)` so the visual gap
+   between cards is `--project-spacing`, mirroring the UPSET .project rule. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: start;
+}
+
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- Card ----------
+   Structure (matches reference):
+     .card  (positioning context, per-card --ratio)
+       .card__link  (grid: "image" / "text")
+         .card__media (padding-bottom: 100%/--ratio → height from width)
+         .card__meta  (title + categories, plain text below image)
+*/
+.card {
+  --ratio: 1.4;
+  position: relative;
+  margin-bottom: var(--s-200);
+  padding: 0 calc(var(--project-spacing) / 2);
+}
+
+/* Per-card image proportions — tweak per project. The default --ratio: 1.4
+   is set on .card above; modifier classes override per variant. */
+.card--tall   { --ratio: 1.78; }
+.card--small  { --ratio: 1.4;  }
+.card--accent { --ratio: 1.75; }
+
+/* "Case Study" pill, anchored to the image area's top-left. */
+.card::before {
+  content: attr(data-tag);
+  position: absolute;
+  top: var(--s-100);
+  left: calc(var(--project-spacing) / 2 + var(--s-100));
+  z-index: 2;
+  padding: 6px 10px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  background: rgba(120, 120, 120, 0.55);
+  color: var(--c-light-white);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.card__link {
+  display: grid;
+  grid-template-areas: "image" "text";
+  gap: var(--s-100);
+  width: 100%;
+}
+
+.card__link:hover { opacity: 1; }
+.card__link:hover .card__media > * { transform: scale(1.015); }
+
+/* Image area — height = width / ratio (UPSET pattern). */
+.card__media {
+  grid-area: image;
+  position: relative;
+  width: 100%;
+  padding-bottom: calc(100% / var(--ratio));
+  background: var(--c-card-background);
+  border-radius: var(--site-border-radius);
+  overflow: hidden;
+}
+
+/* Anything inside .card__media fills the box. */
+.card__media > * {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.card__media img,
+.card__media video {
+  object-fit: cover;
+}
+
+/* Iframe / video motion embeds (CompassStu intro, game loop). Sits at
+   100% of the .card__media box. pointer-events:none lets clicks pass
+   through to the parent card link. */
+.card__motion {
+  border: 0;
+  background: #000;
+  pointer-events: none;
+  object-fit: cover;
+}
+
+.card__placeholder {
+  display: grid;
+  place-items: center;
+  color: var(--c-text-muted);
+  background:
+    repeating-linear-gradient(45deg,
+      rgba(255, 255, 255, 0.02) 0 12px,
+      rgba(255, 255, 255, 0.04) 12px 24px),
+    var(--module-bg-color);
+}
+
+.card__placeholder--portrait {
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255, 255, 255, 0.08), transparent 60%),
+    var(--module-bg-color);
+}
+
+.card__placeholder--light {
+  background: var(--c-light-gray);
+  color: var(--c-dark-black);
+}
+
+/* Accent (chartreuse/green) panel like the reference */
+.card--accent .card__media--accent {
+  background: var(--c-chroma-green);
+  color: var(--c-dark-black);
+  display: grid;
+  place-items: center;
+  padding: var(--s-200);
+}
+
+.card--accent .card__media { background: var(--c-chroma-green); }
+
+.card__display {
+  margin: 0;
+  font-size: clamp(40px, 6vw, 88px);
+  line-height: 0.95;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-align: center;
+  display: grid;
+  gap: var(--s-050);
+}
+
+.card__display .flip {
+  transform: rotate(180deg);
+  display: inline-block;
+}
+
+/* Card meta — plain text below the image (UPSET .project text area).
+   Small left padding compensates for glyph left side bearing so the
+   text optically aligns with the rounded media's left edge. */
+.card__meta {
+  grid-area: text;
+  display: grid;
+  gap: 4px;
+  padding: 0 0 0 4px;
+  background: transparent;
+  color: var(--c-text);
+}
+
+.card__title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--c-card-foreground);
+}
+
+.card__subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: var(--c-text-muted);
+}
+
+/* ---------- Project page ----------
+   Layout (top → bottom):
+     row 1: one full-width block (hero)
+     row 2: one full-width block
+     row 3: two half-width blocks
+     row 4: one full-width block
+   Each block is a placeholder box now — drop content/images in later.
+*/
+.page--project {
+  padding: var(--s-100) var(--main-inline-s) calc(var(--nav-height) + var(--s-300));
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+/* Header band — mirrors the index intro: 52vh, flex-centered, room to breathe. */
+.project__header {
+  min-height: 52vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--s-200);
+  max-width: 130ch;
+  margin: 0 auto;
+}
+
+/* Back pill — floats top-left over content so it's always reachable
+   without breaking the centered header band. Same surface as the dock. */
+.project__back {
+  position: fixed;
+  top: var(--s-200);
+  left: var(--s-200);
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px 8px 10px;
+  border-radius: 999px;
+  background: rgba(18, 20, 22, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 8px 24px rgba(0, 0, 0, 0.35);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--c-light-white);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.project__back:hover { background: rgba(40, 42, 44, 0.78); opacity: 1; }
+.project__back:active { transform: scale(0.97); }
+
+/* Title — matches .wordmark styling on the index. */
+.project__title {
+  margin: 0 0 38px;
+  font-size: clamp(1.08rem, 3.24vw, 1.35rem);
+  line-height: 1.15;
+  font-weight: 550;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-shadow: 0 0 0.4px currentColor;
+  display: inline-block;
+  transform: scaleY(1.05);
+  transform-origin: center bottom;
+}
+
+/* Meta — matches .tagline styling on the index. */
+.project__meta {
+  margin: 0;
+  font-size: clamp(1.08rem, 3.24vw, 1.35rem);
+  line-height: 1.15;
+  font-weight: 350;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 0.4px currentColor;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  gap: var(--project-spacing);
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 calc(var(--project-spacing) / 2);
+}
+
+.project-block {
+  position: relative;
+  border-radius: var(--site-border-radius);
+  overflow: hidden;
+  background: var(--c-card-background);
+}
+
+.project-block--full { grid-column: 1 / -1; }
+.project-block--half { grid-column: span 10; }
+.project-block--60   { grid-column: span 12; }
+.project-block--40   { grid-column: span 8; }
+
+/* Default placeholder ratios per block. Override per-block below. */
+.project-block--full { aspect-ratio: 16 / 9; }
+.project-block--half { aspect-ratio: 4 / 3; }
+.project-block--60   { aspect-ratio: 4 / 3; }
+.project-block--40   { aspect-ratio: 4 / 3; }
+.project-block--hero { aspect-ratio: 16 / 8; }
+
+/* --auto: drop the fixed aspect-ratio so the block's height comes from
+   its content (e.g. an image's natural proportions, no cropping). Other
+   blocks in the same grid row stretch to match via default align-items. */
+.project-block--auto { aspect-ratio: auto; }
+
+/* --crop-top: shrink the block to 16:8.415 (6.5% shorter than 16:9). For a
+   16:9 video sized via object-fit:cover, the height now overhangs by 6.5%;
+   pinning object-position to the bottom crops exactly that 6.5% off the
+   top — useful when a screen recording shows the browser chrome up top. */
+.project-block--crop-top { aspect-ratio: 16 / 8.415; }
+.project-block > video.project-block__video--crop-top {
+  object-position: 50% 100%;
+}
+.project-block--auto > img,
+.project-block--auto > video {
+  position: static;
+  width: 100%;
+  height: auto;
+  object-fit: initial;
+}
+
+.project-block .card__placeholder { width: 100%; height: 100%; }
+
+.project-block > img,
+.project-block > video,
+.project-block > iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+}
+
+@media (max-width: 600px) {
+  .project-grid { grid-template-columns: 1fr; }
+  .project-block--half,
+  .project-block--60,
+  .project-block--40 { grid-column: 1; aspect-ratio: 4 / 3; }
+  .project-block--full,
+  .project-block--hero { aspect-ratio: 4 / 3; }
+}
+
+/* ---------- Floating dock / nav ----------
+   Two pills sit side-by-side: a nav group (Work / Fonts / About) and a
+   standalone circular action button (theme toggle). Both share the same
+   surface — translucent dark, blurred, soft drop shadow. */
+.dock {
+  position: fixed;
+  bottom: max(var(--s-150), env(safe-area-inset-bottom, 0));
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 50;
+}
+
+.dock__group,
+.dock__action {
+  height: var(--nav-height);
+  background: rgba(120, 120, 120, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 8px 24px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+.dock__group {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 8px;
+  border-radius: 999px;
+}
+
+/* Nav link pills — text and active state. */
+.dock__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(var(--nav-height) - 16px);
+  min-width: calc(var(--nav-height) - 16px);
+  padding: 0 var(--nav-padding-inline);
+  border-radius: 999px;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--c-light-white);
+  transition:
+    background 0.2s ease,
+    color 0.25s ease,
+    transform 0.2s ease;
+}
+
+.dock__link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  opacity: 1;
+}
+
+.dock__link:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 2px;
+}
+
+.dock__link:active { transform: scale(0.97); }
+
+.dock__link.is-active {
+  background: var(--c-light-gray-muted);
+  color: var(--c-light-white);
+}
+
+/* Standalone action button (theme toggle). */
+.dock__action {
+  width: var(--nav-height);
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--c-light-white);
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.dock__action:hover {
+  background: rgba(40, 42, 44, 0.78);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.dock__action:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 2px;
+}
+
+.dock__action:active { transform: scale(0.94); }
+
+.dock__icon {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: opacity 0.2s ease, transform 0.3s ease;
+}
+
+/* Show sun in dark theme, moon in light theme (light theme not yet wired). */
+.dock__icon--moon { display: none; }
+:root.theme-light .dock__icon--sun { display: none; }
+:root.theme-light .dock__icon--moon { display: block; }
+
+/* ---------- Small screens ---------- */
+@media (max-width: 600px) {
+  /* On phones, use one column and a friendlier landscape ratio for everything. */
+  .card,
+  .card--tall,
+  .card--small,
+  .card--accent { --ratio: 1.3; }
+  /* Phones don't need a full 50vh intro band. */
+  .intro { min-height: auto; padding-block: var(--s-300); }
+  .project__header { min-height: auto; padding-block: var(--s-300); }
+  .project__back { top: var(--s-100); left: var(--s-100); }
+}
