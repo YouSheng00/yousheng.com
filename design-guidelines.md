@@ -267,6 +267,65 @@ Keep the title alone — no subtitle/meta line on the project header (the meta m
 
 Default ratios: hero `16:8`, full `16:9`, half `4:3`. Mobile collapses everything to one column at `4:3`.
 
+### 4.6 Project text section (editorial spread)
+
+A standalone "breath" between two media rows on a project page. Two-column, all left-aligned, 50/50 split, edge-to-edge with the surrounding images. The hero pitch lives in the left column, the structured argument in the right.
+
+```html
+<section class="project-text">
+  <div class="project-text__left">
+    <h2 class="project-text__lead">…big editorial statement…</h2>
+    <p class="project-text__subhead">…one-line supporting hook…</p>
+  </div>
+
+  <div class="project-text__right">
+    <h3 class="project-text__section-title">
+      <span class="project-text__num">01</span>
+      <span class="project-text__label">Overview</span>
+    </h3>
+
+    <div class="project-text__body">
+      <p>…first body paragraph…</p>
+      <p>…continuation…</p>
+      <p>…final beat…</p>
+    </div>
+
+    <p class="project-text__tagline">
+      Closing kicker. Italic.<br>
+      Manifesto cadence.
+    </p>
+  </div>
+</section>
+```
+
+#### Layout
+
+- **`grid-column: 1 / -1`** — spans the full project-grid width. Never set its own `max-width`; the page's images sit edge-to-edge and so must this section.
+- **`grid-template-columns: 1fr 1fr`** — strict 50/50. Don't drift to 5/6 etc; the symmetry is part of the editorial pattern.
+- **Vertical padding**: `calc(var(--s-500) * 2)` top, `calc(var(--s-500) + var(--s-400))` bottom (~10rem / 9rem). The generous breathing room is what makes it "standalone" rather than "inserted between two cards." Don't reduce.
+- **Column gap**: `calc(var(--s-500) + var(--s-100))` (~6rem).
+- **`align-items: start`** — both columns hang from the top edge.
+
+#### Type tiers (component-local override of the global scale)
+
+This is the **one place** on the site that introduces display sizes larger than the page wordmark. Treat it as a deliberate "editorial moment"; don't reuse these sizes elsewhere.
+
+| Tier | Element | Size (clamp) | Weight | Color | Notes |
+|---|---|---|---|---|---|
+| **Lead** | `.project-text__lead` | `clamp(2.025rem, 4.86vw, 3.285rem)` ~32–52px | 400 | `--c-text` | Negative letter-spacing `-0.025em`, line-height 1.05 for tight display rhythm. |
+| **Subhead** | `.project-text__subhead` | `clamp(1.05rem, 1.42vw, 1.26rem)` ~17–20px | 350 | `--c-text-muted` | Light weight, sits under the lead. |
+| **Section title** | `.project-text__section-title` | `clamp(1.42rem, 2.23vw, 1.86rem)` ~23–30px | 400 | mixed | Flex+baseline: `__num` (muted) + `__label` (full, weight 500). Tabular numerals. |
+| **Body** | `.project-text__body p` | `clamp(1.1rem, 1.3vw, 1.26rem)` ~18–20px | 400 | `--c-text-muted` | Paragraph spacing `var(--s-050)` (8px) so multiple paragraphs read as one block. |
+| **Tagline** | `.project-text__tagline` | `clamp(1.17rem, 1.62vw, 1.42rem)` ~19–23px | 400 italic | `--c-text` | Thin top hairline (`color-mix(--c-text 14%, transparent)`) + italic = "kicker." |
+
+#### Rules
+
+- **Hierarchy by size + color, not weight chaos.** Only three weights (350, 400, 500) across five tiers.
+- **No centering.** Everything in this section is left-aligned by design. The visual symmetry comes from the 50/50 grid, not from centered text.
+- **Body paragraphs sit tight** (`var(--s-050)` between them). Three short paragraphs should feel like one continuous thought.
+- **Tagline always italic** with a thin hairline above it. That's the "closing kicker" convention.
+- **Mobile (`max-width: 800px`)**: collapses to single column with reduced (but still standalone-feeling) padding `calc(var(--s-500) + var(--s-300))` top / `calc(var(--s-500) + var(--s-100))` bottom.
+
 ---
 
 ## 5. Theme system
@@ -321,20 +380,25 @@ Always use an `<iframe>` for self-contained motion HTML (own CSS / scripts). Avo
 ```
 Personal Website/
 ├── index.html              # home (intro + project grid)
-├── project.html            # Project One detail (CompassStu)
-├── project-2.html          # Project Two detail
-├── project-3.html          # Project Three detail
-├── project-4.html          # Project Four detail
+├── project.html            # CompassStu detail
+├── project-2.html          # SATS Cargo Loading Simulation
+├── project-3.html          # Atelier
+├── project-4.html          # (placeholder)
 ├── writing.html            # Writing index
-├── compass-intro.html      # iframe-embedded motion (CompassStu)
+├── compass-intro.html      # iframe-embedded motion (intro card)
+├── compass-motion.html     # iframe-embedded motion (project page hero)
 ├── styles.css              # all styles (single file by design)
 ├── script.js               # all scripts (single file by design)
 ├── design-guidelines.md    # this file
 ├── Images/
 │   ├── Atelier.png
-│   └── Atelierfull.png
+│   ├── Atelierfull.png
+│   ├── CompassStu1.png     # hero screenshot
+│   ├── CompassStu2.png     # detail A
+│   └── CompassStu3.png     # detail B
 ├── Video/
-│   └── *.mp4
+│   ├── CompassStulearn1.mp4  # full-width row 2 video
+│   └── SatsApron1.mp4         # project-2 card loop
 ├── compassstulogo.png
 └── CompassStufavicon (1).png
 ```

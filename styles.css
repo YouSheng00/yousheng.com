@@ -452,6 +452,117 @@ button {
 
 .project-block .card__placeholder { width: 100%; height: 100%; }
 
+/* ---------- Project text section ----------
+   Two-column editorial spread, all left-aligned. 50/50 split.
+     LEFT  → hero pitch: dominant display lead + smaller subhead.
+     RIGHT → numbered section heading, body block, closing tagline
+              (with a thin hairline divider above it as a "kicker").
+   The hierarchy is carried by SIZE (lead > section title > tagline >
+   body > subhead) and by COLOR (text vs text-muted) — not by piling
+   on weights.
+
+   Spans the full project-grid width — edge-to-edge with the images. */
+.project-text {
+  grid-column: 1 / -1;
+  /* Generous vertical breathing room so the section reads as its own
+     deliberate beat — not a strip inserted between two media rows. */
+  padding: calc(var(--s-500) * 2) var(--s-200) calc(var(--s-500) + var(--s-400));
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(var(--s-500) + var(--s-100));
+  align-items: start;
+}
+
+/* — LEFT column: hero pitch — */
+
+.project-text__lead {
+  margin: 0 0 var(--s-300);
+  font-size: clamp(2.025rem, 4.86vw, 3.285rem);
+  line-height: 1.05;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  color: var(--c-text);
+  text-shadow: 0 0 0.4px currentColor;
+}
+
+.project-text__subhead {
+  margin: 0;
+  font-size: clamp(1.05rem, 1.42vw, 1.26rem);
+  line-height: 1.5;
+  font-weight: 350;
+  letter-spacing: 0.005em;
+  color: var(--c-text-muted);
+}
+
+/* — RIGHT column: section heading — */
+
+/* "01  Overview" : tabular number muted, label full-colour. Editorial
+   "Chapter N — Title" pattern, baseline-aligned via flex/gap. */
+.project-text__section-title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-100);
+  margin: 0 0 var(--s-300);
+  font-size: clamp(1.42rem, 2.23vw, 1.86rem);
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -0.008em;
+}
+
+.project-text__num {
+  color: var(--c-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.project-text__label {
+  color: var(--c-text);
+  font-weight: 500;
+}
+
+/* — RIGHT column: body block — */
+
+/* Paragraphs sit tight together so the block reads as one thought, not
+   two separate items. */
+.project-text__body {
+  margin: 0 0 var(--s-300);
+}
+
+.project-text__body p {
+  margin: 0 0 var(--s-050);
+  font-size: clamp(1.1rem, 1.3vw, 1.26rem);
+  line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  color: var(--c-text-muted);
+}
+
+.project-text__body p:last-child { margin-bottom: 0; }
+
+/* — RIGHT column: closing kicker — */
+
+/* Thin hairline above + italic for the closing statement. Editorial
+   "kicker" convention. */
+.project-text__tagline {
+  margin: 0;
+  padding-top: var(--s-200);
+  border-top: 1px solid color-mix(in srgb, var(--c-text) 14%, transparent);
+  font-size: clamp(1.17rem, 1.62vw, 1.42rem);
+  line-height: 1.35;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.002em;
+  color: var(--c-text);
+  text-shadow: 0 0 0.4px currentColor;
+}
+
+@media (max-width: 800px) {
+  .project-text {
+    grid-template-columns: 1fr;
+    gap: var(--s-400);
+    padding: calc(var(--s-500) + var(--s-300)) var(--s-100) calc(var(--s-500) + var(--s-100));
+  }
+}
+
 .project-block > img,
 .project-block > video,
 .project-block > iframe {
