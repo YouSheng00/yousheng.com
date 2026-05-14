@@ -497,17 +497,21 @@ button {
 /* — RIGHT column: section heading — */
 
 /* "01  Overview" : tabular number muted, label full-colour. Editorial
-   "Chapter N — Title" pattern, baseline-aligned via flex/gap. */
+   "Chapter N — Title" pattern, baseline-aligned via flex/gap. Top
+   margin creates separation from preceding content in the same column;
+   collapsed to 0 when the title is the first child of its column. */
 .project-text__section-title {
   display: flex;
   align-items: baseline;
   gap: var(--s-100);
-  margin: 0 0 var(--s-300);
+  margin: var(--s-500) 0 var(--s-300);
   font-size: clamp(1.42rem, 2.23vw, 1.86rem);
   line-height: 1.2;
   font-weight: 400;
   letter-spacing: -0.008em;
 }
+
+.project-text__section-title:first-child { margin-top: 0; }
 
 .project-text__num {
   color: var(--c-text-muted);
@@ -553,6 +557,96 @@ button {
   letter-spacing: 0.002em;
   color: var(--c-text);
   text-shadow: 0 0 0.4px currentColor;
+}
+
+/* Comparison block — editorial "What X / What Y" pattern. Hairline
+   divider above (replaces the user's "—" separator). Muted label on
+   the left, full-colour answer on the right, both at body size. */
+.project-text__compare {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: var(--s-200);
+  row-gap: var(--s-100);
+  margin: var(--s-300) 0 0;
+  padding-top: var(--s-300);
+  border-top: 1px solid color-mix(in srgb, var(--c-text) 14%, transparent);
+}
+
+.project-text__compare dt,
+.project-text__compare dd {
+  margin: 0;
+  font-size: clamp(1.1rem, 1.3vw, 1.26rem);
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+}
+
+.project-text__compare dt { color: var(--c-text-muted); }
+.project-text__compare dd { color: var(--c-text); }
+
+/* Thesis statement — short punchy claim that opens a numbered section.
+   Sits below the section title and above the body. Bigger than body,
+   smaller than the page-level hero lead. */
+.project-text__thesis {
+  margin: 0 0 var(--s-300);
+  font-size: clamp(1.55rem, 3vw, 2.1rem);
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  color: var(--c-text);
+  text-shadow: 0 0 0.4px currentColor;
+}
+
+/* Three-layer pipeline / product pillars list. Each row pairs a
+   prominent action label with a supporting description. Weight order
+   is INVERTED from .project-text__compare: here labels lead and
+   descriptions support. */
+.project-text__pipeline {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: var(--s-200);
+  row-gap: var(--s-150);
+  margin: var(--s-300) 0 0;
+  padding-top: var(--s-300);
+  border-top: 1px solid color-mix(in srgb, var(--c-text) 14%, transparent);
+}
+
+.project-text__pipeline dt,
+.project-text__pipeline dd {
+  margin: 0;
+  font-size: clamp(1.1rem, 1.3vw, 1.26rem);
+  line-height: 1.5;
+  letter-spacing: 0.005em;
+}
+
+.project-text__pipeline dt {
+  color: var(--c-text);
+  font-weight: 500;
+}
+
+.project-text__pipeline dd {
+  color: var(--c-text-muted);
+  font-weight: 400;
+}
+
+/* Motion embed inside the right column — iframe wrapper. Background
+   matches the page surface (no panel chrome) so the diagram reads as
+   part of the page flow, not as a pasted GIF. Aspect-ratio is wider
+   now that the diagram is just verbs + connectors (no descriptions). */
+.project-text__motion {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.project-text__motion iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: transparent;
 }
 
 @media (max-width: 800px) {
