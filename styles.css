@@ -546,12 +546,16 @@ button {
   gap: var(--s-100);
 }
 
-/* Item surface — same dark card grey used by .project-block, so the
-   accordion items sit in the same family as the image cards above. */
+/* Item surface — dark card grey in dark mode, light grey in light mode
+   so the bars don't read as harsh dark blocks on a white page. */
 .approach-item {
   background: var(--c-card-background);
   border-radius: var(--site-border-radius);
   overflow: hidden;
+}
+
+:root.theme-light .approach-item {
+  background: #f0f0f0;
 }
 
 /* Hide native marker (cross-browser). */
@@ -576,8 +580,9 @@ button {
   color: var(--c-text);
 }
 
-/* Circular chevron button — matches the dock action button's circular
-   form (white surface, dark icon, soft transform on toggle). */
+/* Circular chevron button — auto-flips with theme so it always stands
+   out from the bar surface (white-on-dark in dark mode, dark-on-light
+   in light mode). */
 .approach-item__icon {
   flex: none;
   display: inline-flex;
@@ -586,8 +591,8 @@ button {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--c-light-white);
-  color: var(--c-dark-black);
+  background: var(--c-text);
+  color: var(--c-background);
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
