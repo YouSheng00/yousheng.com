@@ -296,6 +296,43 @@ button {
   display: inline-block;
 }
 
+/* ---------- About page ----------
+   Editorial layout: small uppercase label heading + a vertical column of
+   items at display body size. Left-aligned, padded to match the
+   project-grid horizontal rhythm. */
+.about {
+  max-width: 1800px;
+  margin: 0 auto var(--s-300);
+  padding: 0 calc(var(--project-spacing) / 2);
+  display: grid;
+  grid-template-columns: minmax(0, 720px);
+  gap: var(--s-300);
+}
+
+.about__heading {
+  margin: 0 0 var(--s-150);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+
+.about__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-100);
+}
+
+.about__list li {
+  font-size: clamp(1.08rem, 3.24vw, 1.35rem);
+  font-weight: 350;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
 /* Card meta — plain text below the image (UPSET .project text area).
    Small left padding compensates for glyph left side bearing so the
    text optically aligns with the rounded media's left edge. */
@@ -415,6 +452,169 @@ button {
   border-radius: var(--site-border-radius);
   overflow: hidden;
   background: var(--c-card-background);
+}
+
+/* Labeled card — grey header bar fused to the media block below. The
+   two children share the same width and only the outer corners are
+   rounded (label: top corners, media: bottom corners), so the pair
+   reads as one unit. Negative top margin pulls the card up into the
+   preceding section's bottom padding, tightening the visual gap. */
+.labeled-card {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  margin-top: calc(-1 * var(--s-500));
+}
+
+.labeled-card__label {
+  background: #888888;
+  color: var(--c-light-white);
+  padding: var(--s-150) var(--s-200);
+  border-top-left-radius: var(--site-border-radius);
+  border-top-right-radius: var(--site-border-radius);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.labeled-card__media {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* ---------- Approach accordion (Card 11) ----------
+   Centered title + intro, stacked accordion items below. Native
+   <details>/<summary> for expand behaviour. Type scale and colour
+   tokens mirror the project-text sections so this block reads as part
+   of the same family — title at thesis scale, intro at subhead scale,
+   accordion body at the same scale + muted colour as other body text.
+   Item surface uses --c-card-background to sit in the same visual
+   family as the project blocks above. */
+.approach {
+  grid-column: 1 / -1;
+  padding: calc(var(--s-500) * 2) var(--s-200) calc(var(--s-500) + var(--s-400));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Title — same scale as .project-text__thesis, with the same numbered
+   prefix pattern used by .project-text__section-title (muted number +
+   full-colour label). Flex-centered so the pair stays balanced. */
+.approach__title {
+  margin: 0 0 var(--s-300);
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: var(--s-100);
+  font-size: clamp(1.55rem, 3vw, 2.1rem);
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  text-align: center;
+  text-shadow: 0 0 0.4px currentColor;
+}
+
+.approach__num {
+  color: var(--c-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.approach__label {
+  color: var(--c-text);
+  font-weight: 500;
+}
+
+/* Intro — matches .project-text__subhead exactly. */
+.approach__intro {
+  margin: 0 0 var(--s-400);
+  max-width: 62ch;
+  font-size: clamp(1.05rem, 1.42vw, 1.26rem);
+  line-height: 1.5;
+  font-weight: 350;
+  letter-spacing: 0.005em;
+  color: var(--c-text-muted);
+  text-align: center;
+}
+
+.approach__list {
+  width: 100%;
+  max-width: 920px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-100);
+}
+
+/* Item surface — same dark card grey used by .project-block, so the
+   accordion items sit in the same family as the image cards above. */
+.approach-item {
+  background: var(--c-card-background);
+  border-radius: var(--site-border-radius);
+  overflow: hidden;
+}
+
+/* Hide native marker (cross-browser). */
+.approach-item__head {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-200);
+  padding: var(--s-200);
+  cursor: pointer;
+  user-select: none;
+}
+.approach-item__head::-webkit-details-marker { display: none; }
+
+/* Item title — same scale as project-text body, weight 500 for emphasis. */
+.approach-item__title {
+  font-size: clamp(1.1rem, 1.3vw, 1.26rem);
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+  color: var(--c-text);
+}
+
+/* Circular chevron button — matches the dock action button's circular
+   form (white surface, dark icon, soft transform on toggle). */
+.approach-item__icon {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--c-light-white);
+  color: var(--c-dark-black);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.approach-item[open] .approach-item__icon {
+  transform: rotate(180deg);
+}
+
+.approach-item__body {
+  padding: 0 var(--s-200) var(--s-200);
+}
+
+/* Body text — matches .project-text__body p exactly (same scale, weight,
+   line-height, letter-spacing, colour). */
+.approach-item__body p {
+  margin: 0;
+  font-size: clamp(1.1rem, 1.3vw, 1.26rem);
+  line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  color: var(--c-text-muted);
+  max-width: 72ch;
+}
+
+@media (max-width: 600px) {
+  .approach { padding: calc(var(--s-500) + var(--s-300)) var(--s-100) calc(var(--s-500) + var(--s-100)); }
+  .approach-item__head { padding: var(--s-150); }
+  .approach-item__body { padding: 0 var(--s-150) var(--s-150); }
 }
 
 .project-block--full { grid-column: 1 / -1; }
@@ -667,6 +867,7 @@ button {
   object-fit: cover;
   border: 0;
 }
+
 
 @media (max-width: 600px) {
   .project-grid { grid-template-columns: 1fr; }

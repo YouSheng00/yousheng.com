@@ -98,12 +98,16 @@
           </div>
         </section>
 
-        <!-- Row 3: two halves (aspect tuned to match the wide screenshots) -->
-        <div class="project-block project-block--half" style="aspect-ratio: 2 / 1;">
-          <img src="Images/CompassStu2.png" alt="CompassStu detail" />
+        <!-- Row 3: 40/60 split. LaptopView frame ~5% shorter than the image
+             (image is 1024×1030, aspect 21:20) so cover + bottom anchor
+             crops exactly the top ~5% and the rest fills with no gaps. -->
+        <div class="project-block project-block--40" style="aspect-ratio: 21 / 20; align-self: start;">
+          <img src="Images/Laptopview.png" alt="CompassStu detail"
+               style="object-fit: cover; object-position: center bottom; filter: brightness(1.22) contrast(1.04);" />
         </div>
-        <div class="project-block project-block--half" style="aspect-ratio: 2 / 1;">
-          <img src="Images/CompassStu3.png" alt="CompassStu detail" />
+        <div class="project-block project-block--60" style="aspect-ratio: 1.59; align-self: start;">
+          <img src="Images/Mobileview.jpeg" alt="CompassStu mobile view"
+               style="object-position: 58% center;" />
         </div>
 
         <!-- Product thesis: section 03 in left column, right reserved. -->
@@ -139,10 +143,76 @@
           </div>
         </section>
 
-        <!-- Row 4: full-width -->
-        <div class="project-block project-block--full">
-          <div class="card__placeholder"><span>Section</span></div>
+        <!-- Card 10: labeled — grey header bar fused to the image below,
+             both share the same width and round only the outer corners. -->
+        <div class="labeled-card">
+          <div class="labeled-card__label">Production outcome</div>
+          <div class="project-block project-block--full labeled-card__media" style="aspect-ratio: 2844 / 1454;">
+            <img src="Images/CompassStu6.png" alt="CompassStu pipeline outcome" />
+          </div>
         </div>
+
+        <!-- Card 11: Three Learning Engines — centered numbered title + intro,
+             stacked accordion items below. Native <details>/<summary>
+             for the expand behaviour (no JS needed). -->
+        <section class="approach">
+          <h3 class="approach__title">
+            <span class="approach__num">04</span>
+            <span class="approach__label">Three Learning Engines</span>
+          </h3>
+          <p class="approach__intro">
+            One seamless architecture. Three dimensions of mastery.<br>
+            The methodology remains beautifully consistent; the intellectual demand is entirely bespoke. Our unified learning pipeline — Learn, Simulate, Prove — is powered by three distinct cognitive engines.
+          </p>
+
+          <div class="approach__list">
+            <details class="approach-item">
+              <summary class="approach-item__head">
+                <span class="approach-item__title">Concept Engine</span>
+                <span class="approach-item__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <polyline points="19 12 12 19 5 12"/>
+                  </svg>
+                </span>
+              </summary>
+              <div class="approach-item__body">
+                <p>Engineered for strategic intellect and high-stakes judgment. This engine refines the abstract — transforming complex frameworks and persuasive communication into sharp decision-making under pressure. Rather than grading on a simple binary, performance is calibrated against cognitive clarity, structural depth, and contextual relevance.</p>
+              </div>
+            </details>
+
+            <details class="approach-item">
+              <summary class="approach-item__head">
+                <span class="approach-item__title">Operator Engine</span>
+                <span class="approach-item__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <polyline points="19 12 12 19 5 12"/>
+                  </svg>
+                </span>
+              </summary>
+              <div class="approach-item__body">
+                <p>Engineered for flawless execution and technical precision. Built for environments where theory must answer to unyielding reality, this engine demands absolute tactical mastery — deploying infrastructure, executing flawless syntax, and conquering systemic friction. Success is measured by the structural resilience and elegance of the solution.</p>
+              </div>
+            </details>
+
+            <details class="approach-item">
+              <summary class="approach-item__head">
+                <span class="approach-item__title">Analyst Engine</span>
+                <span class="approach-item__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"/>
+                    <polyline points="19 12 12 19 5 12"/>
+                  </svg>
+                </span>
+              </summary>
+              <div class="approach-item__body">
+                <p>Engineered for absolute validation and empirical certainty. Designed for data-driven environments, this engine challenges learners to isolate critical signals, architect robust methodologies, and confidently defend their conclusions. It enforces total rigor, validating the precision of the final outcome alongside the ironclad logic that built it.</p>
+              </div>
+            </details>
+
+          </div>
+        </section>
       </section>
     </main>
 
