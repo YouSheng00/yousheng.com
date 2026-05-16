@@ -469,7 +469,7 @@ button {
 .labeled-card__label {
   background: #888888;
   color: var(--c-light-white);
-  padding: var(--s-150) var(--s-200);
+  padding: calc(var(--s-150) * 0.9) var(--s-200);
   border-top-left-radius: var(--site-border-radius);
   border-top-right-radius: var(--site-border-radius);
   font-size: 15px;
@@ -728,6 +728,30 @@ button {
   font-weight: 500;
 }
 
+/* Subsection title — used within a body block to chunk it into named
+   parts (e.g. "6.1 The page"). Same num + label pattern as the section
+   title, scaled down. Margin-top creates clear separation between
+   subsections; first-child resets to 0. */
+.project-text__subsection-title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-100);
+  margin: var(--s-300) 0 var(--s-100);
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: var(--c-text);
+}
+
+.project-text__body .project-text__subsection-title:first-child { margin-top: 0; }
+
+.project-text__subsection-num {
+  color: var(--c-text-muted);
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+}
+
 /* — RIGHT column: body block — */
 
 /* Paragraphs sit tight together so the block reads as one thought, not
@@ -860,6 +884,273 @@ button {
     gap: var(--s-400);
     padding: calc(var(--s-500) + var(--s-300)) var(--s-100) calc(var(--s-500) + var(--s-100));
   }
+}
+
+/* ---------- Section 08: The Proof Layer ----------
+   Editorial paragraph with three emphasis tiers that stay in the page's
+   restrained typographic family:
+     • default text  — var(--c-text)        (main narrative)
+     • __emp         — same colour, bold    (key concepts; weight, not hue)
+     • __muted       — var(--c-text-muted)  (supporting / technical detail)
+   Wrapped in a dark card surface (matches the image cards' --c-card-
+   background) so it reads as a contained "moment" rather than text
+   floating on the page bg. Closes with a CTA pill that borrows the
+   dock's translucent-glass surface so it reads as native to the page. */
+.proof-layer {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-300);
+  align-items: center;
+  padding: var(--s-500) var(--s-400);
+  margin: var(--s-500) 0;
+  background: var(--c-card-background);
+  border-radius: var(--site-border-radius);
+}
+
+:root.theme-light .proof-layer {
+  background: #f0f0f0;
+}
+
+.proof-layer__main {
+  min-width: 0;
+}
+
+.proof-layer__visual {
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Same scale as .project-text__thesis so it sits in the same display
+   tier as "We do not sell knowledge" / "Mastery is iterative". */
+.proof-layer__body {
+  margin: var(--s-400) 0;
+  max-width: 50ch;
+  font-size: clamp(1.55rem, 3vw, 2.1rem);
+  line-height: 1.25;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  color: var(--c-text);
+  text-shadow: 0 0 0.4px currentColor;
+}
+
+/* Emphasis via weight, not colour — keeps the page's monochrome voice. */
+.proof-layer__emp {
+  font-weight: 600;
+}
+
+.proof-layer__muted {
+  color: var(--c-text-muted);
+}
+
+/* CTA pill — matches the dock surface vocabulary:
+   translucent grey + backdrop blur + thin white border. */
+.proof-layer__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px 10px 20px;
+  background: rgba(120, 120, 120, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  color: var(--c-light-white);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: background 0.2s ease,
+              transform 0.2s ease,
+              border-color 0.2s ease;
+}
+
+.proof-layer__cta:hover {
+  background: rgba(40, 42, 44, 0.78);
+  border-color: rgba(255, 255, 255, 0.12);
+  opacity: 1; /* override the site-wide a:hover opacity fade */
+}
+
+.proof-layer__cta:active { transform: scale(0.97); }
+
+/* Circular arrow nub — same form as the dock action button. */
+.proof-layer__cta-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 13px;
+  line-height: 1;
+  transition: transform 0.25s cubic-bezier(0.2, 0.85, 0.3, 1);
+}
+
+.proof-layer__cta:hover .proof-layer__cta-arrow {
+  transform: translateX(2px);
+}
+
+/* Rubric scoreboard — the right-side visual companion to the proof copy.
+   Uses a translucent surface so it inherits theme adaptation via
+   color-mix on var(--c-text). Bars animate in on first paint. */
+.rubric-card {
+  width: 100%;
+  max-width: 720px;
+  padding: var(--s-300);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--c-text) 4%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c-text) 10%, transparent);
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+.rubric-card__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--s-300);
+}
+
+.rubric-card__title {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+
+.rubric-card__total {
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--c-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.rubric-card__rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rubric-card__row {
+  display: grid;
+  grid-template-columns: 9rem 1fr 2.5ch;
+  align-items: center;
+  gap: 16px;
+}
+
+.rubric-card__label {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--c-text-muted);
+}
+
+.rubric-card__bar {
+  height: 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--c-text) 8%, transparent);
+  overflow: hidden;
+}
+
+.rubric-card__fill {
+  height: 100%;
+  width: var(--score, 0%);
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--c-text) 55%, transparent),
+    var(--c-text)
+  );
+  transform-origin: left center;
+  animation: rubric-fill-loop 8s cubic-bezier(0.2, 0.85, 0.3, 1) infinite;
+}
+
+/* Stagger so the four bars fill in sequence each loop. */
+.rubric-card__row:nth-child(1) .rubric-card__fill { animation-delay: 0s; }
+.rubric-card__row:nth-child(2) .rubric-card__fill { animation-delay: 0.18s; }
+.rubric-card__row:nth-child(3) .rubric-card__fill { animation-delay: 0.36s; }
+.rubric-card__row:nth-child(4) .rubric-card__fill { animation-delay: 0.54s; }
+
+/* Fill from 0 → full over ~2s, hold ~5.3s, fade out over ~0.5s.
+   Opacity reset at 100% lands on a zero-width bar so the wrap is invisible. */
+@keyframes rubric-fill-loop {
+  0%   { transform: scaleX(0);   opacity: 1; }
+  25%  { transform: scaleX(1);   opacity: 1; }
+  91%  { transform: scaleX(1);   opacity: 1; }
+  98%  { transform: scaleX(1);   opacity: 0; }
+  100% { transform: scaleX(0);   opacity: 0; }
+}
+
+.rubric-card__value {
+  font-size: 14px;
+  font-weight: 500;
+  text-align: right;
+  color: var(--c-text);
+  font-variant-numeric: tabular-nums;
+  animation: rubric-value-fade 8s ease-out infinite;
+}
+
+.rubric-card__row:nth-child(1) .rubric-card__value { animation-delay: 0s; }
+.rubric-card__row:nth-child(2) .rubric-card__value { animation-delay: 0.18s; }
+.rubric-card__row:nth-child(3) .rubric-card__value { animation-delay: 0.36s; }
+.rubric-card__row:nth-child(4) .rubric-card__value { animation-delay: 0.54s; }
+
+/* Number fades in alongside its bar reaching full, fades with the reset. */
+@keyframes rubric-value-fade {
+  0%, 20%  { opacity: 0; }
+  26%, 95% { opacity: 1; }
+  100%     { opacity: 0; }
+}
+
+.rubric-card__verified {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: var(--s-300);
+  padding-top: var(--s-200);
+  border-top: 1px solid color-mix(in srgb, var(--c-text) 8%, transparent);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--c-text-muted);
+}
+
+.rubric-card__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #48ea2d;
+  box-shadow: 0 0 10px rgba(72, 234, 45, 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rubric-card__fill,
+  .rubric-card__value {
+    animation: none;
+  }
+  .rubric-card__fill { opacity: 1; transform: scaleX(1); }
+  .rubric-card__value { opacity: 1; }
+}
+
+@media (max-width: 960px) {
+  .proof-layer {
+    grid-template-columns: 1fr;
+    gap: var(--s-300);
+    padding: calc(var(--s-500) + var(--s-100)) var(--s-100);
+  }
+  .proof-layer__visual { justify-content: flex-start; }
+  .rubric-card { max-width: none; }
 }
 
 .project-block > img,

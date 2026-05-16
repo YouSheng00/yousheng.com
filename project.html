@@ -146,18 +146,61 @@
         <!-- Card 10: labeled — grey header bar fused to the image below,
              both share the same width and round only the outer corners. -->
         <div class="labeled-card">
-          <div class="labeled-card__label">Production outcome</div>
+          <div class="labeled-card__label"><span style="font-weight: 700;">Proof</span> : A timestamped, verifiable record. In a single URL.</div>
           <div class="project-block project-block--full labeled-card__media" style="aspect-ratio: 2844 / 1454;">
             <img src="Images/CompassStu6.png" alt="CompassStu pipeline outcome" />
           </div>
         </div>
 
-        <!-- Card 11: Three Learning Engines — centered numbered title + intro,
+        <!-- Cards 11 (left, 55%) + 12 (right, 45%) — system map + reserved. -->
+        <section class="project-text" style="grid-template-columns: 60fr 40fr; padding-top: calc((var(--s-500) + var(--s-300)) * 1.1); padding-bottom: var(--s-200);">
+          <div class="project-text__left" style="align-self: stretch;">
+            <div style="background: #555; border-radius: var(--site-border-radius); padding: 1px; height: 100%;">
+              <div class="project-block" style="height: 100%; background: transparent; border-radius: calc(var(--site-border-radius) - 1px);">
+                <img src="Images/SystemMap.png" alt="CompassStu system map" style="transform: translateY(2px);" />
+              </div>
+            </div>
+          </div>
+
+          <div class="project-text__right">
+            <h3 class="project-text__section-title">
+              <span class="project-text__num">04</span>
+              <span class="project-text__label">System Map</span>
+            </h3>
+
+            <p class="project-text__thesis">
+              Three layers. Each owns a phase of the user journey. End-to-end, they form a single pipeline from authentication to portfolio sharing.
+            </p>
+
+            <div class="project-text__body">
+              <h4 class="project-text__subsection-title">
+                <span>Basic Nav Layer</span>
+              </h4>
+              <p style="font-style: italic;">Entry and routing.</p>
+              <p>Gmail Auth → Home Page → two paths: Course Catalog or AI-led Discover My Path (Capability Diagnosis → Pathway Generation). Both converge at Subscription → Start Learning.</p>
+
+              <h4 class="project-text__subsection-title">
+                <span>Learning Exp Layer</span>
+              </h4>
+              <p style="font-style: italic;">Core delivery. Progress Saving spans the layer.</p>
+              <p>Pipeline: Start Learning → Interactive + Adaptive Learning → Bridge Task → Teach the AI → Module Assessment → Completion → Portfolio Update.</p>
+              <p>Compass Tutor attaches throughout. Teach the AI scores comprehension 0–100 over five rounds.</p>
+
+              <h4 class="project-text__subsection-title">
+                <span>Learning Outcomes Layer</span>
+              </h4>
+              <p style="font-style: italic;">Output and persistence.</p>
+              <p>My Learning aggregates progress. Learning Hub feeds four AI artefacts: Knowledge Hub, My Playbook, Growth Patterns, Career Proof. Profile Page surfaces Certificates, Adaptive Dashboard, and Portfolio Dashboard with public Share Link.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 05: Three Learning Engines — centered numbered title + intro,
              stacked accordion items below. Native <details>/<summary>
              for the expand behaviour (no JS needed). -->
         <section class="approach">
           <h3 class="approach__title">
-            <span class="approach__num">04</span>
+            <span class="approach__num">05</span>
             <span class="approach__label">Three Learning Engines</span>
           </h3>
           <p class="approach__intro">
@@ -210,7 +253,132 @@
                 <p>Engineered for absolute validation and empirical certainty. Designed for data-driven environments, this engine challenges learners to isolate critical signals, architect robust methodologies, and confidently defend their conclusions. It enforces total rigor, validating the precision of the final outcome alongside the ironclad logic that built it.</p>
               </div>
             </details>
+          </div>
+        </section>
 
+        <!-- Section 06: Lesson Anatomy.
+             Card 11 (left, ~35%): text — title, lead, three subsections.
+             Card 12 (right, ~65%): lesson mockup iframe. -->
+        <section class="project-text" style="grid-template-columns: 45fr 55fr; padding-top: var(--s-300);">
+          <div class="project-text__left">
+            <h3 class="project-text__section-title">
+              <span class="project-text__num">06</span>
+              <span class="project-text__label">Learning Experience Design</span>
+            </h3>
+
+            <p class="project-text__thesis">
+              A CompassStu lesson lasts eight to ten minutes. It runs on a three-panel page and a vocabulary of twelve cards.
+            </p>
+
+            <div class="project-text__body">
+              <h4 class="project-text__subsection-title">
+                <span>The page</span>
+              </h4>
+              <p>A fixed grid. Module navigation on the left, one card in the centre, the tutor panel on the right. Nothing else moves. Only the card area scrolls.</p>
+
+              <h4 class="project-text__subsection-title">
+                <span>The cards</span>
+              </h4>
+              <p>Each lesson uses seven to twelve cards. Every card gates the next — a prediction has to be revealed, a quick check answered, an apply question written before the learner can advance. The first required input arrives within forty-five seconds.</p>
+
+              <h4 class="project-text__subsection-title">
+                <span>The close</span>
+              </h4>
+              <p>The final card is a mastery check — two short questions and a confidence selection. On submit, the lesson is marked complete and the learner is handed off to the bridge task, where the work that earns the certificate begins.</p>
+            </div>
+          </div>
+
+          <div class="project-text__right">
+            <div class="project-text__motion" style="aspect-ratio: 3 / 2;">
+              <iframe src="compass-lesson.html" title="CompassStu lesson interface" loading="lazy"></iframe>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 08: Adaptive Engine — CompassStu7 image on the left
+             (45%), editorial text on the right (55%) with section title,
+             lead paragraph, and three feature items. -->
+        <section class="project-text" style="grid-template-columns: 48fr 52fr; padding-top: var(--s-300);">
+          <div class="project-text__left">
+            <div class="project-block" style="aspect-ratio: 1048 / 720;">
+              <img src="Images/CompassStu7.png" alt="CompassStu adaptive engine view" />
+            </div>
+          </div>
+
+          <div class="project-text__right">
+            <h3 class="project-text__section-title">
+              <span class="project-text__num">07</span>
+              <span class="project-text__label">Adaptive Engine</span>
+            </h3>
+
+            <div class="project-text__body">
+              <p>After every module, the system dynamically routes learners into one of three tailored paths based on performance: Advanced (≥ 85%), Standard (70%–84%), or Foundational (&lt; 70%), keeping certification standards consistent.</p>
+            </div>
+
+            <dl class="project-text__pipeline">
+              <dt>Real-Time Recalibration.</dt>
+              <dd>Instantly updates pacing after each completed module.</dd>
+              <dt>Mastery Tracking.</dt>
+              <dd>Maps progress across four functional states: Mastered, In Progress, Available, and Locked.</dd>
+              <dt>Smart Recommendations.</dt>
+              <dd>Automatically surfaces the next high-priority skill and targeted review queue.</dd>
+            </dl>
+          </div>
+        </section>
+
+        <!-- Section 08: The Proof Layer — editorial copy on the left,
+             a four-dimension rubric scoreboard on the right (visualizes
+             the rubric the copy references). -->
+        <section class="proof-layer">
+          <div class="proof-layer__main">
+            <h3 class="project-text__section-title">
+              <span class="project-text__num">08</span>
+              <span class="project-text__label">The Proof Layer</span>
+            </h3>
+
+            <p class="proof-layer__body">
+              Every bridge task that clears its <span class="proof-layer__emp">four-dimension rubric</span> earns a permanent record — <span class="proof-layer__muted">AI-graded, timestamped, and posted to a single URL.</span> The learner owns it; employers <span class="proof-layer__emp">verify it in a click</span>. Each record carries the work itself — <span class="proof-layer__muted">the task, the response, and the score</span> — all on <span class="proof-layer__emp">one page</span>.
+            </p>
+
+            <a class="proof-layer__cta" href="#" target="_blank" rel="noopener">
+              <span>Get your proof now</span>
+              <span class="proof-layer__cta-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <div class="proof-layer__visual" aria-hidden="true">
+            <div class="rubric-card">
+              <div class="rubric-card__header">
+                <span class="rubric-card__title">Rubric · sample</span>
+                <span class="rubric-card__total">89</span>
+              </div>
+              <ul class="rubric-card__rows">
+                <li class="rubric-card__row">
+                  <span class="rubric-card__label">Accuracy</span>
+                  <div class="rubric-card__bar"><div class="rubric-card__fill" style="--score: 92%;"></div></div>
+                  <span class="rubric-card__value">92</span>
+                </li>
+                <li class="rubric-card__row">
+                  <span class="rubric-card__label">Completeness</span>
+                  <div class="rubric-card__bar"><div class="rubric-card__fill" style="--score: 88%;"></div></div>
+                  <span class="rubric-card__value">88</span>
+                </li>
+                <li class="rubric-card__row">
+                  <span class="rubric-card__label">Craft</span>
+                  <div class="rubric-card__bar"><div class="rubric-card__fill" style="--score: 90%;"></div></div>
+                  <span class="rubric-card__value">90</span>
+                </li>
+                <li class="rubric-card__row">
+                  <span class="rubric-card__label">Transferability</span>
+                  <div class="rubric-card__bar"><div class="rubric-card__fill" style="--score: 86%;"></div></div>
+                  <span class="rubric-card__value">86</span>
+                </li>
+              </ul>
+              <div class="rubric-card__verified">
+                <span class="rubric-card__dot"></span>
+                <span>Verified · #a3f7b2c</span>
+              </div>
+            </div>
           </div>
         </section>
       </section>

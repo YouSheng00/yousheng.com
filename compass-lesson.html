@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" sizes="64x64" href="CompassStufavicon (1).png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson — CompassStu</title>
+  <style>
+    /* ─────────────────────────────────────────────────────────────────────
+       LESSON — Light-mode mockup of the three-panel lesson page,
+       floating on a soft purple-haze canvas. Frosted-glass aesthetic.
+       Self-contained for iframe embed (no shared.css / shared.js).
+       ───────────────────────────────────────────────────────────────────── */
+
+    body {
+      background: #f5f5f7;
+      color: #1d1d1f;
+      font-family: 'Inter', system-ui, sans-serif;
+      margin: 0;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    /* ── Stage + atmosphere ──────────────────────────────────────────── */
+    .stage {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      isolation: isolate;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ambient {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 45%,
+          rgba(167, 139, 250, 0.18) 0%,
+          rgba(124, 92, 252, 0.08) 35%,
+          rgba(245, 245, 247, 0) 70%),
+        radial-gradient(ellipse 90% 70% at 50% 100%,
+          rgba(124, 92, 252, 0.10) 0%,
+          transparent 60%),
+        radial-gradient(ellipse 50% 50% at 12% 18%,
+          rgba(255, 200, 220, 0.10) 0%,
+          transparent 60%);
+      animation: hue-drift 24s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes hue-drift {
+      0%, 100% { filter: hue-rotate(0deg)   saturate(1.0); }
+      50%      { filter: hue-rotate(-10deg) saturate(1.1); }
+    }
+
+    /* ── Lesson mockup container ─────────────────────────────────────── */
+    .lesson {
+      position: relative;
+      z-index: 5;
+      width: min(1120px, 92vw);
+      height: 660px;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(28px) saturate(140%);
+      -webkit-backdrop-filter: blur(28px) saturate(140%);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow:
+        0 30px 80px rgba(60, 45, 110, 0.14),
+        0 6px 24px rgba(60, 45, 110, 0.06),
+        0 0 0 1px rgba(124, 92, 252, 0.04);
+      animation: rise 1.4s cubic-bezier(0.2, 0, 0, 1) both;
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Top bar ─────────────────────────────────────────────────────── */
+    .topbar {
+      height: 60px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      display: grid;
+      grid-template-columns: 220px 1fr 280px;
+      align-items: center;
+      padding: 0 24px;
+      position: relative;
+    }
+    .top-back {
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.4);
+      letter-spacing: 0.02em;
+    }
+    .top-center { text-align: center; }
+    .top-course {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.82);
+      letter-spacing: -0.005em;
+    }
+    .top-meta {
+      font-size: 10px;
+      color: rgba(0, 0, 0, 0.35);
+      margin-top: 3px;
+      letter-spacing: 0.08em;
+      font-variant-numeric: tabular-nums;
+    }
+    .top-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 18px;
+      font-size: 10px;
+      color: rgba(0, 0, 0, 0.45);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .progress {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 2px;
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #6b4ae8, #a78bfa);
+      box-shadow: 0 0 12px rgba(124, 92, 252, 0.5);
+      animation: progress-grow 2.4s cubic-bezier(0.2, 0, 0, 1) 0.6s forwards;
+    }
+    @keyframes progress-grow {
+      to { width: 58%; }
+    }
+
+    /* ── Three-panel grid ────────────────────────────────────────────── */
+    .grid {
+      display: grid;
+      grid-template-columns: 220px 1fr 280px;
+      height: calc(100% - 60px);
+    }
+
+    /* ── Sidebar ─────────────────────────────────────────────────────── */
+    .sidebar {
+      border-right: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 28px 22px;
+    }
+    .side-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: rgba(0, 0, 0, 0.38);
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      font-weight: 600;
+    }
+    .side-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 0;
+      font-size: 12.5px;
+      color: rgba(0, 0, 0, 0.34);
+      letter-spacing: -0.002em;
+      transition: color 0.3s ease;
+    }
+    .side-item .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.14);
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+    .side-item.done { color: rgba(0, 0, 0, 0.62); }
+    .side-item.done .dot { background: rgba(94, 76, 212, 0.5); }
+    .side-item.active { color: #1d1d1f; font-weight: 500; }
+    .side-item.active .dot {
+      background: #5e4cd4;
+      box-shadow: 0 0 10px rgba(124, 92, 252, 0.55);
+      animation: dot-pulse 2.8s ease-in-out infinite;
+    }
+    @keyframes dot-pulse {
+      0%, 100% { box-shadow: 0 0 10px rgba(124, 92, 252, 0.55); }
+      50%      { box-shadow: 0 0 16px rgba(124, 92, 252, 0.85); }
+    }
+
+    /* ── Card area (center) ──────────────────────────────────────────── */
+    .card-area {
+      padding: 60px 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      width: 100%;
+      max-width: 420px;
+      opacity: 0;
+      animation: card-in 1.6s cubic-bezier(0.2, 0, 0, 1) 1s forwards;
+    }
+    @keyframes card-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .card-tag {
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      color: #5e4cd4;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .card-heading {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.018em;
+      color: #1d1d1f;
+      margin: 0 0 24px;
+      line-height: 1.25;
+    }
+    .card-body {
+      margin-bottom: 32px;
+    }
+    .card-body .line {
+      display: block;
+      height: 9px;
+      background: linear-gradient(90deg,
+        rgba(0, 0, 0, 0.07),
+        rgba(0, 0, 0, 0.04));
+      border-radius: 4px;
+      margin-bottom: 11px;
+    }
+    .card-body .line.s2 { width: 92%; }
+    .card-body .line.s3 { width: 68%; }
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: #5e4cd4;
+      border-radius: 6px;
+      color: white;
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: -0.002em;
+      box-shadow: 0 4px 14px rgba(94, 76, 212, 0.25);
+    }
+
+    /* ── Tutor panel (right) ─────────────────────────────────────────── */
+    .tutor {
+      border-left: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 28px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      background: rgba(0, 0, 0, 0.008);
+    }
+    .tutor-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      color: rgba(0, 0, 0, 0.55);
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 22px;
+    }
+    .tutor-header .pulse {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #5e4cd4;
+      animation: tutor-pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes tutor-pulse {
+      0%, 100% { opacity: 0.4; }
+      50%      { opacity: 1;   }
+    }
+    .tutor-msg {
+      background: rgba(0, 0, 0, 0.025);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      padding: 13px 14px;
+      margin-bottom: 14px;
+    }
+    .tutor-msg .line {
+      display: block;
+      height: 7px;
+      background: rgba(0, 0, 0, 0.10);
+      border-radius: 3px;
+      margin-bottom: 7px;
+    }
+    .tutor-msg .line:last-child { margin-bottom: 0; }
+    .tutor-msg .line.s2 { width: 85%; }
+    .tutor-msg .line.s3 { width: 50%; }
+    .tutor-spacer { flex: 1; }
+    .tutor-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .tutor-chip {
+      padding: 6px 11px;
+      border: 1px solid rgba(0, 0, 0, 0.10);
+      border-radius: 20px;
+      font-size: 10.5px;
+      color: rgba(0, 0, 0, 0.6);
+      letter-spacing: -0.002em;
+      background: rgba(255, 255, 255, 0.4);
+    }
+    .tutor-input {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 11px;
+      color: rgba(0, 0, 0, 0.38);
+      letter-spacing: -0.002em;
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    /* ── Walkthrough captions ────────────────────────────────────────
+       Three frosted-pill subtitles cycle inside the lesson panel,
+       anchored centre-bottom. Each pairs with a subtle accent
+       highlight on the matching UI region.
+       ──────────────────────────────────────────────────────────────── */
+    .captions {
+      position: absolute;
+      inset: 0;
+      z-index: 6;
+      pointer-events: none;
+    }
+    .cap {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      white-space: nowrap;
+      padding: 11px 24px 11px 20px;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.008em;
+      color: rgba(0, 0, 0, 0.78);
+      box-shadow:
+        0 14px 36px rgba(60, 45, 110, 0.15),
+        0 3px 10px rgba(60, 45, 110, 0.06);
+      opacity: 0;
+    }
+    .cap::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5e4cd4;
+      box-shadow: 0 0 10px rgba(124, 92, 252, 0.7);
+      flex-shrink: 0;
+      animation: cap-dot-pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes cap-dot-pulse {
+      0%, 100% { box-shadow: 0 0 10px rgba(124, 92, 252, 0.7); }
+      50%      { box-shadow: 0 0 16px rgba(124, 92, 252, 1); }
+    }
+    .cap em {
+      font-style: normal;
+      color: #5e4cd4;
+      font-weight: 600;
+    }
+
+    /* ── Per-caption position + arrow caret ─────────────────────────── */
+
+    /* Cap 1 — points UP to the progress bar */
+    .cap-1 {
+      top: 78px;
+      left: 58%;
+      transform: translateX(-50%);
+    }
+    .cap-1::after {
+      content: '';
+      position: absolute;
+      top: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: 7px solid rgba(255, 255, 255, 0.94);
+      filter: drop-shadow(0 -1px 1px rgba(60, 45, 110, 0.04));
+    }
+
+    /* Cap 2 — points LEFT to the active sidebar lesson */
+    .cap-2 {
+      top: 178px;
+      left: 240px;
+    }
+    .cap-2::after {
+      content: '';
+      position: absolute;
+      left: -7px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-right: 7px solid rgba(255, 255, 255, 0.94);
+      filter: drop-shadow(-1px 0 1px rgba(60, 45, 110, 0.04));
+    }
+
+    /* Cap 3 — points RIGHT to the tutor panel */
+    .cap-3 {
+      top: 82px;
+      right: 290px;
+    }
+    .cap-3::after {
+      content: '';
+      position: absolute;
+      right: -7px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      border-left: 7px solid rgba(255, 255, 255, 0.94);
+      filter: drop-shadow(1px 0 1px rgba(60, 45, 110, 0.04));
+    }
+
+    /* Each cap runs on a 6s shared cycle, baked into its own keyframes */
+    .cap-1 { animation: cap-1-show 6s cubic-bezier(0.2, 0, 0, 1) 2s infinite; }
+    .cap-2 { animation: cap-2-show 6s cubic-bezier(0.2, 0, 0, 1) 2s infinite; }
+    .cap-3 { animation: cap-3-show 6s cubic-bezier(0.2, 0, 0, 1) 2s infinite; }
+
+    @keyframes cap-1-show {
+      0%    { opacity: 0; transform: translateX(-50%) translateY(8px); }
+      5%    { opacity: 1; transform: translateX(-50%) translateY(0); }
+      30%   { opacity: 1; transform: translateX(-50%) translateY(0); }
+      33%   { opacity: 0; transform: translateX(-50%) translateY(-6px); }
+      100%  { opacity: 0; transform: translateX(-50%) translateY(-6px); }
+    }
+    @keyframes cap-2-show {
+      0%, 33%    { opacity: 0; transform: translateX(10px); }
+      38%        { opacity: 1; transform: translateX(0); }
+      63%        { opacity: 1; transform: translateX(0); }
+      66%        { opacity: 0; transform: translateX(8px); }
+      100%       { opacity: 0; transform: translateX(8px); }
+    }
+    @keyframes cap-3-show {
+      0%, 66%    { opacity: 0; transform: translateX(-10px); }
+      71%        { opacity: 1; transform: translateX(0); }
+      96%        { opacity: 1; transform: translateX(0); }
+      100%       { opacity: 0; transform: translateX(-8px); }
+    }
+
+    /* Synced UI highlights — same 6s cycle, same windows */
+    .progress-fill {
+      animation:
+        progress-grow 2.4s cubic-bezier(0.2, 0, 0, 1) 0.6s forwards,
+        progress-emphasize 6s ease-in-out 2s infinite;
+    }
+    @keyframes progress-emphasize {
+      0%, 33%, 100% { box-shadow: 0 0 12px rgba(124, 92, 252, 0.5); }
+      5%, 30%       { box-shadow: 0 0 22px rgba(124, 92, 252, 0.95); }
+    }
+
+    .card {
+      animation:
+        card-in 1.6s cubic-bezier(0.2, 0, 0, 1) 1s forwards,
+        card-emphasize 6s ease-in-out 2s infinite;
+    }
+    @keyframes card-emphasize {
+      0%, 33%, 66%, 100% { filter: drop-shadow(0 0 0 transparent); }
+      38%, 63%           { filter: drop-shadow(0 6px 24px rgba(124, 92, 252, 0.22)); }
+    }
+
+    .tutor {
+      animation: tutor-emphasize 6s ease-in-out 2s infinite;
+    }
+    @keyframes tutor-emphasize {
+      0%, 66%, 100% { background: rgba(0, 0, 0, 0.008); }
+      71%, 96%      { background: rgba(124, 92, 252, 0.05); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cap-1, .cap-2, .cap-3,
+      .progress-fill, .card, .tutor {
+        animation: none;
+      }
+      .cap-1 { opacity: 1; }
+    }
+
+    /* ── Responsive — shrink only, no restructure ───────────────────── */
+    @media (max-width: 1000px) {
+      .lesson { height: 560px; }
+      .topbar { grid-template-columns: 160px 1fr 200px; }
+      .grid   { grid-template-columns: 160px 1fr 200px; }
+      .card-area { padding: 40px 48px; }
+      .card-heading { font-size: 19px; }
+      .top-actions { gap: 12px; font-size: 9px; }
+
+      .cap-2 { left: 178px; top: 160px; }
+      .cap-3 { right: 210px; top: 78px; }
+    }
+    @media (max-width: 760px) {
+      .stage { padding: 24px; }
+      .lesson { width: 100%; height: 520px; }
+      .topbar { grid-template-columns: 90px 1fr 120px; padding: 0 14px; }
+      .grid   { grid-template-columns: 90px 1fr 120px; }
+      .side-label, .top-meta { font-size: 9px; }
+      .side-item span:last-child, .top-actions { display: none; }
+      .top-course { font-size: 11px; }
+      .card-area { padding: 28px 24px; }
+      .card-heading { font-size: 17px; }
+      .tutor { padding: 16px 12px; }
+      .tutor-header span:last-child { display: none; }
+      .tutor-chips, .tutor-input { display: none; }
+
+      .cap {
+        font-size: 11.5px;
+        padding: 9px 16px 9px 13px;
+        gap: 8px;
+      }
+      .cap-1 { top: 70px; }
+      .cap-2 { top: 130px; left: 102px; }
+      .cap-3 { top: 70px; right: 128px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="ambient"></div>
+
+    <div class="lesson">
+
+      <div class="topbar">
+        <div class="top-back">← Back</div>
+        <div class="top-center">
+          <div class="top-course">CompassStu Course</div>
+          <div class="top-meta">MODULE 2  ·  LESSON 3  ·  9 MIN</div>
+        </div>
+        <div class="top-actions">
+          <span>Notes</span>
+          <span>Tutor</span>
+          <span>Focus</span>
+        </div>
+        <div class="progress"><div class="progress-fill"></div></div>
+      </div>
+
+      <div class="grid">
+
+        <aside class="sidebar">
+          <div class="side-label">Module 2</div>
+          <div class="side-item done"><span class="dot"></span><span>Lesson 1</span></div>
+          <div class="side-item done"><span class="dot"></span><span>Lesson 2</span></div>
+          <div class="side-item active"><span class="dot"></span><span>Lesson 3</span></div>
+          <div class="side-item"><span class="dot"></span><span>Lesson 4</span></div>
+          <div class="side-item"><span class="dot"></span><span>Lesson 5</span></div>
+        </aside>
+
+        <main class="card-area">
+          <div class="card">
+            <div class="card-tag">Concept</div>
+            <h2 class="card-heading">Active recall beats passive review — by a wide margin.</h2>
+            <div class="card-body">
+              <span class="line"></span>
+              <span class="line s2"></span>
+              <span class="line s3"></span>
+            </div>
+            <div class="card-cta">Continue<span class="arrow">→</span></div>
+          </div>
+        </main>
+
+        <aside class="tutor">
+          <div class="tutor-header"><span class="pulse"></span><span>Compass Tutor</span></div>
+          <div class="tutor-msg">
+            <span class="line"></span>
+            <span class="line s2"></span>
+            <span class="line s3"></span>
+          </div>
+          <div class="tutor-spacer"></div>
+          <div class="tutor-chips">
+            <span class="tutor-chip">Explain simpler</span>
+            <span class="tutor-chip">Give example</span>
+            <span class="tutor-chip">Hint only</span>
+          </div>
+          <div class="tutor-input">Ask anything…</div>
+        </aside>
+
+      </div>
+
+      <div class="captions">
+        <span class="cap cap-1">Eight to ten minutes per lesson.</span>
+        <span class="cap cap-2">One card at a time.</span>
+        <span class="cap cap-3">Compass Tutor stays open.</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
