@@ -153,7 +153,7 @@
         </div>
 
         <!-- Cards 11 (left, 55%) + 12 (right, 45%) — system map + reserved. -->
-        <section class="project-text" style="grid-template-columns: 60fr 40fr; padding-top: calc((var(--s-500) + var(--s-300)) * 1.1); padding-bottom: var(--s-200);">
+        <section class="project-text" style="grid-template-columns: 60fr 40fr;">
           <div class="project-text__left" style="align-self: stretch;">
             <div style="background: #555; border-radius: var(--site-border-radius); padding: 1px; height: 100%;">
               <div class="project-block" style="height: 100%; background: transparent; border-radius: calc(var(--site-border-radius) - 1px);">
@@ -259,7 +259,7 @@
         <!-- Section 06: Lesson Anatomy.
              Card 11 (left, ~35%): text — title, lead, three subsections.
              Card 12 (right, ~65%): lesson mockup iframe. -->
-        <section class="project-text" style="grid-template-columns: 45fr 55fr; padding-top: var(--s-300);">
+        <section class="project-text" style="grid-template-columns: 45fr 55fr;">
           <div class="project-text__left">
             <h3 class="project-text__section-title">
               <span class="project-text__num">06</span>
@@ -298,7 +298,7 @@
         <!-- Section 08: Adaptive Engine — CompassStu7 image on the left
              (45%), editorial text on the right (55%) with section title,
              lead paragraph, and three feature items. -->
-        <section class="project-text" style="grid-template-columns: 48fr 52fr; padding-top: var(--s-300);">
+        <section class="project-text" style="grid-template-columns: 48fr 52fr;">
           <div class="project-text__left">
             <div class="project-block" style="aspect-ratio: 1048 / 720;">
               <img src="Images/CompassStu7.png" alt="CompassStu adaptive engine view" />
@@ -308,7 +308,7 @@
           <div class="project-text__right">
             <h3 class="project-text__section-title">
               <span class="project-text__num">07</span>
-              <span class="project-text__label">Adaptive Engine</span>
+              <span class="project-text__label">Adaptive AI Engine</span>
             </h3>
 
             <div class="project-text__body">
@@ -381,6 +381,73 @@
             </div>
           </div>
         </section>
+
+        <!-- Section 09: Content Operation — title + copy on the left (45%)
+             with CompassStu10 filling remaining vertical space below,
+             CompassStu9 image on the right (55%). Both columns stretch
+             to the same height so the left text + CompassStu10 total
+             matches CompassStu9's height. -->
+        <section class="project-text" style="grid-template-columns: 45fr 55fr; align-items: stretch;">
+          <div class="project-text__left" style="display: flex; flex-direction: column;">
+            <h3 class="project-text__section-title">
+              <span class="project-text__num">09</span>
+              <span class="project-text__label">Content Operation</span>
+            </h3>
+
+            <div class="project-text__body">
+              <p>A separate admin portal lets the content team create, edit, and publish courses end-to-end — without a developer in the loop.</p>
+            </div>
+
+            <dl class="project-text__pipeline">
+              <dt>Visual Lesson Editor.</dt>
+              <dd>Draft / publish workflow with full version history per lesson.</dd>
+              <dt>Per-Course AI Tutor.</dt>
+              <dd>Title, scope, language, and custom prompt — all configurable without code.</dd>
+              <dt>Two-Layer Trash.</dt>
+              <dd>Confirm dialog, 7-day soft delete, then auto-purge.</dd>
+            </dl>
+
+            <div class="project-block" style="flex: 1; min-height: 0; margin-top: var(--s-300);">
+              <img src="Images/CompassStu10.png" alt="CompassStu content admin secondary view" />
+            </div>
+          </div>
+
+          <div class="project-text__right">
+            <div class="project-block" style="aspect-ratio: 1734 / 1450;">
+              <img src="Images/CompassStu9.png" alt="CompassStu content operation view" />
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 10: Brand & Visual Design — centered single-column
+             editorial moment. Title above, lead paragraph below. -->
+        <section class="project-text project-text--center" style="grid-template-columns: 1fr;">
+          <div class="project-text__center">
+            <h3 class="project-text__section-title">
+              <span class="project-text__num">10</span>
+              <span class="project-text__label">Brand &amp; Visual Design</span>
+            </h3>
+
+            <p class="project-text__thesis">
+              Shipped in 3 months — sole owner across product, design, and engineering.
+            </p>
+
+            <div class="project-text__body">
+              <p>The design system is a direct response to CompassStu's thesis: translating its outcomes-over-completion promise into a premium, restrained visual identity defined by <em>Inter</em>, one violet accent, and alpha-based neutrals.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 10 visuals: two slides at full grid width, but with
+             a wider aspect-ratio (21:9 instead of 16:9) so they read as
+             shorter horizontal banners rather than tall full-bleed cards. -->
+        <div class="project-block project-block--full" style="aspect-ratio: 21 / 9.9;">
+          <iframe src="brand-overview-1.html" title="CompassStu brand foundations" loading="lazy"></iframe>
+        </div>
+
+        <div class="project-block project-block--full" style="aspect-ratio: 21 / 9.9;">
+          <iframe src="brand-overview-2.html" title="CompassStu product surfaces" loading="lazy"></iframe>
+        </div>
       </section>
     </main>
 

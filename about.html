@@ -4,9 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>About — YouSheng</title>
-    <meta name="description" content="About YouSheng — designer and builder." />
+    <meta name="description" content="YouSheng — Product & Project Executive. A one-person product team designing, building, and shipping AI-driven platforms end-to-end." />
     <script>
-      // Apply saved theme before paint so there's no flash on page load.
       (function () {
         try {
           if (localStorage.getItem('theme') === 'light') {
@@ -21,19 +20,266 @@
     <main class="page page--project">
       <header class="project__header">
         <h1 class="project__title">About</h1>
+        <p class="project__meta">
+          Neu You Sheng — Product &amp; Project Executive. Based in Singapore.<br>
+          Designing, building, and shipping AI-driven platforms end-to-end.
+        </p>
       </header>
 
-      <section class="about" aria-label="About content">
-        <div class="about__column">
-          <h2 class="about__heading">Tools</h2>
-          <ul class="about__list">
-            <li>Claude Code</li>
-            <li>Unity Engine</li>
-            <li>Adobe Creative Suite</li>
-            <li>Google AI Studio</li>
-            <li>Autodesk Maya</li>
-          </ul>
-        </div>
+      <section class="project-grid" aria-label="About content">
+
+        <!-- HERO: full-bleed editorial lead, no competing content on the row. -->
+        <section class="about-hero">
+          <h2 class="about-hero__lead">
+            A one-person product team — strategy, design, engineering, and operations under one mind.
+          </h2>
+          <p class="about-hero__sub">
+            The hand-offs that slow most orgs do not exist here.
+          </p>
+        </section>
+
+        <!-- 01 Operating Model — title left (narrow), body + pipeline right. -->
+        <section class="project-text" style="grid-template-columns: 35fr 65fr;">
+          <div class="project-text__left">
+            <h3 class="project-text__section-title">
+              <span class="project-text__num">01</span>
+              <span class="project-text__label">Operating Model</span>
+            </h3>
+
+            <p class="project-text__tagline" style="margin-top: var(--s-300);">
+              Three roles.<br>
+              One mind.<br>
+              One point of accountability.
+            </p>
+          </div>
+
+          <div class="project-text__right">
+            <p class="project-text__thesis">
+              I take products from problem framing to working software without a team between idea and execution.
+            </p>
+
+            <div class="project-text__body">
+              <p>Shorter loops. Tighter craft. A single point of ownership across strategy, design, code, and operations.</p>
+            </div>
+
+            <dl class="project-text__pipeline">
+              <dt>Frame.</dt>
+              <dd>Define the user, the job, and the standard that proves it. Functional specs, user flows, wireframes.</dd>
+              <dt>Build.</dt>
+              <dd>Design the interface, write the code, configure the AI. UI, back-end, and the prompts in between.</dd>
+              <dt>Operate.</dt>
+              <dd>Coordinate vendors, run content workflows, manage the post-launch loop.</dd>
+            </dl>
+          </div>
+        </section>
+
+        <!-- 02 Currently — proof-layer card with a Now badge and a metadata panel
+             on the right. Distinct surface so it reads as the "live" beat. -->
+        <section class="proof-layer">
+          <div class="proof-layer__main">
+            <div class="about-now-badge">
+              <span class="about-now-badge__dot"></span>
+              <span>Now · May 2026</span>
+            </div>
+
+            <h3 class="project-text__section-title" style="margin-top: var(--s-200);">
+              <span class="project-text__num">02</span>
+              <span class="project-text__label">Currently</span>
+            </h3>
+
+            <p class="proof-layer__body">
+              Project Executive at Spring College International — leading the end-to-end build of <span class="proof-layer__emp">CompassStu</span>, an AI-driven adult learning platform.
+            </p>
+
+            <dl class="project-text__pipeline" style="margin-top: var(--s-300);">
+              <dt>AI Learning Platform.</dt>
+              <dd>Requirements through rollout. Personalized learning paths, AI tutoring, knowledge-graph navigation, job-matching — shipped on schedule.</dd>
+              <dt>Acquisition Integration.</dt>
+              <dd>Led the operational transition for the company's acquisition of Acuity Academy (SkillsFuture Singapore–approved training centre).</dd>
+              <dt>Tech Leadership.</dt>
+              <dd>Implemented the Training Management System and accounting software. Advised leadership on the organisation's AI transition strategy.</dd>
+              <dt>Business Development.</dt>
+              <dd>Sourced overseas instructors, shaped course direction, ran marketing for the adult AI training line.</dd>
+            </dl>
+          </div>
+
+          <aside class="proof-layer__visual about-meta" aria-label="Current role metadata">
+            <dl class="about-meta__list">
+              <div class="about-meta__row">
+                <dt>Role</dt>
+                <dd>Project Executive · IT &amp; Marketing</dd>
+              </div>
+              <div class="about-meta__row">
+                <dt>Org</dt>
+                <dd>Spring College International</dd>
+              </div>
+              <div class="about-meta__row">
+                <dt>Since</dt>
+                <dd>Feb 2024</dd>
+              </div>
+              <div class="about-meta__row">
+                <dt>Location</dt>
+                <dd>Singapore</dd>
+              </div>
+              <div class="about-meta__row">
+                <dt>Status</dt>
+                <dd>
+                  <span class="about-meta__dot" aria-hidden="true"></span>
+                  Open to conversations
+                </dd>
+              </div>
+            </dl>
+          </aside>
+        </section>
+
+        <!-- Manifesto: full-bleed pull quote — the page's signature line. -->
+        <section class="about-manifesto" aria-label="Operating principle">
+          <p class="about-manifesto__line">I do not specialise.</p>
+          <p class="about-manifesto__line about-manifesto__line--alt">I integrate.</p>
+          <p class="about-manifesto__sub">Design + Engineering + Operations · one signature.</p>
+        </section>
+
+        <!-- 03 Prior Work — narrow title left, pipeline right. -->
+        <section class="project-text" style="grid-template-columns: 35fr 65fr;">
+          <div class="project-text__left">
+            <h3 class="project-text__section-title">
+              <span class="project-text__num">03</span>
+              <span class="project-text__label">Prior Work</span>
+            </h3>
+
+            <p class="project-text__thesis" style="font-size: clamp(1.4rem, 2.2vw, 1.85rem);">
+              Two years before CompassStu — shipping simulation and running operations.
+            </p>
+          </div>
+
+          <div class="project-text__right">
+            <dl class="project-text__pipeline">
+              <dt>Acuity Academy — Operations Executive.</dt>
+              <dd><span class="about-tag">Feb 2025 – Present</span> Daily operations for SkillsFuture-funded WSQ Security Courses. Enrolment coordination, point of contact for inquiries, course promotion.</dd>
+              <dt>SATS Ltd — Unity Software Developer Intern.</dt>
+              <dd><span class="about-tag">Sep 2023 – Feb 2024</span> End-to-end interactive 3D Cargo Loading simulation at Changi Airport for SATS's Apron Training programme. C# · object-oriented systems · inventory and application logic.</dd>
+            </dl>
+          </div>
+        </section>
+
+        <!-- 04 Foundation — education left, certifications right. -->
+        <section class="project-text" style="grid-template-columns: 35fr 65fr;">
+          <div class="project-text__left">
+            <h3 class="project-text__section-title">
+              <span class="project-text__num">04</span>
+              <span class="project-text__label">Foundation</span>
+            </h3>
+
+            <p class="project-text__thesis" style="font-size: clamp(1.4rem, 2.2vw, 1.85rem);">
+              Diploma in Immersive Media. <br>Ngee Ann Polytechnic.
+            </p>
+
+            <p class="project-text__tagline" style="margin-top: var(--s-200);">
+              CGPA 3.6 / 4 · Apr 2021 – Feb 2024
+            </p>
+          </div>
+
+          <div class="project-text__right">
+            <h4 class="project-text__subsection-title" style="margin-bottom: var(--s-200);">
+              <span>Certifications</span>
+            </h4>
+            <dl class="project-text__pipeline">
+              <dt>Meta Back-End Developer.</dt>
+              <dd>Professional Certificate · Meta / Coursera.</dd>
+              <dt>Unity Junior Programmer.</dt>
+              <dd>Unity.</dd>
+              <dt>Unity Certified Associate.</dt>
+              <dd>Game Developer · Unity.</dd>
+              <dt>AR Contest — 3rd Place.</dt>
+              <dd>The Doodle People LLP.</dd>
+            </dl>
+          </div>
+        </section>
+
+        <!-- 05 Toolkit — chip clusters, three semantic groups. -->
+        <section class="about-toolkit">
+          <header class="about-toolkit__head">
+            <h3 class="project-text__section-title">
+              <span class="project-text__num">05</span>
+              <span class="project-text__label">Toolkit</span>
+            </h3>
+          </header>
+
+          <div class="about-toolkit__group">
+            <h4 class="about-toolkit__title">Technical</h4>
+            <ul class="about-chips">
+              <li>Python</li>
+              <li>C#</li>
+              <li>Unity Engine</li>
+              <li>Django</li>
+              <li>Web App Development</li>
+              <li>UX Wireframing</li>
+              <li>Prototyping</li>
+            </ul>
+          </div>
+
+          <div class="about-toolkit__group">
+            <h4 class="about-toolkit__title">Business</h4>
+            <ul class="about-chips">
+              <li>Agile workflow</li>
+              <li>Requirements gathering</li>
+              <li>Stakeholder management</li>
+              <li>Hypothesis-driven dev</li>
+              <li>AI &amp; product development</li>
+              <li>UI/UX &amp; learning design</li>
+              <li>Game &amp; interactive experience</li>
+              <li>Project &amp; vendor management</li>
+              <li>Cross-functional coordination</li>
+            </ul>
+          </div>
+
+          <div class="about-toolkit__group">
+            <h4 class="about-toolkit__title">Daily Tools</h4>
+            <ul class="about-chips about-chips--accent">
+              <li>Claude Code</li>
+              <li>Unity Engine</li>
+              <li>Adobe Creative Suite</li>
+              <li>Google AI Studio</li>
+              <li>Autodesk Maya</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 06 Contact — signature card. Closing moment. -->
+        <section class="about-contact" aria-label="Contact">
+          <div class="about-contact__card">
+            <div class="about-contact__status">
+              <span class="about-contact__dot" aria-hidden="true"></span>
+              <span>Open to product roles · Strategy through ship</span>
+            </div>
+
+            <p class="about-contact__line">
+              Let&rsquo;s build something.
+            </p>
+
+            <ul class="about-contact__channels">
+              <li>
+                <a href="mailto:neuyousheng5533@gmail.com">
+                  <span class="about-contact__label">Email</span>
+                  <span class="about-contact__value">neuyousheng5533@gmail.com</span>
+                </a>
+              </li>
+              <li>
+                <a href="tel:+6591568891">
+                  <span class="about-contact__label">Phone</span>
+                  <span class="about-contact__value">+65 9156 8891</span>
+                </a>
+              </li>
+              <li>
+                <a href="index.html">
+                  <span class="about-contact__label">Portfolio</span>
+                  <span class="about-contact__value">yousheng.com</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </section>
+
       </section>
     </main>
 

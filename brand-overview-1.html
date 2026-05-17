@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Foundations — CompassStu</title>
+  <style>
+    /* Slide 1: Brand Foundations — single 16:9 slide that fills the
+       iframe edge-to-edge so it can be embedded as a standalone card. */
+    body {
+      background: #efeff2;
+      font-family: 'Inter', system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #1d1d1f;
+      -webkit-font-smoothing: antialiased;
+    }
+    body > nav { display: none; }
+    .theme-switch { display: none !important; }
+
+    .slide {
+      width: 100%;
+      height: 100vh;
+      margin: 0;
+      background: white;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 28px 44px;
+      box-sizing: border-box;
+    }
+
+    .slide-title-block { margin-bottom: 20px; }
+    .slide-title {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.024em;
+      line-height: 1.05;
+      color: #1d1d1f;
+      margin: 0 0 6px;
+    }
+    .slide-sub {
+      font-size: 13.5px;
+      color: rgba(0, 0, 0, 0.55);
+      letter-spacing: -0.003em;
+      line-height: 1.5;
+      max-width: 720px;
+      margin: 0;
+    }
+
+    .hairline {
+      height: 1px;
+      background: rgba(0, 0, 0, 0.06);
+      margin-bottom: 18px;
+    }
+
+    .slide-body {
+      flex: 1;
+      display: grid;
+      gap: 18px;
+      min-height: 0;
+    }
+    .body-1-1-1 { grid-template-columns: 1fr 1.1fr 0.95fr; }
+
+    .panel {
+      background: #fafafa;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+    }
+    .panel-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      color: rgba(0, 0, 0, 0.5);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .type-stack { display: flex; flex-direction: column; gap: 4px; }
+    .type-line {
+      display: flex;
+      flex-direction: column;
+      padding: 6px 0;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    .type-line:first-child { border-top: none; padding-top: 0; }
+    .type-meta {
+      font-size: 9px;
+      color: rgba(0, 0, 0, 0.42);
+      letter-spacing: 0.1em;
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .type-sample { color: #1d1d1f; line-height: 1.1; }
+    .ts-display  { font: 700 26px/1.05 'Inter', sans-serif; letter-spacing: -0.022em; }
+    .ts-title    { font: 600 20px/1.1 'Inter', sans-serif; letter-spacing: -0.018em; }
+    .ts-heading  { font: 600 17px/1.2 'Inter', sans-serif; letter-spacing: -0.014em; }
+    .ts-subtitle { font: 500 14px/1.3 'Inter', sans-serif; letter-spacing: -0.008em; }
+    .ts-body     { font: 400 12.5px/1.4 'Inter', sans-serif; letter-spacing: -0.003em; color: rgba(0,0,0,0.78); }
+    .ts-meta     { font: 400 11.5px/1.3 'Inter', sans-serif; color: rgba(0,0,0,0.55); }
+    .ts-micro    { font: 600 10px/1 'Inter', sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(0,0,0,0.55); }
+
+    .color-block { margin-bottom: 12px; }
+    .color-block:last-child { margin-bottom: 0; }
+    .color-block-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: rgba(0, 0, 0, 0.5);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .color-swatches { display: grid; gap: 4px; }
+    .color-row-8 { grid-template-columns: repeat(8, 1fr); }
+    .color-row-6 { grid-template-columns: repeat(6, 1fr); }
+    .color-row-4 { grid-template-columns: repeat(4, 1fr); }
+    .color-swatch {
+      height: 26px;
+      border-radius: 5px;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+    .color-dark-row {
+      background: #0f0c1f;
+      border-radius: 7px;
+      padding: 4px;
+    }
+    .color-dark-row .color-swatch { border-color: rgba(255, 255, 255, 0.06); }
+
+    .spacing-list { display: flex; flex-direction: column; gap: 5px; }
+    .spacing-row {
+      display: grid;
+      grid-template-columns: 28px 1fr 40px;
+      gap: 8px;
+      align-items: center;
+      font-size: 10.5px;
+      font-variant-numeric: tabular-nums;
+    }
+    .spacing-token { font-weight: 500; color: #1d1d1f; }
+    .spacing-bar { height: 4px; background: #5e4cd4; border-radius: 2px; }
+    .spacing-value { color: rgba(0, 0, 0, 0.5); text-align: right; }
+
+    .motion-divider {
+      height: 1px;
+      background: rgba(0, 0, 0, 0.05);
+      margin: 12px 0;
+    }
+    .motion-stack {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 5px 14px;
+      font-size: 11px;
+      font-variant-numeric: tabular-nums;
+    }
+    .motion-name { color: #1d1d1f; font-weight: 500; }
+    .motion-value { color: rgba(0, 0, 0, 0.5); }
+
+    .slide-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      font-size: 10px;
+      color: rgba(0, 0, 0, 0.42);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+</head>
+<body>
+  <section class="slide">
+    <div class="slide-title-block">
+      <h1 class="slide-title">The system behind the system.</h1>
+      <p class="slide-sub">A small, restrained vocabulary of type, colour, motion, and spacing — the same building blocks behind every CompassStu surface.</p>
+    </div>
+
+    <div class="hairline"></div>
+
+    <div class="slide-body body-1-1-1">
+
+      <div class="panel">
+        <div class="panel-label">01 · Typography</div>
+        <div class="type-stack">
+          <div class="type-line">
+            <div class="type-meta">Display · 56 / 700 / -0.028em</div>
+            <div class="type-sample ts-display">CompassStu</div>
+          </div>
+          <div class="type-line">
+            <div class="type-meta">Title · 40 / 600 / -0.022em</div>
+            <div class="type-sample ts-title">From learner to candidate.</div>
+          </div>
+          <div class="type-line">
+            <div class="type-meta">Heading · 24 / 600 / -0.014em</div>
+            <div class="type-sample ts-heading">Active recall beats review.</div>
+          </div>
+          <div class="type-line">
+            <div class="type-meta">Subtitle · 18 / 500 / -0.008em</div>
+            <div class="type-sample ts-subtitle">Card title, form label.</div>
+          </div>
+          <div class="type-line">
+            <div class="type-meta">Body · 15 / 400 / -0.003em</div>
+            <div class="type-sample ts-body">Default reading text across the platform.</div>
+          </div>
+          <div class="type-line">
+            <div class="type-meta">Meta · 13 / 400</div>
+            <div class="type-sample ts-meta">Module 2 · Lesson 3 · 9 min</div>
+          </div>
+          <div class="type-line">
+            <div class="type-meta">Micro · 11 / 600 / 0.1em</div>
+            <div class="type-sample ts-micro">Product Thesis</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-label">02 · Color</div>
+
+        <div class="color-block">
+          <div class="color-block-label">Neutral · dark mode</div>
+          <div class="color-dark-row">
+            <div class="color-swatches color-row-8">
+              <div class="color-swatch" style="background:rgba(255,255,255,0.98);"></div>
+              <div class="color-swatch" style="background:rgba(255,255,255,0.85);"></div>
+              <div class="color-swatch" style="background:rgba(255,255,255,0.70);"></div>
+              <div class="color-swatch" style="background:rgba(255,255,255,0.55);"></div>
+              <div class="color-swatch" style="background:rgba(255,255,255,0.30);"></div>
+              <div class="color-swatch" style="background:rgba(255,255,255,0.14);"></div>
+              <div class="color-swatch" style="background:rgba(255,255,255,0.08);"></div>
+              <div class="color-swatch" style="background:rgba(255,255,255,0.04);"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="color-block">
+          <div class="color-block-label">Neutral · light mode</div>
+          <div class="color-swatches color-row-8">
+            <div class="color-swatch" style="background:rgba(0,0,0,0.98);"></div>
+            <div class="color-swatch" style="background:rgba(0,0,0,0.85);"></div>
+            <div class="color-swatch" style="background:rgba(0,0,0,0.70);"></div>
+            <div class="color-swatch" style="background:rgba(0,0,0,0.55);"></div>
+            <div class="color-swatch" style="background:rgba(0,0,0,0.30);"></div>
+            <div class="color-swatch" style="background:rgba(0,0,0,0.14);"></div>
+            <div class="color-swatch" style="background:rgba(0,0,0,0.08);"></div>
+            <div class="color-swatch" style="background:rgba(0,0,0,0.04);"></div>
+          </div>
+        </div>
+
+        <div class="color-block">
+          <div class="color-block-label">Accent · violet</div>
+          <div class="color-swatches color-row-6">
+            <div class="color-swatch" style="background:rgba(124,92,252,0.08);"></div>
+            <div class="color-swatch" style="background:rgba(124,92,252,0.14);"></div>
+            <div class="color-swatch" style="background:rgba(167,139,250,0.40);"></div>
+            <div class="color-swatch" style="background:#7c5cfc;"></div>
+            <div class="color-swatch" style="background:#6b4ae8;"></div>
+            <div class="color-swatch" style="background:#5a3dd0;"></div>
+          </div>
+        </div>
+
+        <div class="color-block">
+          <div class="color-block-label">Semantic · status</div>
+          <div class="color-swatches color-row-4">
+            <div class="color-swatch" style="background:#34d399;"></div>
+            <div class="color-swatch" style="background:#f59e0b;"></div>
+            <div class="color-swatch" style="background:#f87171;"></div>
+            <div class="color-swatch" style="background:#60a5fa;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-label">03 · Spacing & Motion</div>
+
+        <div class="color-block-label">Spacing tokens · 8-point</div>
+        <div class="spacing-list">
+          <div class="spacing-row"><div class="spacing-token">s1</div><div class="spacing-bar" style="width:4px;"></div><div class="spacing-value">4 px</div></div>
+          <div class="spacing-row"><div class="spacing-token">s2</div><div class="spacing-bar" style="width:8px;"></div><div class="spacing-value">8 px</div></div>
+          <div class="spacing-row"><div class="spacing-token">s3</div><div class="spacing-bar" style="width:12px;"></div><div class="spacing-value">12 px</div></div>
+          <div class="spacing-row"><div class="spacing-token">s4</div><div class="spacing-bar" style="width:16px;"></div><div class="spacing-value">16 px</div></div>
+          <div class="spacing-row"><div class="spacing-token">s5</div><div class="spacing-bar" style="width:24px;"></div><div class="spacing-value">24 px</div></div>
+          <div class="spacing-row"><div class="spacing-token">s6</div><div class="spacing-bar" style="width:32px;"></div><div class="spacing-value">32 px</div></div>
+          <div class="spacing-row"><div class="spacing-token">s7</div><div class="spacing-bar" style="width:48px;"></div><div class="spacing-value">48 px</div></div>
+          <div class="spacing-row"><div class="spacing-token">s8</div><div class="spacing-bar" style="width:64px;"></div><div class="spacing-value">64 px</div></div>
+        </div>
+
+        <div class="motion-divider"></div>
+
+        <div class="color-block-label">Motion · durations</div>
+        <div class="motion-stack">
+          <div class="motion-name">instant</div><div class="motion-value">60 ms</div>
+          <div class="motion-name">fast</div><div class="motion-value">140 ms</div>
+          <div class="motion-name">base</div><div class="motion-value">220 ms</div>
+          <div class="motion-name">slow</div><div class="motion-value">360 ms</div>
+          <div class="motion-name">slower</div><div class="motion-value">520 ms</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="slide-foot">
+      <div>7 type roles · 18 colour tokens · 8 spacing stops · 5 motion durations</div>
+      <div>CompassStu · 2026</div>
+    </div>
+  </section>
+</body>
+</html>
