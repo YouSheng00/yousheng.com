@@ -380,8 +380,8 @@ Always use an `<iframe>` for self-contained motion HTML (own CSS / scripts). Avo
 ```
 Personal Website/
 ├── index.html              # home (intro + project grid)
-├── project.html            # CompassStu detail
-├── project-2.html          # SATS Cargo Loading Simulation
+├── compasstu.html          # CompassStu detail
+├── sats.html               # SATS Cargo Loading Simulation
 ├── project-3.html          # Atelier
 ├── project-4.html          # (placeholder)
 ├── writing.html            # Writing index
