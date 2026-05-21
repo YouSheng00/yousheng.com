@@ -491,6 +491,36 @@ button {
   pointer-events: none;
 }
 
+/* Tech-stack icon row — three equal-size logo chips in a row. Light
+   chip background so brand logos (designed for light) read cleanly;
+   object-fit: contain keeps each logo whole regardless of its source
+   dimensions or format (svg / png / jpg). */
+.tech-icons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-100);
+  margin-top: var(--s-200);
+}
+
+.tech-icons__item {
+  min-width: 0;            /* let grid columns shrink to fit, no overflow */
+  aspect-ratio: 3 / 2;
+  padding: var(--s-150);
+  background: var(--c-light-gray);
+  border-radius: var(--site-border-radius);
+  overflow: hidden;
+}
+
+/* Fill the chip's content box exactly; object-fit: contain then scales
+   each logo whole inside it — reliable regardless of source dimensions
+   or whether the chip height came from aspect-ratio. */
+.tech-icons__item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 /* Image credit — faint italic caption tucked in the bottom-right of a
    media block. No background box: kept deliberately subtle, just a
    shadow for legibility over varied imagery. */
