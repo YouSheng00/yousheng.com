@@ -521,6 +521,24 @@ button {
   object-fit: contain;
 }
 
+/* GLB model + in-game screenshot, stacked tight. Each stack spans half
+   the project grid; two stacks sit per row. The model viewer uses a 5/3
+   ratio (~20% shorter than a standard 4/3 card); the screenshot card
+   sits directly below it with only a small gap. */
+.glb-stack {
+  grid-column: span 10;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-050);
+}
+
+.glb-stack__model { aspect-ratio: 5 / 3; }
+.glb-stack__shot  { aspect-ratio: 16 / 9; }
+
+@media (max-width: 600px) {
+  .glb-stack { grid-column: 1; }
+}
+
 /* Image credit — faint italic caption tucked in the bottom-right of a
    media block. No background box: kept deliberately subtle, just a
    shadow for legibility over varied imagery. */
@@ -779,6 +797,18 @@ button {
   align-items: flex-start;
   text-align: left;
 }
+
+/* Chapter divider — hairline at the top of a numbered section so the
+   page reads as distinct chapters rather than one continuous column. */
+.project-text--chapter {
+  border-top: 1px solid color-mix(in srgb, var(--c-text) 12%, transparent);
+}
+
+/* Mirrored layout — swaps the two columns so the image/text sides
+   alternate down the page (zigzag rhythm). A full-width section title
+   (grid-column: 1 / -1) keeps its default order and stays on top. */
+.project-text--flip .project-text__left  { order: 2; }
+.project-text--flip .project-text__right { order: 1; }
 
 /* — LEFT column: hero pitch — */
 

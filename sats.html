@@ -93,7 +93,7 @@
 
         <!-- 03 The Challenges: section title + two subsections in left
              column, motion card reserved on the right. -->
-        <section class="project-text">
+        <section class="project-text project-text--chapter">
           <div class="project-text__left">
             <h3 class="project-text__section-title">
               <span class="project-text__num">03</span>
@@ -123,7 +123,7 @@
 
         <!-- 04 My Role & Toolkit: narrative subsections in the left column,
              tech stack list in the right. -->
-        <section class="project-text">
+        <section class="project-text project-text--chapter">
           <div class="project-text__left">
             <h3 class="project-text__section-title">
               <span class="project-text__num">04</span>
@@ -171,53 +171,101 @@
           </div>
         </section>
 
-        <!-- Card 7: full-width media block. -->
-        <div class="project-block project-block--full" style="aspect-ratio: 2844 / 1454;" data-num="7">
-          <div class="card__placeholder"></div>
-        </div>
+        <!-- 05 Research & Context (left) beside stacked cards 7 + 8 (right 50%). -->
+        <section class="project-text project-text--chapter project-text--flip">
+          <div class="project-text__left">
+            <h3 class="project-text__section-title">
+              <span class="project-text__num">05</span>
+              <span class="project-text__label">Research &amp; Context</span>
+            </h3>
 
-        <!-- Cards 11 (left, 60%) + 12 (right, 40%) — system map + reserved. -->
-        <section class="project-text" style="grid-template-columns: 60fr 40fr;">
-          <div class="project-text__left" style="align-self: stretch;">
-            <div style="background: #555; border-radius: var(--site-border-radius); padding: 1px; height: 100%;">
-              <div class="project-block" style="height: 100%; background: transparent; border-radius: calc(var(--site-border-radius) - 1px);" data-num="8">
-                <div class="card__placeholder"></div>
-              </div>
+            <div class="project-text__body">
+              <h4 class="project-text__subsection-title">
+                <span>On-Site Discovery &amp; Workflow Mapping</span>
+              </h4>
+              <p>To engineer a simulation that felt authentic to seasoned aviation professionals, I conducted comprehensive field research directly at the Changi Airport airside. Accompanied by an industry supervisor, I observed active cargo loading operations to map the intricate workflows required to maneuver and secure heavy unit load devices (ULDs) within the restrictive confines of an aircraft's cargo hold.</p>
+
+              <h4 class="project-text__subsection-title">
+                <span>Capturing the Physical Reality</span>
+              </h4>
+              <p>I documented the precise mechanics of the operation, capturing detailed reference photography of critical components:</p>
+            </div>
+
+            <dl class="project-text__pipeline">
+              <dt>The Spatial Constraints.</dt>
+              <dd>Observing how apron ramp staff navigate the tight geometry of the cargo hold while managing large containers side-by-side.</dd>
+              <dt>The Mechanical Interfaces.</dt>
+              <dd>Studying the exact operation of the floor-mounted pallet locks (the latches that secure the cargo) and the roller tracks that guide the pallets into position.</dd>
+            </dl>
+          </div>
+          <div class="project-text__right" style="display: flex; flex-direction: column; gap: var(--project-spacing);">
+            <div class="project-block" style="aspect-ratio: 2844 / 1454;" data-num="7">
+              <img src="Images/Sats/Internal5.jpeg" alt="SATS cargo hold interior" />
+            </div>
+            <div class="project-block" style="aspect-ratio: 16 / 9;" data-num="8">
+              <img src="Images/Sats/Internal3.jpg" alt="SATS cargo hold interior" />
+            </div>
+          </div>
+        </section>
+
+        <!-- 06 3D Modeling & Design — full-width title, then two 50/50
+             columns (row-gap: 0 so the h3's own margin sets the spacing). -->
+        <section class="project-text project-text--chapter" style="row-gap: 0;">
+          <h3 class="project-text__section-title" style="grid-column: 1 / -1;">
+            <span class="project-text__num">06</span>
+            <span class="project-text__label">3D Modeling &amp; Design</span>
+          </h3>
+
+          <div class="project-text__left">
+            <div class="project-text__body">
+              <h4 class="project-text__subsection-title">
+                <span>From Reference to 3D Assets</span>
+              </h4>
+              <p>Using the photos and videos captured during my on-site research, I modeled the simulation environment and operational assets from scratch using Autodesk Maya.</p>
+
+              <h4 class="project-text__subsection-title">
+                <span>Scaling for Functionality</span>
+              </h4>
+              <p>To get the sizing right, I imported a player character into Maya to use as a baseline reference. This ensured the cargo pallets, transporters, and pallet locks were scaled accurately enough for the interaction and locking mechanics to work smoothly in the game engine.</p>
+
+              <h4 class="project-text__subsection-title">
+                <span>Texturing &amp; Scene Building</span>
+              </h4>
+              <p>Once the modeling was complete, I used Adobe 3D Substance Painter to apply custom materials and textures. To make the scene feel like a genuine Changi Airport environment, I also modeled and placed background elements like the Control Tower and the Jewel building.</p>
             </div>
           </div>
 
           <div class="project-text__right">
-            <h3 class="project-text__section-title">
-              <span class="project-text__num">04</span>
-              <span class="project-text__label">System Map</span>
-            </h3>
-
-            <p class="project-text__thesis">
-              Three layers. Each owns a phase of the user journey. End-to-end, they form a single pipeline from authentication to portfolio sharing.
-            </p>
-
-            <div class="project-text__body">
-              <h4 class="project-text__subsection-title">
-                <span>Basic Nav Layer</span>
-              </h4>
-              <p style="font-style: italic;">Entry and routing.</p>
-              <p>Gmail Auth → Home Page → two paths: Course Catalog or AI-led Discover My Path (Capability Diagnosis → Pathway Generation). Both converge at Subscription → Start Learning.</p>
-
-              <h4 class="project-text__subsection-title">
-                <span>Learning Exp Layer</span>
-              </h4>
-              <p style="font-style: italic;">Core delivery. Progress Saving spans the layer.</p>
-              <p>Pipeline: Start Learning → Interactive + Adaptive Learning → Bridge Task → Teach the AI → Module Assessment → Completion → Portfolio Update.</p>
-              <p>Compass Tutor attaches throughout. Teach the AI scores comprehension 0–100 over five rounds.</p>
-
-              <h4 class="project-text__subsection-title">
-                <span>Learning Outcomes Layer</span>
-              </h4>
-              <p style="font-style: italic;">Output and persistence.</p>
-              <p>My Learning aggregates progress. Learning Hub feeds four AI artefacts: Knowledge Hub, My Playbook, Growth Patterns, Career Proof. Profile Page surfaces Certificates, Adaptive Dashboard, and Portfolio Dashboard with public Share Link.</p>
+            <div class="project-block" style="aspect-ratio: 1152 / 677;">
+              <img src="Images/Sats/Vehicles%20Modeling.png" alt="SATS vehicles modeling" />
             </div>
           </div>
         </section>
+
+        <!-- Cards 9-12: four GLB models. Each model viewer (height reduced
+             ~20% via the 5/3 ratio) has an in-game screenshot card stacked
+             tight below it. -->
+        <div class="glb-stack">
+          <div class="project-block glb-stack__model" data-num="9">
+            <iframe src="sats-3d.html" title="AKE Cargo 3D model" loading="lazy"></iframe>
+          </div>
+        </div>
+        <div class="glb-stack">
+          <div class="project-block glb-stack__model">
+            <iframe src="sats-3d-jcpl.html" title="JCPL Front Right 3D model" loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <div class="glb-stack">
+          <div class="project-block glb-stack__model" data-num="10">
+            <iframe src="sats-3d-rampladder.html" title="Ramp Ladder 3D model" loading="lazy"></iframe>
+          </div>
+        </div>
+        <div class="glb-stack">
+          <div class="project-block glb-stack__model">
+            <iframe src="sats-3d-controltower.html" title="Control Tower 3D model" loading="lazy"></iframe>
+          </div>
+        </div>
 
         <!-- Section 05: Three Learning Engines — centered numbered title + intro,
              stacked accordion items below. Native <details>/<summary>
@@ -313,7 +361,7 @@
           </div>
 
           <div class="project-text__right">
-            <div class="project-text__motion" style="aspect-ratio: 3 / 2;" data-num="9">
+            <div class="project-text__motion" style="aspect-ratio: 3 / 2;" data-num="11">
               <div class="card__placeholder"></div>
             </div>
           </div>
@@ -324,7 +372,7 @@
              lead paragraph, and three feature items. -->
         <section class="project-text" style="grid-template-columns: 48fr 52fr;">
           <div class="project-text__left">
-            <div class="project-block" style="aspect-ratio: 1048 / 720;" data-num="10">
+            <div class="project-block" style="aspect-ratio: 1048 / 720;" data-num="12">
               <div class="card__placeholder"></div>
             </div>
           </div>
@@ -430,13 +478,13 @@
               <dd>Confirm dialog, 7-day soft delete, then auto-purge.</dd>
             </dl>
 
-            <div class="project-block" style="flex: 1; min-height: 0; margin-top: var(--s-300);" data-num="11">
+            <div class="project-block" style="flex: 1; min-height: 0; margin-top: var(--s-300);" data-num="13">
               <div class="card__placeholder"></div>
             </div>
           </div>
 
           <div class="project-text__right">
-            <div class="project-block" style="aspect-ratio: 1734 / 1450;" data-num="12">
+            <div class="project-block" style="aspect-ratio: 1734 / 1450;" data-num="14">
               <div class="card__placeholder"></div>
             </div>
           </div>
@@ -463,11 +511,11 @@
 
         <!-- Section 10 visuals: two slide placeholders at full grid width,
              wider aspect-ratio (21:9.9) so they read as horizontal banners. -->
-        <div class="project-block project-block--full" style="aspect-ratio: 21 / 9.9;" data-num="13">
+        <div class="project-block project-block--full" style="aspect-ratio: 21 / 9.9;" data-num="15">
           <div class="card__placeholder"></div>
         </div>
 
-        <div class="project-block project-block--full" style="aspect-ratio: 21 / 9.9;" data-num="14">
+        <div class="project-block project-block--full" style="aspect-ratio: 21 / 9.9;" data-num="16">
           <div class="card__placeholder"></div>
         </div>
 
