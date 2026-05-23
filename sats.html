@@ -273,7 +273,7 @@
         </div>
 
         <!-- Section 07: UI/UX Design — left text, right image. -->
-        <section class="project-text" style="row-gap: var(--s-200);">
+        <section class="project-text project-text--chapter" style="row-gap: var(--s-200);">
           <div class="project-text__left">
             <h3 class="project-text__section-title">
               <span class="project-text__num">07</span>
@@ -341,49 +341,59 @@
           </div>
         </section>
 
-        <!-- Section 06: Lesson Anatomy.
-             Card 11 (left, ~35%): text — title, lead, three subsections.
-             Card 12 (right, ~65%): lesson mockup placeholder. -->
-        <section class="project-text" style="grid-template-columns: 45fr 55fr;">
+        <!-- Section 08: Interactive Development & Engineering — full-width title,
+             two 50/50 columns with two subsections each. -->
+        <section class="project-text project-text--chapter" style="row-gap: 0; padding-bottom: 0;">
+          <h3 class="project-text__section-title" style="grid-column: 1 / -1;">
+            <span class="project-text__num">08</span>
+            <span class="project-text__label">Interactive Development &amp; Engineering</span>
+          </h3>
+
+          <div style="grid-column: 1 / -1; display: flex; gap: var(--s-150); align-items: center; padding: var(--s-150) 0 var(--s-200) 0;">
+            <img src="Images/Sats/Unity.svg" alt="Unity" style="height: 96px; width: auto; background: white; border-radius: 6px; padding: 6px;" />
+            <img src="Images/Sats/C%23.png" alt="C#" style="height: 96px; width: auto;" />
+          </div>
+
           <div class="project-text__left">
-            <h3 class="project-text__section-title">
-              <span class="project-text__num">06</span>
-              <span class="project-text__label">Learning Experience Design</span>
-            </h3>
-
-            <p class="project-text__thesis">
-              A CompassStu lesson lasts eight to ten minutes. It runs on a three-panel page and a vocabulary of twelve cards.
-            </p>
-
             <div class="project-text__body">
               <h4 class="project-text__subsection-title">
-                <span>The page</span>
+                <span>Modular Architecture via Object-Oriented Programming (OOP)</span>
               </h4>
-              <p>A fixed grid. Module navigation on the left, one card in the centre, the tutor panel on the right. Nothing else moves. Only the card area scrolls.</p>
+              <p>To ensure the simulation was scalable and performant, I architected a modular interaction system using C# Interfaces (InterfaceInteractable). Instead of attaching heavy, isolated scripts to every object, I utilized optimized physics casting (Physics.OverlapSphereNonAlloc) to detect player proximity. This allowed the player to seamlessly interact with various objects—from cargo pallets to aircraft damage reports—using a unified, lightweight logic structure that drastically reduced performance overhead.</p>
 
               <h4 class="project-text__subsection-title">
-                <span>The cards</span>
+                <span>Precision Spatial Tracking &amp; State Management</span>
               </h4>
-              <p>Each lesson uses seven to twelve cards. Every card gates the next — a prediction has to be revealed, a quick check answered, an apply question written before the learner can advance. The first required input arrives within forty-five seconds.</p>
-
-              <h4 class="project-text__subsection-title">
-                <span>The close</span>
-              </h4>
-              <p>The final card is a mastery check — two short questions and a confidence selection. On submit, the lesson is marked complete and the learner is handed off to the bridge task, where the work that earns the certificate begins.</p>
+              <p>Aviation SOPs require exact cargo placement. To enforce this, I engineered the ForwardHoldSystem as a robust state machine. When a trainee moves a pallet, the system continuously tracks its real-time X and Z coordinates against predefined multidimensional arrays. If a trainee attempts to lock a pallet outside the designated safe zone, the system intercepts the input, halts progression, and dynamically triggers an error UI prompt, ensuring strict compliance with real-world loading instructions.</p>
             </div>
           </div>
 
           <div class="project-text__right">
-            <div class="project-text__motion" style="aspect-ratio: 3 / 2;" data-num="11">
-              <div class="card__placeholder"></div>
+            <div class="project-text__body">
+              <h4 class="project-text__subsection-title">
+                <span>Mechanical Synchronization &amp; Quaternions</span>
+              </h4>
+              <p>The simulation required physical mechanics to feel heavy and deliberate. Using OnClickHandler and CargoPalletMovement, I synchronized complex 3D animations with gameplay logic. Pallet locks were programmed using specific Quaternion rotations to physically snap into "lowered," "tactile," or "raised" states upon mouse clicks. Additionally, transporter platforms were coded to lock player input until specific animation frames (GetCurrentAnimatorStateInfo) completed, preventing game-breaking physics glitches.</p>
+
+              <h4 class="project-text__subsection-title">
+                <span>Engineering the G-OPS Digital Twin</span>
+              </h4>
+              <p>Replicating the SATS enterprise software required building a fully functional in-game camera system (PhotoCapture.cs). I utilized Unity's RenderTexture API to capture the player's real-time field of view, converting it into a Texture2D to simulate a smartphone barcode scan. I then engineered a backend validation loop that cross-references the scanned target against the active Loading Instruction Report (LIR) database—approving the operation if it matches, or prompting a rescan if the data is incorrect.</p>
             </div>
           </div>
         </section>
 
+        <div class="project-block project-block--half" style="aspect-ratio: 1051 / 864; align-self: start;">
+          <img src="Images/Sats/Script1.png" alt="Script 1" />
+        </div>
+        <div class="project-block project-block--half" style="aspect-ratio: 1171 / 963; align-self: start;">
+          <img src="Images/Sats/Script2.png" alt="Script 2" />
+        </div>
+
         <!-- Section 07: Adaptive Engine — placeholder on the left
              (48%), editorial text on the right (52%) with section title,
              lead paragraph, and three feature items. -->
-        <section class="project-text" style="grid-template-columns: 48fr 52fr;">
+        <section class="project-text project-text--chapter" style="grid-template-columns: 48fr 52fr;">
           <div class="project-text__left">
             <div class="project-block" style="aspect-ratio: 1048 / 720;" data-num="12">
               <div class="card__placeholder"></div>
