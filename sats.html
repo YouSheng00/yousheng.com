@@ -29,8 +29,11 @@
 
       <section class="project-grid" aria-label="Project content">
         <!-- Row 1 (Card 1): full-width hero. -->
-        <div class="project-block project-block--full" style="aspect-ratio: 16 / 8;" data-num="1">
-          <div class="card__placeholder"></div>
+        <div class="labeled-card">
+          <div class="labeled-card__label" style="text-align: center; font-size: 13px; padding: 0.6rem var(--s-200);">Product Demo</div>
+          <div class="project-block labeled-card__media" style="aspect-ratio: 16 / 8;">
+            <video id="hero-vid" src="Video/SatsApron3.mp4" autoplay muted playsinline style="object-position: 50% 25%;"></video>
+          </div>
         </div>
 
         <!-- Row 2: two half-width blocks at 16:9 so they sit at the same
@@ -442,5 +445,15 @@
     </nav>
 
     <script src="script.js"></script>
+    <script>
+      (function () {
+        var v = document.getElementById('hero-vid');
+        if (!v) return;
+        v.addEventListener('loadedmetadata', function () { v.currentTime = 4; v.playbackRate = 0.75; });
+        v.addEventListener('timeupdate', function () {
+          if (v.currentTime >= 13) v.currentTime = 4;
+        });
+      })();
+    </script>
   </body>
 </html>
