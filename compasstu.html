@@ -21,7 +21,7 @@
 
 <body>
   <main class="page page--project">
-    <header class="project__header">
+    <header class="project__header" id="s-00" data-section>
       <h1 class="project__title">CompassStu</h1>
       <p class="project__meta">
         An adult upskilling platform built around AI-graded work samples.<br>
@@ -48,7 +48,7 @@
       <!-- Product description: two-column editorial spread.
              LEFT: hero pitch + numbered section block stacked vertically.
              RIGHT: reserved for future content. -->
-      <section class="project-text">
+      <section class="project-text" id="s-01" data-section>
         <div class="project-text__left">
           <h2 class="project-text__lead">
             A learning platform built to produce candidates, not completions.
@@ -114,7 +114,7 @@
       </div>
 
       <!-- Product thesis: section 03 in left column, right reserved. -->
-      <section class="project-text">
+      <section class="project-text" id="s-03" data-section>
         <div class="project-text__left">
           <h3 class="project-text__section-title">
             <span class="project-text__num">03</span>
@@ -157,7 +157,7 @@
       </div>
 
       <!-- Cards 11 (left, 55%) + 12 (right, 45%) — system map + reserved. -->
-      <section class="project-text" style="grid-template-columns: 60fr 40fr;">
+      <section class="project-text" id="s-04" data-section style="grid-template-columns: 60fr 40fr;">
         <div class="project-text__left" style="align-self: stretch;">
           <div style="background: #555; border-radius: var(--site-border-radius); padding: 1px; height: 100%;">
             <div class="project-block"
@@ -209,7 +209,7 @@
       <!-- Section 05: Three Learning Engines — centered numbered title + intro,
              stacked accordion items below. Native <details>/<summary>
              for the expand behaviour (no JS needed). -->
-      <section class="approach">
+      <section class="approach" id="s-05" data-section>
         <h3 class="approach__title">
           <span class="approach__num">05</span>
           <span class="approach__label">Three Learning Engines</span>
@@ -283,7 +283,7 @@
       <!-- Section 06: Lesson Anatomy.
              Card 11 (left, ~35%): text — title, lead, three subsections.
              Card 12 (right, ~65%): lesson mockup iframe. -->
-      <section class="project-text" style="grid-template-columns: 45fr 55fr;">
+      <section class="project-text" id="s-06" data-section style="grid-template-columns: 45fr 55fr;">
         <div class="project-text__left">
           <h3 class="project-text__section-title">
             <span class="project-text__num">06</span>
@@ -328,7 +328,7 @@
       <!-- Section 08: Adaptive Engine — CompassStu7 image on the left
              (45%), editorial text on the right (55%) with section title,
              lead paragraph, and three feature items. -->
-      <section class="project-text" style="grid-template-columns: 48fr 52fr;">
+      <section class="project-text" id="s-07" data-section style="grid-template-columns: 48fr 52fr;">
         <div class="project-text__left">
           <div class="project-block" style="aspect-ratio: 1048 / 720;">
             <img src="Images/CompassStu/CompassStu7.png" alt="CompassStu adaptive engine view" />
@@ -361,7 +361,7 @@
       <!-- Section 08: The Proof Layer — editorial copy on the left,
              a four-dimension rubric scoreboard on the right (visualizes
              the rubric the copy references). -->
-      <section class="proof-layer">
+      <section class="proof-layer" id="s-08" data-section>
         <div class="proof-layer__main">
           <h3 class="project-text__section-title">
             <span class="project-text__num">08</span>
@@ -431,7 +431,7 @@
              CompassStu9 image on the right (55%). Both columns stretch
              to the same height so the left text + CompassStu10 total
              matches CompassStu9's height. -->
-      <section class="project-text" style="grid-template-columns: 45fr 55fr; align-items: stretch;">
+      <section class="project-text" id="s-09" data-section style="grid-template-columns: 45fr 55fr; align-items: stretch;">
         <div class="project-text__left" style="display: flex; flex-direction: column;">
           <h3 class="project-text__section-title">
             <span class="project-text__num">09</span>
@@ -466,7 +466,7 @@
 
       <!-- Section 10: Brand & Visual Design — centered single-column
              editorial moment. Title above, lead paragraph below. -->
-      <section class="project-text project-text--center" style="grid-template-columns: 1fr;">
+      <section class="project-text project-text--center" id="s-10" data-section style="grid-template-columns: 1fr;">
         <div class="project-text__center">
           <h3 class="project-text__section-title">
             <span class="project-text__num">10</span>
@@ -498,7 +498,7 @@
 
       <!-- Section 11: Results — left-aligned scaffold, title on the left
              column, right column reserved for metrics / supporting copy. -->
-      <section class="project-text" style="grid-template-columns: 45fr 55fr;">
+      <section class="project-text" id="s-11" data-section style="grid-template-columns: 45fr 55fr;">
         <div class="project-text__left">
           <h3 class="project-text__section-title">
             <span class="project-text__num">11</span>
@@ -514,8 +514,8 @@
 
   <nav class="dock" aria-label="Primary">
     <div class="dock__group">
-      <a class="dock__link" href="index.html" data-back>Back</a>
-      <a class="dock__link" href="#">Calibration</a>
+      <a class="dock__link" href="index.html">Back</a>
+      <a class="dock__link" href="#" data-calibrate>Calibration</a>
       <a class="dock__link" href="#">Site</a>
     </div>
     <button class="dock__action" type="button" aria-label="Toggle theme" data-theme-toggle>
@@ -531,6 +531,35 @@
   </nav>
 
   <script src="script.js"></script>
+  <script>
+    (function () {
+      var sections = Array.from(document.querySelectorAll('[data-section]'));
+      var calibBtn = document.querySelector('[data-calibrate]');
+      if (!calibBtn || !sections.length) return;
+      var ratios = {};
+      sections.forEach(function (s) { ratios[s.id] = 0; });
+      var thresholds = Array.from({ length: 11 }, function (_, i) { return i * 0.1; });
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { ratios[e.target.id] = e.intersectionRatio; });
+      }, { threshold: thresholds });
+      sections.forEach(function (s) { observer.observe(s); });
+      calibBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var best = sections.reduce(function (a, b) {
+          return (ratios[b.id] || 0) > (ratios[a.id] || 0) ? b : a;
+        });
+        var targetId = best.dataset.target;
+        if (best.id === 's-00') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else if (targetId) {
+          var target = document.getElementById(targetId);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          best.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    })();
+  </script>
 </body>
 
 </html>

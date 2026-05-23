@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" class="vt-forward">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3D Environment &amp; World Design Showcase — YouSheng</title>
+    <meta name="description" content="A collection of immersive virtual environments engineered using Unity, Autodesk Maya, and Adobe Creative Suite." />
+    <script>
+      // Apply saved theme before paint so there's no flash on page load.
+      (function () {
+        try {
+          if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('theme-light');
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page page--project">
+      <header class="project__header" id="s-00" data-section>
+        <h1 class="project__title">3D Environment &amp; World Design Showcase</h1>
+        <p class="project__meta">
+          A collection of immersive virtual environments engineered using Unity, Autodesk Maya, and Adobe Creative Suite.<br>
+          Diverse thematic landscapes, dynamic lighting, interactive level mechanics.<br>
+          Polytechnic assignments, 2022–2023.
+        </p>
+      </header>
+
+      <section class="project-grid" aria-label="Project content">
+        <!-- Row 1: full-width YouTube hero -->
+        <div class="project-block project-block--full" style="aspect-ratio: 16 / 9;">
+          <div id="yt-hero" style="width: 100%; height: 100%;"></div>
+        </div>
+
+      </section>
+    </main>
+
+    <nav class="dock" aria-label="Primary">
+      <div class="dock__group">
+        <a class="dock__link" href="index.html">Back</a>
+        <a class="dock__link" href="#" data-calibrate>Calibration</a>
+        <a class="dock__link" href="https://youtu.be/kjAjXmeAhDQ?si=I0UVP3MY_naZNBb7" target="_blank" rel="noopener">Site</a>
+      </div>
+      <button class="dock__action" type="button" aria-label="Toggle theme" data-theme-toggle>
+        <svg class="dock__icon dock__icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2.5v2.4M12 19.1v2.4M4.22 4.22l1.7 1.7M18.08 18.08l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.22 19.78l1.7-1.7M18.08 5.92l1.7-1.7"/>
+        </svg>
+        <svg class="dock__icon dock__icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>
+        </svg>
+      </button>
+    </nav>
+
+    <script src="script.js"></script>
+    <script>
+      (function () {
+        var tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        document.head.appendChild(tag);
+
+        window.onYouTubeIframeAPIReady = function () {
+          new YT.Player('yt-hero', {
+            width: '100%',
+            height: '100%',
+            videoId: 'kjAjXmeAhDQ',
+            playerVars: {
+              autoplay: 1,
+              mute: 1,
+              controls: 1,
+              rel: 0,
+              playsinline: 1,
+              start: 7
+            },
+            events: {
+              onReady: function (e) {
+                var p = e.target;
+                p.setVolume(75);
+                p.unMute();
+              },
+              onStateChange: function (e) {
+                if (e.data === YT.PlayerState.ENDED) {
+                  e.target.seekTo(7, true);
+                  e.target.playVideo();
+                }
+              }
+            }
+          });
+        };
+      })();
+    </script>
+    <script>
+      (function () {
+        var sections = Array.from(document.querySelectorAll('[data-section]'));
+        var calibBtn = document.querySelector('[data-calibrate]');
+        if (!calibBtn || !sections.length) return;
+        var ratios = {};
+        sections.forEach(function (s) { ratios[s.id] = 0; });
+        var thresholds = Array.from({ length: 11 }, function (_, i) { return i * 0.1; });
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { ratios[e.target.id] = e.intersectionRatio; });
+        }, { threshold: thresholds });
+        sections.forEach(function (s) { observer.observe(s); });
+        calibBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          var best = sections.reduce(function (a, b) {
+            return (ratios[b.id] || 0) > (ratios[a.id] || 0) ? b : a;
+          });
+          var targetId = best.dataset.target;
+          if (best.id === 's-00') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else if (targetId) {
+            var target = document.getElementById(targetId);
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else {
+            best.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

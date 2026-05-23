@@ -239,7 +239,82 @@ The dock is **two pills**: a nav group (`.dock__group`) + a circular action butt
 - **`is-active`** marks the current page link (white pill on dark bg).
 - The action button currently is the **theme toggle** (sun/moon SVG swap, persisted to `localStorage.theme`).
 
-### 4.4 Project page header
+### 4.4 Dock — Calibration & Back behaviour (project pages)
+
+Every project page dock has three links: **Back**, **Calibration**, and a third link (e.g. "Site") specific to the project.
+
+#### Back button
+Always navigates to `index.html`. Do **not** use `data-back` (which triggers `history.back()` and returns the user to wherever they came from). Just use a plain `href`:
+
+```html
+<a class="dock__link" href="index.html">Back</a>
+```
+
+#### Calibration button
+Detects which section the user is currently viewing and, on click, smoothly scrolls to bring that section's top into view.
+
+**How it works:**
+1. Each numbered section (including the page header as `s-00`) gets `id="s-XX"` and `data-section`.
+2. An `IntersectionObserver` tracks how much of each section is visible and stores a ratio per section.
+3. On click, the section with the highest intersection ratio is selected. If that section is a continuation of a parent section (e.g. "08 continued"), a `data-target="s-XX"` attribute redirects calibration to the parent.
+
+**Markup rules:**
+- Page header (the intro title/meta block) → `id="s-00" data-section`. Calibration scrolls to `window.scrollTo({ top: 0 })`.
+- Numbered sections 01–09 → `id="s-01"` … `id="s-09"` and `data-section`.
+- Continuation sections (same numbered section, no new number) → `data-section data-target="s-XX"` (pointing to the parent section's ID). No `id` needed.
+- Non-section grid items (image cards, 3D viewers) do not get `data-section` — the observer naturally falls back to the nearest tracked section.
+
+```html
+<!-- Page header: portion 00 -->
+<header class="project__header" id="s-00" data-section>…</header>
+
+<!-- Numbered section -->
+<section class="project-text project-text--chapter" id="s-03" data-section>…</section>
+
+<!-- Continuation of section 08 (no new number) -->
+<section class="project-text" data-section data-target="s-08">…</section>
+
+<!-- Dock -->
+<a class="dock__link" href="index.html">Back</a>
+<a class="dock__link" href="#" data-calibrate>Calibration</a>
+```
+
+**Inline script** (add before `</body>` on every project page):
+
+```javascript
+(function () {
+  var sections = Array.from(document.querySelectorAll('[data-section]'));
+  var calibBtn = document.querySelector('[data-calibrate]');
+  if (!calibBtn || !sections.length) return;
+
+  var ratios = {};
+  sections.forEach(function (s) { ratios[s.id] = 0; });
+
+  var thresholds = Array.from({ length: 11 }, function (_, i) { return i * 0.1; });
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { ratios[e.target.id] = e.intersectionRatio; });
+  }, { threshold: thresholds });
+  sections.forEach(function (s) { observer.observe(s); });
+
+  calibBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    var best = sections.reduce(function (a, b) {
+      return (ratios[b.id] || 0) > (ratios[a.id] || 0) ? b : a;
+    });
+    var targetId = best.dataset.target;
+    if (best.id === 's-00') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (targetId) {
+      var target = document.getElementById(targetId);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      best.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+})();
+```
+
+### 4.5 Project page header
 
 Used on `project*.html`. Same 52vh centred layout as the index intro:
 

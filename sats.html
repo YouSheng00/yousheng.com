@@ -19,7 +19,7 @@
   </head>
   <body>
     <main class="page page--project">
-      <header class="project__header">
+      <header class="project__header" id="s-00" data-section>
         <h1 class="project__title">SATS Cargo Loading Simulation</h1>
         <p class="project__meta">
           An interactive 3D training simulation engineered in Unity. Custom environments, seamless runtime.<br>
@@ -39,17 +39,17 @@
         <!-- Row 2: two half-width blocks at 16:9 so they sit at the same
              height. Card 2 = placeholder. Card 3 = interactive 3D viewer
              (AKE cargo container rendered with <model-viewer> in a sibling HTML file). -->
-        <div class="project-block project-block--half" style="aspect-ratio: 16 / 9;" data-num="2">
+        <div class="project-block project-block--half" style="aspect-ratio: 16 / 9;">
           <img src="Images/Sats/Third%20Person%20Control.png" alt="SATS third-person control" />
         </div>
-        <div class="project-block project-block--half" style="aspect-ratio: 16 / 9;" data-num="3">
+        <div class="project-block project-block--half" style="aspect-ratio: 16 / 9;">
           <img src="Images/Sats/JCPL_loading.png" alt="SATS JCPL loading" />
         </div>
 
         <!-- Product description: two-column editorial spread.
              LEFT: hero pitch + numbered section block stacked vertically.
              RIGHT: reserved for future content. -->
-        <section class="project-text">
+        <section class="project-text" id="s-01" data-section>
           <div class="project-text__left">
             <h2 class="project-text__lead">
               Elevating aviation training through interactive tech.
@@ -87,16 +87,16 @@
         </section>
 
         <!-- Row 3: 40/60 split. -->
-        <div class="project-block project-block--40" style="aspect-ratio: 21 / 20; align-self: start;" data-num="4">
+        <div class="project-block project-block--40" style="grid-column: span 9; aspect-ratio: 1.30; align-self: start;">
           <img src="Images/Sats/Aircraftview.jpg" alt="SATS aircraft view" />
         </div>
-        <div class="project-block project-block--60" style="aspect-ratio: 1.59; align-self: start;" data-num="5">
-          <img src="Images/Sats/SATS.png" alt="SATS overview" />
+        <div class="project-block project-block--60" style="grid-column: span 11; aspect-ratio: 1.59; align-self: start; background: white;">
+          <img src="Images/Sats/SATS3.jpg" alt="SATS overview" style="top: 50%; right: 0; bottom: auto; left: 0; height: auto; transform: translateY(-50%); object-fit: none;" />
         </div>
 
         <!-- 03 The Challenges: section title + two subsections in left
              column, motion card reserved on the right. -->
-        <section class="project-text project-text--chapter">
+        <section class="project-text project-text--chapter" id="s-03" data-section>
           <div class="project-text__left">
             <h3 class="project-text__section-title">
               <span class="project-text__num">03</span>
@@ -117,7 +117,7 @@
           </div>
 
           <div class="project-text__right">
-            <div class="project-text__motion" style="aspect-ratio: 3 / 2;" data-num="6">
+            <div class="project-text__motion" style="aspect-ratio: 3 / 2;">
               <img src="Images/Sats/Cargoloading.jpg" alt="SATS cargo loading" />
               <span class="media-credit">img: sats.com</span>
             </div>
@@ -126,7 +126,7 @@
 
         <!-- 04 My Role & Toolkit: narrative subsections in the left column,
              tech stack list in the right. -->
-        <section class="project-text project-text--chapter">
+        <section class="project-text project-text--chapter" id="s-04" data-section>
           <div class="project-text__left">
             <h3 class="project-text__section-title">
               <span class="project-text__num">04</span>
@@ -175,7 +175,7 @@
         </section>
 
         <!-- 05 Research & Context (left) beside stacked cards 7 + 8 (right 50%). -->
-        <section class="project-text project-text--chapter project-text--flip">
+        <section class="project-text project-text--chapter project-text--flip" id="s-05" data-section>
           <div class="project-text__left">
             <h3 class="project-text__section-title">
               <span class="project-text__num">05</span>
@@ -202,10 +202,10 @@
             </dl>
           </div>
           <div class="project-text__right" style="display: flex; flex-direction: column; gap: var(--project-spacing);">
-            <div class="project-block" style="aspect-ratio: 2844 / 1454;" data-num="7">
+            <div class="project-block" style="aspect-ratio: 2844 / 1454;">
               <img src="Images/Sats/Internal5.jpeg" alt="SATS cargo hold interior" />
             </div>
-            <div class="project-block" style="aspect-ratio: 16 / 9;" data-num="8">
+            <div class="project-block" style="aspect-ratio: 16 / 9;">
               <img src="Images/Sats/Internal3.jpg" alt="SATS cargo hold interior" />
             </div>
           </div>
@@ -213,7 +213,7 @@
 
         <!-- 06 3D Modeling & Design — full-width title, then two 50/50
              columns (row-gap: 0 so the h3's own margin sets the spacing). -->
-        <section class="project-text project-text--chapter" style="row-gap: 0;">
+        <section class="project-text project-text--chapter" id="s-06" data-section style="row-gap: 0;">
           <h3 class="project-text__section-title" style="grid-column: 1 / -1;">
             <span class="project-text__num">06</span>
             <span class="project-text__label">3D Modeling &amp; Design</span>
@@ -254,7 +254,7 @@
              ~20% via the 5/3 ratio) has an in-game screenshot card stacked
              tight below it. -->
         <div class="glb-stack">
-          <div class="project-block glb-stack__model" data-num="9">
+          <div class="project-block glb-stack__model">
             <iframe src="sats-3d.html" title="AKE Cargo 3D model" loading="lazy"></iframe>
           </div>
         </div>
@@ -265,7 +265,7 @@
         </div>
 
         <div class="glb-stack">
-          <div class="project-block glb-stack__model" data-num="10">
+          <div class="project-block glb-stack__model">
             <iframe src="sats-3d-rampladder.html" title="Ramp Ladder 3D model" loading="lazy"></iframe>
           </div>
         </div>
@@ -276,7 +276,7 @@
         </div>
 
         <!-- Section 07: UI/UX Design — left text, right image. -->
-        <section class="project-text project-text--chapter" style="row-gap: var(--s-200);">
+        <section class="project-text project-text--chapter" id="s-07" data-section style="row-gap: var(--s-200);">
           <div class="project-text__left">
             <h3 class="project-text__section-title">
               <span class="project-text__num">07</span>
@@ -346,7 +346,7 @@
 
         <!-- Section 08: Interactive Development & Engineering — full-width title,
              two 50/50 columns with two subsections each. -->
-        <section class="project-text project-text--chapter" style="row-gap: 0; padding-bottom: 0;">
+        <section class="project-text project-text--chapter" id="s-08" data-section style="row-gap: 0; padding-bottom: 0;">
           <h3 class="project-text__section-title" style="grid-column: 1 / -1;">
             <span class="project-text__num">08</span>
             <span class="project-text__label">Interactive Development &amp; Engineering</span>
@@ -393,8 +393,41 @@
           <img src="Images/Sats/Script2.png" alt="Script 2" />
         </div>
 
+        <!-- Section 08 continued: Unity Editor, Spatial Config, Sandbox -->
+        <section class="project-text" data-section data-target="s-08">
+          <div class="project-text__left">
+            <div class="project-text__body">
+              <h4 class="project-text__subsection-title">
+                <span>Unity Editor Workflow &amp; Scene Assembly</span>
+              </h4>
+              <p>Before the complex logic could run, the physical digital environment had to be constructed. I managed a massive library of custom 3D meshes imported from Maya—ranging from ULD containers and floor rollers to intricate door locks. These assets were meticulously organized within the Unity hierarchy to compose the expansive Changi tarmac and the true-to-scale A380 aircraft exterior, ensuring lighting, static batching, and mesh colliders were fully optimized.</p>
+
+              <h4 class="project-text__subsection-title">
+                <span>Sandbox Prototyping &amp; MVP Validation</span>
+              </h4>
+              <p>To validate the core interaction loops without the overhead of the massive main scene, I constructed isolated sandbox environments. This allowed for rapid MVP (Minimum Viable Product) test runs. By testing the player mechanics, UI Canvas overlays, and quest manager scripts in a controlled interior room first, I ensured that the foundational physics and logic operated flawlessly before deploying them into the full-scale, high-stakes cargo simulation.</p>
+            </div>
+          </div>
+
+          <div class="project-text__right">
+            <div class="project-text__body">
+              <h4 class="project-text__subsection-title">
+                <span>Spatial Configuration &amp; Player Mechanics</span>
+              </h4>
+              <p>Fine-tuning the user experience required precise spatial adjustments within the engine. I configured the PlayerCharacter's Animator, Rigidbody, and Character Controller to ensure smooth third-person movement and collision. Moving into the highly restricted space of the cargo hold, I meticulously adjusted the player's pivot points, camera angles, and positioning on the JCPL transporter to guarantee that the interaction mechanics and visual field felt natural during the loading process.</p>
+            </div>
+          </div>
+        </section>
+
+        <div class="project-block project-block--half" style="aspect-ratio: 16 / 9; margin-top: calc(var(--s-500) * -1);">
+          <img src="Images/Sats/UE1.png" alt="Unity Editor scene 1" />
+        </div>
+        <div class="project-block project-block--half" style="aspect-ratio: 16 / 9; margin-top: calc(var(--s-500) * -1);">
+          <img src="Images/Sats/UE3.png" alt="Unity Editor scene 3" />
+        </div>
+
         <!-- Section 09: Business Impact & Outcomes -->
-        <section class="project-text project-text--chapter" style="row-gap: 0;">
+        <section class="project-text project-text--chapter" id="s-09" data-section style="row-gap: 0;">
           <h3 class="project-text__section-title" style="grid-column: 1 / -1;">
             <span class="project-text__num">09</span>
             <span class="project-text__label">Business Impact &amp; Outcomes</span>
@@ -424,14 +457,21 @@
           </div>
         </section>
 
+        <div class="project-block project-block--half" style="aspect-ratio: 16 / 9; margin-top: calc(var(--s-500) * -1);">
+          <img src="Images/Sats/StartingScene.png" alt="Starting scene" />
+        </div>
+        <div class="project-block project-block--half" style="aspect-ratio: 16 / 9; margin-top: calc(var(--s-500) * -1);">
+          <img src="Images/Sats/EndScene.png" alt="End scene" />
+        </div>
+
       </section>
     </main>
 
     <nav class="dock" aria-label="Primary">
       <div class="dock__group">
-        <a class="dock__link" href="index.html" data-back>Back</a>
-        <a class="dock__link" href="#">Calibration</a>
-        <a class="dock__link" href="#">Site</a>
+        <a class="dock__link" href="index.html">Back</a>
+        <a class="dock__link" href="#" data-calibrate>Calibration</a>
+        <a class="dock__link" href="https://youtu.be/lR0tlI7Eimg?si=Xd67hNEJ4ykzgu40" target="_blank" rel="noopener">Site</a>
       </div>
       <button class="dock__action" type="button" aria-label="Toggle theme" data-theme-toggle>
         <svg class="dock__icon dock__icon--sun" viewBox="0 0 24 24" aria-hidden="true">
@@ -446,6 +486,39 @@
 
     <script src="script.js"></script>
     <script>
+      // Calibration — detect most-visible section, scroll to it on click.
+      (function () {
+        var sections = Array.from(document.querySelectorAll('[data-section]'));
+        var calibBtn = document.querySelector('[data-calibrate]');
+        if (!calibBtn || !sections.length) return;
+
+        var ratios = {};
+        sections.forEach(function (s) { ratios[s.id] = 0; });
+
+        var thresholds = Array.from({ length: 11 }, function (_, i) { return i * 0.1; });
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { ratios[e.target.id] = e.intersectionRatio; });
+        }, { threshold: thresholds });
+        sections.forEach(function (s) { observer.observe(s); });
+
+        calibBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          var best = sections.reduce(function (a, b) {
+            return (ratios[b.id] || 0) > (ratios[a.id] || 0) ? b : a;
+          });
+          var targetId = best.dataset.target;
+          if (best.id === 's-00') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else if (targetId) {
+            var target = document.getElementById(targetId);
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else {
+            best.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      })();
+
+      // Hero video loop.
       (function () {
         var v = document.getElementById('hero-vid');
         if (!v) return;
