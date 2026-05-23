@@ -239,9 +239,9 @@ The dock is **two pills**: a nav group (`.dock__group`) + a circular action butt
 - **`is-active`** marks the current page link (white pill on dark bg).
 - The action button currently is the **theme toggle** (sun/moon SVG swap, persisted to `localStorage.theme`).
 
-### 4.4 Dock — Calibration & Back behaviour (project pages)
+### 4.4 Dock — Calibrate & Back behaviour (project pages)
 
-Every project page dock has three links: **Back**, **Calibration**, and a third link (e.g. "Site") specific to the project.
+Every project page dock has three links: **Back**, **Calibrate**, and a third link (e.g. "Site") specific to the project.
 
 #### Back button
 Always navigates to `index.html`. Do **not** use `data-back` (which triggers `history.back()` and returns the user to wherever they came from). Just use a plain `href`:
@@ -250,7 +250,7 @@ Always navigates to `index.html`. Do **not** use `data-back` (which triggers `hi
 <a class="dock__link" href="index.html">Back</a>
 ```
 
-#### Calibration button
+#### Calibrate button
 Detects which section the user is currently viewing and, on click, smoothly scrolls to bring that section's top into view.
 
 **How it works:**
@@ -259,7 +259,7 @@ Detects which section the user is currently viewing and, on click, smoothly scro
 3. On click, the section with the highest intersection ratio is selected. If that section is a continuation of a parent section (e.g. "08 continued"), a `data-target="s-XX"` attribute redirects calibration to the parent.
 
 **Markup rules:**
-- Page header (the intro title/meta block) → `id="s-00" data-section`. Calibration scrolls to `window.scrollTo({ top: 0 })`.
+- Page header (the intro title/meta block) → `id="s-00" data-section`. Calibrate scrolls to `window.scrollTo({ top: 0 })`.
 - Numbered sections 01–09 → `id="s-01"` … `id="s-09"` and `data-section`.
 - Continuation sections (same numbered section, no new number) → `data-section data-target="s-XX"` (pointing to the parent section's ID). No `id` needed.
 - Non-section grid items (image cards, 3D viewers) do not get `data-section` — the observer naturally falls back to the nearest tracked section.
@@ -276,7 +276,7 @@ Detects which section the user is currently viewing and, on click, smoothly scro
 
 <!-- Dock -->
 <a class="dock__link" href="index.html">Back</a>
-<a class="dock__link" href="#" data-calibrate>Calibration</a>
+<a class="dock__link" href="#" data-calibrate>Calibrate</a>
 ```
 
 **Inline script** (add before `</body>` on every project page):

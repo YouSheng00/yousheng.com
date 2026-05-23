@@ -21,25 +21,53 @@
       <header class="project__header">
         <h1 class="project__title">About</h1>
         <p class="project__meta">
-          Neu You Sheng — Product &amp; Project Executive. Based in Singapore.<br>
+          Neu You Sheng — Senior Project Executive (IT &amp; Marketing). Based in Singapore.<br>
           Designing, building, and shipping AI-driven platforms end-to-end.
         </p>
       </header>
 
       <section class="project-grid" aria-label="About content">
 
-        <!-- HERO: full-bleed editorial lead, no competing content on the row. -->
+        <!-- HERO: editorial lead on the left, contact CTA on the right. -->
         <section class="about-hero">
-          <h2 class="about-hero__lead">
-            A one-person product team — strategy, design, engineering, and operations under one mind.
-          </h2>
-          <p class="about-hero__sub">
-            The hand-offs that slow most orgs do not exist here.
-          </p>
+          <div>
+            <h2 class="about-hero__lead" data-hero-lead>
+              A one-person product team — strategy, design, engineering, and operations under one mind.
+            </h2>
+            <p class="about-hero__sub" data-hero-sub>
+              The hand-offs that slow most orgs do not exist here.
+            </p>
+          </div>
+          <a class="about-hero__cta" href="#contact" data-scroll-to>
+            <span class="about-hero__cta-status">
+              <span class="about-hero__cta-dot" aria-hidden="true"></span>
+              <span>Open to conversations</span>
+            </span>
+            <span class="about-hero__cta-line">
+              Let&rsquo;s build
+              <span class="about-hero__cta-arrow" aria-hidden="true">→</span>
+            </span>
+          </a>
+        </section>
+
+        <!-- Editorial stats — punctuation row between hero and section 01. -->
+        <section class="about-stats" data-reveal aria-label="At a glance">
+          <div class="about-stats__item">
+            <div class="about-stats__num">3+</div>
+            <div class="about-stats__label">Years building</div>
+          </div>
+          <div class="about-stats__item">
+            <div class="about-stats__num">2</div>
+            <div class="about-stats__label">Platforms shipped</div>
+          </div>
+          <div class="about-stats__item">
+            <div class="about-stats__num">3</div>
+            <div class="about-stats__label">Disciplines integrated</div>
+          </div>
         </section>
 
         <!-- 01 Operating Model — title left (narrow), body + pipeline right. -->
-        <section class="project-text" style="grid-template-columns: 35fr 65fr;">
+        <section class="project-text" data-reveal style="grid-template-columns: 35fr 65fr;">
           <div class="project-text__left">
             <h3 class="project-text__section-title">
               <span class="project-text__num">01</span>
@@ -62,20 +90,35 @@
               <p>Shorter loops. Tighter craft. A single point of ownership across strategy, design, code, and operations.</p>
             </div>
 
-            <dl class="project-text__pipeline">
-              <dt>Frame.</dt>
-              <dd>Define the user, the job, and the standard that proves it. Functional specs, user flows, wireframes.</dd>
-              <dt>Build.</dt>
-              <dd>Design the interface, write the code, configure the AI. UI, back-end, and the prompts in between.</dd>
-              <dt>Operate.</dt>
-              <dd>Coordinate vendors, run content workflows, manage the post-launch loop.</dd>
-            </dl>
+            <ol class="about-process">
+              <li class="about-process__step">
+                <div class="about-process__head">
+                  <span class="about-process__num">01</span>
+                  <span class="about-process__title">Frame.</span>
+                </div>
+                <p class="about-process__body">Define the user, the job, and the standard that proves it. Functional specs, user flows, wireframes.</p>
+              </li>
+              <li class="about-process__step">
+                <div class="about-process__head">
+                  <span class="about-process__num">02</span>
+                  <span class="about-process__title">Build.</span>
+                </div>
+                <p class="about-process__body">Design the interface, write the code, configure the AI. UI, back-end, and the prompts in between.</p>
+              </li>
+              <li class="about-process__step">
+                <div class="about-process__head">
+                  <span class="about-process__num">03</span>
+                  <span class="about-process__title">Operate.</span>
+                </div>
+                <p class="about-process__body">Coordinate vendors, run content workflows, manage the post-launch loop.</p>
+              </li>
+            </ol>
           </div>
         </section>
 
         <!-- 02 Currently — proof-layer card with a Now badge and a metadata panel
              on the right. Distinct surface so it reads as the "live" beat. -->
-        <section class="proof-layer">
+        <section class="proof-layer" data-reveal>
           <div class="proof-layer__main">
             <div class="about-now-badge">
               <span class="about-now-badge__dot"></span>
@@ -88,8 +131,18 @@
             </h3>
 
             <p class="proof-layer__body">
-              Project Executive at Spring College International — leading the end-to-end build of <span class="proof-layer__emp">CompassStu</span>, an AI-driven adult learning platform.
+              Senior Project Executive at Spring College International — leading the end-to-end build of <span class="proof-layer__emp">CompassStu</span>, an AI-driven adult learning platform.
             </p>
+
+            <ol class="about-timeline" aria-label="Current role">
+              <li class="about-timeline__item about-timeline__item--current">
+                <h4 class="about-timeline__title">Senior Project Executive (IT &amp; Marketing)</h4>
+                <p class="about-timeline__meta">
+                  <span class="about-timeline__date">Jan 2026 – Present</span>
+                  <span class="about-timeline__duration">5 mos</span>
+                </p>
+              </li>
+            </ol>
 
             <dl class="project-text__pipeline" style="margin-top: var(--s-300);">
               <dt>AI Learning Platform.</dt>
@@ -103,11 +156,14 @@
             </dl>
           </div>
 
-          <aside class="proof-layer__visual about-meta" aria-label="Current role metadata">
+          <aside class="proof-layer__visual about-currently-visual" aria-label="Current role">
+            <div class="about-portrait" aria-hidden="true">
+              <span class="about-portrait__placeholder">YS</span>
+            </div>
             <dl class="about-meta__list">
               <div class="about-meta__row">
                 <dt>Role</dt>
-                <dd>Project Executive · IT &amp; Marketing</dd>
+                <dd>Senior Project Executive (IT &amp; Marketing)</dd>
               </div>
               <div class="about-meta__row">
                 <dt>Org</dt>
@@ -133,120 +189,255 @@
         </section>
 
         <!-- Manifesto: full-bleed pull quote — the page's signature line. -->
-        <section class="about-manifesto" aria-label="Operating principle">
+        <section class="about-manifesto" data-reveal aria-label="Operating principle">
           <p class="about-manifesto__line">I do not specialise.</p>
-          <p class="about-manifesto__line about-manifesto__line--alt">I integrate.</p>
+          <p class="about-manifesto__line about-manifesto__line--alt">I <span class="about-manifesto__emphasis">integrate</span>.</p>
           <p class="about-manifesto__sub">Design + Engineering + Operations · one signature.</p>
         </section>
 
         <!-- 03 Prior Work — narrow title left, pipeline right. -->
-        <section class="project-text" style="grid-template-columns: 35fr 65fr;">
+        <section class="project-text" data-reveal style="grid-template-columns: 35fr 65fr;">
           <div class="project-text__left">
             <h3 class="project-text__section-title">
               <span class="project-text__num">03</span>
-              <span class="project-text__label">Prior Work</span>
+              <span class="project-text__label">Working Experience</span>
             </h3>
 
             <p class="project-text__thesis" style="font-size: clamp(1.4rem, 2.2vw, 1.85rem);">
-              Two years before CompassStu — shipping simulation and running operations.
+              The path that led to today — shipping platforms and building simulation end-to-end.
             </p>
           </div>
 
           <div class="project-text__right">
-            <dl class="project-text__pipeline">
-              <dt>Acuity Academy — Operations Executive.</dt>
-              <dd><span class="about-tag">Feb 2025 – Present</span> Daily operations for SkillsFuture-funded WSQ Security Courses. Enrolment coordination, point of contact for inquiries, course promotion.</dd>
-              <dt>SATS Ltd — Unity Software Developer Intern.</dt>
-              <dd><span class="about-tag">Sep 2023 – Feb 2024</span> End-to-end interactive 3D Cargo Loading simulation at Changi Airport for SATS's Apron Training programme. C# · object-oriented systems · inventory and application logic.</dd>
-            </dl>
+            <ul class="about-prior">
+              <li>
+                <article class="about-prior__item">
+                  <div class="about-prior__thumb">
+                    <img src="Images/Cert/Sci.png" alt="Spring College International" />
+                  </div>
+                  <div class="about-prior__body">
+                    <h4 class="about-prior__title">Spring College International — Project Executive (IT &amp; Marketing)</h4>
+                    <p class="about-prior__date">Aug 2024 – Jan 2026 · 1 yr 6 mos · On-site</p>
+                    <p class="about-prior__desc">Managed the entire project lifecycle for building the innovative online learning platform; primary point of contact and coordinator with the platform development team.</p>
+                  </div>
+                </article>
+              </li>
+              <li>
+                <article class="about-prior__item">
+                  <div class="about-prior__thumb">
+                    <img src="Images/Cert/Sci.png" alt="Spring College International" />
+                  </div>
+                  <div class="about-prior__body">
+                    <h4 class="about-prior__title">Spring College International — IT Project Coordinator</h4>
+                    <p class="about-prior__date">Feb 2024 – Jul 2024 · 6 mos · On-site</p>
+                    <p class="about-prior__desc">Person in charge of the organisation's new online learning platform project. Oversaw project planning and execution, marketing research, development approach, resource allocation, technical assignments, technology tool sourcing, and integration capabilities.</p>
+                  </div>
+                </article>
+              </li>
+              <li>
+                <a class="about-prior__item" href="sats.html">
+                  <div class="about-prior__thumb about-prior__thumb--fill">
+                    <img src="Images/Cert/SATS4.png" alt="SATS Cargo Loading Simulation" />
+                  </div>
+                  <div class="about-prior__body">
+                    <h4 class="about-prior__title">SATS Ltd — Unity Developer (3D Simulation), Internship</h4>
+                    <p class="about-prior__date">Sep 2023 – Jan 2024 · 5 mos · On-site</p>
+                    <p class="about-prior__desc">Full development lifecycle of an interactive 3D Cargo Loading simulation at Changi Airport for SATS's Apron Training programme. On-site research and stakeholder engagement; interactive systems in C# (OOP, inventory, application logic); 3D modelling, texturing, lighting, and animation in Autodesk Maya; UI/UX design and user testing.</p>
+                  </div>
+                </a>
+              </li>
+            </ul>
           </div>
         </section>
 
         <!-- 04 Foundation — education left, certifications right. -->
-        <section class="project-text" style="grid-template-columns: 35fr 65fr;">
+        <section class="project-text" data-reveal style="grid-template-columns: 35fr 65fr;">
           <div class="project-text__left">
             <h3 class="project-text__section-title">
               <span class="project-text__num">04</span>
               <span class="project-text__label">Foundation</span>
             </h3>
 
-            <p class="project-text__thesis" style="font-size: clamp(1.4rem, 2.2vw, 1.85rem);">
-              Diploma in Immersive Media. <br>Ngee Ann Polytechnic.
-            </p>
+            <div class="about-school">
+              <div class="about-school__icon">
+                <img src="Images/Cert/Ngee Ann.jpg" alt="Ngee Ann Polytechnic" />
+              </div>
+              <div class="about-school__text">
+                <p class="about-school__diploma">Diploma in<br>Immersive Media</p>
+                <p class="about-school__name">Ngee Ann Polytechnic</p>
+                <p class="about-school__date">Apr 2021 – Jan 2024</p>
+              </div>
+            </div>
 
-            <p class="project-text__tagline" style="margin-top: var(--s-200);">
-              CGPA 3.6 / 4 · Apr 2021 – Feb 2024
-            </p>
+            <div class="about-coursework">
+              <h4 class="about-coursework__label">
+                <span>Main Coursework</span>
+              </h4>
+              <ol class="about-coursework__list">
+                <li class="about-coursework__item">
+                  <span class="about-coursework__num">01</span>
+                  <span class="about-coursework__name">Computing Mathematics</span>
+                </li>
+                <li class="about-coursework__item">
+                  <span class="about-coursework__num">02</span>
+                  <span class="about-coursework__name">Programming I</span>
+                </li>
+                <li class="about-coursework__item">
+                  <span class="about-coursework__num">03</span>
+                  <span class="about-coursework__name">Interactive Development</span>
+                </li>
+                <li class="about-coursework__item">
+                  <span class="about-coursework__num">04</span>
+                  <span class="about-coursework__name">3D for Real-Time</span>
+                </li>
+                <li class="about-coursework__item">
+                  <span class="about-coursework__num">05</span>
+                  <span class="about-coursework__name">Immersive Technology Development</span>
+                </li>
+                <li class="about-coursework__item">
+                  <span class="about-coursework__num">06</span>
+                  <span class="about-coursework__name">Social Media &amp; Branding</span>
+                </li>
+                <li class="about-coursework__item">
+                  <span class="about-coursework__num">07</span>
+                  <span class="about-coursework__name">Production Management</span>
+                </li>
+              </ol>
+            </div>
           </div>
 
           <div class="project-text__right">
             <h4 class="project-text__subsection-title" style="margin-bottom: var(--s-200);">
               <span>Certifications</span>
             </h4>
-            <dl class="project-text__pipeline">
-              <dt>Meta Back-End Developer.</dt>
-              <dd>Professional Certificate · Meta / Coursera.</dd>
-              <dt>Unity Junior Programmer.</dt>
-              <dd>Unity.</dd>
-              <dt>Unity Certified Associate.</dt>
-              <dd>Game Developer · Unity.</dd>
-              <dt>AR Contest — 3rd Place.</dt>
-              <dd>The Doodle People LLP.</dd>
-            </dl>
+            <ul class="about-certs">
+              <li>
+                <a class="about-cert" href="https://www.coursera.org/account/accomplishments/professional-cert/certificate/8BP49G0RAQTG" target="_blank" rel="noopener">
+                  <div class="about-cert__icon"><img src="Images/Cert/Meta.jpg" alt="Meta" /></div>
+                  <div class="about-cert__body">
+                    <h4 class="about-cert__title">Meta Back-End Developer</h4>
+                    <p class="about-cert__meta">Professional Certificate · Meta · Sep 2025</p>
+                  </div>
+                  <span class="about-cert__arrow" aria-hidden="true">↗</span>
+                </a>
+              </li>
+              <li>
+                <a class="about-cert" href="https://www.credly.com/badges/be44b0fa-28f4-4324-abdb-c5d236ff05f1/linked_in_profile" target="_blank" rel="noopener">
+                  <div class="about-cert__icon"><img src="Images/Cert/Unity.png" alt="Unity" /></div>
+                  <div class="about-cert__body">
+                    <h4 class="about-cert__title">Unity Junior Programmer</h4>
+                    <p class="about-cert__meta">Unity · May 2023</p>
+                  </div>
+                  <span class="about-cert__arrow" aria-hidden="true">↗</span>
+                </a>
+              </li>
+              <li>
+                <a class="about-cert" href="https://www.linkedin.com/learning/certificates/df1e5ef821bb7b41a74f804fa5e86f9b49091f4aeb905681cae400f31f8d69d4" target="_blank" rel="noopener">
+                  <div class="about-cert__icon"><img src="Images/Cert/Linkedin.jpg" alt="LinkedIn Learning" /></div>
+                  <div class="about-cert__body">
+                    <h4 class="about-cert__title">Autodesk Maya: Advanced Modeling</h4>
+                    <p class="about-cert__meta">LinkedIn Learning · Apr 2023</p>
+                  </div>
+                  <span class="about-cert__arrow" aria-hidden="true">↗</span>
+                </a>
+              </li>
+              <li>
+                <a class="about-cert" href="https://www.credly.com/badges/68e38cf2-d935-4ac2-83a5-f65152e610fa/linked_in_profile" target="_blank" rel="noopener">
+                  <div class="about-cert__icon"><img src="Images/Cert/Unity.png" alt="Unity" /></div>
+                  <div class="about-cert__body">
+                    <h4 class="about-cert__title">Unity Certified Associate · Game Developer</h4>
+                    <p class="about-cert__meta">Unity · Feb 2023</p>
+                  </div>
+                  <span class="about-cert__arrow" aria-hidden="true">↗</span>
+                </a>
+              </li>
+              <li>
+                <article class="about-cert">
+                  <div class="about-cert__icon"><img src="Images/Cert/The Doddle People.jpeg" alt="The Doodle People" /></div>
+                  <div class="about-cert__body">
+                    <h4 class="about-cert__title">Memory Flavours AR Contest — 3rd Place</h4>
+                    <p class="about-cert__meta">The Doodle People LLP · Mar 2023</p>
+                  </div>
+                </article>
+              </li>
+            </ul>
           </div>
         </section>
 
-        <!-- 05 Toolkit — chip clusters, three semantic groups. -->
-        <section class="about-toolkit">
+        <!-- 05 Toolkit — tool icon strip + capability blocks pairing
+             stack with outcome. Restrained editorial composition. -->
+        <section class="about-toolkit" data-reveal>
           <header class="about-toolkit__head">
             <h3 class="project-text__section-title">
               <span class="project-text__num">05</span>
               <span class="project-text__label">Toolkit</span>
             </h3>
+            <p class="about-toolkit__lead">
+              The instruments I ship with — engineered, designed, and operated under one signature.
+            </p>
           </header>
 
-          <div class="about-toolkit__group">
-            <h4 class="about-toolkit__title">Technical</h4>
-            <ul class="about-chips">
-              <li>Python</li>
-              <li>C#</li>
-              <li>Unity Engine</li>
-              <li>Django</li>
-              <li>Web App Development</li>
-              <li>UX Wireframing</li>
-              <li>Prototyping</li>
-            </ul>
-          </div>
+          <ul class="about-toolkit__icons" aria-label="Primary tools">
+            <li class="about-toolkit__icon">
+              <div class="about-toolkit__icon-img"><img src="Images/Toolkit/claudecode.jpg" alt="" /></div>
+              <span class="about-toolkit__icon-name">Claude Code</span>
+            </li>
+            <li class="about-toolkit__icon">
+              <div class="about-toolkit__icon-img"><img src="Images/Cert/Unity.png" alt="" /></div>
+              <span class="about-toolkit__icon-name">Unity</span>
+            </li>
+            <li class="about-toolkit__icon">
+              <div class="about-toolkit__icon-img"><img src="Images/Toolkit/C%23.png" alt="" /></div>
+              <span class="about-toolkit__icon-name">C#</span>
+            </li>
+            <li class="about-toolkit__icon">
+              <div class="about-toolkit__icon-img"><img src="Images/Toolkit/maya.png" alt="" /></div>
+              <span class="about-toolkit__icon-name">Autodesk Maya</span>
+            </li>
+            <li class="about-toolkit__icon">
+              <div class="about-toolkit__icon-img"><img src="Images/Toolkit/adobe.jpg" alt="" /></div>
+              <span class="about-toolkit__icon-name">Adobe Creative</span>
+            </li>
+            <li class="about-toolkit__icon">
+              <div class="about-toolkit__icon-img"><img src="Images/Toolkit/Figma.png" alt="" style="padding: 0; transform: scale(1.35);" /></div>
+              <span class="about-toolkit__icon-name">Figma</span>
+            </li>
+            <li class="about-toolkit__icon">
+              <div class="about-toolkit__icon-img"><img src="Images/Toolkit/Python.png" alt="" /></div>
+              <span class="about-toolkit__icon-name">Python</span>
+            </li>
+            <li class="about-toolkit__icon">
+              <div class="about-toolkit__icon-img"><img src="Images/Toolkit/Django.png" alt="" /></div>
+              <span class="about-toolkit__icon-name">Django</span>
+            </li>
+          </ul>
 
-          <div class="about-toolkit__group">
-            <h4 class="about-toolkit__title">Business</h4>
-            <ul class="about-chips">
-              <li>Agile workflow</li>
-              <li>Requirements gathering</li>
-              <li>Stakeholder management</li>
-              <li>Hypothesis-driven dev</li>
-              <li>AI &amp; product development</li>
-              <li>UI/UX &amp; learning design</li>
-              <li>Game &amp; interactive experience</li>
-              <li>Project &amp; vendor management</li>
-              <li>Cross-functional coordination</li>
-            </ul>
-          </div>
-
-          <div class="about-toolkit__group">
-            <h4 class="about-toolkit__title">Daily Tools</h4>
-            <ul class="about-chips about-chips--accent">
-              <li>Claude Code</li>
-              <li>Unity Engine</li>
-              <li>Adobe Creative Suite</li>
-              <li>Google AI Studio</li>
-              <li>Autodesk Maya</li>
-            </ul>
+          <div class="about-toolkit__capabilities">
+            <article class="about-toolkit__cap">
+              <h4 class="about-toolkit__cap-title">AI &amp; Tooling</h4>
+              <p class="about-toolkit__cap-stack">Claude Code · Google AI Studio</p>
+              <p class="about-toolkit__cap-desc">AI-assisted engineering and model prompting, woven into product surfaces and the build loop.</p>
+            </article>
+            <article class="about-toolkit__cap">
+              <h4 class="about-toolkit__cap-title">Engineering</h4>
+              <p class="about-toolkit__cap-stack">Unity · C# · Python · Django</p>
+              <p class="about-toolkit__cap-desc">Interactive 3D systems and back-end services, shipped end-to-end with object-oriented architecture.</p>
+            </article>
+            <article class="about-toolkit__cap">
+              <h4 class="about-toolkit__cap-title">Design &amp; 3D</h4>
+              <p class="about-toolkit__cap-stack">Autodesk Maya · Adobe Creative · Figma</p>
+              <p class="about-toolkit__cap-desc">UI/UX, 3D modelling, motion, and brand assets — from wireframe to final pixel.</p>
+            </article>
+            <article class="about-toolkit__cap">
+              <h4 class="about-toolkit__cap-title">Operating Method</h4>
+              <p class="about-toolkit__cap-stack">Agile · Hypothesis-driven · Cross-functional</p>
+              <p class="about-toolkit__cap-desc">Requirements gathering, stakeholder management, vendor coordination, and post-launch loops.</p>
+            </article>
           </div>
         </section>
 
         <!-- 06 Contact — signature card. Closing moment. -->
-        <section class="about-contact" aria-label="Contact">
+        <section class="about-contact" id="contact" data-reveal aria-label="Contact">
           <div class="about-contact__card">
             <div class="about-contact__status">
               <span class="about-contact__dot" aria-hidden="true"></span>
@@ -301,5 +492,72 @@
     </nav>
 
     <script src="script.js"></script>
+    <script>
+      (function () {
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // 1. Hero — wrap each word in a span, stagger reveal on load.
+        var lead = document.querySelector('[data-hero-lead]');
+        var sub = document.querySelector('[data-hero-sub]');
+        if (lead) {
+          var words = lead.textContent.trim().split(/\s+/);
+          lead.textContent = '';
+          words.forEach(function (w, i) {
+            var span = document.createElement('span');
+            span.className = 'word';
+            span.style.setProperty('--d', (i * 55) + 'ms');
+            span.textContent = w;
+            lead.appendChild(span);
+            if (i < words.length - 1) lead.appendChild(document.createTextNode(' '));
+          });
+          requestAnimationFrame(function () {
+            lead.classList.add('is-revealed');
+            if (sub) {
+              setTimeout(function () { sub.classList.add('is-revealed'); }, words.length * 55 + 200);
+            }
+          });
+        }
+
+        // Hero CTA — smooth scroll to the contact section.
+        document.querySelectorAll('[data-scroll-to]').forEach(function (el) {
+          el.addEventListener('click', function (e) {
+            var href = el.getAttribute('href') || '';
+            if (href.charAt(0) !== '#') return;
+            var target = document.querySelector(href);
+            if (!target) return;
+            e.preventDefault();
+            target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+          });
+        });
+
+        // 2. Toolkit icons + chips — stagger delay per item within each group.
+        document.querySelectorAll('.about-chips, .about-toolkit__icons').forEach(function (list) {
+          Array.from(list.children).forEach(function (li, i) {
+            li.style.setProperty('--d', (i * 45) + 'ms');
+          });
+        });
+
+        // 3. Scroll-reveal — fade + lift on viewport entry.
+        if (reduced || !('IntersectionObserver' in window)) {
+          document.querySelectorAll('[data-reveal]').forEach(function (el) {
+            el.classList.add('is-revealed');
+          });
+          return;
+        }
+
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-revealed');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+
+        document.querySelectorAll('[data-reveal]').forEach(function (el) {
+          io.observe(el);
+        });
+      })();
+    </script>
   </body>
 </html>
