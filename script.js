@@ -67,6 +67,35 @@
     });
   });
 
+  // WIP overlay — intercepts clicks on [data-wip] links and shows a "coming soon" modal.
+  const wipOverlay = document.getElementById('wipOverlay');
+  if (wipOverlay) {
+    const openWip = () => {
+      wipOverlay.classList.add('is-open');
+      wipOverlay.removeAttribute('aria-hidden');
+      wipOverlay.querySelector('.wip-card__close')?.focus();
+    };
+    const closeWip = () => {
+      wipOverlay.classList.remove('is-open');
+      wipOverlay.setAttribute('aria-hidden', 'true');
+    };
+
+    document.querySelectorAll('[data-wip]').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        openWip();
+      });
+    });
+
+    wipOverlay.querySelector('.wip-card__close')?.addEventListener('click', closeWip);
+    wipOverlay.addEventListener('click', (e) => {
+      if (e.target === wipOverlay) closeWip();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && wipOverlay.classList.contains('is-open')) closeWip();
+    });
+  }
+
   // Lazy reveal cards on scroll.
   const cards = document.querySelectorAll('.card');
   if ('IntersectionObserver' in window && cards.length) {

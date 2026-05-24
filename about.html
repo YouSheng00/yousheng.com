@@ -28,6 +28,8 @@
 
       <section class="project-grid" aria-label="About content">
 
+        <div class="about-divider" aria-hidden="true"><span></span></div>
+
         <!-- HERO: editorial lead on the left, contact CTA on the right. -->
         <section class="about-hero">
           <div>
@@ -38,7 +40,7 @@
               The hand-offs that slow most orgs do not exist here.
             </p>
           </div>
-          <a class="about-hero__cta" href="#contact" data-scroll-to>
+          <a class="about-hero__cta" href="#contact" data-open-contact>
             <span class="about-hero__cta-status">
               <span class="about-hero__cta-dot" aria-hidden="true"></span>
               <span>Open to conversations</span>
@@ -56,13 +58,28 @@
             <div class="about-stats__num">3+</div>
             <div class="about-stats__label">Years building</div>
           </div>
-          <div class="about-stats__item">
+          <div class="about-stats__item about-stats__item--has-detail" tabindex="0">
             <div class="about-stats__num">2</div>
             <div class="about-stats__label">Platforms shipped</div>
+            <div class="about-stats__tooltip" role="tooltip">
+              <p class="about-stats__tooltip-label">What I’ve shipped</p>
+              <ol class="about-stats__tooltip-list">
+                <li>AI-powered online learning platform</li>
+                <li>3D interactive simulation platform</li>
+              </ol>
+            </div>
           </div>
-          <div class="about-stats__item">
+          <div class="about-stats__item about-stats__item--has-detail" tabindex="0">
             <div class="about-stats__num">3</div>
             <div class="about-stats__label">Disciplines integrated</div>
+            <div class="about-stats__tooltip" role="tooltip">
+              <p class="about-stats__tooltip-label">Under one signature</p>
+              <ol class="about-stats__tooltip-list">
+                <li>Design</li>
+                <li>Engineering</li>
+                <li>Operations</li>
+              </ol>
+            </div>
           </div>
         </section>
 
@@ -235,7 +252,7 @@
                 </article>
               </li>
               <li>
-                <a class="about-prior__item" href="sats.html">
+                <article class="about-prior__item">
                   <div class="about-prior__thumb about-prior__thumb--fill">
                     <img src="Images/Cert/SATS4.png" alt="SATS Cargo Loading Simulation" />
                   </div>
@@ -244,7 +261,7 @@
                     <p class="about-prior__date">Sep 2023 – Jan 2024 · 5 mos · On-site</p>
                     <p class="about-prior__desc">Full development lifecycle of an interactive 3D Cargo Loading simulation at Changi Airport for SATS's Apron Training programme. On-site research and stakeholder engagement; interactive systems in C# (OOP, inventory, application logic); 3D modelling, texturing, lighting, and animation in Autodesk Maya; UI/UX design and user testing.</p>
                   </div>
-                </a>
+                </article>
               </li>
             </ul>
           </div>
@@ -271,7 +288,7 @@
 
             <div class="about-coursework">
               <h4 class="about-coursework__label">
-                <span>Main Coursework</span>
+                <span>Coursework Highlights</span>
               </h4>
               <ol class="about-coursework__list">
                 <li class="about-coursework__item">
@@ -448,6 +465,11 @@
               Let&rsquo;s build something.
             </p>
 
+            <a class="about-contact__cta" href="#contact" data-open-contact>
+              <span>Send a message</span>
+              <span class="about-contact__cta-arrow" aria-hidden="true">→</span>
+            </a>
+
             <ul class="about-contact__channels">
               <li>
                 <a href="mailto:neuyousheng5533@gmail.com">
@@ -491,6 +513,77 @@
       </button>
     </nav>
 
+    <!-- Contact modal — opened by the hero CTA. -->
+    <div class="contact-overlay" id="contact-overlay" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title" aria-hidden="true">
+      <div class="contact-modal">
+        <button class="contact-modal__close" type="button" aria-label="Close" data-close-contact>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+
+        <header class="contact-modal__header">
+          <span class="contact-modal__status"><span>Open to conversations</span></span>
+          <h2 class="contact-modal__title" id="contact-modal-title">Let&rsquo;s build something.</h2>
+        </header>
+
+        <div class="contact-modal__grid">
+          <aside class="contact-modal__info" aria-label="Direct contact">
+            <div class="contact-modal__info-row" style="--d: 60ms;">
+              <span class="contact-modal__info-label">Email</span>
+              <span class="contact-modal__info-value">
+                <a href="mailto:neuyousheng5533@gmail.com">neuyousheng5533@gmail.com</a>
+              </span>
+            </div>
+            <div class="contact-modal__info-row" style="--d: 120ms;">
+              <span class="contact-modal__info-label">Phone</span>
+              <span class="contact-modal__info-value">
+                <a href="tel:+6591568891">+65 9156 8891</a>
+              </span>
+            </div>
+            <div class="contact-modal__info-row" style="--d: 180ms;">
+              <span class="contact-modal__info-label">Based in</span>
+              <span class="contact-modal__info-value">Singapore · GMT +8</span>
+            </div>
+            <div class="contact-modal__info-row" style="--d: 240ms;">
+              <span class="contact-modal__info-label">Response</span>
+              <span class="contact-modal__info-value">Within 48 hours</span>
+            </div>
+          </aside>
+
+          <form class="contact-modal__form" data-contact-form action="https://formspree.io/f/meedznvz" method="POST" novalidate>
+            <div class="contact-modal__field" style="--d: 80ms;">
+              <label class="contact-modal__field-label" for="cm-name">Name</label>
+              <input class="contact-modal__input" id="cm-name" name="name" type="text" required autocomplete="name" />
+            </div>
+            <div class="contact-modal__field" style="--d: 140ms;">
+              <label class="contact-modal__field-label" for="cm-email">Email</label>
+              <input class="contact-modal__input" id="cm-email" name="email" type="email" required autocomplete="email" />
+            </div>
+            <div class="contact-modal__field" style="--d: 200ms;">
+              <label class="contact-modal__field-label" for="cm-phone">Phone <span class="contact-modal__optional">(optional)</span></label>
+              <input class="contact-modal__input" id="cm-phone" name="phone" type="tel" autocomplete="tel" />
+            </div>
+            <div class="contact-modal__field" style="--d: 260ms;">
+              <label class="contact-modal__field-label" for="cm-message">Message</label>
+              <textarea class="contact-modal__textarea" id="cm-message" name="message" rows="4" required></textarea>
+            </div>
+            <p class="contact-modal__error" role="alert" hidden></p>
+            <button class="contact-modal__submit" type="submit" style="--d: 320ms;">
+              <span class="contact-modal__submit-text">Send message</span>
+              <span class="contact-modal__submit-arrow" aria-hidden="true">→</span>
+            </button>
+          </form>
+        </div>
+
+        <div class="contact-modal__success" role="status" aria-live="polite">
+          <div class="contact-modal__success-icon" aria-hidden="true">✓</div>
+          <h3 class="contact-modal__success-title">Message sent.</h3>
+          <p class="contact-modal__success-body">Thanks for reaching out. I&rsquo;ll get back to you within 48 hours.</p>
+        </div>
+      </div>
+    </div>
+
     <script src="script.js"></script>
     <script>
       (function () {
@@ -518,17 +611,103 @@
           });
         }
 
-        // Hero CTA — smooth scroll to the contact section.
-        document.querySelectorAll('[data-scroll-to]').forEach(function (el) {
+        // Hero CTA — open contact modal instead of scrolling.
+        var contactOverlay = document.getElementById('contact-overlay');
+        var contactModal = contactOverlay ? contactOverlay.querySelector('.contact-modal') : null;
+        var contactForm = contactOverlay ? contactOverlay.querySelector('[data-contact-form]') : null;
+
+        function openContact() {
+          if (!contactOverlay) return;
+          contactOverlay.classList.add('is-open');
+          contactOverlay.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+          var firstInput = contactOverlay.querySelector('input, textarea');
+          if (firstInput) setTimeout(function () { firstInput.focus(); }, 400);
+        }
+
+        function closeContact() {
+          if (!contactOverlay) return;
+          contactOverlay.classList.remove('is-open');
+          contactOverlay.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+          if (contactModal) {
+            setTimeout(function () {
+              contactModal.classList.remove('is-success');
+              var err = contactModal.querySelector('.contact-modal__error');
+              if (err) { err.hidden = true; err.textContent = ''; }
+            }, 400);
+          }
+        }
+
+        document.querySelectorAll('[data-open-contact]').forEach(function (el) {
           el.addEventListener('click', function (e) {
-            var href = el.getAttribute('href') || '';
-            if (href.charAt(0) !== '#') return;
-            var target = document.querySelector(href);
-            if (!target) return;
             e.preventDefault();
-            target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+            openContact();
           });
         });
+
+        document.querySelectorAll('[data-close-contact]').forEach(function (el) {
+          el.addEventListener('click', closeContact);
+        });
+
+        if (contactOverlay) {
+          contactOverlay.addEventListener('click', function (e) {
+            if (e.target === contactOverlay) closeContact();
+          });
+        }
+
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && contactOverlay && contactOverlay.classList.contains('is-open')) {
+            closeContact();
+          }
+        });
+
+        if (contactForm) {
+          var submitBtn = contactForm.querySelector('.contact-modal__submit');
+          var submitText = contactForm.querySelector('.contact-modal__submit-text');
+          var errorEl = contactForm.querySelector('.contact-modal__error');
+          var originalText = submitText ? submitText.textContent : 'Send message';
+
+          contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (errorEl) { errorEl.hidden = true; errorEl.textContent = ''; }
+            if (submitBtn) {
+              submitBtn.disabled = true;
+              submitBtn.classList.add('is-loading');
+            }
+            if (submitText) submitText.textContent = 'Sending…';
+
+            fetch(contactForm.action, {
+              method: 'POST',
+              body: new FormData(contactForm),
+              headers: { 'Accept': 'application/json' }
+            })
+              .then(function (response) {
+                if (response.ok) {
+                  if (contactModal) contactModal.classList.add('is-success');
+                  contactForm.reset();
+                  return;
+                }
+                return response.json().then(function (data) {
+                  var msg = (data && data.errors && data.errors[0] && data.errors[0].message) || 'Could not send. Please try again or email me directly.';
+                  throw new Error(msg);
+                });
+              })
+              .catch(function (err) {
+                if (errorEl) {
+                  errorEl.textContent = err.message || 'Network error. Please try again or email me directly.';
+                  errorEl.hidden = false;
+                }
+              })
+              .then(function () {
+                if (submitBtn) {
+                  submitBtn.disabled = false;
+                  submitBtn.classList.remove('is-loading');
+                }
+                if (submitText) submitText.textContent = originalText;
+              });
+          });
+        }
 
         // 2. Toolkit icons + chips — stagger delay per item within each group.
         document.querySelectorAll('.about-chips, .about-toolkit__icons').forEach(function (list) {

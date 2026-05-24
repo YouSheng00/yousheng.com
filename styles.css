@@ -160,6 +160,10 @@ button {
   text-shadow: 0 0 0.4px currentColor;
 }
 
+/* Mobile-only intro variants — hidden by default, shown at ≤600px */
+.wordmark__mobile,
+.tagline__mobile { display: none; }
+
 /* ---------- Project grid ---------- */
 /* Two-column. Each card gets `padding: 0 calc(spacing/2)` so the visual gap
    between cards is `--project-spacing`, mirroring the UPSET .project rule. */
@@ -526,6 +530,12 @@ button {
    the project grid; two stacks sit per row. The model viewer uses a 5/3
    ratio (~20% shorter than a standard 4/3 card); the screenshot card
    sits directly below it with only a small gap. */
+/* Overlap effect — pulls a project-block up into the preceding section.
+   Reset to 0 at tablet/mobile (see responsive block below). */
+.project-block--overlap {
+  margin-top: calc(var(--s-500) * -1);
+}
+
 .glb-stack {
   grid-column: span 10;
   display: flex;
@@ -1326,6 +1336,34 @@ button {
    variety so the page reads as composed rather than uniform.
    ============================================================ */
 
+/* DIVIDER — editorial section ornament: short hairline + small dot
+   + short hairline, centered. Marks the transition from page header
+   to body without imposing a full-width rule. */
+.about-divider {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: var(--s-200) 0 var(--s-100);
+}
+
+.about-divider::before,
+.about-divider::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: color-mix(in srgb, var(--c-text) 22%, transparent);
+}
+
+.about-divider span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--c-text) 38%, transparent);
+}
+
 /* HERO — full-bleed display moment. Stretched type, deep top
    padding so it reads as a title page rather than a section.
    Two-column at desktop: lead text on the left, contact CTA on the right. */
@@ -1357,68 +1395,75 @@ button {
   gap: var(--s-300);
   padding: var(--s-300) var(--s-400);
   border-radius: 22px;
-  background: transparent;
+  background-color: transparent;
+  background-image: linear-gradient(105deg, color-mix(in srgb, var(--c-text) 88%, var(--c-background)) 50%, transparent 50%);
+  background-size: 220% 100%;
+  background-position: 100% 0;
+  background-repeat: no-repeat;
   color: var(--c-text);
   text-decoration: none;
   min-width: 440px;
   min-height: 200px;
-  box-shadow:
-    inset 0 0 0 1.5px var(--c-text),
-    0 10px 30px -16px color-mix(in srgb, var(--c-text) 14%, transparent);
-  animation: about-cta-breathe 2.6s ease-in-out infinite;
+  box-shadow: inset 0 0 0 1.5px var(--c-text);
   transition:
-    transform 0.4s cubic-bezier(0.2, 0.85, 0.3, 1),
-    background 1.5s ease,
-    color 1.5s ease;
+    transform 0.45s cubic-bezier(0.2, 0.85, 0.3, 1),
+    background-position 0.9s cubic-bezier(0.65, 0, 0.35, 1),
+    color 0.55s cubic-bezier(0.65, 0, 0.35, 1) 0.25s,
+    box-shadow 0.9s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-/* Ping ring — an expanding outline that pulses outward, like a
-   classic "tap here" indicator. Sits behind the button via ::before. */
-.about-hero__cta::before {
+/* Animations live on pseudo-elements so the button itself can
+   transition cleanly on hover without animation snap-back. */
+.about-hero__cta::before,
+.about-hero__cta::after {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
   pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+/* Breathing outer glow */
+.about-hero__cta::after {
+  box-shadow: 0 6px 18px -10px color-mix(in srgb, var(--c-text) 6%, transparent);
+  animation: about-cta-breathe 2.6s ease-in-out infinite;
+  z-index: -1;
+}
+
+/* Expanding ping ring */
+.about-hero__cta::before {
   box-shadow: 0 0 0 0 color-mix(in srgb, var(--c-text) 45%, transparent);
   animation: about-cta-ping 2.6s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
 }
 
 @keyframes about-cta-breathe {
-  0%, 100% {
-    box-shadow:
-      inset 0 0 0 1.5px var(--c-text),
-      0 6px 18px -10px color-mix(in srgb, var(--c-text) 6%, transparent);
-  }
-  50% {
-    box-shadow:
-      inset 0 0 0 1.5px var(--c-text),
-      0 26px 60px -10px color-mix(in srgb, var(--c-text) 42%, transparent);
-  }
+  0%, 100% { box-shadow: 0 6px 18px -10px color-mix(in srgb, var(--c-text) 6%, transparent); }
+  50%      { box-shadow: 0 26px 60px -10px color-mix(in srgb, var(--c-text) 42%, transparent); }
 }
 
 @keyframes about-cta-ping {
-  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--c-text) 45%, transparent); }
+  0%        { box-shadow: 0 0 0 0 color-mix(in srgb, var(--c-text) 45%, transparent); }
   70%, 100% { box-shadow: 0 0 0 14px color-mix(in srgb, var(--c-text) 0%, transparent); }
 }
 
 .about-hero__cta:hover {
-  background: var(--c-text);
+  background-position: 0% 0;
   color: var(--c-background);
   transform: translateY(-3px);
-  animation: none;
   box-shadow:
     inset 0 0 0 1.5px var(--c-text),
     0 28px 56px -20px color-mix(in srgb, var(--c-text) 30%, transparent);
 }
 
-.about-hero__cta:hover::before {
-  animation: none;
+.about-hero__cta:hover::before,
+.about-hero__cta:hover::after {
+  opacity: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .about-hero__cta,
-  .about-hero__cta::before { animation: none; }
+  .about-hero__cta::before,
+  .about-hero__cta::after { animation: none; }
 }
 
 .about-hero__cta-status {
@@ -1839,12 +1884,54 @@ button {
 }
 
 .about-contact__line {
-  margin: var(--s-200) 0 var(--s-400);
+  margin: var(--s-200) 0 var(--s-300);
   font-size: clamp(2rem, 4.4vw, 3.4rem);
   font-weight: 350;
   letter-spacing: -0.025em;
   line-height: 1.05;
   color: var(--c-text);
+}
+
+/* Primary CTA inside the contact card — opens the same modal as the
+   hero CTA. Outlined ghost button with hover invert. */
+.about-contact__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-100);
+  margin: 0 auto var(--s-400);
+  padding: 12px 24px;
+  border: none;
+  border-radius: 14px;
+  background-color: transparent;
+  color: var(--c-text);
+  text-decoration: none;
+  box-shadow: inset 0 0 0 1.5px var(--c-text);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  transition:
+    background-color 1s ease,
+    color 1s ease,
+    transform 0.35s cubic-bezier(0.2, 0.85, 0.3, 1);
+}
+
+.about-contact__cta:hover {
+  background-color: var(--c-text);
+  color: var(--c-background);
+  transform: translateY(-2px);
+  opacity: 1;
+}
+
+.about-contact__cta-arrow {
+  display: inline-block;
+  font-size: 0.9em;
+  transition: transform 0.35s cubic-bezier(0.2, 0.85, 0.3, 1);
+}
+
+.about-contact__cta:hover .about-contact__cta-arrow {
+  transform: translate(4px, -4px);
 }
 
 .about-contact__channels {
@@ -2227,6 +2314,97 @@ button {
   display: flex;
   flex-direction: column;
   gap: var(--s-100);
+  position: relative;
+}
+
+.about-stats__item--has-detail {
+  cursor: help;
+}
+
+/* Tooltip — soft floating panel that lists what the number contains.
+   Appears below the stat on hover/focus with a subtle fade + lift. */
+.about-stats__tooltip {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  min-width: 260px;
+  max-width: 320px;
+  padding: var(--s-200);
+  background: color-mix(in srgb, var(--c-text) 6%, var(--c-background));
+  border-radius: 14px;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--c-text) 14%, transparent),
+    0 18px 36px -16px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition:
+    opacity 0.32s cubic-bezier(0.2, 0.85, 0.3, 1),
+    transform 0.32s cubic-bezier(0.2, 0.85, 0.3, 1);
+  z-index: 10;
+}
+
+.about-stats__tooltip::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 28px;
+  width: 10px;
+  height: 10px;
+  background: color-mix(in srgb, var(--c-text) 6%, var(--c-background));
+  box-shadow:
+    -1px -1px 0 0 color-mix(in srgb, var(--c-text) 14%, transparent);
+  transform: translateY(50%) rotate(45deg);
+}
+
+.about-stats__item:hover .about-stats__tooltip,
+.about-stats__item:focus-within .about-stats__tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-stats__tooltip-label {
+  margin: 0 0 var(--s-150);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+
+.about-stats__tooltip-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  counter-reset: stats-detail;
+}
+
+.about-stats__tooltip-list li {
+  counter-increment: stats-detail;
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 4px;
+  align-items: baseline;
+  font-size: 13px;
+  letter-spacing: -0.003em;
+  line-height: 1.4;
+  color: var(--c-text);
+}
+
+.about-stats__tooltip-list li::before {
+  content: counter(stats-detail, decimal-leading-zero);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--c-text-muted);
+}
+
+@media (max-width: 720px) {
+  .about-stats__tooltip { min-width: 200px; max-width: 280px; }
 }
 
 .about-stats__num {
@@ -3069,4 +3247,819 @@ a.about-cert:hover .about-cert__arrow {
   .article__body { font-size: 1rem; }
   .article__footer { flex-direction: column; align-items: flex-start; }
   .article__figure--pair { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   CONTACT MODAL — popup with direct contact info + form.
+   Triggered by the hero CTA. Editorial card language;
+   form fields cascade in with subtle motion.
+   ============================================================ */
+.contact-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-200);
+  background: color-mix(in srgb, var(--c-background) 72%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.contact-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.contact-modal {
+  position: relative;
+  width: 100%;
+  max-width: 920px;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  padding: var(--s-400);
+  background: color-mix(in srgb, var(--c-text) 5%, var(--c-background));
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--c-text) 12%, transparent),
+    0 30px 60px -24px rgba(0, 0, 0, 0.5);
+  border-radius: 22px;
+  transform: translateY(20px) scale(0.97);
+  opacity: 0;
+  transition:
+    transform 0.5s cubic-bezier(0.2, 0.85, 0.3, 1),
+    opacity 0.35s ease;
+}
+
+.contact-overlay.is-open .contact-modal {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.contact-modal__close {
+  position: absolute;
+  top: var(--s-200);
+  right: var(--s-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c-text) 14%, transparent);
+  color: var(--c-text-muted);
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.3s cubic-bezier(0.2, 0.85, 0.3, 1);
+  z-index: 2;
+}
+
+.contact-modal__close:hover {
+  background: color-mix(in srgb, var(--c-text) 10%, transparent);
+  color: var(--c-text);
+  transform: rotate(90deg);
+}
+
+.contact-modal__close svg {
+  width: 14px;
+  height: 14px;
+}
+
+.contact-modal__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-150);
+  margin-bottom: var(--s-300);
+  padding-right: var(--s-300);
+}
+
+.contact-modal__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--c-text) 6%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c-text) 12%, transparent);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  align-self: flex-start;
+}
+
+.contact-modal__status::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #48ea2d;
+  box-shadow: 0 0 8px rgba(72, 234, 45, 0.55);
+  animation: about-pulse 2.4s ease-in-out infinite;
+}
+
+.contact-modal__title {
+  margin: 0;
+  font-family: var(--font-display, inherit);
+  font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+  font-weight: 350;
+  letter-spacing: -0.028em;
+  line-height: 1.05;
+  color: var(--c-text);
+}
+
+.contact-modal__grid {
+  display: grid;
+  grid-template-columns: 40fr 60fr;
+  gap: var(--s-400);
+  align-items: start;
+}
+
+@media (max-width: 720px) {
+  .contact-modal { padding: var(--s-300); }
+  .contact-modal__grid { grid-template-columns: 1fr; gap: var(--s-300); }
+  .contact-modal__header { padding-right: var(--s-200); }
+}
+
+/* Left: direct contact info */
+.contact-modal__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-200);
+  padding-top: var(--s-100);
+}
+
+.contact-modal__info-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s cubic-bezier(0.2, 0.85, 0.3, 1);
+  transition-delay: var(--d, 0ms);
+}
+
+.contact-overlay.is-open .contact-modal__info-row {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-modal__info-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+
+.contact-modal__info-value {
+  font-size: 0.98rem;
+  color: var(--c-text);
+  letter-spacing: -0.005em;
+}
+
+.contact-modal__info-value a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--c-text) 20%, transparent);
+  transition: border-color 0.25s ease;
+}
+
+.contact-modal__info-value a:hover {
+  border-color: var(--c-text);
+}
+
+/* Right: form */
+.contact-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-150);
+}
+
+.contact-modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s cubic-bezier(0.2, 0.85, 0.3, 1);
+  transition-delay: var(--d, 0ms);
+}
+
+.contact-overlay.is-open .contact-modal__field {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-modal__field-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+}
+
+.contact-modal__optional {
+  text-transform: none;
+  letter-spacing: 0.02em;
+  opacity: 0.7;
+}
+
+.contact-modal__input,
+.contact-modal__textarea {
+  width: 100%;
+  padding: 11px 14px;
+  background: color-mix(in srgb, var(--c-text) 3%, transparent);
+  border: none;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c-text) 12%, transparent);
+  color: var(--c-text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  letter-spacing: -0.005em;
+  transition: box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.contact-modal__input:focus,
+.contact-modal__textarea:focus {
+  outline: none;
+  background: color-mix(in srgb, var(--c-text) 6%, transparent);
+  box-shadow: inset 0 0 0 1.5px var(--c-text);
+}
+
+.contact-modal__textarea {
+  resize: vertical;
+  min-height: 110px;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.contact-modal__submit {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-100);
+  margin-top: var(--s-100);
+  padding: 12px 24px;
+  border: none;
+  background-color: transparent;
+  color: var(--c-text);
+  box-shadow: inset 0 0 0 1.5px var(--c-text);
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  align-self: flex-start;
+  transition:
+    background-color 1s ease,
+    color 1s ease,
+    transform 0.3s cubic-bezier(0.2, 0.85, 0.3, 1);
+}
+
+.contact-modal__submit:hover {
+  background-color: var(--c-text);
+  color: var(--c-background);
+  transform: translateY(-2px);
+}
+
+.contact-modal__submit-arrow {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.2, 0.85, 0.3, 1);
+}
+
+.contact-modal__submit:hover .contact-modal__submit-arrow {
+  transform: translate(4px, -4px);
+}
+
+.contact-modal__submit:disabled,
+.contact-modal__submit.is-loading {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+.contact-modal__submit.is-loading .contact-modal__submit-arrow {
+  animation: contact-submit-spin 1s linear infinite;
+}
+
+@keyframes contact-submit-spin {
+  to { transform: rotate(360deg); }
+}
+
+.contact-modal__error {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: color-mix(in srgb, #f87171 14%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, #f87171 30%, transparent);
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: color-mix(in srgb, #f87171 80%, var(--c-text));
+  letter-spacing: -0.005em;
+}
+
+/* Success state */
+.contact-modal__success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--s-400) 0 var(--s-300);
+  gap: var(--s-200);
+}
+
+.contact-modal.is-success .contact-modal__header,
+.contact-modal.is-success .contact-modal__grid {
+  display: none;
+}
+
+.contact-modal.is-success .contact-modal__success {
+  display: flex;
+  animation: contact-success-in 0.6s cubic-bezier(0.2, 0.85, 0.3, 1);
+}
+
+@keyframes contact-success-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.contact-modal__success-icon {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, #48ea2d 14%, transparent);
+  color: #48ea2d;
+  font-size: 26px;
+  box-shadow:
+    0 0 0 6px color-mix(in srgb, #48ea2d 8%, transparent),
+    0 0 20px color-mix(in srgb, #48ea2d 25%, transparent);
+}
+
+.contact-modal__success-title {
+  margin: 0;
+  font-family: var(--font-display, inherit);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 350;
+  letter-spacing: -0.025em;
+  color: var(--c-text);
+}
+
+.contact-modal__success-body {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--c-text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-modal,
+  .contact-modal__info-row,
+  .contact-modal__field { transition: none; }
+  .contact-modal.is-success .contact-modal__success { animation: none; }
+}
+
+/* ============================================================
+   WIP OVERLAY — "Coming soon" modal for unfinished case studies.
+   Built on the site's editorial card language: soft text-mix
+   surface, hairline inset border, pulsing live status dot.
+   ============================================================ */
+.wip-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-200);
+  background: color-mix(in srgb, var(--c-background) 70%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.wip-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.wip-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-200);
+  padding: var(--s-400);
+  background: color-mix(in srgb, var(--c-text) 5%, var(--c-background));
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--c-text) 12%, transparent),
+    0 30px 60px -24px rgba(0, 0, 0, 0.5);
+  border-radius: 22px;
+  max-width: 460px;
+  width: 100%;
+  transform: translateY(12px);
+  transition:
+    transform 0.4s cubic-bezier(0.2, 0.85, 0.3, 1),
+    opacity 0.3s ease;
+}
+
+.wip-overlay.is-open .wip-card {
+  transform: translateY(0);
+}
+
+/* Status pill — same pattern as the Now badge / hero CTA dot.
+   Reinforces "this is live, just in progress". */
+.wip-card__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--c-text) 6%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c-text) 12%, transparent);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-text-muted);
+  align-self: flex-start;
+}
+
+.wip-card__tag::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #48ea2d;
+  box-shadow: 0 0 8px rgba(72, 234, 45, 0.55);
+  animation: about-pulse 2.4s ease-in-out infinite;
+}
+
+.wip-card__title {
+  margin: 0;
+  font-family: var(--font-display, inherit);
+  font-size: clamp(2rem, 4.4vw, 2.8rem);
+  font-weight: 350;
+  letter-spacing: -0.028em;
+  line-height: 1.05;
+  color: var(--c-text);
+}
+
+.wip-card__body {
+  margin: 0;
+  max-width: 38ch;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--c-text-muted);
+  letter-spacing: -0.005em;
+}
+
+.wip-card__close {
+  position: absolute;
+  top: var(--s-200);
+  right: var(--s-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c-text) 14%, transparent);
+  color: var(--c-text-muted);
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s cubic-bezier(0.2, 0.85, 0.3, 1);
+}
+
+.wip-card__close:hover {
+  background: color-mix(in srgb, var(--c-text) 10%, transparent);
+  color: var(--c-text);
+  transform: rotate(90deg);
+}
+
+.wip-card__close svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN — Unified breakpoints
+
+   Architecture:
+   • Desktop (> 768px)  — body { zoom: 0.8 } stays on; all
+     sizes were designed against this 80 % visual scale.
+   • Tablet / mobile (≤ 768px) — zoom removed; content renders
+     at 100 % native scale, which is correct for touch devices.
+     clamp() values scale naturally; the few that are too large
+     at full scale get explicit overrides below.
+
+   Breakpoints:
+     1024px  tablet landscape
+      768px  tablet portrait  ← zoom turned off here
+      600px  mobile
+      480px  small phone
+   ============================================================ */
+
+/* ── 1024px — tablet landscape ────────────────────────────── */
+@media (max-width: 1024px) {
+  .intro           { min-height: 46vh; }
+  .project__header { min-height: 42vh; }
+}
+
+/* ── 768px — tablet portrait; zoom normalised ─────────────── */
+@media (max-width: 768px) {
+
+  /* GLOBAL: disable desktop-only visual zoom.
+     body { zoom: 0.8 } was set to preview at 80 % on a laptop.
+     On touch devices every pixel should be a real pixel. */
+  body { zoom: 1; }
+
+  /* ---- Index ---- */
+  .intro {
+    min-height: 38vh;
+    padding: var(--s-200) var(--s-150);
+  }
+
+  /* ---- About hero ---- */
+  /* 440px hardcoded min-width overflows every phone and most tablets */
+  .about-hero__cta {
+    min-width: 0;
+    width: 100%;
+    max-width: 520px;
+    min-height: 160px;
+    padding: var(--s-250) var(--s-300);
+  }
+
+  /* Hero lead: recalibrated clamp for 100 % scale */
+  .about-hero__lead {
+    font-size: clamp(2rem, 5.5vw, 3.8rem);
+  }
+
+  /* ---- Project pages ---- */
+  .project__header {
+    min-height: 34vh;
+    padding: var(--s-200) var(--s-150);
+  }
+
+  /* The 800px rule stacks project-text but keeps ~8rem top padding —
+     at zoom:1 that is 104px. Also some sections set grid-template-
+     columns inline (e.g. "60fr 40fr") which the 800px rule silently
+     ignores. !important fixes both. */
+  .project-text {
+    grid-template-columns: 1fr !important;
+    padding: var(--s-400) var(--s-200) var(--s-300);
+    gap: var(--s-300);
+  }
+
+  /* Flip modifier: restore natural reading order */
+  .project-text--flip .project-text__left,
+  .project-text--flip .project-text__right {
+    order: unset;
+  }
+
+  /* Approach: reduce the 7+ rem top padding the desktop rule sets */
+  .approach {
+    padding: var(--s-400) var(--s-200) var(--s-300);
+  }
+
+  /* Proof layer: tighter inline padding */
+  .proof-layer {
+    padding: var(--s-400) var(--s-200);
+  }
+
+  /* Overlap blocks: negative margin creates overlap effect on desktop;
+     reset at tablet so they don't crash into content above */
+  .project-block--overlap {
+    margin-top: 0;
+  }
+}
+
+/* ── 600px — mobile ────────────────────────────────────────── */
+@media (max-width: 600px) {
+
+  /* ---- Index: mobile-only intro format ---- */
+  .wordmark__desktop,
+  .tagline__desktop { display: none; }
+  .wordmark__mobile,
+  .tagline__mobile   { display: inline; }
+
+  /* ---- Index ---- */
+  .intro {
+    padding: var(--s-150) var(--s-100);
+  }
+
+  /* Atelier card: grid-row: span 2 is meaningless in 1-col grid.
+     Inline style requires !important to override. */
+  .card--accent {
+    grid-row: auto !important;
+  }
+
+  /* ---- About ---- */
+  .about-hero {
+    padding: var(--s-200) var(--s-100);
+  }
+
+  .about-hero__lead {
+    font-size: clamp(1.6rem, 8vw, 2.4rem);
+  }
+
+  .about-hero__sub {
+    font-size: clamp(0.9rem, 3.8vw, 1.1rem);
+    margin-top: var(--s-150);
+  }
+
+  /* Stats: single column below tablet */
+  .about-stats {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stat numbers: allow bigger vw scaling on small screens */
+  .about-stats__num {
+    font-size: clamp(2rem, 11vw, 3.5rem);
+  }
+
+  /* Contact channels / card */
+  .about-contact__channels {
+    grid-template-columns: 1fr;
+  }
+
+  .about-contact__card {
+    padding: var(--s-200) var(--s-150);
+  }
+
+  /* ---- Project text ---- */
+  .project-text {
+    padding: var(--s-200);
+    gap: var(--s-200);
+  }
+
+  .project-text__lead {
+    font-size: clamp(1.5rem, 7vw, 2.2rem);
+  }
+
+  .project-text__section-title {
+    font-size: clamp(1rem, 4.5vw, 1.4rem);
+  }
+
+  .project-text__body p,
+  .project-text__body li {
+    font-size: clamp(0.88rem, 3.8vw, 1rem);
+    line-height: 1.55;
+  }
+
+  /* Approach: tighter padding (this block is later in the file,
+     so it naturally overrides the earlier 600px rule) */
+  .approach {
+    padding: var(--s-250) var(--s-100);
+  }
+
+  .approach__title {
+    font-size: clamp(1.25rem, 5.5vw, 1.7rem);
+  }
+
+  .approach-item__head {
+    padding: var(--s-100) var(--s-150);
+    font-size: clamp(0.95rem, 4vw, 1.15rem);
+  }
+
+  .approach-item__body {
+    padding: 0 var(--s-150) var(--s-150);
+  }
+
+  /* Proof layer */
+  .proof-layer {
+    padding: var(--s-250) var(--s-100);
+    margin: var(--s-200) 0;
+  }
+
+  .proof-layer__body {
+    font-size: clamp(1.2rem, 4.5vw, 1.65rem);
+    margin: var(--s-200) 0;
+  }
+
+  /* Project grid: tighten gap between blocks at mobile */
+  .project-grid {
+    gap: var(--s-050);
+  }
+
+  /* ---- Writing ---- */
+  .news-card__title {
+    font-size: clamp(0.95rem, 4.2vw, 1.2rem);
+  }
+
+  /* ---- Article long-form ---- */
+  .article {
+    padding-top: 5vh;
+    padding-inline: var(--s-100);
+  }
+
+  /* ---- Contact modal ---- */
+  .contact-overlay {
+    padding: var(--s-100);
+  }
+
+  .contact-modal {
+    padding: var(--s-200);
+    border-radius: 16px;
+  }
+
+  .contact-modal__close {
+    top: var(--s-100);
+    right: var(--s-100);
+  }
+
+  /* ---- Project pages ---- */
+
+  /* Force 40/60 split blocks (inline grid-column/aspect-ratio) to fill width */
+  .project-block--40,
+  .project-block--60 {
+    grid-column: 1 !important;
+    aspect-ratio: 4 / 3 !important;
+  }
+
+  /* Ensure project-block elements inside text sections are full-width */
+  .project-text .project-block {
+    width: 100%;
+  }
+
+  /* Fix spacing: trailing body margin should be smaller than the grid gap
+     between stacked columns, so inter-section gaps feel wider than
+     inter-paragraph gaps */
+  .project-text__body {
+    margin-bottom: var(--s-100);
+  }
+
+  /* Tighten section title top margin accordingly */
+  .project-text__section-title {
+    margin-top: var(--s-150);
+  }
+
+  /* Stack pipeline dt/dd: title on top, description below */
+  .project-text__pipeline {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── 480px — small phone ───────────────────────────────────── */
+@media (max-width: 480px) {
+
+  /* Intro: minimal height */
+  .intro {
+    min-height: 22vh;
+    padding: var(--s-100) var(--s-050);
+  }
+
+  /* Wordmark + tagline: slightly smaller on very narrow screens */
+  .wordmark,
+  .tagline {
+    font-size: clamp(0.95rem, 4.8vw, 1.15rem);
+  }
+
+  .wordmark { margin-bottom: var(--s-150); }
+
+  /* About hero: smallest phones */
+  .about-hero__lead {
+    font-size: clamp(1.4rem, 9vw, 2rem);
+  }
+
+  /* Dock: tighter pill at 375px and below */
+  .dock__group {
+    gap: 1px;
+    padding: 6px;
+  }
+
+  .dock__link {
+    font-size: 11.5px;
+    padding: 0 9px;
+    min-width: 34px;
+  }
+
+  /* WIP overlay */
+  .wip-card {
+    padding: var(--s-200) var(--s-150);
+    max-width: calc(100vw - var(--s-150));
+    border-radius: 16px;
+  }
 }
