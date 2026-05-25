@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en" class="vt-forward">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CompassStu: Market Pricing Research — YouSheng</title>
+    <meta name="description" content="CompassStu's 15% annual discount sits far below an industry median of 44–52%. This is the research behind a proposed repricing — what competitors charge, what Singapore's subsidy system makes possible, and what the new tier structure should look like." />
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('theme-light');
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .article__table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: var(--s-300) 0;
+        font-size: clamp(0.82rem, 1.8vw, 0.95rem);
+        line-height: 1.45;
+      }
+      .article__table th,
+      .article__table td {
+        padding: 0.65rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid color-mix(in srgb, var(--c-text) 12%, transparent);
+        color: var(--c-text-muted);
+      }
+      .article__table th {
+        color: var(--c-text);
+        font-weight: 500;
+        font-size: 0.8rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        background: color-mix(in srgb, var(--c-text) 5%, transparent);
+      }
+      .article__table tbody tr:last-child td { border-bottom: none; }
+      .article__table td strong { color: var(--c-text); font-weight: 500; }
+      .article__table td em { color: color-mix(in srgb, var(--c-text) 55%, transparent); font-style: normal; font-size: 0.85em; }
+      .article__table--highlight td:first-child { color: var(--c-text); font-weight: 500; }
+      .table-note {
+        font-size: 0.82rem;
+        color: var(--c-text-muted);
+        opacity: 0.7;
+        margin-top: calc(var(--s-050) * -1);
+        margin-bottom: var(--s-300);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <article class="article">
+        <header class="article__header">
+          <div class="article__meta">May 25, 2026 · Research</div>
+          <h1 class="article__title">CompassStu: Market Pricing Research</h1>
+          <p class="article__deck">
+            CompassStu's current 15% annual discount sits far below an industry median of 44–52%. This is the research behind a proposed repricing — what competitors charge, what Singapore's subsidy system makes possible, and what a revised tier structure should look like.
+          </p>
+        </header>
+
+        <div class="article__body">
+
+          <h2>The pricing problem we started with</h2>
+          <p>
+            CompassStu currently charges $39/month with a 15% annual discount, bringing the effective monthly rate to $33.25 for annual subscribers. On the surface that looks mid-market. When you line it up against the competitive field, it tells a different story.
+          </p>
+          <p>
+            The platforms we're most directly competing with all use annual discounts as the primary mechanism for subscription lock-in — and they do it aggressively. Brilliant's 52% annual discount means subscribers are paying $13.49 effective monthly. LinkedIn Learning and Codecademy Pro both offer 50%. Our 15% gives a learner almost no financial reason to commit to a yearly plan. That is the core pricing problem this research set out to map.
+          </p>
+
+          <h2>What the competitive field looks like</h2>
+
+          <table class="article__table article__table--highlight">
+            <thead>
+              <tr>
+                <th>Platform</th>
+                <th>Monthly (USD)</th>
+                <th>Annual effective/mo</th>
+                <th>Annual discount</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Khanmigo</td>
+                <td>$4</td>
+                <td>$3.67</td>
+                <td>8%</td>
+                <td>AI tutor market price floor</td>
+              </tr>
+              <tr>
+                <td>Brilliant</td>
+                <td>$27.99</td>
+                <td>$13.49</td>
+                <td>52%</td>
+                <td>AI-adaptive — closest direct competitor</td>
+              </tr>
+              <tr>
+                <td>Codecademy Pro</td>
+                <td>$39.99</td>
+                <td>$19.99</td>
+                <td>50%</td>
+                <td>Coding segment benchmark</td>
+              </tr>
+              <tr>
+                <td>DataCamp Premium</td>
+                <td>$42</td>
+                <td>$25–28</td>
+                <td>~40%</td>
+                <td>Data segment benchmark</td>
+              </tr>
+              <tr>
+                <td>Pluralsight Standard</td>
+                <td>$29</td>
+                <td>$24.92</td>
+                <td>14%</td>
+                <td>Tech segment benchmark</td>
+              </tr>
+              <tr>
+                <td>LinkedIn Learning</td>
+                <td>$39.99</td>
+                <td>$19.99</td>
+                <td>50%</td>
+                <td>General professional</td>
+              </tr>
+              <tr>
+                <td>Coursera Plus</td>
+                <td>$59</td>
+                <td>$33.25</td>
+                <td>44%</td>
+                <td>High-end academic anchor</td>
+              </tr>
+              <tr>
+                <td><strong>CompassStu (current)</strong></td>
+                <td><strong>$39</strong></td>
+                <td><strong>$33.25</strong></td>
+                <td><strong>15%</strong></td>
+                <td><em>Annual discount far below industry standard</em></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            A few things stand out when you map these side by side. Khanmigo at $4 is the psychological price floor — it sets an AI tutor anchor in learners' heads that's difficult to argue against on value alone. Brilliant at $27.99 is the closest structural competitor, and its 52% annual discount means it's converting subscribers at $13.49 effective monthly. That's a 37-point annual commitment gap versus our current offering.
+          </p>
+          <p>
+            Coursera Plus at $59 is the high-end ceiling. Everyone else stacks between $27.99 and $42 on monthly price, with annual discounts clustered between 40–52%. CompassStu sits mid-market on monthly price but offers the weakest annual commitment incentive in the segment by a wide margin.
+          </p>
+          <p>
+            For B2B, Vendr's published data shows enterprise deal ranges for platforms like Udemy Business landing between $148–$240 per seat per year at 500+ seats. SME per-seat pricing in the market runs $24–$30/month, with volume discounts bringing 100–500 seat accounts down to roughly $20/seat.
+          </p>
+
+          <figure class="article__figure" style="margin: var(--s-400) 0 var(--s-300);">
+            <iframe src="writing-compassstu-pricing-visual.html" title="Annual discount comparison — AI learning platforms 2026" loading="lazy" style="width:100%; aspect-ratio:16/9; border:0; border-radius:10px; display:block;"></iframe>
+            <figcaption>Annual discount by platform, May 2026. CompassStu at 15% vs an industry median of 44–52%.</figcaption>
+          </figure>
+
+          <h2>The Singapore angle</h2>
+          <p>
+            This is where the research got more interesting. Singapore's SSG (SkillsFuture Singapore) subsidy system fundamentally changes the economics for a certified course provider — in a way no pure consumer SaaS competitor can replicate.
+          </p>
+          <p>
+            The numbers work like this. For a certified course priced at $399/year (S$518.70):
+          </p>
+
+          <table class="article__table">
+            <thead>
+              <tr>
+                <th>Learner type</th>
+                <th>Government pays CompassStu</th>
+                <th>Learner out-of-pocket</th>
+                <th>After S$500 SFC credit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>SG Citizen 25–39 (70% subsidy)</td>
+                <td>S$356.09</td>
+                <td>S$152.61</td>
+                <td><strong>S$0</strong></td>
+              </tr>
+              <tr>
+                <td>SG Citizen 40+ (90% subsidy)</td>
+                <td>S$457.83</td>
+                <td>S$50.87</td>
+                <td><strong>S$0</strong></td>
+              </tr>
+              <tr>
+                <td>SG PR (no SFC credit)</td>
+                <td>S$356.09</td>
+                <td>S$152.61</td>
+                <td>S$152.61</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            For a Singapore citizen 40+, the government pays CompassStu S$457.83. The learner pays S$50.87 out-of-pocket, then offsets it against their S$500 SkillsFuture Credit. Net cost to the learner: zero. Net revenue to CompassStu: unchanged.
+          </p>
+          <p>
+            This is not a discount. It's a structural market position. Brilliant, Codecademy, and every other platform operating as pure consumer SaaS cannot offer a learner a zero-cost experience while maintaining full revenue. SSG certification creates that condition — and no competitor can quickly copy it because the certification process is gated, time-consuming, and institution-specific.
+          </p>
+
+          <h2>The 90-day SSG application path</h2>
+          <p>
+            Getting SSG-certified requires an upfront investment of ~S$872 and 8–14 weeks of processing time. The standard failure mode for first-time applicants isn't the paperwork — it's treating the on-site evaluation like a product demo when SSG runs it like a financial audit. 15–20% of first-time applicants get rejected at that stage, almost always because governance documentation and trainer qualification materials aren't audit-ready.
+          </p>
+          <p>
+            The execution path we mapped:
+          </p>
+          <p>
+            <strong>Weeks 1–2:</strong> Select the first three courses to submit. Recommendation: one from each of the Concept, Operator, and Analyst tracks — this gives the portfolio a complete narrative from day one of certification, rather than a partial one that needs explaining.
+          </p>
+          <p>
+            <strong>Weeks 2–4:</strong> Prepare Institution Registration (OR) application materials. Pay S$545. The on-site evaluation is the critical gate — prepare governance documentation as if for an audit, not a meeting. This is the step most applicants underinvest in.
+          </p>
+          <p>
+            <strong>Weeks 3–6:</strong> Draft three Course Applications (CA) concurrently, each at S$109.
+          </p>
+          <p>
+            <strong>Weeks 6–14:</strong> Submit, respond to queries, on-site evaluation, approval. Build in at least one revision cycle.
+          </p>
+          <p>
+            <strong>Weeks 4–12 (concurrent):</strong> Initiate NTUC LearningHub LXP integration. NTUC's 3.2 million training sessions and UTAP S$250/year reimbursement mechanism is the second leverage point — it distributes CompassStu to an existing learner base without building a new acquisition channel from scratch.
+          </p>
+          <p>
+            Total upfront: ~S$872 and 8–14 weeks. The return is access to Singapore's largest single subsidy pool and a market position that pure consumer SaaS competitors cannot occupy.
+          </p>
+
+          <h2>The structural constraint to design around</h2>
+          <p>
+            SSG Notice RPD/2021/5 caps subsidised learners per course at 350 asynchronous seats. At the $399/year price with 70% subsidy, that puts the theoretical revenue ceiling per course at approximately S$178K per subsidy cycle.
+          </p>
+          <p>
+            The design implication is to build breadth, not depth. Rather than one large comprehensive course, splitting content into multiple standalone certified courses multiplies the 350-seat cap. This aligns naturally with CompassStu's existing modular architecture — the Concept, Operator, and Analyst track structure maps directly onto separate certifiable course units without requiring a product rebuild.
+          </p>
+          <p>
+            One constraint worth flagging: SSG's unified pricing rule is permanent once certification is in place. After certification, promotional pricing cannot vary for quota-maxed learners. Any launch discounts need to be locked in before the certification process completes.
+          </p>
+
+          <h2>What the new pricing structure should look like</h2>
+          <p>
+            Based on the benchmarking, the recommendation is a two-direction repricing: the core Pro tier moves down to compete with Pluralsight and DataCamp, while a new Pro+ Certs tier creates an upgrade path that doesn't currently exist in the market.
+          </p>
+
+          <table class="article__table article__table--highlight">
+            <thead>
+              <tr>
+                <th>Tier</th>
+                <th>Target</th>
+                <th>Monthly (USD / SGD)</th>
+                <th>Annual (USD / SGD)</th>
+                <th>Discount</th>
+                <th>Rationale</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Pro</strong> <em>↓ from $39</em></td>
+                <td>Global self-pay</td>
+                <td>$29 / S$37.70</td>
+                <td>$229 / S$297.70</td>
+                <td>34%</td>
+                <td>Benchmarks Pluralsight ($29) and DataCamp annual rate; closes the discount gap</td>
+              </tr>
+              <tr>
+                <td><strong>Pro+ Certs</strong> <em>New</em></td>
+                <td>Job seekers</td>
+                <td>$49 / S$63.70</td>
+                <td>$399 / S$518.70</td>
+                <td>32%</td>
+                <td>3× monthly human-reviewed milestone tasks + Credly / Accredible cert priority issuance</td>
+              </tr>
+              <tr>
+                <td><strong>Teams</strong> <em>↓ from market</em></td>
+                <td>SME ≥5 seats, annual only</td>
+                <td>$19/seat / S$24.70</td>
+                <td>—</td>
+                <td>—</td>
+                <td>Below Udemy Business ($30) and Codecademy Teams ($29.99)</td>
+              </tr>
+              <tr>
+                <td><strong>Teams+</strong></td>
+                <td>Mid-market ≥20 seats</td>
+                <td>$29/seat / S$37.70</td>
+                <td>—</td>
+                <td>—</td>
+                <td>Adds SSO, admin analytics, custom milestone task templates</td>
+              </tr>
+              <tr>
+                <td><strong>Enterprise</strong></td>
+                <td>100+ seats</td>
+                <td>Negotiated</td>
+                <td>$148–240/seat/yr</td>
+                <td>—</td>
+                <td>Benchmarked against Vendr's published Udemy Business enterprise deal range</td>
+              </tr>
+              <tr>
+                <td><strong>SkillsFuture Channel</strong> <em>SG only</em></td>
+                <td>SSG-certified courses</td>
+                <td>—</td>
+                <td>List $399; learner pays ~S$0</td>
+                <td>—</td>
+                <td>70% government subsidy + S$500 SFC credit; learner zero-cost, revenue unchanged</td>
+              </tr>
+              <tr>
+                <td><strong>Milestone Task Pass</strong></td>
+                <td>Non-subscribers</td>
+                <td>$19 / S$24.70 per use</td>
+                <td>—</td>
+                <td>—</td>
+                <td>Standalone SKU; no direct competitor in current market</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            The Milestone Task Pass deserves a separate note. Selling AI-graded certification tasks as a standalone per-use product — available to anyone, not just subscribers — creates a conversion funnel with no moat risk. There is no direct competitor offering this SKU in the market right now.
+          </p>
+
+          <h2>Market entry sequence</h2>
+          <p>
+            Singapore is the clear first market. SSG certification plus NTUC LearningHub integration is a 0–3 month window. The subsidy ROI on that investment is the best available.
+          </p>
+          <p>
+            After Singapore: Malaysia via HRD Corp training provider registration (RM 1,000/year) at month 3–6. Indonesia through Kartu Prakerja, via partners like Pijar Mahir, at 6–12 months. Philippines as a mobile-first pilot with telco billing at 12–18 months. Vietnam as a partner-led play, watching how Khanmigo approaches localisation as a reference signal. Thailand is deferred — only worth engaging if responding to depa-led government procurement.
+          </p>
+          <p>
+            The subsidy application priority, by ROI: SSG TPGateway institution registration and course applications first (S$872 unlocks the largest single subsidy pool in SEA). IMDA AI Trailblazers/Spark second for investor signal value and non-dilutive capital. Singapore EDB for capability building support, then Malaysia HRD Corp as the second claimable training market in the region.
+          </p>
+
+          <h2>Risks I'm flagging</h2>
+          <p>
+            A few things to watch as this moves from research to execution.
+          </p>
+          <p>
+            <strong>Revenue ceiling per course.</strong> The 350-seat cap means scale comes from course count, not learner depth. Each certified course has a theoretical revenue ceiling of ~S$178K per subsidy cycle. The architecture decision — breadth over depth — is a business model constraint, not just a curriculum one.
+          </p>
+          <p>
+            <strong>The unified pricing rule is permanent.</strong> Once SSG-certified, differentiated promotional pricing for quota-maxed learners is off the table. Any launch discounts need to be designed and locked in before the certification process completes. This is easy to miss and hard to undo.
+          </p>
+          <p>
+            <strong>The S$4,000 mid-term supplement is not available short-term.</strong> Don't build strategy around it. Qualifying requires 40+ hour certified courses — that's a 12–18 month build from where we are now.
+          </p>
+          <p>
+            <strong>One validation before going global.</strong> Run a 30-day A/B test in Singapore: new $29 Pro price versus the current $39. Validate conversion with a control sample before rolling the repricing out worldwide. The Singapore market is the right contained environment for this test — large enough to generate signal, small enough that a misstep is recoverable.
+          </p>
+
+          <h2>Where this lands</h2>
+          <p>
+            The pricing problem is structural and the Singapore opportunity is real — and the two things are linked. Dropping the Pro tier to $29, closing the annual discount gap to 34%, and pursuing SSG certification simultaneously gives CompassStu a market position that looks like this: competitive on global self-pay price, zero-cost for Singapore learners through government subsidy, and a standalone certification SKU with no direct competitor.
+          </p>
+          <p>
+            No consumer SaaS competitor in the current market can replicate all three conditions at once.
+          </p>
+
+        </div>
+
+        <footer class="article__footer">
+          <a class="article__back-link" href="writing.html">← All writing</a>
+          <span class="article__byline">Neu You Sheng · CompassStu</span>
+        </footer>
+      </article>
+    </main>
+
+    <nav class="dock" aria-label="Primary">
+      <div class="dock__group">
+        <a class="dock__link" href="writing.html">Back</a>
+        <a class="dock__link" href="#" data-calibrate>Calibrate</a>
+      </div>
+      <button class="dock__action" type="button" aria-label="Toggle theme" data-theme-toggle>
+        <svg class="dock__icon dock__icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2.5v2.4M12 19.1v2.4M4.22 4.22l1.7 1.7M18.08 18.08l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.22 19.78l1.7-1.7M18.08 5.92l1.7-1.7"/>
+        </svg>
+        <svg class="dock__icon dock__icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>
+        </svg>
+      </button>
+    </nav>
+
+    <script src="script.js"></script>
+  </body>
+</html>

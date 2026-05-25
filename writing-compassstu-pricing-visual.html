@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pricing Visual — Preview</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    /* ── Card shell ── */
+    .visual {
+      width: min(880px, 94vw);
+      aspect-ratio: 16 / 9;
+      background: #161616;
+      border-radius: 10px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+    }
+
+    /* subtle edge rule */
+    .visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 10px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.07);
+      pointer-events: none;
+    }
+
+    /* ── LEFT PANEL — headline insight ── */
+    .panel-left {
+      padding: 9% 8% 9% 9%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 9.5px;
+      font-weight: 500;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+    }
+    .tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ef4444;
+    }
+
+    .headline {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6%;
+    }
+
+    .stat-label {
+      font-size: clamp(9px, 1.1vw, 13px);
+      font-weight: 400;
+      color: rgba(255,255,255,0.38);
+      letter-spacing: 0.03em;
+      line-height: 1.4;
+    }
+
+    .stat-main {
+      font-size: clamp(36px, 7vw, 74px);
+      font-weight: 200;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      color: #fff;
+    }
+    .stat-main span {
+      color: #ef4444;
+    }
+
+    .stat-vs {
+      display: flex;
+      align-items: baseline;
+      gap: 0.35em;
+    }
+    .stat-vs-num {
+      font-size: clamp(18px, 3vw, 32px);
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      color: rgba(255,255,255,0.75);
+    }
+    .stat-vs-label {
+      font-size: clamp(8px, 0.9vw, 11px);
+      color: rgba(255,255,255,0.32);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .divider {
+      width: 28px;
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .insight {
+      font-size: clamp(8.5px, 0.95vw, 11.5px);
+      line-height: 1.6;
+      color: rgba(255,255,255,0.35);
+      max-width: 28ch;
+    }
+
+    /* ── RIGHT PANEL — bar chart ── */
+    .panel-right {
+      padding: 8% 8% 8% 7%;
+      display: flex;
+      flex-direction: column;
+      gap: 5%;
+    }
+
+    .chart-title {
+      font-size: clamp(8px, 0.9vw, 11px);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      margin-bottom: 2%;
+    }
+
+    .bars {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 6em 1fr 2.6em;
+      align-items: center;
+      gap: 6%;
+    }
+
+    .bar-name {
+      font-size: clamp(7.5px, 0.88vw, 10.5px);
+      color: rgba(255,255,255,0.45);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: right;
+    }
+
+    .bar-track {
+      height: clamp(4px, 0.6vw, 7px);
+      background: rgba(255,255,255,0.05);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+    }
+
+    /* CompassStu row highlight */
+    .bar-row--cs .bar-name { color: #ef4444; }
+    .bar-row--cs .bar-fill { background: #ef4444; }
+    .bar-row--cs .bar-pct { color: #ef4444; }
+
+    .bar-pct {
+      font-size: clamp(7.5px, 0.85vw, 10px);
+      color: rgba(255,255,255,0.32);
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+    }
+
+    .separator {
+      height: 1px;
+      background: rgba(255,255,255,0.06);
+      margin: 1% 0;
+    }
+
+    .footnote {
+      font-size: clamp(7px, 0.75vw, 9px);
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.02em;
+    }
+  </style>
+</head>
+<body>
+  <div class="visual">
+
+    <!-- LEFT: headline number -->
+    <div class="panel-left">
+      <span class="tag">CompassStu · Pricing Research 2026</span>
+
+      <div class="headline">
+        <p class="stat-label">Annual discount offered<br>by CompassStu</p>
+        <p class="stat-main"><span>15</span>%</p>
+        <div class="stat-vs">
+          <span class="stat-vs-num">44–52%</span>
+          <span class="stat-vs-label">industry median</span>
+        </div>
+        <div class="divider"></div>
+        <p class="insight">Every direct competitor offers at least a 40% annual commitment discount. A 15% discount gives subscribers almost no financial reason to choose an annual plan.</p>
+      </div>
+    </div>
+
+    <!-- RIGHT: bar chart -->
+    <div class="panel-right">
+      <p class="chart-title">Annual discount by platform</p>
+
+      <div class="bars">
+        <div class="bar-row">
+          <span class="bar-name">Brilliant</span>
+          <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+          <span class="bar-pct">52%</span>
+        </div>
+
+        <div class="bar-row">
+          <span class="bar-name">Codecademy Pro</span>
+          <div class="bar-track"><div class="bar-fill" style="width:96%"></div></div>
+          <span class="bar-pct">50%</span>
+        </div>
+
+        <div class="bar-row">
+          <span class="bar-name">LinkedIn Learning</span>
+          <div class="bar-track"><div class="bar-fill" style="width:96%"></div></div>
+          <span class="bar-pct">50%</span>
+        </div>
+
+        <div class="bar-row">
+          <span class="bar-name">Coursera Plus</span>
+          <div class="bar-track"><div class="bar-fill" style="width:85%"></div></div>
+          <span class="bar-pct">44%</span>
+        </div>
+
+        <div class="bar-row">
+          <span class="bar-name">DataCamp</span>
+          <div class="bar-track"><div class="bar-fill" style="width:77%"></div></div>
+          <span class="bar-pct">~40%</span>
+        </div>
+
+        <div class="bar-row">
+          <span class="bar-name">Pluralsight</span>
+          <div class="bar-track"><div class="bar-fill" style="width:27%"></div></div>
+          <span class="bar-pct">14%</span>
+        </div>
+
+        <div class="bar-row">
+          <span class="bar-name">Khanmigo</span>
+          <div class="bar-track"><div class="bar-fill" style="width:15%"></div></div>
+          <span class="bar-pct">8%</span>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="bar-row bar-row--cs">
+          <span class="bar-name">CompassStu</span>
+          <div class="bar-track"><div class="bar-fill" style="width:29%"></div></div>
+          <span class="bar-pct">15%</span>
+        </div>
+      </div>
+
+      <p class="footnote">Source: public pricing pages, May 2026. B2B enterprise rates excluded.</p>
+    </div>
+
+  </div>
+</body>
+</html>
