@@ -325,10 +325,76 @@
         </div>
       </section>
 
-      <!-- Section 08: Adaptive Engine — CompassStu7 image on the left
-             (45%), editorial text on the right (55%) with section title,
-             lead paragraph, and three feature items. -->
+      <!-- Section 07: Compass Tutor — in-lesson AI coach.
+             Left (48%): section title, thesis, pipeline.
+             Right (52%): styled mock chat card with quick-action chips,
+             a sample exchange, and the scope-guard footer line. -->
       <section class="project-text" id="s-07" data-section style="grid-template-columns: 48fr 52fr;">
+        <div class="project-text__left">
+          <h3 class="project-text__section-title">
+            <span class="project-text__num">07</span>
+            <span class="project-text__label">Compass Tutor</span>
+          </h3>
+
+          <p class="project-text__thesis">
+            An AI coach built into every lesson — course-aware, bilingual, and incapable of answering outside its scope.
+          </p>
+
+          <div class="project-text__body">
+            <p>Compass Tutor runs inside every lesson. It knows the course, the module, and the card the learner is on. Every reply it generates is passed through a second AI check — any answer that contradicts the lesson is blocked before it reaches the screen.</p>
+            <p>In teach-back mode, the learner explains a concept in their own words and the tutor evaluates comprehension, surfacing exactly what was missed.</p>
+          </div>
+
+          <dl class="project-text__pipeline">
+            <dt>Course-Aware Context.</dt>
+            <dd>Scoped to the current lesson. Never answers outside the curriculum boundary, regardless of how the question is phrased.</dd>
+            <dt>Bilingual.</dt>
+            <dd>Responds in English or Mandarin based on the course language — no setting to switch.</dd>
+            <dt>Teach-Back Mode.</dt>
+            <dd>Learner explains the concept back; the AI evaluates comprehension and flags the specific gap.</dd>
+          </dl>
+        </div>
+
+        <div class="project-text__right">
+          <div class="tutor-card">
+            <div class="tutor-card__header">
+              <span class="tutor-card__dot"></span>
+              <span class="tutor-card__name">Compass Tutor</span>
+              <span class="tutor-card__scope">Claude Code for Product Development&nbsp;· Lesson 3</span>
+            </div>
+
+            <div class="tutor-card__chips">
+              <span class="tutor-card__chip">Explain simpler</span>
+              <span class="tutor-card__chip">Give an example</span>
+              <span class="tutor-card__chip">Just a hint</span>
+            </div>
+
+            <div class="tutor-card__exchange">
+              <div class="tutor-card__msg tutor-card__msg--user">
+                Why does the AI need context in the system prompt?
+              </div>
+              <div class="tutor-card__msg tutor-card__msg--ai">
+                Without a system prompt the model has no anchor — it answers the entire internet instead of your task. Think of it as the brief you'd hand a contractor before they start: scope, constraints, tone. No brief, no direction.
+              </div>
+              <div class="tutor-card__msg tutor-card__msg--user">
+                So it's basically setting the job description?
+              </div>
+              <div class="tutor-card__msg tutor-card__msg--ai">
+                Exactly. And like a good job description, the more specific it is, the more useful the output. That's what the next card covers — how to structure that brief for precision.
+              </div>
+            </div>
+
+            <div class="tutor-card__guard">
+              <em class="tutor-card__guard-icon">✓</em>
+              Reply verified against lesson scope before display
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 08: Adaptive AI Engine — image left (48%), text right (52%).
+             Expanded: adds Skill Map four-state legend below the pipeline. -->
+      <section class="project-text" id="s-08" data-section style="grid-template-columns: 48fr 52fr;">
         <div class="project-text__left">
           <div class="project-block" style="aspect-ratio: 1048 / 720;">
             <img src="Images/CompassStu/CompassStu7.png" alt="CompassStu adaptive engine view" />
@@ -337,44 +403,86 @@
 
         <div class="project-text__right">
           <h3 class="project-text__section-title">
-            <span class="project-text__num">07</span>
+            <span class="project-text__num">08</span>
             <span class="project-text__label">Adaptive AI Engine</span>
           </h3>
 
           <div class="project-text__body">
-            <p>After every module, the system dynamically routes learners into one of three tailored paths based on
-              performance: Advanced (≥ 85%), Standard (70%–84%), or Foundational (&lt; 70%), keeping certification
-              standards consistent.</p>
+            <p>After every module, the system reads the learner's score and routes them into one of three tracks:
+              Advanced (≥&nbsp;85%), Standard (70–84%), or Foundation (&lt;&nbsp;70%). The certification bar never
+              moves — only the scaffolding adapts.</p>
           </div>
 
           <dl class="project-text__pipeline">
             <dt>Real-Time Recalibration.</dt>
-            <dd>Instantly updates pacing after each completed module.</dd>
-            <dt>Mastery Tracking.</dt>
-            <dd>Maps progress across four functional states: Mastered, In Progress, Available, and Locked.</dd>
+            <dd>Route assigned instantly after each module. No wait, no manual review.</dd>
             <dt>Smart Recommendations.</dt>
-            <dd>Automatically surfaces the next high-priority skill and targeted review queue.</dd>
+            <dd>AI surfaces the next highest-priority skill and queues targeted review automatically.</dd>
+            <dt>AI Path Diagnosis.</dt>
+            <dd>On first sign-in, a capability assessment generates a personalised learning-path recommendation before the learner picks a single course.</dd>
           </dl>
+
+          <h4 class="project-text__subsection-title" style="margin-top: var(--s-300);">
+            <span>Skill Map</span>
+          </h4>
+          <p class="project-text__body" style="margin-bottom: 0;">
+            <span style="display:block; font-size: clamp(0.8rem, 0.95vw, 0.9rem); line-height: 1.55; color: var(--c-text-muted);">
+              Every course auto-generates a live visual graph of atomic skills. Each node sits in one of four states — updated after every interaction without manual setup.
+            </span>
+          </p>
+
+          <div class="skill-map-states" role="list" aria-label="Skill states">
+            <div class="skill-state skill-state--locked" role="listitem">
+              <span class="skill-state__dot"></span>
+              <span class="skill-state__label">Locked</span>
+              <span class="skill-state__desc">Prerequisites not yet met</span>
+            </div>
+            <div class="skill-state skill-state--available" role="listitem">
+              <span class="skill-state__dot"></span>
+              <span class="skill-state__label">Available</span>
+              <span class="skill-state__desc">Ready to attempt</span>
+            </div>
+            <div class="skill-state skill-state--progress" role="listitem">
+              <span class="skill-state__dot"></span>
+              <span class="skill-state__label">In Progress</span>
+              <span class="skill-state__desc">Active learning underway</span>
+            </div>
+            <div class="skill-state skill-state--mastered" role="listitem">
+              <span class="skill-state__dot"></span>
+              <span class="skill-state__label">Mastered</span>
+              <span class="skill-state__desc">Bridge task cleared, cert issued</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- Section 08: The Proof Layer — editorial copy on the left,
-             a four-dimension rubric scoreboard on the right (visualizes
-             the rubric the copy references). -->
-      <section class="proof-layer" id="s-08" data-section>
+      <!-- Section 09: The Proof Layer — expanded with GPT-4o grading
+             details, pass threshold, and attempt logic. -->
+      <section class="proof-layer" id="s-09" data-section>
         <div class="proof-layer__main">
           <h3 class="project-text__section-title">
-            <span class="project-text__num">08</span>
+            <span class="project-text__num">09</span>
             <span class="project-text__label">The Proof Layer</span>
           </h3>
 
           <p class="proof-layer__body">
             Every bridge task that clears its <span class="proof-layer__emp">four-dimension rubric</span> earns a
-            permanent record — <span class="proof-layer__muted">AI-graded, timestamped, and posted to a single
+            permanent record — <span class="proof-layer__muted">GPT-4o graded, timestamped, and posted to a single
               URL.</span> The learner owns it; employers <span class="proof-layer__emp">verify it in a click</span>.
             Each record carries the work itself — <span class="proof-layer__muted">the task, the response, and the
               score</span> — all on <span class="proof-layer__emp">one page</span>.
           </p>
+
+          <dl class="project-text__pipeline" style="margin-top: var(--s-300);">
+            <dt>Graded by GPT-4o.</dt>
+            <dd>Four dimensions: relevance, structure &amp; logic, professional quality, specificity &amp; depth. Localized rubric for Mandarin-language courses.</dd>
+            <dt>What comes back.</dt>
+            <dd>A score (0–100), a headline verdict, specific feedback, one named strength, and one concrete improvement — every time.</dd>
+            <dt>Pass threshold: 70.</dt>
+            <dd>Up to five graded attempts. After the fifth, an automatic pass ensures no learner is permanently blocked by a single task.</dd>
+            <dt>Certificates are permanent.</dt>
+            <dd>They survive any progress reset. Proof of prior work is never lost, even if a learner restarts a course.</dd>
+          </dl>
 
           <a class="proof-layer__cta" href="#" target="_blank" rel="noopener">
             <span>Get your proof now</span>
@@ -426,15 +534,105 @@
         </div>
       </section>
 
-      <!-- Section 09: Content Operation — title + copy on the left (45%)
+      <!-- Section 10: Learning Hub — four AI output layers that compound
+             from the learner's own work, plus the Role Fit snapshot.
+             Left (42%): title, thesis, role-fit card.
+             Right (58%): four stacked hub-layer rows. -->
+      <section class="project-text" id="s-10" data-section style="grid-template-columns: 42fr 58fr;">
+        <div class="project-text__left">
+          <h3 class="project-text__section-title">
+            <span class="project-text__num">10</span>
+            <span class="project-text__label">Learning Hub</span>
+          </h3>
+
+          <p class="project-text__thesis">
+            Every lesson compounds into a personal knowledge base built entirely from your own work.
+          </p>
+
+          <div class="project-text__body">
+            <p>Most platforms forget you between sessions. CompassStu accumulates. Every answer you write, every bridge task you submit, every tutor exchange you have — all of it feeds four AI-powered layers that grow with you automatically.</p>
+            <p>No manual note-taking. No tagging. The system builds your knowledge base while you learn.</p>
+          </div>
+
+          <div class="hub-role-fit">
+            <p class="hub-role-fit__title">Role Fit Snapshot</p>
+            <p style="font-size: 12px; color: var(--c-text-muted); margin: 0 0 var(--s-100);">Your certificates evaluated in parallel against three target roles.</p>
+            <div class="hub-role-fit__roles">
+              <div class="hub-role-fit__role">
+                <span class="hub-role-fit__role-name">AI Product Manager</span>
+                <div class="hub-role-fit__bar-wrap">
+                  <div class="hub-role-fit__bar"><div class="hub-role-fit__fill" style="width: 87%;"></div></div>
+                  <span class="hub-role-fit__pct">87%</span>
+                </div>
+              </div>
+              <div class="hub-role-fit__role">
+                <span class="hub-role-fit__role-name">Prompt Engineer</span>
+                <div class="hub-role-fit__bar-wrap">
+                  <div class="hub-role-fit__bar"><div class="hub-role-fit__fill" style="width: 74%;"></div></div>
+                  <span class="hub-role-fit__pct">74%</span>
+                </div>
+              </div>
+              <div class="hub-role-fit__role">
+                <span class="hub-role-fit__role-name">AI Ops Specialist</span>
+                <div class="hub-role-fit__bar-wrap">
+                  <div class="hub-role-fit__bar"><div class="hub-role-fit__fill" style="width: 61%;"></div></div>
+                  <span class="hub-role-fit__pct">61%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-text__right">
+          <div class="learning-hub-layers">
+
+            <div class="hub-layer">
+              <span class="hub-layer__num">01</span>
+              <div>
+                <p class="hub-layer__title">Knowledge Hub</p>
+                <p class="hub-layer__body">AI-summarized notes generated automatically from every lesson you complete — a personal knowledge base that grows without any manual effort. Ask it a question and it answers grounded only in your own notes, not the internet.</p>
+                <span class="hub-layer__feature">Ask my notes</span>
+              </div>
+            </div>
+
+            <div class="hub-layer">
+              <span class="hub-layer__num">02</span>
+              <div>
+                <p class="hub-layer__title">My Playbook</p>
+                <p class="hub-layer__body">AI scans your highest-scoring bridge-task responses and extracts the reusable methods and frameworks inside them. A growing library of your own techniques — not generic best practices, but the specific approaches that worked for you.</p>
+              </div>
+            </div>
+
+            <div class="hub-layer">
+              <span class="hub-layer__num">03</span>
+              <div>
+                <p class="hub-layer__title">Growth Patterns</p>
+                <p class="hub-layer__body">AI reads across all your submissions to name your recurring strengths and blind spots — quoting your actual words back. Coaching grounded in your real work, not an anonymous rubric average.</p>
+              </div>
+            </div>
+
+            <div class="hub-layer">
+              <span class="hub-layer__num">04</span>
+              <div>
+                <p class="hub-layer__title">Career Proof</p>
+                <p class="hub-layer__body">AI-generated proof cards that translate your scored submissions into language an employer reads: demonstrated competencies, performance tier, and the specific evidence behind the claim. Not a certificate — a case for your hire.</p>
+                <span class="hub-layer__feature">Shareable public link · employer-readable</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 11: Content Operation — title + copy on the left (45%)
              with CompassStu10 filling remaining vertical space below,
              CompassStu9 image on the right (55%). Both columns stretch
              to the same height so the left text + CompassStu10 total
              matches CompassStu9's height. -->
-      <section class="project-text" id="s-09" data-section style="grid-template-columns: 45fr 55fr; align-items: stretch;">
+      <section class="project-text" id="s-11" data-section style="grid-template-columns: 45fr 55fr; align-items: stretch;">
         <div class="project-text__left" style="display: flex; flex-direction: column;">
           <h3 class="project-text__section-title">
-            <span class="project-text__num">09</span>
+            <span class="project-text__num">11</span>
             <span class="project-text__label">Content Operation</span>
           </h3>
 
@@ -464,12 +662,12 @@
         </div>
       </section>
 
-      <!-- Section 10: Brand & Visual Design — centered single-column
+      <!-- Section 12: Brand & Visual Design — centered single-column
              editorial moment. Title above, lead paragraph below. -->
-      <section class="project-text project-text--center" id="s-10" data-section style="grid-template-columns: 1fr;">
+      <section class="project-text project-text--center" id="s-12" data-section style="grid-template-columns: 1fr;">
         <div class="project-text__center">
           <h3 class="project-text__section-title">
-            <span class="project-text__num">10</span>
+            <span class="project-text__num">12</span>
             <span class="project-text__label">Brand &amp; Visual Design</span>
           </h3>
 
@@ -496,12 +694,12 @@
         <iframe src="brand-overview-2.html" title="CompassStu product surfaces" loading="lazy"></iframe>
       </div>
 
-      <!-- Section 11: Results — left-aligned scaffold, title on the left
+      <!-- Section 13: Results — left-aligned scaffold, title on the left
              column, right column reserved for metrics / supporting copy. -->
-      <section class="project-text" id="s-11" data-section style="grid-template-columns: 45fr 55fr;">
+      <section class="project-text" id="s-13" data-section style="grid-template-columns: 45fr 55fr;">
         <div class="project-text__left">
           <h3 class="project-text__section-title">
-            <span class="project-text__num">11</span>
+            <span class="project-text__num">13</span>
             <span class="project-text__label">Results</span>
           </h3>
         </div>
