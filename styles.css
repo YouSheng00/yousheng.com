@@ -3154,35 +3154,38 @@ a.about-cert:hover .about-cert__arrow {
 
 .hub-layer {
   display: grid;
-  grid-template-columns: 2.4ch 1fr;
+  grid-template-columns: max-content 1fr;
   gap: var(--s-150);
   padding: var(--s-200) 0;
   border-bottom: 1px solid color-mix(in srgb, var(--c-text) 8%, transparent);
+  align-items: baseline;
 }
 
 .hub-layer:first-child { padding-top: 0; }
 .hub-layer:last-child  { border-bottom: none; }
 
 .hub-layer__num {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
+  font-size: clamp(1.1rem, 1.3vw, 1.26rem);
+  font-weight: 400;
+  letter-spacing: 0.005em;
   color: var(--c-text-muted);
-  padding-top: 4px;
   font-variant-numeric: tabular-nums;
 }
 
 .hub-layer__title {
-  font-size: clamp(0.88rem, 1.1vw, 1rem);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.1rem, 1.3vw, 1.26rem);
+  font-weight: 500;
+  letter-spacing: 0.005em;
   color: var(--c-text);
   margin: 0 0 var(--s-050);
+  line-height: 1.5;
 }
 
 .hub-layer__body {
-  font-size: clamp(0.8rem, 0.95vw, 0.9rem);
+  font-size: clamp(1.1rem, 1.3vw, 1.26rem);
   line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: 0.005em;
   color: var(--c-text-muted);
   margin: 0;
 }
