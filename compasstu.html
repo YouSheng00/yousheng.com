@@ -639,15 +639,26 @@
           <div class="project-text__body">
             <p>A separate admin portal lets the content team create, edit, and publish courses end-to-end — without a
               developer in the loop.</p>
+            <p>Underneath, the editor is a thin shell over a markdown-to-JSONB pipeline. The database is the runtime
+              source of truth — a publish is visible to learners on the next page load. No build, no cache bust, no
+              redeploy.</p>
           </div>
 
           <dl class="project-text__pipeline">
-            <dt>Visual Lesson Editor.</dt>
-            <dd>Draft / publish workflow with full version history per lesson.</dd>
-            <dt>Per-Course AI Tutor.</dt>
-            <dd>Title, scope, language, and custom prompt — all configurable without code.</dd>
-            <dt>Two-Layer Trash.</dt>
-            <dd>Confirm dialog, 7-day soft delete, then auto-purge.</dd>
+            <dt>Dual-runtime parser.</dt>
+            <dd>The same markdown&rarr;JSON parser ships as a Node CLI (batch ingest) and a browser module
+              (in-editor preview/publish). Output: typed JSON written straight into the
+              <code>lessons.lesson_data</code> JSONB column.</dd>
+            <dt>Round-trippable format.</dt>
+            <dd>Every lesson re-hydrates from JSON back into editable markdown automatically. Bidirectional by design
+              &mdash; no export step, no stale drafts.</dd>
+            <dt>Idempotent publish, 24h rollback.</dt>
+            <dd>Each publish is an upsert on <code>(course_slug, module_number, lesson_number)</code>. A DB trigger
+              snapshots the prior row into <code>lesson_versions</code> before every write &mdash; version history
+              without app code.</dd>
+            <dt>Live AI tutor config.</dt>
+            <dd>Per-course tutor prompt, scope, and language live in <code>course_ai_context</code>, read by the Edge
+              Function on every chat turn. Admin saves show up in the tutor&rsquo;s next response.</dd>
           </dl>
 
           <div class="project-block" style="flex: 1; min-height: 0; margin-top: var(--s-300);">

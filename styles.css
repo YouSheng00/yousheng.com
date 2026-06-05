@@ -1006,6 +1006,20 @@ button {
   font-weight: 400;
 }
 
+/* Inline code — for table names, columns, paths inside body / pipeline copy.
+   Subtle background pill so identifiers don't visually shout, just sit
+   apart from the prose. */
+.project-text__body code,
+.project-text__pipeline code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.88em;
+  padding: 0.1em 0.4em;
+  background: color-mix(in srgb, var(--c-text) 7%, transparent);
+  border-radius: 4px;
+  color: var(--c-text);
+  letter-spacing: 0;
+}
+
 /* Motion embed inside the right column — iframe wrapper. Background
    matches the page surface (no panel chrome) so the diagram reads as
    part of the page flow, not as a pasted GIF. Aspect-ratio is wider
