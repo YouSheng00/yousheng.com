@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en" class="vt-forward">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CompassStu: Product Marketing Plan — YouSheng</title>
+    <meta name="description" content="How we're positioning CompassStu, who we're targeting first, and the reasoning behind every decision — including the one constraint the whole strategy is built around." />
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.add('theme-light');
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .article__table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: var(--s-300) 0;
+        font-size: clamp(0.82rem, 1.8vw, 0.95rem);
+        line-height: 1.45;
+      }
+      .article__table th,
+      .article__table td {
+        padding: 0.65rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid color-mix(in srgb, var(--c-text) 12%, transparent);
+        color: var(--c-text-muted);
+      }
+      .article__table th {
+        color: var(--c-text);
+        font-weight: 500;
+        font-size: 0.8rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        background: color-mix(in srgb, var(--c-text) 5%, transparent);
+      }
+      .article__table tbody tr:last-child td { border-bottom: none; }
+      .article__table td strong { color: var(--c-text); font-weight: 500; }
+      .article__table td em {
+        color: color-mix(in srgb, var(--c-text) 55%, transparent);
+        font-style: normal;
+        font-size: 0.85em;
+      }
+      .article__table--highlight td:first-child { color: var(--c-text); font-weight: 500; }
+
+      .quadrant-label {
+        display: inline-block;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: rgba(124, 92, 252, 0.9);
+        background: rgba(124, 92, 252, 0.1);
+        border: 1px solid rgba(124, 92, 252, 0.2);
+        padding: 2px 8px;
+        border-radius: 4px;
+        vertical-align: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <article class="article">
+        <header class="article__header">
+          <div class="article__meta">June 03, 2026 · Strategy</div>
+          <h1 class="article__title">CompassStu: Product Marketing Plan</h1>
+          <p class="article__deck">
+            How we're positioning CompassStu, who we're targeting first, and the reasoning behind every decision — including the constraint that the whole strategy is built around.
+          </p>
+        </header>
+
+        <div class="article__body">
+
+          <h2>What we're actually selling</h2>
+          <p>
+            The category we officially compete in is online upskilling. The category we're trying to own is different: proof-of-capability learning. That distinction matters because the word "course" has been so thoroughly diluted that a completion certificate means almost nothing to a hiring manager in 2026. Employers know it. Learners are starting to know it too.
+          </p>
+          <p>
+            We're not selling a certificate. We're selling a portfolio of AI-graded, timestamped work samples that an employer can read in a single URL. The learning still happens — the lessons, the tutor, the feedback loops — but the output is evidence, not a badge.
+          </p>
+          <p>
+            The one-sentence version: not "you watched the course," but "here's the actual work, AI-scored, dated, and yours to show any employer in one click."
+          </p>
+          <p>
+            The product logic runs in three steps: Learn → Simulate → Prove. At the end of every module, the learner completes a real-work bridge task graded by AI against a four-dimension rubric. What they walk away with isn't a certificate of completion — it's a skill-anchored, timestamped, verifiable capability proof.
+          </p>
+
+          <h2>The blank quadrant</h2>
+          <p>
+            Map the adult upskilling market on two axes — passive content consumption to demonstrated capability on the horizontal, and low to high price on the vertical — and a picture emerges.
+          </p>
+
+          <table class="article__table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Low price</th>
+                <th>High price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Demonstrated capability</strong></td>
+                <td><span class="quadrant-label">CompassStu</span> — the gap we occupy</td>
+                <td>Maven · Reforge · Section (US$950–2,500/cohort, time-limited, English-only, no bilingual)</td>
+              </tr>
+              <tr>
+                <td><strong>Passive content</strong></td>
+                <td>Coursera · Udemy (cheap, high-volume, completion badges employers increasingly ignore)</td>
+                <td>LinkedIn Learning (broad content, no way to verify real-world application)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            The top-right exists but is expensive and limited: Maven, Reforge, and Section run cohort-based programmes at US$950–2,500. They're time-scheduled, produce no persistent post-completion credential, and are almost entirely English-language with no Asia localisation.
+          </p>
+          <p>
+            The top-left — high proof of capability, mid-to-low price point — is empty. That is where CompassStu sits: self-paced, AI-graded real work output, bilingual in English and Mandarin, built specifically for the Singapore and Southeast Asia market.
+          </p>
+
+          <h2>The credibility problem we have to solve first</h2>
+          <p>
+            A credential is only worth what the institution behind it is worth. That's the structural constraint every new platform runs into, and pretending it isn't there is how platforms fail quietly — good product, no trust, slow death.
+          </p>
+          <p>
+            For CompassStu, building trust isn't a phase-two problem. It's the first engineering priority. The whole strategy is organised around it.
+          </p>
+          <p>
+            Three pillars:
+          </p>
+          <p>
+            <strong>Skill-anchored proof portfolios.</strong> The credibility on a proof page doesn't have to come from the CompassStu brand — not yet. It can come from the skill and tool the proof references. A record that says "deployed an AI agent using Claude Code, scored 88/100" can be read and verified by any recruiter who knows the tool, regardless of whether they've heard of us. That means every course needs to be anchored to a recognisable, marketable, real-world skill — not a generic topic.
+          </p>
+          <p>
+            <strong>Recruiter endorsements.</strong> We need 15–20 Singapore-based hiring managers willing to go on record saying they would prefer a CompassStu capability proof over a Udemy completion certificate. Not paid testimonials — genuine ones from people who've seen the format and can speak to why it's more useful. That kind of signal can't be manufactured from good copywriting. It has to be earned by putting the right people in front of the proof pages early.
+          </p>
+          <p>
+            <strong>Learner outcome flywheel.</strong> The first cohort's real results — interviews booked, roles changed, promotions landed — are the only thing that can establish trust at speed. One documented outcome ("three interview invitations in two weeks after sharing the proof page") carries more weight than a hundred product descriptions. Getting that first wave of outcomes is the unlock for everything else.
+          </p>
+          <p>
+            Running parallel to this credibility work is a three-layer narrative we shift between depending on where we are in the launch cycle:
+          </p>
+          <p>
+            At launch: <em>Stop collecting certificates employers don't read. Give them evidence you can do the work.</em> — direct, problem-first, no brand assumption required.
+          </p>
+          <p>
+            In the value layer: <em>Learn → Simulate → Prove. A portfolio that grows every time you finish a module.</em> — product-led, shows the mechanism.
+          </p>
+          <p>
+            Long-term: <em>Proof-of-capability learning</em> as the category name itself — only worth picking up once enough people know what CompassStu is.
+          </p>
+
+          <h2>Who we're targeting first, and why in this order</h2>
+          <p>
+            Three segments, three different levels of priority at launch.
+          </p>
+          <p>
+            <strong>The ambitious climber (25–35).</strong> This is the primary target. They want a portfolio piece that proves they're already capable of the role they're going for — not learning toward it, operating in it. The courses that fit: product management, AI-native full-stack development, digital marketing, B2B sales with AI. This segment has the highest product-market fit, the strongest willingness to pay, and the clearest motivation. More importantly: when they get the outcome, they talk about it publicly. Their success is the evidence the next customer needs. We start here.
+          </p>
+          <p>
+            <strong>The mid-career professional under pressure (30–45).</strong> Second wave. More money, more urgency — either facing displacement anxiety or proving relevance in a role that's changing fast. The courses that fit: Applied AI Agents & Automation, Claude Code, AI-native full-stack. The conversion profile is strong, but the motivation is private. This segment doesn't broadcast their career anxiety on LinkedIn. They convert well; they amplify poorly. We bring them in once the flywheel from the first segment is turning.
+          </p>
+          <p>
+            <strong>Job seekers.</strong> The clearest use case on paper — a portfolio piece to put directly in front of recruiters — but the lowest lifetime value, the highest price sensitivity, and the least reason to trust a new credential format. We don't ignore them. We don't lead with them. They become significantly easier to convert once the recruiter endorsement layer is in place, because the trust gap closes when a hiring manager has already said publicly that this format works.
+          </p>
+          <p>
+            All three segments share the same hook: the capability proof portfolio. It's also the most shareable asset the product produces.
+          </p>
+
+          <h2>How the funnel runs</h2>
+          <p>
+            One direction, four steps: free diagnostic → 60-second product demo → course recommendation → paid conversion. Everything is designed to move people through that path, not to be a destination in itself.
+          </p>
+          <p>
+            We're building in three phases, in sequence — because trying to do all of them at once is how you end up doing none of them well.
+          </p>
+          <p>
+            <strong>Phase one — the fast loop.</strong> Founder-led content, a single seeded community, and the free diagnostic as the top-of-funnel entry point. The goal here is signal, not scale. Does the primary target segment engage? What are they actually willing to pay for? We want those answers in weeks, not quarters. Running at too many channels before we have them is expensive noise.
+          </p>
+          <p>
+            <strong>Phase two — amplification.</strong> Recruiter endorsement content — named hiring managers saying publicly that they would rather see a capability proof than a completion badge — becomes the social proof layer. Learner portfolio showcases follow. These two asset types power the billboard mechanism: every learner who shares their proof page is an unpaid distribution node. The platform scales through outcomes, not through ad spend.
+          </p>
+          <p>
+            <strong>Phase three — the compound layer.</strong> SEO content, PR, partnerships, and eventually paid media on Meta and YouTube. This is the long game — takes months to compound, costs relatively little once built, and doesn't require us to be in the room. We don't start here because it doesn't move fast enough at launch and doesn't generate the signal we need early. SEO and partnerships are a moat, not an acquisition engine.
+          </p>
+          <p>
+            Channel notes worth keeping in mind: LinkedIn and SEO content works best as sharp commentary on useless credentials, learner outcome showcases, and genuine perspective on the AI job market. Generic thought leadership without concrete proof behind it reads as exactly the kind of thing we're arguing against. Partnership outreach — coworking spaces, professional associations, university career offices, tech meetups — is a mutual distribution play, not a paid placement. We offer proof pages and platform access, not cash.
+          </p>
+
+          <h2>What goes in front of people</h2>
+          <p>
+            Two assets carry the whole launch. Everything else supports them.
+          </p>
+          <p>
+            <strong>The 60-second magic moment video.</strong> Bridge task → AI grading → capability proof page, in one unbroken cut. No voiceover required. Seeing the AI evaluate a real work submission in real time and generate a proof page is the clearest possible demonstration of what's different about this product. It shows the mechanism in the time it takes to say "this is different" — faster than any landing page copy can.
+          </p>
+          <p>
+            <strong>The free diagnostic.</strong> An AI skills readiness assessment or role-fit snapshot, available without a subscription. It captures intent, generates a course recommendation, and moves the user toward a decision without asking for commitment upfront. Every channel we run — LinkedIn posts, SEO articles, partner referrals — should point to this. It's the single top-of-funnel entry point, and everything downstream flows from what it tells us about the person who completed it.
+          </p>
+          <p>
+            The supporting material — recruiter endorsement posts, portfolio screenshots, the side-by-side comparison of a Udemy completion badge and a CompassStu proof page — all exists to feed those two assets. They're not the lead.
+          </p>
+          <p>
+            One asset worth building on a slow burn: founder thought leadership on LinkedIn. Long posts arguing the "proof, not promises" case, platform transparency, learner outcome documentation. It doesn't move fast enough to anchor a launch, but it builds the category argument over time in a way that paid content can't. We treat it as background compound interest, not a launch lever.
+          </p>
+
+        </div>
+
+        <footer class="article__footer">
+          <a class="article__back-link" href="writing.html">← All writing</a>
+          <span class="article__byline">Neu You Sheng · CompassStu</span>
+        </footer>
+      </article>
+    </main>
+
+    <nav class="dock" aria-label="Primary">
+      <div class="dock__group">
+        <a class="dock__link" href="writing.html">Back</a>
+        <a class="dock__link" href="#" data-calibrate>Calibrate</a>
+      </div>
+      <button class="dock__action" type="button" aria-label="Toggle theme" data-theme-toggle>
+        <svg class="dock__icon dock__icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2.5v2.4M12 19.1v2.4M4.22 4.22l1.7 1.7M18.08 18.08l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.22 19.78l1.7-1.7M18.08 5.92l1.7-1.7"/>
+        </svg>
+        <svg class="dock__icon dock__icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>
+        </svg>
+      </button>
+    </nav>
+
+    <script src="script.js"></script>
+  </body>
+</html>
