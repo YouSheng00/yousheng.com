@@ -3248,13 +3248,13 @@ a.about-cert:hover .about-cert__arrow {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
+  padding: var(--s-150) var(--s-200);
   background: color-mix(in srgb, var(--c-text) 5%, transparent);
   border-bottom: 1px solid color-mix(in srgb, var(--c-text) 8%, transparent);
 }
 
 .pathway-track__domain {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.01em;
   color: var(--c-text);
@@ -3281,18 +3281,18 @@ a.about-cert:hover .about-cert__arrow {
 .pathway-tier--practitioner .pathway-tier__stripe { background: #3b82f6; }
 .pathway-tier--specialist   .pathway-tier__stripe { background: #7c5cfc; }
 
-.pathway-tier__body { padding: 14px 16px; }
+.pathway-tier__body { padding: var(--s-200) var(--s-200) var(--s-250); }
 
 /* Inline row: muted counter · coloured level label */
 .pathway-tier__meta {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 5px;
+  gap: var(--s-100);
+  margin-bottom: var(--s-100);
 }
 
 .pathway-tier__num {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   color: var(--c-text-muted);
@@ -3310,27 +3310,27 @@ a.about-cert:hover .about-cert__arrow {
 .pathway-tier--specialist   .pathway-tier__level { color: #7c5cfc; }
 
 .pathway-tier__title {
-  font-size: clamp(0.82rem, 1vw, 0.92rem);
+  font-size: clamp(0.9rem, 1.1vw, 1rem);
   font-weight: 600;
-  margin: 0 0 5px;
+  margin: 0 0 var(--s-100);
   color: var(--c-text);
   letter-spacing: -0.01em;
 }
 
 .pathway-tier__desc {
-  font-size: clamp(0.75rem, 0.88vw, 0.82rem);
+  font-size: clamp(0.82rem, 0.95vw, 0.9rem);
   color: var(--c-text-muted);
   margin: 0;
-  line-height: 1.55;
+  line-height: 1.65;
 }
 
-/* Thin separator row between tiers */
+/* Separator row between tiers */
 .pathway-unlock {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 7px 16px;
-  font-size: 10px;
+  gap: 8px;
+  padding: var(--s-100) var(--s-200);
+  font-size: 11px;
   color: var(--c-text-muted);
   letter-spacing: 0.06em;
   border-bottom: 1px solid color-mix(in srgb, var(--c-text) 6%, transparent);
