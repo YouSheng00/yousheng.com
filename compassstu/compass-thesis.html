@@ -153,6 +153,8 @@
       align-self: center;
       background: var(--hairline);
       opacity: 0;
+      /* clip pulse at connector edges; -15px top/bottom preserves the glow */
+      clip-path: inset(-15px 0);
     }
     /* Two animations layered on the wire: an opacity reveal on load,
        then an infinite "warm" pulse that brightens the hairline while
@@ -218,6 +220,7 @@
         width: 1px;
         height: clamp(48px, 6vw, 64px);
         margin: 0 auto;
+        clip-path: inset(0 -15px); /* vertical: clip at top/bottom, allow glow left/right */
       }
       .connector::after {
         top: 0;
