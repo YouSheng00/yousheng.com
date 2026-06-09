@@ -3232,22 +3232,24 @@ a.about-cert:hover .about-cert__arrow {
 }
 
 /* ============================================================
-   PATHWAY ECOSYSTEM — tiered course track visual used in
-   Section 12. Three stacked tier rows inside a bordered card.
+   PATHWAY ECOSYSTEM — tiered course track visual (Section 12).
+   Card with a colored left-stripe per tier, matching hub-layer
+   / hub-role-fit design language.
    ============================================================ */
 
 .pathway-track {
-  border: 1px solid color-mix(in srgb, var(--c-text) 10%, transparent);
-  border-radius: var(--site-border-radius);
+  border: 1px solid color-mix(in srgb, var(--c-text) 9%, transparent);
+  border-radius: 12px;
   overflow: hidden;
+  background: color-mix(in srgb, var(--c-text) 2%, transparent);
 }
 
 .pathway-track__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--s-150) var(--s-200);
-  background: color-mix(in srgb, var(--c-text) 4%, transparent);
+  padding: 12px 16px;
+  background: color-mix(in srgb, var(--c-text) 5%, transparent);
   border-bottom: 1px solid color-mix(in srgb, var(--c-text) 8%, transparent);
 }
 
@@ -3265,49 +3267,50 @@ a.about-cert:hover .about-cert__arrow {
   text-transform: uppercase;
 }
 
+/* Two-column: 3 px coloured stripe | content body */
 .pathway-tier {
   display: grid;
-  grid-template-columns: 32px 1fr;
-  gap: var(--s-150);
-  align-items: start;
-  padding: var(--s-200);
+  grid-template-columns: 3px 1fr;
   border-bottom: 1px solid color-mix(in srgb, var(--c-text) 6%, transparent);
 }
 
 .pathway-tier:last-child { border-bottom: none; }
 
-.pathway-tier__num {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
+.pathway-tier__stripe { /* filled by modifier below */ }
+.pathway-tier--foundation   .pathway-tier__stripe { background: #6b7280; }
+.pathway-tier--practitioner .pathway-tier__stripe { background: #3b82f6; }
+.pathway-tier--specialist   .pathway-tier__stripe { background: #7c5cfc; }
+
+.pathway-tier__body { padding: 14px 16px; }
+
+/* Inline row: muted counter · coloured level label */
+.pathway-tier__meta {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  font-weight: 700;
-  flex-shrink: 0;
-  margin-top: 2px;
+  gap: 8px;
+  margin-bottom: 5px;
 }
 
-.pathway-tier--foundation .pathway-tier__num  { background: color-mix(in srgb, #6b7280 16%, transparent); color: #6b7280; }
-.pathway-tier--practitioner .pathway-tier__num { background: color-mix(in srgb, #3b82f6 14%, transparent); color: #3b82f6; }
-.pathway-tier--specialist .pathway-tier__num  { background: color-mix(in srgb, #7c5cfc 14%, transparent); color: #7c5cfc; }
+.pathway-tier__num {
+  font-size: 10px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--c-text-muted);
+}
 
 .pathway-tier__level {
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--c-text-muted);
-  margin: 0 0 3px;
 }
 
-.pathway-tier--foundation  .pathway-tier__level { color: #6b7280; }
+.pathway-tier--foundation   .pathway-tier__level { color: #6b7280; }
 .pathway-tier--practitioner .pathway-tier__level { color: #3b82f6; }
-.pathway-tier--specialist  .pathway-tier__level { color: #7c5cfc; }
+.pathway-tier--specialist   .pathway-tier__level { color: #7c5cfc; }
 
 .pathway-tier__title {
-  font-size: clamp(0.82rem, 1vw, 0.9rem);
+  font-size: clamp(0.82rem, 1vw, 0.92rem);
   font-weight: 600;
   margin: 0 0 5px;
   color: var(--c-text);
@@ -3315,21 +3318,23 @@ a.about-cert:hover .about-cert__arrow {
 }
 
 .pathway-tier__desc {
-  font-size: clamp(0.75rem, 0.9vw, 0.82rem);
+  font-size: clamp(0.75rem, 0.88vw, 0.82rem);
   color: var(--c-text-muted);
   margin: 0;
   line-height: 1.55;
 }
 
+/* Thin separator row between tiers */
 .pathway-unlock {
   display: flex;
   align-items: center;
-  gap: var(--s-050);
-  padding: var(--s-100) var(--s-200);
+  gap: 6px;
+  padding: 7px 16px;
   font-size: 10px;
   color: var(--c-text-muted);
   letter-spacing: 0.06em;
   border-bottom: 1px solid color-mix(in srgb, var(--c-text) 6%, transparent);
+  background: color-mix(in srgb, var(--c-text) 3%, transparent);
 }
 
 /* ============================================================
