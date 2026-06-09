@@ -659,6 +659,8 @@
             <dt>Live AI tutor config.</dt>
             <dd>Per-course tutor prompt, scope, and language live in <code>course_ai_context</code>, read by the Edge
               Function on every chat turn. Admin saves show up in the tutor&rsquo;s next response.</dd>
+            <dt>Course Discovery Index.</dt>
+            <dd>Every publish triggers an automatic extraction pass. Course title, module structure, and learning objectives are distilled into a structured discovery record — written into the index the moment the content goes live. The Discover My Path engine reads this index in real time: a learner whose capability assessment flags a gap gets routed to the right course immediately, without a content team manually tagging anything or a developer updating a recommendation list. New course published. Assessment updated. Zero lag between the two.</dd>
           </dl>
 
           <div class="project-block" style="flex: 1; min-height: 0; margin-top: var(--s-300);">
