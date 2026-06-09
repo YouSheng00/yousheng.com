@@ -484,10 +484,6 @@
             <dd>They survive any progress reset. Proof of prior work is never lost, even if a learner restarts a course.</dd>
           </dl>
 
-          <a class="proof-layer__cta" href="#" target="_blank" rel="noopener">
-            <span>Get your proof now</span>
-            <span class="proof-layer__cta-arrow" aria-hidden="true">→</span>
-          </a>
         </div>
 
         <div class="proof-layer__visual" aria-hidden="true">
@@ -637,30 +633,25 @@
           </h3>
 
           <div class="project-text__body">
-            <p>A separate admin portal lets the content team create, edit, and publish courses end-to-end — without a
-              developer in the loop.</p>
-            <p>Underneath, the editor is a thin shell over a markdown-to-JSONB pipeline. The database is the runtime
-              source of truth — a publish is visible to learners on the next page load. No build, no cache bust, no
-              redeploy.</p>
+            <p>An admin portal lets the content team publish courses end-to-end — no developer required.
+              A markdown&rarr;JSONB pipeline writes directly to the database; a publish is live on the next page load.</p>
           </div>
 
           <dl class="project-text__pipeline">
             <dt>Dual-runtime parser.</dt>
-            <dd>The same markdown&rarr;JSON parser ships as a Node CLI (batch ingest) and a browser module
-              (in-editor preview/publish). Output: typed JSON written straight into the
-              <code>lessons.lesson_data</code> JSONB column.</dd>
+            <dd>One parser, two runtimes — Node CLI for batch ingest, browser module for in-editor publish.
+              Output: typed JSON into <code>lessons.lesson_data</code>.</dd>
             <dt>Round-trippable format.</dt>
-            <dd>Every lesson re-hydrates from JSON back into editable markdown automatically. Bidirectional by design
-              &mdash; no export step, no stale drafts.</dd>
+            <dd>JSON re-hydrates to editable markdown automatically. No export step, no stale drafts.</dd>
             <dt>Idempotent publish, 24h rollback.</dt>
-            <dd>Each publish is an upsert on <code>(course_slug, module_number, lesson_number)</code>. A DB trigger
-              snapshots the prior row into <code>lesson_versions</code> before every write &mdash; version history
-              without app code.</dd>
+            <dd>Upsert on <code>(course_slug, module_number, lesson_number)</code>. A DB trigger snapshots
+              prior rows into <code>lesson_versions</code> — version history without app code.</dd>
             <dt>Live AI tutor config.</dt>
-            <dd>Per-course tutor prompt, scope, and language live in <code>course_ai_context</code>, read by the Edge
-              Function on every chat turn. Admin saves show up in the tutor&rsquo;s next response.</dd>
+            <dd>Tutor prompt and scope live in <code>course_ai_context</code>, read on every chat turn.
+              Admin saves reflect instantly.</dd>
             <dt>Course Discovery Index.</dt>
-            <dd>Every publish triggers an automatic extraction pass. Course title, module structure, and learning objectives are distilled into a structured discovery record — written into the index the moment the content goes live. The Discover My Path engine reads this index in real time: a learner whose capability assessment flags a gap gets routed to the right course immediately, without a content team manually tagging anything or a developer updating a recommendation list. New course published. Assessment updated. Zero lag between the two.</dd>
+            <dd>Every publish writes course structure and objectives into the discovery index. Discover My Path
+              reads this in real time — no manual tagging, no developer updates. New course. Live recommendations.</dd>
           </dl>
 
           <div class="project-block" style="flex: 1; min-height: 0; margin-top: var(--s-300);">
@@ -688,31 +679,23 @@
           </p>
 
           <div class="project-text__body">
-            <p>Isolated courses are becoming a commodity. A learner finishes a 12-hour video series,
-              earns a certificate, and walks away with no map of what comes next. The platform
-              keeps the revenue; the learner keeps the gap.</p>
-
-            <p>CompassStu&rsquo;s answer is the Outcome-Linked Competency Pathway: structured, progressive
-              tracks that move a learner from complete beginner to advanced practitioner in a single,
-              coherent arc. Each tier unlocks only after the previous one is verified &mdash; by AI-graded
-              work samples, not self-reported completion.</p>
+            <p>Isolated courses are a commodity — learners finish, earn a certificate, and walk away
+              with no map of what&rsquo;s next. CompassStu builds structured pathways from beginner to
+              specialist, where each tier unlocks only after AI-verified work samples pass.</p>
           </div>
 
           <dl class="project-text__pipeline">
             <dt>Category tracks, not course catalogs.</dt>
-            <dd>Every pathway maps a real-world competency domain end-to-end. Learners don&rsquo;t browse;
-              they enter a track and follow the arc. The platform decides what comes next based on
-              assessed performance, not manual curation.</dd>
+            <dd>Each pathway maps a domain end-to-end. Learners enter a track; the platform routes them
+              forward based on assessed performance, not manual curation.</dd>
 
             <dt>High-demand pathways only.</dt>
-            <dd>Initial tracks target the three roles where AI is reshaping hiring fastest: AI Product
-              Development, Prompt Engineering &amp; LLM Operations, and AI-Augmented Business Analysis.
-              Depth over breadth &mdash; one track done well beats fifteen done passably.</dd>
+            <dd>Three tracks: AI Product Development, Prompt Engineering &amp; LLM Ops, AI-Augmented
+              Business Analysis. Depth over breadth.</dd>
 
             <dt>Retention locked by design.</dt>
-            <dd>A learner mid-pathway has a live record of verified competencies and a visible next
-              milestone. Switching platforms means starting over. That stickiness is structural,
-              not manufactured by gamification points or streak mechanics.</dd>
+            <dd>A learner mid-pathway has verified competency records and a visible next milestone.
+              Switching platforms means starting over — stickiness by structure, not gamification.</dd>
           </dl>
         </div>
 
@@ -731,9 +714,8 @@
                   <span class="pathway-tier__level">Foundation</span>
                 </div>
                 <p class="pathway-tier__title">AI Product Thinking</p>
-                <p class="pathway-tier__desc">Core mental models for building with AI — from problem framing to
-                  selecting the right model tier. Assessment: a scoped AI product brief graded against
-                  six practitioner criteria.</p>
+                <p class="pathway-tier__desc">Problem framing, model selection, AI product scoping.
+                  Assessment: brief graded against six practitioner criteria.</p>
               </div>
             </div>
 
@@ -752,9 +734,8 @@
                   <span class="pathway-tier__level">Practitioner</span>
                 </div>
                 <p class="pathway-tier__title">Prompt Systems &amp; LLM Integration</p>
-                <p class="pathway-tier__desc">Structured prompt design, retrieval-augmented generation, and
-                  evaluation loops. Assessment: a working prompt pipeline evaluated on consistency
-                  and failure-mode coverage.</p>
+                <p class="pathway-tier__desc">Prompt systems, RAG, and evaluation loops.
+                  Assessment: pipeline graded on consistency and failure-mode coverage.</p>
               </div>
             </div>
 
@@ -773,9 +754,8 @@
                   <span class="pathway-tier__level">Specialist</span>
                 </div>
                 <p class="pathway-tier__title">AI Product Launch &amp; Iteration</p>
-                <p class="pathway-tier__desc">Go-to-market strategy, feedback instrumentation, and model-improvement
-                  cycles for shipped AI features. Assessment: a launch retrospective with documented
-                  iteration decisions.</p>
+                <p class="pathway-tier__desc">GTM strategy, feedback loops, model-improvement cycles.
+                  Assessment: launch retrospective with documented iteration decisions.</p>
               </div>
             </div>
           </div>
