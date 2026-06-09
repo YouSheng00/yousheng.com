@@ -52,36 +52,30 @@
           </a>
         </section>
 
-        <!-- Editorial stats — punctuation row between hero and section 01. -->
+        <!-- Editorial stats — clean three-number punctuation row. -->
         <section class="about-stats" data-reveal aria-label="At a glance">
           <div class="about-stats__item">
             <div class="about-stats__num">3+</div>
             <div class="about-stats__label">Years building</div>
           </div>
-          <div class="about-stats__item about-stats__item--has-detail" tabindex="0">
+          <div class="about-stats__item">
             <div class="about-stats__num">2</div>
-            <div class="about-stats__label">Platforms shipped</div>
-            <div class="about-stats__tooltip" role="tooltip">
-              <p class="about-stats__tooltip-label">What I’ve shipped</p>
-              <ol class="about-stats__tooltip-list">
-                <li>AI-powered online learning platform</li>
-                <li>3D interactive simulation platform</li>
-              </ol>
-            </div>
+            <div class="about-stats__label">Key products shipped</div>
           </div>
-          <div class="about-stats__item about-stats__item--has-detail" tabindex="0">
-            <div class="about-stats__num">3</div>
-            <div class="about-stats__label">Disciplines integrated</div>
-            <div class="about-stats__tooltip" role="tooltip">
-              <p class="about-stats__tooltip-label">Under one signature</p>
-              <ol class="about-stats__tooltip-list">
-                <li>Design</li>
-                <li>Engineering</li>
-                <li>Operations</li>
-              </ol>
-            </div>
+          <div class="about-stats__item">
+            <div class="about-stats__num">7</div>
+            <div class="about-stats__label">Skills integrated</div>
           </div>
         </section>
+
+        <!-- Glance: inline detail beneath the stats. Wide dt/dd row,
+             visible by default. No hover, no click. -->
+        <dl class="about-glance" data-reveal>
+          <dt class="about-glance__term">Key products</dt>
+          <dd class="about-glance__def">AI-powered online learning &middot; 3D interactive simulation</dd>
+          <dt class="about-glance__term">Skills</dt>
+          <dd class="about-glance__def">Product Development &middot; 3D Modelling &amp; Animation &middot; 2D Game &amp; 3D Simulation Development &middot; Interactive Web Development &middot; UI/UX Design &middot; Brand &amp; Visual Design &middot; Project Operations</dd>
+        </dl>
 
         <!-- 01 Operating Model — title left (narrow), body + pipeline right. -->
         <section class="project-text" data-reveal style="grid-template-columns: 35fr 65fr;">
