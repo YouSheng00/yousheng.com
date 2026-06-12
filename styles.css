@@ -170,6 +170,9 @@ button {
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  /* Cards carry their own bottom margin (--s-200); this adds a touch
+     more breathing room between rows only. */
+  row-gap: 4px;
   align-items: start;
 }
 
