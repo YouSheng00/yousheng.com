@@ -59,11 +59,18 @@
           </a>
         </article>
 
-        <!-- Card: IE100 Club -->
+        <!-- Card: IE100 Club — screen recording, top 15% cropped to hide
+             browser chrome (top:-17.7% / height:117.7%), starts at 2s, loops. -->
         <article class="card" data-tag="Web Design" style="--ratio: 1.78;">
           <a class="card__link" href="ie100/ie100.html" aria-label="Open project: IE100 Club">
             <div class="card__media">
-              <img src="Images/IE100/Image1.png" alt="IE100 Club website" style="object-position: 65% 50%;" />
+              <video id="ie100-card-vid" class="card__motion"
+                autoplay muted playsinline
+                aria-hidden="true"
+                preload="auto"
+                style="top: -17.7%; height: 117.7%;">
+                <source src="Video/IE100.mp4" type="video/mp4">
+              </video>
             </div>
             <footer class="card__meta">
               <h2 class="card__title">IE100 Club</h2>
@@ -146,6 +153,15 @@
       </div>
     </div>
 
+    <script>
+      // IE100 card — start at 2s, loop back to 2s on end (skips browser chrome intro).
+      (function () {
+        var v = document.getElementById('ie100-card-vid');
+        if (!v) return;
+        v.addEventListener('loadedmetadata', function () { v.currentTime = 2; v.playbackRate = 1.2; });
+        v.addEventListener('ended', function () { v.currentTime = 2; v.play(); });
+      })();
+    </script>
     <script src="script.js"></script>
   </body>
 </html>

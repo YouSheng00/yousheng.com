@@ -29,9 +29,13 @@
 
       <section class="project-grid" aria-label="Project content">
 
-        <!-- Hero — homepage, hotel lounge with woman + luggage -->
-        <div class="project-block project-block--full" style="aspect-ratio: 16 / 8;">
-          <img src="../Images/IE100/Image1.png" alt="IE100 Club homepage — luxury hotel lounge hero" style="object-position: 65% 50%;" />
+        <!-- Hero — IE100 screen recording. Top 17.7% offset hides browser chrome,
+             video starts at 2s and loops back to 2s on end. -->
+        <div class="project-block project-block--full" style="aspect-ratio: 16 / 8; overflow: hidden;">
+          <video id="ie100-vid" autoplay muted playsinline
+            style="position: absolute; top: -17.7%; left: 0; width: 100%; height: 117.7%;">
+            <source src="../Video/IE100.mp4" type="video/mp4">
+          </video>
         </div>
 
         <!-- S01: Overview — text left, membership page visual right -->
@@ -195,6 +199,14 @@
 
     <script src="../script.js"></script>
     <script>
+      // IE100 hero — start at 2s, loop back to 2s on end (not native loop attr).
+      (function () {
+        var v = document.getElementById('ie100-vid');
+        if (!v) return;
+        v.addEventListener('loadedmetadata', function () { v.currentTime = 2; });
+        v.addEventListener('ended', function () { v.currentTime = 2; v.play(); });
+      })();
+
       (function () {
         var sections = Array.from(document.querySelectorAll('[data-section]'));
         var calibBtn = document.querySelector('[data-calibrate]');
