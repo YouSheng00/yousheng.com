@@ -1214,7 +1214,7 @@ button {
 
 .rubric-card__row {
   display: grid;
-  grid-template-columns: 9rem 1fr 2.5ch;
+  grid-template-columns: 10.5rem 1fr 2.5ch;
   align-items: center;
   gap: 16px;
 }
