@@ -553,6 +553,35 @@ button {
   .glb-stack { grid-column: 1; }
 }
 
+/* SATS logo block — desktop shows the logo art at natural pixel size,
+   vertically centred (object-fit: none). On mobile the natural size is
+   far wider than the viewport, so it flips to contain (whole logo). */
+.sats-logo-block > img {
+  top: 50%;
+  right: 0;
+  bottom: auto;
+  left: 0;
+  height: auto;
+  transform: translateY(-50%);
+  object-fit: none;
+}
+
+@media (max-width: 600px) {
+  .sats-logo-block > img {
+    top: 0;
+    height: 100%;
+    transform: none;
+    object-fit: contain;
+  }
+}
+
+/* Tech badge row (Unity / C# logos) — inline 96px heights overflow a
+   narrow viewport; shrink and allow wrapping on mobile. */
+@media (max-width: 600px) {
+  .tech-badges { flex-wrap: wrap; }
+  .tech-badges img { height: 56px !important; }
+}
+
 /* Image credit — faint italic caption tucked in the bottom-right of a
    media block. No background box: kept deliberately subtle, just a
    shadow for legibility over varied imagery. */
@@ -4217,6 +4246,17 @@ a.about-cert:hover .about-cert__arrow {
   .project-block--overlap {
     margin-top: 0;
   }
+
+  /* Slide embeds (brand-overview banners): the inner pages are fixed
+     desktop compositions that clip badly at narrow widths. Render the
+     iframe at a fixed desktop width and let script.js scale it down to
+     the wrapper — same artwork, proportionally smaller. 518.57px =
+     1100px x (9.9 / 21), matching the wrapper's aspect ratio. */
+  .slide-embed > iframe {
+    width: 1100px;
+    height: 518.57px;
+    transform-origin: top left;
+  }
 }
 
 /* ── 600px — mobile ────────────────────────────────────────── */
@@ -4322,9 +4362,17 @@ a.about-cert:hover .about-cert__arrow {
     margin: var(--s-200) 0;
   }
 
-  /* Project grid: tighten gap between blocks at mobile */
+  /* Project grid: stacked media blocks need a readable seam between
+     them — 8px made consecutive images blur into one block, leaving
+     no sense of where a section starts or ends. */
   .project-grid {
-    gap: var(--s-050);
+    gap: var(--s-100);
+  }
+
+  /* Chapter sections: extra breathing room above the existing hairline
+     so each numbered section announces itself in a single column. */
+  .project-text--chapter {
+    margin-top: var(--s-200);
   }
 
   /* ---- Writing ---- */

@@ -96,6 +96,27 @@
     });
   }
 
+  // Slide embeds — the brand-overview slides are fixed desktop
+  // compositions. On small screens, render the iframe at a desktop
+  // width and scale it down to fit, preserving the layout instead of
+  // letting it clip. CSS (≤768px) sets the fixed iframe size +
+  // transform-origin; this just supplies the scale factor.
+  const slideFrames = document.querySelectorAll('.slide-embed > iframe');
+  if (slideFrames.length) {
+    const SLIDE_W = 1100;
+    const slideMq = window.matchMedia('(max-width: 768px)');
+    const fitSlides = () => {
+      slideFrames.forEach((frame) => {
+        frame.style.transform = slideMq.matches
+          ? `scale(${frame.parentElement.clientWidth / SLIDE_W})`
+          : '';
+      });
+    };
+    slideMq.addEventListener('change', fitSlides);
+    window.addEventListener('resize', fitSlides);
+    fitSlides();
+  }
+
   // Lazy reveal cards on scroll.
   const cards = document.querySelectorAll('.card');
   if ('IntersectionObserver' in window && cards.length) {
