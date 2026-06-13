@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Favicon — Choose a direction</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<style>
+  :root {
+    --bg: #0b1215; --fg: #ffffff; --muted: #86868b;
+    --line: rgba(255,255,255,0.1); --panel: #15191c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.6; padding: 8vh 24px 16vh;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; }
+  .kicker { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin: 0 0 12px; }
+  h1 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.1; letter-spacing: -0.01em; margin: 0 0 16px; }
+  p.lede { color: var(--muted); font-size: 1.05rem; margin: 0 0 56px; max-width: 64ch; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+  .card--rec { box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.45); }
+  .card__big { aspect-ratio: 1; display: grid; place-items: center; padding: 40px; }
+  .card__big svg { width: 100%; height: 100%; max-width: 150px; }
+  .card__info { padding: 22px 24px 26px; border-top: 1px solid var(--line); }
+  .badge { display: inline-block; font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: #48ea2d; font-weight: 600; margin-bottom: 8px; }
+  .card__name { font-size: 1.05rem; font-weight: 600; margin: 0 0 6px; }
+  .card__desc { font-size: 0.85rem; color: var(--muted); margin: 0 0 18px; line-height: 1.5; }
+
+  .strip { display: flex; align-items: flex-end; gap: 16px; }
+  .strip figure { margin: 0; text-align: center; }
+  .strip svg { display: block; margin: 0 auto 6px; }
+  .strip figcaption { font-size: 10px; color: var(--muted); }
+
+  .onlight { margin-top: 18px; display: flex; gap: 10px; }
+  .onlight .pad { flex: 1; border-radius: 10px; display: grid; place-items: center; padding: 16px 0; }
+  .onlight .pad svg { width: 34px; height: 34px; }
+  .pad--d { background: #000; } .pad--l { background: #f5f5f7; }
+
+  h2 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); font-weight: 600; margin: 64px 0 20px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  .tabbar { display: inline-flex; background: #2a2f33; border-radius: 10px 10px 0 0; padding: 6px 6px 0; gap: 4px; }
+  .tab { display: flex; align-items: center; gap: 8px; background: var(--bg); padding: 9px 16px; border-radius: 8px 8px 0 0; font-size: 12.5px; color: #ccc; }
+  .tab svg { width: 16px; height: 16px; }
+  code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.85em; background: rgba(255,255,255,0.08); padding: 0.12em 0.45em; border-radius: 4px; }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="kicker">Brand · Identity</p>
+  <h1>Choose a favicon direction</h1>
+  <p class="lede">
+    Three takes on a <strong style="color:var(--fg)">Y</strong> monogram — all monochrome, all legible to 16&nbsp;pixels,
+    each a different voice. Same restraint as the rest of the work; just pick the personality that feels most you.
+  </p>
+
+  <div class="grid">
+
+    <!-- A -->
+    <div class="card card--rec">
+      <div class="card__big" style="background:#0b1215">
+        <svg viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0b1215"/><path d="M31 30 L50 52 L69 30 M50 52 L50 72" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="card__info">
+        <span class="badge">● Current pick</span>
+        <p class="card__name">A · Geometric</p>
+        <p class="card__desc">Thin, even stroke with round joins. The most modern and minimal — reads as a calm, considered mark.</p>
+        <div class="strip">
+          <figure><svg width="16" height="16" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0b1215"/><path d="M31 30 L50 52 L69 30 M50 52 L50 72" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg><figcaption>16</figcaption></figure>
+          <figure><svg width="24" height="24" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0b1215"/><path d="M31 30 L50 52 L69 30 M50 52 L50 72" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg><figcaption>24</figcaption></figure>
+          <figure><svg width="32" height="32" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0b1215"/><path d="M31 30 L50 52 L69 30 M50 52 L50 72" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg><figcaption>32</figcaption></figure>
+        </div>
+        <div class="onlight">
+          <div class="pad pad--d"><svg viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0b1215"/><path d="M31 30 L50 52 L69 30 M50 52 L50 72" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="pad pad--l"><svg viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0b1215"/><path d="M31 30 L50 52 L69 30 M50 52 L50 72" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- B -->
+    <div class="card">
+      <div class="card__big" style="background:#0b1215">
+        <svg viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0b1215"/><text x="50" y="53" fill="#fff" font-family="Georgia,'Times New Roman',serif" font-size="66" font-weight="400" text-anchor="middle" dominant-baseline="central">Y</text></svg>
+      </div>
+      <div class="card__info">
+        <p class="card__name">B · Serif</p>
+        <p class="card__desc">A filled serif Y with true bracketed terminals. Classic and editorial — echoes the Georgia headings on your articles.</p>
+        <div class="strip">
+          <figure><svg width="16" height="16" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0b1215"/><text x="50" y="53" fill="#fff" font-family="Georgia,'Times New Roman',serif" font-size="66" font-weight="400" text-anchor="middle" dominant-baseline="central">Y</text></svg><figcaption>16</figcaption></figure>
+          <figure><svg width="24" height="24" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0b1215"/><text x="50" y="53" fill="#fff" font-family="Georgia,'Times New Roman',serif" font-size="66" font-weight="400" text-anchor="middle" dominant-baseline="central">Y</text></svg><figcaption>24</figcaption></figure>
+          <figure><svg width="32" height="32" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0b1215"/><text x="50" y="53" fill="#fff" font-family="Georgia,'Times New Roman',serif" font-size="66" font-weight="400" text-anchor="middle" dominant-baseline="central">Y</text></svg><figcaption>32</figcaption></figure>
+        </div>
+        <div class="onlight">
+          <div class="pad pad--d"><svg viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0b1215"/><text x="50" y="53" fill="#fff" font-family="Georgia,'Times New Roman',serif" font-size="66" font-weight="400" text-anchor="middle" dominant-baseline="central">Y</text></svg></div>
+          <div class="pad pad--l"><svg viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0b1215"/><text x="50" y="53" fill="#fff" font-family="Georgia,'Times New Roman',serif" font-size="66" font-weight="400" text-anchor="middle" dominant-baseline="central">Y</text></svg></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- C -->
+    <div class="card">
+      <div class="card__big" style="background:#f5f5f7">
+        <svg viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#f5f5f7"/><path d="M30 29 L50 51 L70 29 M50 51 L50 73" fill="none" stroke="#0b1215" stroke-width="15" stroke-linecap="square" stroke-linejoin="miter"/></svg>
+      </div>
+      <div class="card__info">
+        <p class="card__name">C · Bold inverted</p>
+        <p class="card__desc">Heavy, square-cut stroke, dark on a light tile. Confident and stamp-like — and it shows off your light-theme side.</p>
+        <div class="strip">
+          <figure><svg width="16" height="16" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#f5f5f7"/><path d="M30 29 L50 51 L70 29 M50 51 L50 73" fill="none" stroke="#0b1215" stroke-width="15" stroke-linecap="square" stroke-linejoin="miter"/></svg><figcaption>16</figcaption></figure>
+          <figure><svg width="24" height="24" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#f5f5f7"/><path d="M30 29 L50 51 L70 29 M50 51 L50 73" fill="none" stroke="#0b1215" stroke-width="15" stroke-linecap="square" stroke-linejoin="miter"/></svg><figcaption>24</figcaption></figure>
+          <figure><svg width="32" height="32" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#f5f5f7"/><path d="M30 29 L50 51 L70 29 M50 51 L50 73" fill="none" stroke="#0b1215" stroke-width="15" stroke-linecap="square" stroke-linejoin="miter"/></svg><figcaption>32</figcaption></figure>
+        </div>
+        <div class="onlight">
+          <div class="pad pad--d"><svg viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#f5f5f7"/><path d="M30 29 L50 51 L70 29 M50 51 L50 73" fill="none" stroke="#0b1215" stroke-width="15" stroke-linecap="square" stroke-linejoin="miter"/></svg></div>
+          <div class="pad pad--l"><svg viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#f5f5f7"/><path d="M30 29 L50 51 L70 29 M50 51 L50 73" fill="none" stroke="#0b1215" stroke-width="15" stroke-linecap="square" stroke-linejoin="miter"/></svg></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TAB context for all three -->
+  <h2>In a browser tab</h2>
+  <div style="display:flex; gap:18px; flex-wrap:wrap;">
+    <div class="tabbar"><div class="tab"><svg viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0b1215"/><path d="M31 30 L50 52 L69 30 M50 52 L50 72" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>YouSheng — A</div></div>
+    <div class="tabbar"><div class="tab"><svg viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#0b1215"/><text x="50" y="53" fill="#fff" font-family="Georgia,serif" font-size="66" text-anchor="middle" dominant-baseline="central">Y</text></svg>YouSheng — B</div></div>
+    <div class="tabbar"><div class="tab"><svg viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#f5f5f7"/><path d="M30 29 L50 51 L70 29 M50 51 L50 73" fill="none" stroke="#0b1215" stroke-width="15" stroke-linecap="square" stroke-linejoin="miter"/></svg>YouSheng — C</div></div>
+  </div>
+
+  <p style="color:var(--muted); font-size:0.88rem; margin-top:56px; padding-top:24px; border-top:1px solid var(--line);">
+    Tell me <strong style="color:var(--fg)">A</strong>, <strong style="color:var(--fg)">B</strong>, or <strong style="color:var(--fg)">C</strong> and I'll set it as the production <code>favicon.svg</code>, regenerate the PNG fallbacks, and wire it across the site. <code>favicon.svg</code> is currently A.
+  </p>
+
+</div>
+</body>
+</html>
