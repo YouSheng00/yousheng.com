@@ -149,6 +149,9 @@ button {
 }
 
 .tagline {
+  /* Mobile-only: how much smaller the description is than the wordmark.
+     Used only inside the ≤600px / ≤480px media queries — desktop is unaffected. */
+  --desc-shrink: 4px;
   font-size: clamp(1.08rem, 3.24vw, 1.35rem);
   line-height: 1.15;
   font-weight: 350;
@@ -160,9 +163,8 @@ button {
   text-shadow: 0 0 0.4px currentColor;
 }
 
-/* Mobile-only intro variants — hidden by default, shown at ≤600px */
-.wordmark__mobile,
-.tagline__mobile { display: none; }
+/* Mobile-only wordmark variant — hidden by default, shown at ≤600px */
+.wordmark__mobile { display: none; }
 
 /* ---------- Project grid ---------- */
 /* Two-column. Each card gets `padding: 0 calc(spacing/2)` so the visual gap
@@ -4263,10 +4265,13 @@ a.about-cert:hover .about-cert__arrow {
 @media (max-width: 600px) {
 
   /* ---- Index: mobile-only intro format ---- */
-  .wordmark__desktop,
-  .tagline__desktop { display: none; }
-  .wordmark__mobile,
-  .tagline__mobile   { display: inline; }
+  .wordmark__desktop { display: none; }
+  .wordmark__mobile  { display: inline; }
+
+  /* Shrink the description so the wordmark reads as the dominant line. */
+  .tagline {
+    font-size: calc(clamp(1.08rem, 3.24vw, 1.35rem) - var(--desc-shrink));
+  }
 
   /* ---- Index ---- */
   .intro {
@@ -4442,10 +4447,13 @@ a.about-cert:hover .about-cert__arrow {
     padding: var(--s-100) var(--s-050);
   }
 
-  /* Wordmark + tagline: slightly smaller on very narrow screens */
-  .wordmark,
-  .tagline {
+  /* Wordmark + tagline: slightly smaller on very narrow screens.
+     Tagline sized down (var --desc-shrink) so the wordmark dominates. */
+  .wordmark {
     font-size: clamp(0.95rem, 4.8vw, 1.15rem);
+  }
+  .tagline {
+    font-size: calc(clamp(0.95rem, 4.8vw, 1.15rem) - var(--desc-shrink));
   }
 
   .wordmark { margin-bottom: var(--s-150); }
