@@ -4317,7 +4317,20 @@ a.about-cert:hover .about-cert__arrow {
     padding: var(--s-200) var(--s-150);
   }
 
-  /* ---- Project text ---- */
+  /* ---- Project header ----
+     Shrink the subtitle (meta) under the project title by 4px on mobile,
+     across all project pages. Desktop untouched. */
+  .project__meta {
+    font-size: calc(clamp(1.08rem, 3.24vw, 1.35rem) - 4px);
+  }
+
+  /* ---- Project text ----
+     Mobile type scale. The original mobile block shrank only the lead,
+     section-title and body — leaving the subhead, subsection-title,
+     pipeline lists and accordion body at desktop size, so they floated
+     ABOVE the reduced body and even the section title. These rules
+     complete the scale into one clean descending hierarchy:
+       lead › section-title › subsection-title › body = subhead = pipeline. */
   .project-text {
     padding: var(--s-200);
     gap: var(--s-200);
@@ -4327,13 +4340,29 @@ a.about-cert:hover .about-cert__arrow {
     font-size: clamp(1.5rem, 7vw, 2.2rem);
   }
 
+  /* Section heading ("01 Overview") — clearly leads its section, with a
+     tighter top gap so it groups with the content it introduces rather
+     than floating in an 80px void above it. */
   .project-text__section-title {
-    font-size: clamp(1rem, 4.5vw, 1.4rem);
+    font-size: clamp(1.2rem, 5.2vw, 1.5rem);
+    margin: var(--s-250) 0 var(--s-150);
   }
 
+  /* Subsection heading (H4) — sits above body, kept bold + full-colour. */
+  .project-text__subsection-title {
+    font-size: clamp(1rem, 4.3vw, 1.12rem);
+    margin: var(--s-200) 0 var(--s-050);
+  }
+
+  /* Body tier — body copy, intro subhead, pipeline lists and accordion
+     body all share one size so supporting text never outweighs headings. */
+  .project-text__subhead,
   .project-text__body p,
-  .project-text__body li {
-    font-size: clamp(0.88rem, 3.8vw, 1rem);
+  .project-text__body li,
+  .project-text__pipeline dt,
+  .project-text__pipeline dd,
+  .approach-item__body p {
+    font-size: clamp(0.9rem, 3.9vw, 1rem);
     line-height: 1.55;
   }
 
@@ -4436,6 +4465,81 @@ a.about-cert:hover .about-cert__arrow {
   .project-text__pipeline {
     grid-template-columns: 1fr;
   }
+
+  /* ── CompassStu — mobile type & spacing pass ─────────────────
+     Scoped to .page--compassstu so it can't leak to ie100/about,
+     which share the .project-text* system. Desktop is untouched
+     (this whole block lives inside max-width: 600px).
+
+     Why: desktop sizes were tuned for body{zoom:0.8}; mobile resets
+     to zoom:1, and the @600 query above re-tuned only some roles —
+     leaving the tagline/pipeline/cards LARGER than the section
+     heading and the tutor/skill micro-text SMALLER than body. This
+     restores one clean descending scale:
+       thesis > heading > sub-heads/card-titles > body≈tagline≈pipeline > micro-labels */
+
+  /* Tier 1 — section statement */
+  .page--compassstu .project-text__thesis {
+    font-size: clamp(1.4rem, 6vw, 1.85rem);
+    margin-bottom: var(--s-150);
+  }
+
+  /* Tier 2 — section heading (num + label inherit this size) */
+  .page--compassstu .project-text__section-title {
+    font-size: clamp(1.18rem, 5vw, 1.5rem);
+    margin: var(--s-200) 0 var(--s-150);
+  }
+
+  /* Tier 4 — closing kicker: was bigger than the heading */
+  .page--compassstu .project-text__tagline {
+    font-size: clamp(0.98rem, 4vw, 1.12rem);
+    padding-top: var(--s-150);
+  }
+
+  /* Tier 4 — pipeline / compare lists: drop to body level, tighten hairline */
+  .page--compassstu .project-text__pipeline,
+  .page--compassstu .project-text__compare {
+    padding-top: var(--s-200);
+    margin-top: var(--s-200);
+  }
+  .page--compassstu .project-text__pipeline dt,
+  .page--compassstu .project-text__pipeline dd,
+  .page--compassstu .project-text__compare dt,
+  .page--compassstu .project-text__compare dd {
+    font-size: clamp(0.92rem, 3.9vw, 1.02rem);
+  }
+
+  /* Stack the compare list like the pipeline (label on top, answer below)
+     instead of a cramped max-content/1fr split in a single narrow column. */
+  .page--compassstu .project-text__compare {
+    grid-template-columns: 1fr;
+    row-gap: var(--s-050);
+  }
+  .page--compassstu .project-text__compare dd {
+    margin-bottom: var(--s-100);
+  }
+
+  /* Tier 3 — sub-headings within a body block */
+  .page--compassstu .project-text__subsection-title {
+    font-size: clamp(1rem, 4.2vw, 1.12rem);
+    margin: var(--s-200) 0 var(--s-100);
+  }
+
+  /* Tier 4 — hero subhead */
+  .page--compassstu .project-text__subhead {
+    font-size: clamp(0.95rem, 4vw, 1.08rem);
+  }
+
+  /* CompassStu-only cards — normalise the scatter (some > body, some < body).
+     Tier 3 card titles ~0.98rem; Tier 4 card body ~0.9rem; Tier 5 legend ~0.8rem. */
+  .page--compassstu .hub-layer__title,
+  .page--compassstu .pathway-tier__title { font-size: 0.98rem; }
+  .page--compassstu .hub-layer__num { font-size: 0.9rem; }
+  .page--compassstu .hub-layer__body,
+  .page--compassstu .pathway-tier__desc,
+  .page--compassstu .tutor-card__msg { font-size: 0.9rem; line-height: 1.55; }
+  .page--compassstu .skill-state__label { font-size: 0.85rem; }
+  .page--compassstu .skill-state__desc { font-size: 0.8rem; }
 }
 
 /* ── 480px — small phone ───────────────────────────────────── */
