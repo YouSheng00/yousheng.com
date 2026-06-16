@@ -874,6 +874,7 @@ button {
 
 .project-text__subhead {
   margin: 0;
+  max-width: 64ch;
   font-size: clamp(1.05rem, 1.42vw, 1.26rem);
   line-height: 1.5;
   font-weight: 350;
@@ -944,6 +945,10 @@ button {
 
 .project-text__body p {
   margin: 0 0 var(--s-050);
+  /* Cap line length so prose stays readable when the two-column layout
+     widens on large/ultra-wide screens (kicks in only past ~74 chars;
+     no effect in the narrow mobile column). */
+  max-width: 74ch;
   font-size: clamp(1.1rem, 1.3vw, 1.26rem);
   line-height: 1.55;
   font-weight: 400;
@@ -4175,6 +4180,28 @@ a.about-cert:hover .about-cert__arrow {
       600px  mobile
       480px  small phone
    ============================================================ */
+
+/* ── Large desktops & ultra-wide ────────────────────────────
+   The base layout caps at 1800px which, after body{zoom:0.8},
+   renders ≈1440px wide — so on big monitors the content is marooned
+   in the centre with huge side margins ("ratio looks weird"). Grow
+   the cap in steps so content keeps filling ~85–90% of the screen.
+   Media-query widths are physical px; the max-width values live in
+   the zoomed coordinate space, so physical width ≈ value × 0.8.
+   Paired with the line-length cap on body copy so prose stays
+   readable even as the columns widen. */
+@media (min-width: 1800px) {
+  .page, .intro, .project__header, .project-grid { max-width: 2100px; }
+}
+@media (min-width: 2100px) {
+  .page, .intro, .project__header, .project-grid { max-width: 2450px; }
+}
+@media (min-width: 2560px) {
+  .page, .intro, .project__header, .project-grid { max-width: 2950px; }
+}
+@media (min-width: 3200px) {
+  .page, .intro, .project__header, .project-grid { max-width: 3650px; }
+}
 
 /* ── 1024px — tablet landscape ────────────────────────────── */
 @media (max-width: 1024px) {
