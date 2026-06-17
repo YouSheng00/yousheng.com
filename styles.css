@@ -166,6 +166,11 @@ button {
 /* Mobile-only wordmark variant — hidden by default, shown at ≤600px */
 .wordmark__mobile { display: none; }
 
+/* Generic responsive text-swap helpers: a desktop variant and a mobile
+   variant of the same line, so the index tagline and the About meta can
+   stack differently on phones without changing the desktop layout. */
+.only-mobile { display: none; }
+
 /* ---------- Project grid ---------- */
 /* Two-column. Each card gets `padding: 0 calc(spacing/2)` so the visual gap
    between cards is `--project-spacing`, mirroring the UPSET .project rule. */
@@ -4295,9 +4300,15 @@ a.about-cert:hover .about-cert__arrow {
   .wordmark__desktop { display: none; }
   .wordmark__mobile  { display: inline; }
 
-  /* Shrink the description so the wordmark reads as the dominant line. */
+  /* Swap to the stacked mobile text variants. */
+  .only-desktop { display: none; }
+  .only-mobile  { display: inline; }
+
+  /* Shrink the description so the wordmark reads as the dominant line;
+     looser line-height so the stacked lines aren't cramped together. */
   .tagline {
     font-size: calc(clamp(1.08rem, 3.24vw, 1.35rem) - var(--desc-shrink));
+    line-height: 1.45;
   }
 
   /* ---- Index ---- */
@@ -4349,6 +4360,7 @@ a.about-cert:hover .about-cert__arrow {
      across all project pages. Desktop untouched. */
   .project__meta {
     font-size: calc(clamp(1.08rem, 3.24vw, 1.35rem) - 4px);
+    line-height: 1.45;
   }
 
   /* ---- Project text ----
@@ -4588,6 +4600,22 @@ a.about-cert:hover .about-cert__arrow {
   }
 
   .wordmark { margin-bottom: var(--s-150); }
+
+  /* About & Writing page titles match the wordmark (name) size on the
+     narrowest phones, where the wordmark gets a bump the base title does
+     not. Scoped to these two pages so the case-study eyebrow titles
+     (CompassStu, SATS, IE100, 3D-Design) stay intentionally small. */
+  .page--about .project__title,
+  .page--writing .project__title {
+    font-size: clamp(0.95rem, 4.8vw, 1.15rem);
+  }
+
+  /* About's meta line matches the homepage tagline exactly (both are
+     "name-size − 4px"). Without this it ran ~1px smaller because it was
+     sized off the title clamp instead of the wordmark clamp. */
+  .page--about .project__meta {
+    font-size: calc(clamp(0.95rem, 4.8vw, 1.15rem) - 4px);
+  }
 
   /* About hero: smallest phones */
   .about-hero__lead {
