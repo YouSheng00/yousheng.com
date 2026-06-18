@@ -598,6 +598,10 @@
             <dt>Retention locked by design.</dt>
             <dd>A learner mid-pathway has verified competency records and a visible next milestone.
               Switching platforms means starting over — stickiness by structure, not gamification.</dd>
+
+            <dt>$10/month, single tier.</dt>
+            <dd>Priced just under the market median — one flat subscription, no per-course fees, no upsell ladder.
+              The model bets on pathway retention over ARPU, and keeps the funnel and the build simple.</dd>
           </dl>
         </div>
 
@@ -762,7 +766,7 @@
           </h3>
 
           <p class="project-text__thesis">
-            Four infrastructure decisions, each made so one person could run an entire platform.
+            Five infrastructure decisions, each made so one person could run an entire platform.
           </p>
 
           <div class="project-text__body">
@@ -782,6 +786,9 @@
             <dt>Auth and ownership built in.</dt>
             <dd>Supabase Auth with row-level security. A learner&rsquo;s record belongs to them; a proof URL is
               public only because its owner chose to share it.</dd>
+            <dt>Subscriptions behind the edge.</dt>
+            <dd>Airwallex runs the recurring billing; its webhooks sync the subscription lifecycle into Supabase,
+              so access control and payment state share one source of truth — and settle across currencies for overseas learners.</dd>
             <dt>Zero-ops deployment.</dt>
             <dd>Vercel — push to ship, a preview per change, no servers to maintain. A solo team&rsquo;s
               operations budget spent on product, not infrastructure.</dd>
