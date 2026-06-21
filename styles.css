@@ -2214,6 +2214,25 @@ button {
   :root.vt-back    .page { animation: none; }
 }
 
+/* ---------- Dock entrance ----------
+   The dock lives OUTSIDE .page, so the page-turn above never touches it —
+   without this it hard-cuts into place on every load. That pop is invisible
+   when the links match, but obvious when the count changes between pages
+   (Work·About → Back·Calibrate·Site): the pill jumps to a new width with a
+   hard edit. A short ease-up settles it in so the change reads as motion,
+   not a cut. Same easing as [data-reveal] for a consistent motion voice. */
+@keyframes dockIn {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(14px) scale(0.97); }
+  100% { opacity: 1; transform: translateX(-50%) translateY(0)    scale(1);    }
+}
+.dock {
+  animation: dockIn 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dock { animation: none; }
+}
+
 /* ============================================================
    ABOUT — scroll reveals & micro-interactions
    Subtle entrance motion that extends the site's existing
