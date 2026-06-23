@@ -40,13 +40,11 @@
 
       <section class="project-grid" aria-label="Project content">
 
-        <!-- Hero — IE100 screen recording. Top 17.7% offset hides browser chrome,
-             video starts at 2s and loops back to 2s on end. -->
+        <!-- Hero — live rebuild of the ie100club.com hero, embedded via iframe.
+             Replaces the cropped screen-recording: renders crisp at any size
+             with no distortion. Self-contained (assets in ie100/hero/). -->
         <div class="project-block project-block--full" style="aspect-ratio: 16 / 8; overflow: hidden;">
-          <video id="ie100-vid" autoplay muted playsinline
-            style="position: absolute; top: -17.7%; left: 0; width: 100%; height: 117.7%;">
-            <source src="../Video/IE100.mp4" type="video/mp4">
-          </video>
+          <iframe src="ie100-hero.html" title="IE100 Club — homepage hero" loading="lazy"></iframe>
         </div>
 
         <!-- S01: Overview — text left, membership page visual right -->
@@ -58,21 +56,18 @@
             </h3>
 
             <p class="project-text__thesis">
-              IE100 connects Chinese entrepreneurs worldwide — capped at one hundred members, invitation-only. A closed, high-trust network of established industrialists, young founders, and second-generation successors. Global by design, anchored in Singapore.
+              One hundred Chinese entrepreneurs, invitation-only — a high-trust network anchored in Singapore.
             </p>
 
             <div class="project-text__body">
-              <p>The brief: build a digital presence that signals belonging before a single word is read. This audience recognises immediately when something is built for them versus engineered for scale. Every decision had to carry weight.</p>
-              <p>The network spans Southeast Asia, North America, Europe, Australia and beyond — across manufacturing, technology, finance, trade, real estate and more. Singapore isn't a boundary; it's the strategic pivot the whole ecosystem turns on.</p>
+              <p>The brief: signal belonging before a word is read — this audience knows instantly when something is built for them, not for scale. The network runs from Southeast Asia to North America, Europe and Australia, across manufacturing, tech, finance and real estate, with Singapore the pivot it all turns on.</p>
             </div>
 
             <dl class="project-text__pipeline">
               <dt>Vision.</dt>
-              <dd>Connect Chinese entrepreneurs across the globe, and redraw the map of value.</dd>
+              <dd>Connect Chinese entrepreneurs worldwide and redraw the map of value.</dd>
               <dt>Mission.</dt>
-              <dd>With Singapore as the hub, build a high-trust collaboration network for Chinese business worldwide.</dd>
-              <dt>The Model.</dt>
-              <dd>One hundred members, three forces — seasoned industrialists, young founders, and business heirs — held in a single closed-loop ecosystem where every connection must create real value.</dd>
+              <dd>Singapore as the hub for a high-trust network where every connection creates real value.</dd>
             </dl>
           </div>
 
@@ -89,16 +84,23 @@
           <img src="../Images/IE100v2/Image9.png" alt="IE100 Club — dark cinematic hero, design language" style="object-position: 50% 50%;" />
         </div>
 
-        <!-- Services + Events — side by side -->
-        <div class="project-block project-block--half" style="aspect-ratio: 16 / 9;">
+        <!-- Services + Events — side by side.
+             Pushed down half a grid-gap (top-only positive margin) for more
+             breathing room below the banner. Top-only keeps all gaps below
+             this row unchanged. Tune the divisor — smaller number = wider gap. -->
+        <div class="project-block project-block--half" style="aspect-ratio: 16 / 9; margin-top: calc(var(--project-spacing) / 2);">
           <img src="../Images/IE100v2/Image3.png" alt="IE100 Club — three core services section" style="object-position: 50% 50%;" />
         </div>
-        <div class="project-block project-block--half" style="aspect-ratio: 16 / 9;">
+        <div class="project-block project-block--half" style="aspect-ratio: 16 / 9; margin-top: calc(var(--project-spacing) / 2);">
           <img src="../Images/IE100v2/Image8.png" alt="IE100 Club — events and activities section" style="object-position: 50% 50%;" />
         </div>
 
-        <!-- S02: Design Approach — text left, leadership section right -->
-        <section class="project-text" id="s-02" data-section style="grid-template-columns: 45fr 55fr;">
+        <!-- S02: Design Approach — text left, leadership section right.
+             50/50 split + gap matched to the grid gutter (var(--project-spacing))
+             so the text and image align exactly under the two half-width
+             screenshots above. (Default project-text gap is wider — overridden
+             here only because this section sits under a 50/50 image row.) -->
+        <section class="project-text" id="s-02" data-section style="grid-template-columns: 1fr 1fr; gap: var(--project-spacing);">
           <div class="project-text__left">
             <h3 class="project-text__section-title">
               <span class="project-text__num">02</span>
@@ -106,20 +108,18 @@
             </h3>
 
             <p class="project-text__thesis">
-              Dark photography. Large Chinese type. A gold accent used exactly once per section. The visual language borrows from private banking — not the startup world.
+              Visual language borrowed from private banking — not the startup world.
             </p>
 
             <div class="project-text__body">
-              <p>Prestige is communicated through restraint. Near-black backgrounds anchor the full-bleed photography and let the Chinese headline typography read with weight. Clean white sections for the service cards create visual breath — contrast that signals craft rather than compromise.</p>
+              <p>Prestige through restraint: near-black backgrounds carry the full-bleed photography and let the Chinese headlines read with weight.</p>
             </div>
 
             <dl class="project-text__pipeline">
               <dt>Bilingual by architecture.</dt>
-              <dd>All content authored in Simplified Chinese — not translated but written for the audience. The nav, CTAs, and body copy are all Chinese-first. The site doesn't translate; it speaks.</dd>
+              <dd>Authored in Simplified Chinese, not translated — nav, CTAs and body all Chinese-first. The site doesn't translate; it speaks.</dd>
               <dt>Photography as positioning.</dt>
-              <dd>Hotel lounges, boardrooms, rooftop gatherings. Each image was chosen to communicate the social texture of the club — warm but selective, global but closed.</dd>
-              <dt>Gold accent, used sparingly.</dt>
-              <dd>A single warm gold runs through section labels, service icons, and link text. It marks hierarchy without decorating everything.</dd>
+              <dd>Hotel lounges, boardrooms, rooftop gatherings — chosen for the club's social texture: warm but selective.</dd>
             </dl>
           </div>
 
@@ -140,20 +140,20 @@
             </h3>
 
             <div class="project-text__body">
-              <p>The site covers the full member journey — from first impression to application. Each section has a distinct visual register that reflects its function.</p>
+              <p>The site runs the full member journey, first impression to application — each section in a distinct visual register.</p>
             </div>
 
             <dl class="project-text__pipeline">
               <dt>Homepage.</dt>
-              <dd>Two hero treatments — hotel lounge and boardroom — show the dual dimensions of the club: intimate and international. Opening statement loads before the hero.</dd>
+              <dd>Two heroes — intimate and international.</dd>
               <dt>About & Philosophy.</dt>
-              <dd>The four values that govern the network — value first, cross-generational co-creation, global vision, and trust above all. Stated plainly, the way the club itself operates.</dd>
+              <dd>Four values: value-first, co-creation, global vision, trust.</dd>
               <dt>Member Services.</dt>
-              <dd>Three pillars — 1-to-1 business matching, enterprise succession advisory, and the second-generation network — each a card with a dark photo overlay and a gold icon. Scannable in seconds.</dd>
+              <dd>Three pillars: business matching, succession, second-gen network.</dd>
               <dt>Events & Activities.</dt>
-              <dd>Annual forum, quarterly salons, corporate site visits, and the second-generation programme. A structured catalog with entry criteria visible.</dd>
+              <dd>Annual forum, quarterly salons, site visits.</dd>
               <dt>Leadership & Membership.</dt>
-              <dd>Founding team, advisory council, and the application path — the most trust-critical pages. Criteria stated clearly; for this audience, transparency about selectivity is itself a trust signal.</dd>
+              <dd>Founding team, advisory council, application path.</dd>
             </dl>
           </div>
 
@@ -191,14 +191,6 @@
 
     <script src="../script.js"></script>
     <script>
-      // IE100 hero — start at 2s, loop back to 2s on end (not native loop attr).
-      (function () {
-        var v = document.getElementById('ie100-vid');
-        if (!v) return;
-        v.addEventListener('loadedmetadata', function () { v.currentTime = 2; });
-        v.addEventListener('ended', function () { v.currentTime = 2; v.play(); });
-      })();
-
       (function () {
         var sections = Array.from(document.querySelectorAll('[data-section]'));
         var calibBtn = document.querySelector('[data-calibrate]');

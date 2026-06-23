@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IE100 CLUB — Hero Showcase</title>
+
+  <!-- Local rebuild of the live ie100club.com hero, embedded as the case-study
+       hero via <iframe>. Self-contained: the 6 slides + logo live in ./hero/.
+       Sized to FILL its iframe (height:100%) rather than the full viewport, so
+       it renders crisp at any size with no video-crop distortion. -->
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --navy: #16344F;
+      --navy-deep: #0E2438;
+      --steel: #3E6488;
+      --ink: #1A1A1A;
+      --slate: #5C6770;
+      --cream: #F7F6F2;
+      --white: #FFFFFF;
+      --line: #E3E1DB;
+      --gold: #B79256;
+      --serif: "Noto Serif SC", "Songti SC", Georgia, serif;
+      --display: "Cormorant Garamond", "Noto Serif SC", serif;
+      --sans: "Inter", "Noto Sans SC", "PingFang SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --maxw: 1240px;
+      --gutter: clamp(20px, 3.5vw, 44px);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      font-family: var(--sans); color: var(--ink); background: var(--navy-deep);
+      line-height: 1.75; font-weight: 400; overflow: hidden;
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+
+    /* ===== this is a non-interactive showcase: nothing is clickable ===== */
+    a, button { pointer-events: none; cursor: default; }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 13px; font-weight: 500; letter-spacing: 0.04em; color: var(--gold);
+    }
+    .eyebrow::before { content: ""; width: 30px; height: 1px; background: currentColor; opacity: .65; }
+
+    /* Buttons */
+    .btn {
+      display: inline-block; font-size: 14px; font-weight: 500;
+      letter-spacing: 0.04em; padding: 16px 36px; border-radius: 0;
+      cursor: pointer; border: 1px solid transparent;
+      background-size: 100% 200%; background-position: 0 0;
+      transition: background-position .55s var(--ease), color .45s var(--ease), border-color .45s var(--ease);
+    }
+    .btn-light {
+      color: var(--navy);
+      background-image: linear-gradient(to bottom, #fff 0 50%, var(--navy) 50% 100%);
+    }
+    .btn-outline {
+      color: #fff; border-color: rgba(255,255,255,.55);
+      background-image: linear-gradient(to bottom, transparent 0 50%, #fff 50% 100%);
+    }
+
+    /* ===== NAVBAR ===== */
+    header {
+      position: absolute; top: 0; left: 0; right: 0; z-index: 100;
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between; height: 78px;
+    }
+    .logo {
+      font-family: var(--display); font-size: 27px; font-weight: 600;
+      letter-spacing: 0.02em; color: #fff; display: flex; align-items: center;
+    }
+    .logo img { height: 44px; width: auto; display: block; filter: brightness(0) invert(1); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 14px; font-weight: 500; letter-spacing: 0.02em;
+      color: rgba(255,255,255,.9); position: relative;
+    }
+    .nav-cta { display: flex; align-items: center; gap: 16px; }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative; min-height: 100%; height: 100%;
+      display: flex; align-items: flex-end; color: #fff; overflow: hidden;
+    }
+    .hero-slides { position: absolute; inset: 0; }
+    .hero-slide {
+      position: absolute; inset: 0; background-size: cover; background-position: center;
+      opacity: 0; transform: scale(1.04);
+      transition: opacity 1.6s ease-in-out; will-change: opacity, transform;
+    }
+    .hero-slide.active { opacity: 1; animation: kenburns 7s ease-out forwards; }
+    @keyframes kenburns { from { transform: scale(1.04); } to { transform: scale(1.12); } }
+    .hero-overlay {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(180deg, rgba(14,36,56,.6) 0%, rgba(14,36,56,.25) 35%, rgba(14,36,56,.8) 100%);
+    }
+    .hero-inner { position: relative; z-index: 2; padding-bottom: 90px; padding-top: 120px; }
+
+    /* Slide indicators — animated progress bars */
+    .hero-dots {
+      position: absolute; bottom: 38px; left: 50%; transform: translateX(-50%);
+      z-index: 3; display: flex; gap: 16px; align-items: center;
+    }
+    .hero-dots button { padding: 0; border: 0; cursor: pointer; background: transparent; }
+    .hero-dots .track {
+      position: relative; width: 52px; height: 2px; border-radius: 0;
+      background: rgba(255,255,255,.3); overflow: hidden;
+    }
+    .hero-dots .fill {
+      position: absolute; left: 0; top: 0; height: 100%; width: 0;
+      background: var(--gold); box-shadow: 0 0 8px rgba(183,146,86,.55);
+    }
+    .hero-dots button.active .fill { animation: fillbar 6s linear forwards; }
+    @keyframes fillbar { from { width: 0; } to { width: 100%; } }
+
+    .hero .eyebrow { color: rgba(255,255,255,.85); }
+    .hero h1 {
+      font-family: var(--serif); font-weight: 500; font-size: clamp(38px, 5.6vw, 70px);
+      line-height: 1.28; letter-spacing: 0.01em; max-width: 18ch; margin: 26px 0 26px;
+    }
+    .hero p { font-size: 17px; font-weight: 400; line-height: 1.9; max-width: 48ch; color: rgba(255,255,255,.85); margin-bottom: 38px; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-slide.active { animation: none; }
+      .hero-dots button.active .fill { animation: none; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="wrap nav">
+      <a class="logo"><img src="./hero/Logo-Flag.png" alt="IE100 CLUB 国际企业家100俱乐部" /></a>
+      <nav>
+        <ul class="nav-links">
+          <li><a>首页</a></li>
+          <li><a>关于我们</a></li>
+          <li><a>企业理念</a></li>
+          <li><a>会员服务</a></li>
+          <li><a>活动动态</a></li>
+          <li><a>联系我们</a></li>
+        </ul>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-light">立即申请</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-slides" id="heroSlides">
+      <div class="hero-slide" style="background-image:url('./hero/Image21.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('./hero/Image3.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('./hero/Image1.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('./hero/Image16.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('./hero/Image5.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('./hero/Image4.jpg')"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="wrap hero-inner">
+      <span class="eyebrow">国际企业家100俱乐部</span>
+      <h1>连接全球华商，重塑<br>价值版图</h1>
+      <p>以新加坡为枢纽，构建高信任的全球华商协作网络——资源对接、企业传承、世代相传，仅限受邀加入。</p>
+      <div class="hero-actions">
+        <a class="btn btn-light">了解会员</a>
+        <a class="btn btn-outline">走进 IE100</a>
+      </div>
+    </div>
+    <div class="hero-dots" id="heroDots"></div>
+  </section>
+
+  <!-- ===== Hero slideshow (crossfade + Ken Burns) ===== -->
+  <script>
+    (function () {
+      const slides = Array.from(document.querySelectorAll('#heroSlides .hero-slide'));
+      const dotsWrap = document.getElementById('heroDots');
+      if (!slides.length) return;
+
+      const INTERVAL = 6000; // ms each slide is visible
+      let current = 0;
+      let timer = null;
+
+      const dots = slides.map((_, i) => {
+        const b = document.createElement('button');
+        b.innerHTML = '<span class="track"><span class="fill"></span></span>';
+        dotsWrap.appendChild(b);
+        return b;
+      });
+
+      function show(i) {
+        slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+        dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+        current = i;
+      }
+      function next() { show((current + 1) % slides.length); }
+      function restart() { clearInterval(timer); timer = setInterval(next, INTERVAL); }
+
+      show(0);
+      restart();
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) clearInterval(timer); else restart();
+      });
+    })();
+  </script>
+</body>
+</html>
