@@ -20,6 +20,273 @@
   <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="../favicon-180.png" />
   <link rel="stylesheet" href="../styles.css" />
+
+  <!-- CompassStu page-scoped refinements — isolated via .page--compassstu so no
+       other case study is affected. Cleans up the type hierarchy, spacing rhythm,
+       rendering crispness, and body contrast. Tune --c-text-muted below. -->
+  <style>
+    .page--compassstu {
+      --c-text-muted: #c4c4c4;    /* lifted a half-step for crisper prose on near-black (was #b4b4b4) */
+    }
+
+    /* Spacing — reconnect the two columns (the 6rem gap read as two separate
+       pages) and remove the doubled whitespace above section titles. */
+    .page--compassstu .project-text { gap: var(--s-300); align-items: center; }   /* balance text & graphic vertically (sections with inline stretch keep full height) */
+    .page--compassstu .project-text__section-title { margin-top: var(--s-300); }
+
+    /* Type hierarchy — subsection titles were SMALLER than body text; lift
+       them into a real step, and open the thesis up over the section title. */
+    .page--compassstu .project-text__subsection-title {
+      font-size: clamp(1.3rem, 1.5vw, 1.5rem);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .page--compassstu .project-text__thesis {
+      font-size: clamp(1.6rem, 3.1vw, 2.3rem);
+    }
+
+    /* Crisper rendering — drop the 0.4px halo that fakes weight and softens glyphs
+       everywhere (the new REAL weight below replaces the faked weight). */
+    .page--compassstu .project-text__lead,
+    .page--compassstu .project-text__thesis,
+    .page--compassstu .project-text__section-title,
+    .page--compassstu .project-text__tagline,
+    .page--compassstu .project__title,
+    .page--compassstu .project__meta,
+    .page--compassstu .approach__title,
+    .page--compassstu .proof-layer__body { text-shadow: none; }
+
+    /* ★ STEP-CHANGE 1 — give the display type a real WEIGHT JUMP so the page finally
+       has a confident white-on-black tonal anchor. The lead/thesis sat at a timid
+       450 (read as "enlarged body text"); pushing them to 680/620 with tighter
+       optical tracking turns large type into DISPLAY type. Body stays 400, so the
+       hierarchy gap widens from ~50 to ~250 weight units — that gap is composition. */
+    .page--compassstu .project-text__lead {
+      font-size: clamp(2.4rem, 5.6vw, 3.9rem); line-height: 1.02;
+      font-weight: 680; letter-spacing: -0.04em;
+    }
+    .page--compassstu .project-text__thesis { font-weight: 620; letter-spacing: -0.022em; }
+
+    /* Section numbers — keep the original muted gray so they match every other
+       case-study page (no accent colour). */
+    .page--compassstu .project-text__num,
+    .page--compassstu .project-text__subsection-num,
+    .page--compassstu .approach__num { color: var(--c-light-gray-muted); }
+
+    /* ---- Premium-dark depth — the product is dark by design, so lift the
+       panels off the near-black page and let the existing #7c5cfc accent carry
+       the colour, instead of chasing colour the dark UI can't provide. ---- */
+
+    /* Ambient accent glow at the top of the page (behind the hero) — the only
+       "colour" a dark theme really needs. Subtle; lower the alpha or delete. */
+    .page--compassstu {
+      background: radial-gradient(1200px 480px at 50% -120px,
+        rgba(124, 92, 252, 0.10), transparent 70%);
+    }
+
+    /* Hairline ring on every media panel so the dark screenshots and cards stop
+       melting into the near-black background. (Drop shadows don't read on
+       near-black — a light 1px ring does the separation.) */
+    .page--compassstu .project-block {
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    /* Unify the data-viz on the accent: the rubric bars were plain white while
+       the role-fit bars were already violet. One shared accent reads as
+       "designed" and adds the colour the page is missing. */
+    .page--compassstu .rubric-card__fill {
+      background: linear-gradient(90deg,
+        color-mix(in srgb, #7c5cfc 55%, transparent), #7c5cfc);
+    }
+
+    /* Every section now carries its own honest number (01–15), so the old
+       "demote un-numbered titles" rule is gone — all section headings are peers. */
+
+    /* ════════════════════════════════════════════════════════════════
+       Refinement pass — 留白 · 克制 · 气质 · 高级感
+       Layered on top. No structural / layout changes: pure breathing
+       room, restraint, and type polish. All scoped to .page--compassstu. */
+
+    /* 留白 + 高级感 — open the media gutter (was a tight 1rem, panels nearly
+       touched) and give every panel a softer, more deliberate corner. */
+    .page--compassstu {
+      --project-spacing: 1.6rem;
+      --site-border-radius: 0.85rem;
+    }
+
+    /* Ambient violet behind the hero — committed to a level that actually registers
+       as faint atmosphere (0.05 was below the perceptual floor: it cost a gradient
+       and delivered nothing). Ties to the new violet chapter numerals. */
+    .page--compassstu {
+      background: radial-gradient(1200px 540px at 50% -140px,
+        rgba(124, 92, 252, 0.12), transparent 72%);
+    }
+
+    /* ★ STEP-CHANGE 4 — CONTAIN the imagery. The screenshots ARE the proof of work,
+       but at distance the dark ones bleed into #0c0d10. One confident containing
+       edge (10% ring) plus a near-invisible grounding floor makes every panel read
+       as a framed exhibit with presence, not a dark rectangle melting into the page. */
+    .page--compassstu .project-block {
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.10),
+                  0 26px 64px -40px rgba(0, 0, 0, 0.9);
+    }
+
+    /* 留白 — BIGGER vertical intervals between sections. "Rhythm of big intervals"
+       is one of the few signals the eye reads at distance. ~10rem lets each section
+       land as its own chapter, widening the contrast against the tight media rows. */
+    .page--compassstu .project-text,
+    .page--compassstu .approach {
+      padding-block: calc(var(--s-500) + var(--s-500));
+    }
+    /* The Proof Layer is a contained CARD, not an open section — its 10rem would be
+       internal padding, leaving the info marooned. Keep it comfortable; the gap to
+       its neighbours already supplies the inter-section spacing. */
+    .page--compassstu .proof-layer { padding-block: var(--s-400); }
+    .page--compassstu .project__header { padding-bottom: var(--s-300); }
+
+    /* 气质 — let the body breathe: a more relaxed line and real space between
+       paragraphs reads as considered, not dense. */
+    .page--compassstu .project-text__body p { line-height: 1.72; }
+    .page--compassstu .project-text__body p + p { margin-top: 1.05em; }
+
+    /* ★ STEP-CHANGE 2 — the 01–15 numbers become the page's SIGNATURE. They are the
+       ONE place the brand violet now lands at typographic SIZE: a large, light-weight
+       violet figure stacked above each white section name, repeated 15× down the
+       page. Light 300 against the heavier label is a second weight contrast inside
+       the mark. The only coloured anchor on an otherwise mono page — its identity. */
+    .page--compassstu .project-text__section-title,
+    .page--compassstu .approach__title {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .page--compassstu .project-text__num,
+    .page--compassstu .approach__num {
+      font-size: 1.75rem;
+      font-weight: 300;
+      letter-spacing: 0;
+      line-height: 1;
+      color: #7c5cfc;
+      font-variant-numeric: tabular-nums;
+    }
+    /* the section name carries the weight; keep its large-display tracking tight. */
+    .page--compassstu .project-text__label,
+    .page--compassstu .approach__label { letter-spacing: -0.01em; }
+
+    /* 留白 — a touch more air between the feature-list rows. */
+    .page--compassstu .project-text__pipeline { row-gap: var(--s-200); }
+
+    /* ★ STEP-CHANGE 3 — kill the flat grey CMS bar. A solid mid-grey strip fused to
+       the image is the single most "templated / Notion-callout" element on the page.
+       Restyle it as a small tracked uppercase caption ABOVE the media, and give the
+       media back all four corners so it reads as one clean framed exhibit (museum
+       caption), not a banner welded to a picture. */
+    .page--compassstu .labeled-card__label {
+      background: transparent;
+      color: var(--c-text-muted);
+      padding: 0 0 var(--s-100);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-align: left;
+      border: none;
+    }
+    .page--compassstu .labeled-card__media {
+      border-radius: var(--site-border-radius);
+    }
+
+    /* Gap 09 → 10 — slightly tighten the interval into Pathway (both are tall,
+       text-heavy sections with no media row between them to break it up). */
+    .page--compassstu #s-10 { padding-top: calc(var(--s-500) + var(--s-250)); }
+
+    /* ── Section 13 (Tech Architecture) — the only all-text section, so give it
+       life: a scroll-driven stagger (each line rises as it enters the viewport)
+       and a violet hover that focuses one architecture decision at a time.
+       Pure CSS; degrades to fully-visible where scroll-timelines aren't supported. */
+    @keyframes s13-rise {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (animation-timeline: view()) {
+        .page--compassstu #s-13 .project-text__section-title,
+        .page--compassstu #s-13 .project-text__thesis,
+        .page--compassstu #s-13 .project-text__body,
+        .page--compassstu #s-13 .project-text__pipeline > * {
+          animation: s13-rise linear both;
+          animation-timeline: view();
+          animation-range: entry 5% entry 70%;
+        }
+      }
+    }
+    .page--compassstu #s-13 .project-text__pipeline dt {
+      transition: color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .page--compassstu #s-13 .project-text__pipeline dt:hover {
+      color: #7c5cfc;
+      transform: translateX(5px);
+    }
+    .page--compassstu #s-13 .project-text__pipeline dt:hover + dd { color: var(--c-text); }
+
+    /* ── Light mode — Apple style. The dark-tuned muted grey (#c4c4c4) is invisible
+       on white, so day mode gets Apple's actual palette: a soft #f5f5f7 field,
+       near-black #1d1d1f text, #6e6e73 secondary — with media panels lifted by a
+       hairline + soft shadow instead of the dark mode's glowing white ring. */
+    html.theme-light body { background: #f5f5f7; }
+    html.theme-light .page--compassstu {
+      --c-text: #1d1d1f;
+      --c-text-muted: #6e6e73;
+      background:
+        radial-gradient(1100px 520px at 50% -120px, rgba(124, 92, 252, 0.05), transparent 70%),
+        #f5f5f7;
+    }
+    html.theme-light .page--compassstu .project-block {
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 14px 36px -22px rgba(0, 0, 0, 0.2);
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       Responsive — the page-scoped overrides above (dramatic section padding,
+       oversized display type, large violet numerals) out-specify the base mobile
+       rules in styles.css, so they each need their own breakpoints. Column
+       stacking and component type are already handled by the base; these only
+       rein in what this file added. */
+
+    /* Tablet / small laptop — ease the dramatic chapter rhythm one step. */
+    @media (max-width: 1024px) {
+      .page--compassstu .project-text,
+      .page--compassstu .approach { padding-block: calc(var(--s-500) + var(--s-200)); }
+      .page--compassstu #s-10 { padding-top: calc(var(--s-500) + var(--s-100)); }
+    }
+
+    /* Phone / tablet-portrait (zoom off, columns stacked). Pull the big intervals
+       right down and bring the heavy display type to a phone scale. */
+    @media (max-width: 768px) {
+      .page--compassstu .project-text,
+      .page--compassstu .approach { padding-block: var(--s-400); }
+      .page--compassstu #s-10 { padding-top: var(--s-400); }
+      /* The Proof Layer is a 2-col grid the base never stacks — stack it here. */
+      .page--compassstu .proof-layer { padding-block: var(--s-300); grid-template-columns: 1fr; }
+      .page--compassstu .project-text__lead {
+        font-size: clamp(1.85rem, 7vw, 2.6rem); letter-spacing: -0.02em; line-height: 1.08;
+      }
+      .page--compassstu .project-text__num,
+      .page--compassstu .approach__num { font-size: 1.5rem; }
+    }
+
+    /* Small phone — tighten further. */
+    @media (max-width: 600px) {
+      .page--compassstu .project-text,
+      .page--compassstu .approach { padding-block: var(--s-300); }
+      .page--compassstu #s-10 { padding-top: var(--s-300); }
+      .page--compassstu .project-text__lead { font-size: clamp(1.55rem, 8vw, 2.1rem); }
+      .page--compassstu .project-text__thesis { font-size: clamp(1.35rem, 6vw, 1.75rem); }
+      .page--compassstu .project-text__num,
+      .page--compassstu .approach__num { font-size: 1.3rem; }
+    }
+  </style>
+
   <!-- Microsoft Clarity analytics -->
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -74,8 +341,7 @@
           </h3>
 
           <div class="project-text__body">
-            <p>CompassStu measures it in work demonstrated — AI-graded against a four-dimension rubric.</p>
-            <p>Scored, signed, and shareable as a single URL an employer can verify in a click.</p>
+            <p>It measures work demonstrated — AI-graded against a four-dimension rubric, shareable as a single URL.</p>
             <p>Time-stamped. Immutable.</p>
           </div>
 
@@ -92,15 +358,9 @@
           </h3>
 
           <div class="project-text__body">
-            <p>The adult upskilling industry is large, well-funded, and broken at the seam that matters most — the
-              handoff to a job.</p>
-            <p>Today's platforms compete on catalog size and completion rate. They measure what is easy to count: hours
-              watched, modules finished, certificates issued. None of it tells an employer whether the learner can do
-              the work.</p>
-            <p>The result is a market full of certificates no one trusts.</p>
-            <p>Recruiters discount them.</p>
-            <p>Hiring managers ask for take-home tests anyway.</p>
-            <p>Learners pay for signal that does not carry.</p>
+            <p>A large, well-funded industry, broken at the seam that matters most — the handoff to a job.</p>
+            <p>Platforms compete on completions: hours watched, modules finished. None of it proves you can do the
+              work — so the certificates go untrusted.</p>
           </div>
 
           <dl class="project-text__compare">
@@ -136,17 +396,13 @@
             We do not sell knowledge. We produce candidates.
           </p>
 
-          <div class="project-text__body">
-            <p>Every course is built on the same three-layer pipeline.</p>
-          </div>
-
           <dl class="project-text__pipeline">
             <dt>Learn.</dt>
-            <dd>Active recall, not passive video. Eight-to-ten minute lessons engineered for attention.</dd>
+            <dd>Active recall, not passive video.</dd>
             <dt>Simulate.</dt>
-            <dd>AI-graded bridge tasks. Real work, scored against a four-dimension rubric.</dd>
+            <dd>AI-graded bridge tasks against a four-dimension rubric.</dd>
             <dt>Prove.</dt>
-            <dd>A timestamped, verifiable record an employer can read in a single URL.</dd>
+            <dd>A verifiable record, readable in one URL.</dd>
           </dl>
         </div>
 
@@ -160,8 +416,7 @@
       <!-- Card 10: labeled — grey header bar fused to the image below,
              both share the same width and round only the outer corners. -->
       <div class="labeled-card">
-        <div class="labeled-card__label"><span style="font-weight: 700;">Proof</span> : A timestamped, verifiable
-          record. In a single URL.</div>
+        <div class="labeled-card__label"><span style="font-weight: 700;">Proof</span> — a verifiable record, in a single URL.</div>
         <div class="project-block project-block--full labeled-card__media" style="aspect-ratio: 2844 / 1454;">
           <img src="../Images/CompassStu/CompassStu6.png" alt="CompassStu pipeline outcome" />
         </div>
@@ -176,7 +431,7 @@
           <span class="approach__label">Three Learning Engines</span>
         </h3>
         <p class="approach__intro">
-          The Learn &rarr; Simulate &rarr; Prove pipeline runs identically every time — what changes is the cognitive demand it makes.
+          The pipeline runs identically every time. What changes is the cognitive demand.
         </p>
 
         <div class="approach__list">
@@ -192,7 +447,7 @@
               </span>
             </summary>
             <div class="approach-item__body">
-              <p>For frameworks, persuasion, and high-stakes judgment. Graded on clarity of thinking, structural depth, and contextual relevance.</p>
+              <p>For frameworks, persuasion, and judgment. Graded on clarity and structural depth.</p>
             </div>
           </details>
 
@@ -208,7 +463,7 @@
               </span>
             </summary>
             <div class="approach-item__body">
-              <p>For execution and technical precision — syntax, deployment, infrastructure. Graded on structural correctness and elegance of solution.</p>
+              <p>For execution and technical precision. Graded on correctness and elegance.</p>
             </div>
           </details>
 
@@ -224,7 +479,7 @@
               </span>
             </summary>
             <div class="approach-item__body">
-              <p>For data-driven environments. Graded on methodology, signal isolation, and the rigor of the argument.</p>
+              <p>For data-driven work. Graded on methodology and rigor.</p>
             </div>
           </details>
         </div>
@@ -241,30 +496,24 @@
           </h3>
 
           <p class="project-text__thesis">
-            A CompassStu lesson lasts eight to ten minutes. It runs on a three-panel page and a vocabulary of twelve
-            cards.
+            A lesson lasts eight minutes — a three-panel page, a vocabulary of twelve cards.
           </p>
 
           <div class="project-text__body">
             <h4 class="project-text__subsection-title">
               <span>The page</span>
             </h4>
-            <p>A fixed grid. Module navigation on the left, one card in the centre, the tutor panel on the right.
-              Nothing else moves. Only the card area scrolls.</p>
+            <p>A fixed grid — module nav left, one card centre, tutor right. Only the card area scrolls.</p>
 
             <h4 class="project-text__subsection-title">
               <span>The cards</span>
             </h4>
-            <p>Each lesson uses seven to twelve cards. Every card gates the next — a prediction has to be revealed, a
-              quick check answered, an apply question written before the learner can advance. The first required input
-              arrives within forty-five seconds.</p>
+            <p>Seven to twelve cards, each gating the next. The first required input arrives within forty-five seconds.</p>
 
             <h4 class="project-text__subsection-title">
               <span>The close</span>
             </h4>
-            <p>The final card is a mastery check — two short questions and a confidence selection. On submit, the lesson
-              is marked complete and the learner is handed off to the bridge task, where the work that earns the
-              certificate begins.</p>
+            <p>A final mastery check, then handoff to the bridge task — where the work that earns the certificate begins.</p>
           </div>
         </div>
 
@@ -290,18 +539,13 @@
             An AI coach built into every lesson — course-scoped, bilingual, with every reply verified before it reaches the screen.
           </p>
 
-          <div class="project-text__body">
-            <p>Compass Tutor runs inside every lesson. It knows the course, the module, and the card the learner is on. Every reply it generates is passed through a second AI check — any answer that contradicts the lesson is blocked before it reaches the screen.</p>
-            <p>In teach-back mode, the learner explains a concept in their own words and the tutor evaluates comprehension, surfacing exactly what was missed.</p>
-          </div>
-
           <dl class="project-text__pipeline">
             <dt>Course-Aware Context.</dt>
-            <dd>Scoped to the current lesson. Never answers outside the curriculum boundary, regardless of how the question is phrased.</dd>
+            <dd>Scoped to the lesson. Never answers outside the curriculum.</dd>
             <dt>Bilingual.</dt>
-            <dd>Responds in English or Mandarin based on the course language — no setting to switch.</dd>
+            <dd>English or Mandarin, by course — no setting to switch.</dd>
             <dt>Teach-Back Mode.</dt>
-            <dd>Learner explains the concept back; the AI evaluates comprehension and flags the specific gap.</dd>
+            <dd>The learner explains it back; the AI grades comprehension and flags the gap.</dd>
           </dl>
         </div>
 
@@ -358,18 +602,17 @@
           </h3>
 
           <div class="project-text__body">
-            <p>After every module, the system reads the learner's score and routes them into one of three tracks:
-              Advanced (≥&nbsp;85%), Standard (70–84%), or Foundation (&lt;&nbsp;70%). The certification bar never
-              moves — only the scaffolding adapts.</p>
+            <p>After each module, the score routes the learner — Advanced (≥&nbsp;85%), Standard (70–84%), or
+              Foundation (&lt;&nbsp;70%). The bar never moves; only the scaffolding adapts.</p>
           </div>
 
           <dl class="project-text__pipeline">
             <dt>Real-Time Recalibration.</dt>
-            <dd>Route assigned instantly after each module. No wait, no manual review.</dd>
+            <dd>Route assigned instantly — no wait, no manual review.</dd>
             <dt>Smart Recommendations.</dt>
-            <dd>AI surfaces the next highest-priority skill and queues targeted review automatically.</dd>
+            <dd>AI queues the next highest-priority skill automatically.</dd>
             <dt>AI Path Diagnosis.</dt>
-            <dd>On first sign-in, a capability assessment generates a personalised learning-path recommendation before the learner picks a single course.</dd>
+            <dd>A first-sign-in assessment builds the path before they pick a course.</dd>
           </dl>
 
           <h4 class="project-text__subsection-title" style="margin-top: var(--s-300);">
@@ -377,7 +620,7 @@
           </h4>
           <p class="project-text__body" style="margin-bottom: 0;">
             <span style="display:block; font-size: clamp(0.8rem, 0.95vw, 0.9rem); line-height: 1.55; color: var(--c-text-muted);">
-              Every course auto-generates a live visual graph of atomic skills. Each node sits in one of four states — updated after every interaction without manual setup.
+              Every course auto-generates a live skill graph — each node in one of four states, updated as you go.
             </span>
           </p>
 
@@ -423,13 +666,13 @@
 
           <dl class="project-text__pipeline" style="margin-top: var(--s-300);">
             <dt>Graded by GPT-4o.</dt>
-            <dd>Four dimensions: relevance, structure &amp; logic, professional quality, specificity &amp; depth. Localized rubric for Mandarin-language courses.</dd>
+            <dd>Four dimensions: relevance, structure, quality, depth. Localized for Mandarin courses.</dd>
             <dt>What comes back.</dt>
-            <dd>A score (0–100), a headline verdict, specific feedback, one named strength, and one concrete improvement — every time.</dd>
+            <dd>A score, a verdict, specific feedback, one strength, one fix — every time.</dd>
             <dt>Pass threshold: 70.</dt>
-            <dd>Up to five graded attempts. After the fifth, the learner advances so momentum is never lost — but the record keeps the real score and attempt count. Nothing is hidden from an employer.</dd>
+            <dd>Up to five attempts; the record keeps the real score and count. Nothing hidden.</dd>
             <dt>Certificates are permanent.</dt>
-            <dd>They survive any progress reset. Proof of prior work is never lost, even if a learner restarts a course.</dd>
+            <dd>They survive any reset. Proof of work is never lost.</dd>
           </dl>
 
         </div>
@@ -494,13 +737,12 @@
           </p>
 
           <div class="project-text__body">
-            <p>Most platforms forget you between sessions. CompassStu accumulates. Every answer you write, every bridge task you submit, every tutor exchange you have — all of it feeds four AI-powered layers that grow with you automatically.</p>
-            <p>No manual note-taking. No tagging. The system builds your knowledge base while you learn.</p>
+            <p>Most platforms forget you between sessions. CompassStu accumulates — every answer feeds four AI layers that grow on their own.</p>
           </div>
 
           <div class="hub-role-fit">
             <p class="hub-role-fit__title">Role Fit Snapshot</p>
-            <p style="font-size: 12px; color: var(--c-text-muted); margin: 0 0 var(--s-100);">Your certificates evaluated in parallel against three target roles.</p>
+            <p style="font-size: 12px; color: var(--c-text-muted); margin: 0 0 var(--s-100);">Your certificates, scored against three target roles.</p>
             <div class="hub-role-fit__roles">
               <div class="hub-role-fit__role">
                 <span class="hub-role-fit__role-name">AI Product Manager</span>
@@ -534,7 +776,7 @@
               <span class="hub-layer__num">01</span>
               <div>
                 <p class="hub-layer__title">Knowledge Hub</p>
-                <p class="hub-layer__body">AI-summarized notes generated automatically from every lesson you complete — a personal knowledge base that grows without any manual effort. Ask it a question and it answers grounded only in your own notes, not the internet.</p>
+                <p class="hub-layer__body">AI notes from every lesson — ask them anything; they answer from your work, not the internet.</p>
                 <span class="hub-layer__feature">Ask my notes</span>
               </div>
             </div>
@@ -543,7 +785,7 @@
               <span class="hub-layer__num">02</span>
               <div>
                 <p class="hub-layer__title">My Playbook</p>
-                <p class="hub-layer__body">AI scans your highest-scoring bridge-task responses and extracts the reusable methods and frameworks inside them. A growing library of your own techniques — not generic best practices, but the specific approaches that worked for you.</p>
+                <p class="hub-layer__body">AI extracts the methods inside your best submissions — your techniques, not generic best practice.</p>
               </div>
             </div>
 
@@ -551,7 +793,7 @@
               <span class="hub-layer__num">03</span>
               <div>
                 <p class="hub-layer__title">Growth Patterns</p>
-                <p class="hub-layer__body">AI reads across all your submissions to name your recurring strengths and blind spots — quoting your actual words back. Coaching grounded in your real work, not an anonymous rubric average.</p>
+                <p class="hub-layer__body">AI names your recurring strengths and blind spots, quoting your own words back.</p>
               </div>
             </div>
 
@@ -559,7 +801,7 @@
               <span class="hub-layer__num">04</span>
               <div>
                 <p class="hub-layer__title">Career Proof</p>
-                <p class="hub-layer__body">AI-generated proof cards that translate your scored submissions into language an employer reads: demonstrated competencies, performance tier, and the specific evidence behind the claim. Not a certificate — a case for your hire.</p>
+                <p class="hub-layer__body">Proof cards an employer reads: competencies, tier, evidence. Not a certificate — a case for your hire.</p>
                 <span class="hub-layer__feature">Shareable public link · employer-readable</span>
               </div>
             </div>
@@ -581,27 +823,22 @@
           </p>
 
           <div class="project-text__body">
-            <p>Isolated courses are a commodity — learners finish, earn a certificate, and walk away
-              with no map of what&rsquo;s next. CompassStu builds structured pathways from beginner to
-              specialist, where each tier unlocks only after AI-verified work samples pass.</p>
+            <p>Isolated courses are a commodity — finish, certify, walk away with no map. CompassStu builds pathways
+              from beginner to specialist, each tier unlocked only by AI-verified work.</p>
           </div>
 
           <dl class="project-text__pipeline">
-            <dt>Category tracks, not course catalogs.</dt>
-            <dd>Each pathway maps a domain end-to-end. Learners enter a track; the platform routes them
-              forward based on assessed performance, not manual curation.</dd>
+            <dt>Category tracks, not catalogs.</dt>
+            <dd>Each pathway maps a domain end-to-end; the platform routes on performance, not curation.</dd>
 
             <dt>High-demand pathways only.</dt>
-            <dd>Three tracks: AI Product Development, Prompt Engineering &amp; LLM Ops, AI-Augmented
-              Business Analysis. Depth over breadth.</dd>
+            <dd>Three tracks — AI Product Development, Prompt &amp; LLM Ops, Business Analysis. Depth over breadth.</dd>
 
             <dt>Retention locked by design.</dt>
-            <dd>A learner mid-pathway has verified competency records and a visible next milestone.
-              Switching platforms means starting over — stickiness by structure, not gamification.</dd>
+            <dd>Mid-pathway you have verified records and a next milestone. Switching means starting over.</dd>
 
             <dt>$10/month, single tier.</dt>
-            <dd>Priced just under the market median — one flat subscription, no per-course fees, no upsell ladder.
-              The model bets on pathway retention over ARPU, and keeps the funnel and the build simple.</dd>
+            <dd>One flat price, just under market median. Betting on retention over ARPU.</dd>
           </dl>
         </div>
 
@@ -620,8 +857,7 @@
                   <span class="pathway-tier__level">Foundation</span>
                 </div>
                 <p class="pathway-tier__title">AI Product Thinking</p>
-                <p class="pathway-tier__desc">Problem framing, model selection, AI product scoping.
-                  Assessment: brief graded against six practitioner criteria.</p>
+                <p class="pathway-tier__desc">Problem framing, model selection, scoping. Assessed by a graded brief.</p>
               </div>
             </div>
 
@@ -640,8 +876,7 @@
                   <span class="pathway-tier__level">Practitioner</span>
                 </div>
                 <p class="pathway-tier__title">Prompt Systems &amp; LLM Integration</p>
-                <p class="pathway-tier__desc">Prompt systems, RAG, and evaluation loops.
-                  Assessment: pipeline graded on consistency and failure-mode coverage.</p>
+                <p class="pathway-tier__desc">Prompt systems, RAG, evaluation loops. Assessed by a graded pipeline.</p>
               </div>
             </div>
 
@@ -660,8 +895,7 @@
                   <span class="pathway-tier__level">Specialist</span>
                 </div>
                 <p class="pathway-tier__title">AI Product Launch &amp; Iteration</p>
-                <p class="pathway-tier__desc">GTM strategy, feedback loops, model-improvement cycles.
-                  Assessment: launch retrospective with documented iteration decisions.</p>
+                <p class="pathway-tier__desc">GTM, feedback loops, iteration cycles. Assessed by a launch retrospective.</p>
               </div>
             </div>
           </div>
@@ -696,22 +930,17 @@
             <h4 class="project-text__subsection-title">
               <span>Basic Nav Layer</span>
             </h4>
-            <p>Entry and routing. A learner signs in with Gmail and either browses the catalog or lets Discover My
-              Path diagnose their capability and generate a pathway. Both routes converge at subscription and the
-              first lesson.</p>
+            <p>Entry and routing — sign in, then browse or let Discover My Path build a pathway. Both converge at the first lesson.</p>
 
             <h4 class="project-text__subsection-title">
               <span>Learning Exp Layer</span>
             </h4>
-            <p>Core delivery. Lessons flow into the bridge task, teach-back, and module assessment, with progress
-              saved continuously. Compass Tutor attaches throughout; Teach the AI verifies comprehension over five
-              rounds before a module closes.</p>
+            <p>Core delivery — lessons, bridge task, teach-back, and assessment, with Compass Tutor throughout.</p>
 
             <h4 class="project-text__subsection-title">
               <span>Learning Outcomes Layer</span>
             </h4>
-            <p>Output and persistence. Completed work feeds the Learning Hub&rsquo;s four AI artefacts and surfaces
-              on the profile as certificates, dashboards, and a public share link.</p>
+            <p>Output and persistence — work feeds the Hub&rsquo;s AI artefacts and the public profile.</p>
           </div>
         </div>
       </section>
@@ -726,25 +955,16 @@
           </h3>
 
           <div class="project-text__body">
-            <p>An admin portal lets the content team publish courses end-to-end — no developer required.
-              A markdown&rarr;JSONB pipeline writes directly to the database; a publish is live on the next page load.</p>
+            <p>An admin portal publishes courses end-to-end — no developer required. Content lives as data, never hardcoded.</p>
           </div>
 
           <dl class="project-text__pipeline">
-            <dt>Dual-runtime parser.</dt>
-            <dd>One parser, two runtimes — Node CLI for batch ingest, browser module for in-editor publish.
-              Output: typed JSON into <code>lessons.lesson_data</code>.</dd>
-            <dt>Round-trippable format.</dt>
-            <dd>JSON re-hydrates to editable markdown automatically. No export step, no stale drafts.</dd>
-            <dt>Idempotent publish, 24h rollback.</dt>
-            <dd>Upsert on <code>(course_slug, module_number, lesson_number)</code>. A DB trigger snapshots
-              prior rows into <code>lesson_versions</code> — version history without app code.</dd>
-            <dt>Live AI tutor config.</dt>
-            <dd>Tutor prompt and scope live in <code>course_ai_context</code>, read on every chat turn.
-              Admin saves reflect instantly.</dd>
-            <dt>Course Discovery Index.</dt>
-            <dd>Every publish writes course structure and objectives into the discovery index. Discover My Path
-              reads this in real time — no manual tagging, no developer updates. New course. Live recommendations.</dd>
+            <dt>Markdown in, live courses out.</dt>
+            <dd>The team writes markdown; a parser publishes to the database. No developer in the loop.</dd>
+            <dt>Versioned and instant.</dt>
+            <dd>Every publish is versioned for rollback and live on the next load.</dd>
+            <dt>Feeds discovery automatically.</dt>
+            <dd>Each publish feeds the discovery index — no manual tagging.</dd>
           </dl>
 
         </div>
@@ -766,32 +986,22 @@
           </h3>
 
           <p class="project-text__thesis">
-            Five infrastructure decisions, each made so one person could run an entire platform.
+            Infrastructure built so one person can run the entire platform.
           </p>
 
           <div class="project-text__body">
-            <p>Nothing on CompassStu is hardcoded into a page. The site is a thin runtime over a database —
-              content, configuration, and AI behaviour all live as data and ship without a deploy.</p>
+            <p>A thin runtime over a database — content, configuration, and AI behaviour all live as data and ship without a deploy.</p>
           </div>
         </div>
 
         <div class="project-text__right">
           <dl class="project-text__pipeline">
             <dt>Content is data, not pages.</dt>
-            <dd>Every lesson, course, and tutor prompt lives in Supabase Postgres. Pages pull from the database
-              on load — publishing new content never touches the codebase.</dd>
+            <dd>Every lesson and prompt lives in Postgres. Publishing never touches the codebase.</dd>
             <dt>AI behind the edge.</dt>
-            <dd>Every model call — grading, tutoring, path diagnosis — runs through Supabase Edge Functions.
-              API keys never reach the client; every AI feature shares one governed gateway.</dd>
-            <dt>Auth and ownership built in.</dt>
-            <dd>Supabase Auth with row-level security. A learner&rsquo;s record belongs to them; a proof URL is
-              public only because its owner chose to share it.</dd>
-            <dt>Subscriptions behind the edge.</dt>
-            <dd>Airwallex runs the recurring billing; its webhooks sync the subscription lifecycle into Supabase,
-              so access control and payment state share one source of truth — and settle across currencies for overseas learners.</dd>
+            <dd>Every model call runs through edge functions. Keys never reach the client.</dd>
             <dt>Zero-ops deployment.</dt>
-            <dd>Vercel — push to ship, a preview per change, no servers to maintain. A solo team&rsquo;s
-              operations budget spent on product, not infrastructure.</dd>
+            <dd>Vercel — push to ship, no servers. Budget spent on product, not infrastructure.</dd>
           </dl>
         </div>
       </section>
@@ -810,8 +1020,7 @@
           </p>
 
           <div class="project-text__body">
-            <p>Alpha-based neutrals throughout — every surface, dark or light, derives from the same palette.
-              Nothing on the page competes with the work.</p>
+            <p>Alpha-based neutrals throughout — one palette, dark or light. Nothing competes with the work.</p>
           </div>
         </div>
       </section>
@@ -841,26 +1050,20 @@
           </p>
 
           <div class="project-text__body">
-            <p>CompassStu runs end-to-end today: sign-in, adaptive lessons, AI-graded bridge tasks, verifiable
-              proof URLs, and an admin portal that publishes courses without a developer — in English and
-              Mandarin.</p>
+            <p>It runs end-to-end today — adaptive lessons, AI grading, verifiable proof, and a no-developer CMS, in English and Mandarin.</p>
           </div>
         </div>
 
         <div class="project-text__right">
           <dl class="project-text__pipeline">
             <dt>What shipped.</dt>
-            <dd>The full loop — auth, learning runtime, AI grading, permanent certificates, content CMS —
-              designed, built, and operated by one person.</dd>
+            <dd>The full loop — auth, runtime, AI grading, permanent certificates, CMS — by one person.</dd>
             <dt>What I&rsquo;d measure first.</dt>
-            <dd>Whether the proof carries: do employers open the share link, and does a verified record change a
-              screening decision. That — not completion rate — is the metric this product lives or dies on.</dd>
+            <dd>Whether the proof carries: do employers open the link, and does it change a screening decision.</dd>
             <dt>What I&rsquo;d revisit.</dt>
-            <dd>The five-attempt advance. It protects momentum but pulls against the fixed standard — the next
-              iteration separates &ldquo;module unlocked&rdquo; from &ldquo;certificate earned&rdquo; completely.</dd>
+            <dd>The five-attempt advance — it protects momentum but pulls against the fixed standard.</dd>
             <dt>What&rsquo;s next.</dt>
-            <dd>An employer-side view: rubric evidence and work samples side by side, designed for a
-              ninety-second screening read.</dd>
+            <dd>An employer-side view: rubric evidence and work samples, built for a ninety-second read.</dd>
           </dl>
         </div>
       </section>
