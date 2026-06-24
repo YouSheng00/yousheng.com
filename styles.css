@@ -560,26 +560,14 @@ button {
   .glb-stack { grid-column: 1; }
 }
 
-/* SATS logo block — desktop shows the logo art at natural pixel size,
-   vertically centred (object-fit: none). On mobile the natural size is
-   far wider than the viewport, so it flips to contain (whole logo). */
+/* SATS logo block — contain the logo art within the white block so it shows
+   in full, centred, at any size or resolution. (Previously desktop used
+   object-fit:none, which drew the image at its raw 1100px size and cropped/
+   zoomed it whenever the box width or page zoom shifted — the cause of the
+   "logo moved / cut off" bug.) The base .project-block > img already supplies
+   position:absolute; inset:0; width/height:100%, so contain just centres it. */
 .sats-logo-block > img {
-  top: 50%;
-  right: 0;
-  bottom: auto;
-  left: 0;
-  height: auto;
-  transform: translateY(-50%);
-  object-fit: none;
-}
-
-@media (max-width: 600px) {
-  .sats-logo-block > img {
-    top: 0;
-    height: 100%;
-    transform: none;
-    object-fit: contain;
-  }
+  object-fit: contain;
 }
 
 /* Tech badge row (Unity / C# logos) — inline 96px heights overflow a
