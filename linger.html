@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en" class="vt-forward">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Linger — YouSheng</title>
+    <meta name="description" content="Linger — brand & website design for a four-city slow-coffee café, built as an editorial magazine rather than a landing page. A study in restraint." />
+    <script>
+      document.documentElement.className += " js";
+      (function () { try { if (localStorage.getItem('theme') === 'light') document.documentElement.classList.add('theme-light'); } catch (e) {} })();
+    </script>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="favicon-180.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Warm-canvas fonts only (the body below the hero). The header + hero use
+         Inter via styles.css, untouched. -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&family=Jost:wght@300;400;500&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet" />
+
+    <style>
+      /* ── Header + hero: the portfolio chrome, left consistent (only crispness +
+         the panel ring, matching CompassStu / IE100). DO NOT re-theme these. ── */
+      .page--linger .project__title,
+      .page--linger .project__meta { text-shadow: none; }
+      .page--linger .project-block {
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.10), 0 26px 64px -40px rgba(0, 0, 0, 0.9);
+      }
+      html.theme-light body { background: #f5f5f7; }
+      html.theme-light .page--linger .project-block {
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 14px 36px -22px rgba(0, 0, 0, 0.2);
+      }
+      /* pull the dark frame's bottom in so the warm canvas follows the hero closely */
+      .page--linger { padding-bottom: var(--s-300); }
+
+      /* ════════════════════════════════════════════════════════════════
+         The warm canvas — EVERYTHING BELOW THE HERO. A full-width warm-paper
+         editorial body (espresso ink, one sage accent, paper grain, Quicksand/
+         Jost) that the dark masthead and dark footer bookend. All selectors are
+         scoped under .linger-warm so nothing leaks into the portfolio chrome. */
+      .linger-warm {
+        /* Dark by default — the section melts onto the portfolio's black background
+           (transparent canvas, cream text, sage accent). The theme toggle reverts it
+           to warm espresso-on-paper below. */
+        --paper: transparent; --paper-2: rgba(237, 234, 227, 0.05); --ink: #EDEAE3;
+        --ink-soft: rgba(237, 234, 227, 0.78); --ink-faint: rgba(237, 234, 227, 0.56);
+        --hair: rgba(237, 234, 227, 0.16); --sage: #8E9A77; --sage-deep: #A6B18B;
+        --room: #14110D; --room-text: #F4F1EA;
+        --display: "Quicksand", system-ui, sans-serif; --text: "Jost", system-ui, sans-serif;
+        --serif: "Fraunces", Georgia, serif; --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+        --gutter: clamp(22px, 5vw, 72px); --measure: 60ch;
+        position: relative; background: transparent; color: var(--ink);
+        font-family: var(--text); font-weight: 300; line-height: 1.7;
+        margin-top: clamp(28px, 6vh, 64px);
+      }
+      html.theme-light .linger-warm {
+        --paper-2: #F3F3F1; --ink: #26211B;
+        --ink-soft: rgba(38, 33, 27, 0.60); --ink-faint: rgba(38, 33, 27, 0.38);
+        --hair: rgba(38, 33, 27, 0.16); --sage: #7E8A6B; --sage-deep: #5F6B4F;
+      }
+      .linger-warm > * { position: relative; z-index: 1; }
+      .linger-warm a { color: inherit; text-decoration: none; }
+      .linger-warm em { font-style: italic; }
+      .linger-warm ::selection { background: rgba(126, 138, 107, 0.26); }
+
+      .linger-warm .wrap { max-width: 1180px; margin: 0 auto; padding: 0 var(--gutter); }
+      .linger-warm .narrow { max-width: 1060px; }
+      .linger-warm section { padding-block: clamp(54px, 11vh, 110px); }
+
+      .linger-warm .eyebrow { font-family: var(--text); font-weight: 500; font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink-faint); }
+      .linger-warm .display { font-family: var(--display); font-weight: 300; line-height: 1.05; font-size: clamp(30px, 5vw, 58px); letter-spacing: -0.012em; color: var(--ink); }
+      .linger-warm .lede { font-family: var(--display); font-weight: 300; line-height: 1.3; font-size: clamp(20px, 2.6vw, 30px); letter-spacing: -0.01em; color: var(--ink); max-width: 22ch; }
+      .linger-warm .body { max-width: var(--measure); color: var(--ink-soft); font-size: 15.5px; line-height: 1.85; }
+      .linger-warm .body + .body { margin-top: 1.1em; }
+      .linger-warm .sage-dot { color: var(--sage); }
+
+      .linger-warm .plate { position: relative; background: var(--paper-2); border: 1px solid var(--hair); border-radius: 4px; overflow: hidden; }
+      /* Make-your-own game — a click-to-activate veil so scrolling never traps the wheel */
+      .linger-warm .game-embed__veil { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; border: 0; cursor: pointer; background: rgba(20, 17, 13, 0.34); transition: opacity .45s var(--ease), background .3s var(--ease); }
+      .linger-warm .game-embed__veil:hover { background: rgba(20, 17, 13, 0.46); }
+      .linger-warm .game-embed__play { font-family: var(--text); font-size: 12px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: #26211B; background: #EDEAE3; padding: 12px 22px; border-radius: 999px; }
+      .linger-warm .game-embed__hint { font-family: var(--text); font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255, 255, 255, 0.85); }
+      .linger-warm .game-embed.is-live .game-embed__veil { opacity: 0; pointer-events: none; }
+      .linger-warm .plate__cap { margin-top: 14px; font-size: 11px; letter-spacing: 0.04em; color: var(--ink-faint); }
+
+      .linger-warm .seam { display: flex; justify-content: center; padding-block: clamp(20px, 5vh, 44px); }
+      .linger-warm .seam span { width: 7px; height: 7px; border-radius: 50%; background: var(--sage); opacity: 0.85; }
+
+      .linger-warm .spread { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
+      .linger-warm .spread--flip .spread__media { order: -1; }
+      .linger-warm .spread__title { margin-bottom: 22px; }
+      .linger-warm .spread__title .eyebrow { display: block; margin-bottom: 14px; }
+
+      .linger-warm .rules { border-top: 1px solid var(--hair); margin-top: 34px; }
+      .linger-warm .rule { display: grid; grid-template-columns: 3.2rem 1fr; gap: clamp(14px, 2vw, 30px); padding: clamp(18px, 2.6vw, 26px) 0; border-bottom: 1px solid var(--hair); align-items: baseline; }
+      .linger-warm .rule__n { font-family: var(--display); font-weight: 300; font-size: 1.4rem; color: var(--sage); font-variant-numeric: tabular-nums; }
+      .linger-warm .rule__t { font-family: var(--display); font-weight: 400; font-size: clamp(17px, 1.6vw, 21px); letter-spacing: -0.01em; color: var(--ink); }
+      .linger-warm .rule__d { margin-top: 6px; color: var(--ink-soft); font-size: 14.5px; line-height: 1.7; max-width: 52ch; }
+
+      .linger-warm .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 38px; }
+      .linger-warm .sw { display: flex; flex-direction: column; }
+      .linger-warm .sw__chip { aspect-ratio: 5 / 4; border-radius: 5px; border: 1px solid var(--hair); }
+      .linger-warm .sw__name { margin-top: 12px; font-family: var(--display); font-weight: 400; font-size: 14px; color: var(--ink); }
+      .linger-warm .sw__hex { margin-top: 2px; font-size: 11.5px; letter-spacing: 0.04em; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+      .linger-warm .sw__role { margin-top: 1px; font-size: 11px; color: var(--ink-faint); }
+
+      .linger-warm .type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 64px); margin-top: 38px; align-items: end; }
+      .linger-warm .spec { border-top: 1px solid var(--hair); padding-top: 20px; }
+      .linger-warm .spec__big { font-family: var(--display); font-weight: 300; font-size: clamp(64px, 12vw, 132px); line-height: 0.9; letter-spacing: -0.02em; color: var(--ink); }
+      .linger-warm .spec__big--text { font-family: var(--text); }
+      .linger-warm .spec__meta { margin-top: 16px; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+      .linger-warm .spec__face { font-family: var(--display); font-weight: 400; font-size: 15px; }
+      .linger-warm .spec__use { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); text-align: right; }
+      .linger-warm .scale { margin-top: 40px; border-top: 1px solid var(--hair); }
+      .linger-warm .scale__row { display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: baseline; padding: 16px 0; border-bottom: 1px solid var(--hair); }
+      .linger-warm .scale__row span:last-child { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
+      .linger-warm .scale__sm { font-weight: 500; font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink); }
+      .linger-warm .scale__md { font-family: var(--display); font-weight: 400; font-size: 22px; color: var(--ink); }
+      .linger-warm .scale__lg { font-family: var(--display); font-weight: 300; font-size: clamp(30px, 4vw, 46px); letter-spacing: -0.012em; color: var(--ink); }
+
+      .linger-warm .broadsheet { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 64px); }
+      .linger-warm .course__eyebrow { display: block; margin-bottom: 8px; }
+      .linger-warm .course__title { font-family: var(--display); font-weight: 300; font-size: clamp(26px, 3.4vw, 40px); letter-spacing: -0.012em; margin-bottom: 18px; }
+      .linger-warm .mrow { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: baseline; padding: 12px 0; border-top: 1px solid var(--hair); }
+      .linger-warm .mrow__name { font-family: var(--display); font-weight: 400; font-size: 16px; letter-spacing: -0.01em; }
+      .linger-warm .mrow__desc { grid-column: 1 / -1; font-size: 11.5px; color: var(--ink-faint); line-height: 1.6; margin-top: 2px; }
+      .linger-warm .mrow__price { font-weight: 500; font-size: 13px; letter-spacing: 0.04em; color: var(--sage-deep); font-variant-numeric: tabular-nums; }
+
+      /* 02 · The feeling — a 2×2 of emotional targets, carried by type, not a photo */
+      .linger-warm .feeling-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(30px, 4vw, 56px) clamp(32px, 6vw, 84px); margin-top: clamp(44px, 8vh, 84px); }
+      .linger-warm .feeling-grid > div { border-top: 1px solid var(--hair); padding-top: 20px; }
+      .linger-warm .feeling-grid__n { font-family: var(--text); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; color: var(--sage-deep); }
+      .linger-warm .feeling-grid h4 { font-family: var(--display); font-weight: 400; font-size: clamp(19px, 1.9vw, 24px); letter-spacing: -0.01em; color: var(--ink); margin-top: 13px; }
+      .linger-warm .feeling-grid p { margin-top: 9px; color: var(--ink-soft); font-size: 14.5px; line-height: 1.72; max-width: 38ch; }
+
+      .linger-warm .quote { text-align: center; }
+      .linger-warm .quote p { font-family: var(--display); font-weight: 300; font-size: clamp(30px, 5.4vw, 66px); line-height: 1.08; letter-spacing: -0.016em; }
+
+      /* Dark "back room" footer — mirrors the masthead, closes the warm canvas */
+      .linger-warm .room { background: var(--room); color: var(--room-text); margin-top: clamp(40px, 8vh, 90px); }
+      .linger-warm .room__in { padding-block: clamp(64px, 12vh, 120px); display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(34px, 6vw, 80px); }
+      .linger-warm .room__mark { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(40px, 7vw, 78px); }
+      .linger-warm .room__mark i { font-style: normal; color: var(--sage); }
+      .linger-warm .room__say { margin-top: 18px; color: rgba(244, 241, 234, 0.6); max-width: 40ch; line-height: 1.7; font-size: 14.5px; }
+      .linger-warm .room__cols { display: flex; gap: clamp(34px, 6vw, 72px); flex-wrap: wrap; }
+      .linger-warm .room__col h4 { font-weight: 500; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(244, 241, 234, 0.5); margin-bottom: 14px; }
+      .linger-warm .room__col a, .linger-warm .room__col p { display: block; color: rgba(244, 241, 234, 0.85); font-size: 13.5px; margin-bottom: 9px; }
+      .linger-warm .room__col a { position: relative; width: max-content; }
+      .linger-warm .room__col a:hover { color: #fff; }
+      .linger-warm .room__base { border-top: 1px solid rgba(244, 241, 234, 0.14); margin-top: 8px; padding-block: 26px clamp(54px, 9vh, 84px); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 11px; letter-spacing: 0.08em; color: rgba(244, 241, 234, 0.45); }
+
+      .js .linger-warm .reveal { opacity: 0; transform: translateY(17px); transition: opacity 1.1s var(--ease), transform 1.1s var(--ease); }
+      .js .linger-warm .reveal.in { opacity: 1; transform: none; }
+
+      @media (max-width: 820px) {
+        .linger-warm .spread, .linger-warm .type-grid, .linger-warm .broadsheet, .linger-warm .feeling-grid, .linger-warm .room__in { grid-template-columns: 1fr; }
+        .linger-warm .spread--flip .spread__media { order: 0; }
+        .linger-warm .spread__media { margin-bottom: 8px; }
+        .linger-warm .swatches { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .js .linger-warm .reveal { opacity: 1; transform: none; transition: none; }
+      }
+    </style>
+
+    <!-- Microsoft Clarity analytics -->
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "x78d7lv8qq");
+    </script>
+  </head>
+  <body>
+    <!-- ════ HEADER + HERO — portfolio chrome, untouched ════ -->
+    <main class="page page--project page--linger">
+      <header class="project__header" id="s-00" data-section>
+        <h1 class="project__title">Linger</h1>
+        <p class="project__meta">
+          Brand &amp; website for a slow-coffee café, built as an editorial magazine.<br>
+          A study in restraint. Concept, art direction &amp; front-end, 2026.
+        </p>
+      </header>
+
+      <section class="project-grid" aria-label="Project content">
+        <div class="project-block project-block--full" style="aspect-ratio: 16 / 9; overflow: hidden; content-visibility: auto;">
+          <!-- The hero is a full desktop composition; render it at a fixed 1280px
+               logical width and scale it down to the plate with container units,
+               so the photo + type stay crisp at any size. -->
+          <div style="container-type: inline-size; width: 100%; height: 100%;">
+            <iframe src="linger-hero.html" title="Linger — a café, composed" loading="lazy"
+              style="position:absolute; top:0; left:0; width:1280px; height:calc(1280px / 1.78); transform-origin:top left; transform:scale(calc(100cqw / 1280px)); border:0; pointer-events:none;"></iframe>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ════ EVERYTHING BELOW THE HERO — the warm editorial canvas ════ -->
+    <div class="linger-warm">
+
+      <!-- 01 · The idea -->
+      <section class="wrap narrow" id="s-01" data-section>
+        <div class="spread">
+          <div class="spread__title reveal">
+            <span class="eyebrow">01 — The idea</span>
+            <h2 class="display">A café, composed<span class="sage-dot">.</span></h2>
+          </div>
+          <div class="reveal">
+            <p class="body">Most café websites shout — hero slogans, bright buttons, a wall of food photos. Linger does the opposite. The site is art-directed like a print magazine, where empty space is the design and atmosphere does the selling.</p>
+            <p class="body">The brand promise is time: slow coffee and unhurried hours. The interface had to embody that — slow transitions, generous whitespace, a quiet voice — so the medium <em>is</em> the message.</p>
+          </div>
+        </div>
+        <div class="rules reveal">
+          <div class="rule"><span class="rule__n">01</span><div><p class="rule__t">Restraint</p><p class="rule__d">If a section feels empty, it's correct. Resist filling it.</p></div></div>
+          <div class="rule"><span class="rule__n">02</span><div><p class="rule__t">Minimal</p><p class="rule__d">One statement per view; hierarchy comes from space, not from competing type.</p></div></div>
+          <div class="rule"><span class="rule__n">03</span><div><p class="rule__t">Control</p><p class="rule__d">Nothing is accidental. Every margin, weight and easing curve is deliberate.</p></div></div>
+        </div>
+      </section>
+
+      <div class="seam reveal"><span></span></div>
+
+      <!-- 02 · The feeling -->
+      <section class="wrap narrow" id="s-02" data-section>
+        <div class="spread__title reveal" style="max-width: 30ch;">
+          <span class="eyebrow" style="display:block; margin-bottom: 14px;">02 — The feeling</span>
+          <h2 class="display">Calm, considered,<br>a little luxurious.</h2>
+          <p class="body" style="margin-top: 20px; max-width: 52ch;">Before a single product is shown, the site has to feel like somewhere quiet — the digital equivalent of a well-lit corner table on a slow morning. Four qualities hold that feeling in place.</p>
+        </div>
+        <div class="feeling-grid reveal">
+          <div><span class="feeling-grid__n">01</span><h4>Composed, not busy</h4><p>Air around everything. The eye is never crowded.</p></div>
+          <div><span class="feeling-grid__n">02</span><h4>Warm, not cold</h4><p>Palette and grain keep it human — quiet luxury, never clinical.</p></div>
+          <div><span class="feeling-grid__n">03</span><h4>Unhurried</h4><p>Motion settles like steam; nothing snaps or bounces.</p></div>
+          <div><span class="feeling-grid__n">04</span><h4>Printed, not pixel</h4><p>A constant paper grain makes the screen feel like a page.</p></div>
+        </div>
+      </section>
+
+      <div class="seam reveal"><span></span></div>
+
+      <!-- 03 · The pages  (the visual payoff, pulled up right after The feeling) -->
+      <section class="wrap" id="s-03" data-section>
+        <div class="spread__title reveal" style="margin-bottom: clamp(34px, 6vh, 60px);">
+          <span class="eyebrow" style="display:block; margin-bottom: 14px;">03 — The pages</span>
+          <h2 class="display">Three pages that feel like one held object.</h2>
+        </div>
+
+        <div class="reveal" style="max-width: 64ch;">
+          <span class="eyebrow" style="display:block; margin-bottom: 12px;">Home</span>
+          <h3 class="lede" style="max-width: 30ch;">A single, slow scroll in three movements.</h3>
+          <p class="body" style="margin-top: 16px;">The hero at the very top of this page, then <em>Just Landed</em> — a two-product spread where one click swaps image, copy and emphasis in one synchronised move — and finally <em>the Atlas</em>: a single plate that cross-fades through the four cities, each with a real coordinate. The two movements are below.</p>
+        </div>
+
+        <!-- Home · "Just Landed" — the live What's New movement, framed -->
+        <div class="reveal" style="margin-top: clamp(30px, 5.5vh, 60px);">
+          <span class="eyebrow" style="display:block; margin-bottom: 14px;">Home · &ldquo;Just Landed&rdquo;</span>
+          <div class="plate" style="aspect-ratio: 16 / 9;">
+            <img src="Images/Linger/JustLanded.png" alt="Linger — Just Landed: a two-product editorial swap, the active drink centred and the other a desaturated thumbnail" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;">
+          </div>
+          <p class="plate__cap">A two-product editorial swap — the active drink centred, the other a desaturated thumbnail.</p>
+        </div>
+
+        <!-- Home · "Where to linger" (the Atlas) — the four-city cross-fade, framed -->
+        <div class="reveal" style="margin-top: clamp(30px, 5.5vh, 60px);">
+          <span class="eyebrow" style="display:block; margin-bottom: 14px;">Home · &ldquo;Where to linger&rdquo;</span>
+          <div class="plate" style="aspect-ratio: 16 / 9;">
+            <img src="Images/Linger/Atlas.png" alt="Linger — Where to linger: the four-city atlas showing a London café exterior with thumbnails for Barcelona, Hong Kong and Singapore" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;">
+          </div>
+          <p class="plate__cap">The Atlas — one plate cross-fades through London, Barcelona, Hong Kong and Singapore, each with a live coordinate.</p>
+        </div>
+
+        <div style="margin-top: clamp(48px, 9vh, 90px);">
+          <div class="spread__title reveal" style="margin-bottom: 24px;">
+            <span class="eyebrow" style="display:block; margin-bottom: 12px;">Menu — one menu, four cafés</span>
+            <h3 class="lede" style="max-width: 30ch;">A two-column broadsheet that quietly changes city — currency and availability shift on selection.</h3>
+          </div>
+          <div class="plate reveal" style="margin-top: clamp(6px, 1.5vh, 14px);">
+            <img src="Images/Linger/Linger_Menu.png" alt="Linger — the menu page: one broadsheet with a London / Barcelona / Hong Kong / Singapore selector above a two-column drinks list" style="width:100%; height:auto; display:block;">
+          </div>
+          <p class="plate__cap reveal">Menu — one broadsheet, reconfigured by city.</p>
+        </div>
+
+        <!-- Make your own coffee — the LIVE, playable mini-game, embedded directly
+             (interactive: no pointer-events:none, unlike the static exhibits). -->
+        <div class="reveal" style="margin-top: clamp(48px, 9vh, 90px);">
+          <span class="eyebrow" style="display:block; margin-bottom: 12px;">Make your own coffee</span>
+          <h3 class="lede" style="max-width: 32ch;">A playful counterpoint to the stillness — and this one is live.</h3>
+          <p class="body" style="margin-top: 16px; max-width: 58ch;">A clean, single-column walk through Grind → Pull → Steam → Pour. It proves the brand can be warm and human, not only elegant. Go ahead — make a cup.</p>
+        </div>
+        <div class="plate game-embed reveal" style="aspect-ratio: 16 / 10; margin-top: clamp(24px, 4vh, 40px); content-visibility: auto;">
+          <iframe id="coffeeGame" src="https://yousheng00.github.io/linger/web/coffee.html?embed=1" loading="lazy" title="Linger — make your own coffee"
+            style="position:absolute; inset:0; width:100%; height:100%; border:0; pointer-events:none;"></iframe>
+          <button class="game-embed__veil" type="button" aria-label="Activate the mini-game — it stays inert so you can scroll past it freely">
+            <span class="game-embed__play">&#9654;&ensp;Play the mini-game</span>
+            <span class="game-embed__hint">Scrolls freely until you click</span>
+          </button>
+        </div>
+        <p class="plate__cap reveal" style="display:flex; justify-content:space-between; align-items:baseline; gap:14px; flex-wrap:wrap;">
+          <span>The Bench — playable, right here.</span>
+          <a href="https://yousheng00.github.io/linger/web/coffee.html" target="_blank" rel="noopener" style="color:var(--sage); border-bottom:1px solid var(--sage); padding-bottom:2px;">Open full-screen ↗</a>
+        </p>
+      </section>
+
+      <div class="seam reveal"><span></span></div>
+
+      <!-- 04 · Art direction  (the craft system, after the pages it produced) -->
+      <section class="wrap" id="s-04" data-section>
+        <div class="spread__title reveal" style="text-align: center; max-width: 40ch; margin: 0 auto;">
+          <span class="eyebrow" style="display:block; margin-bottom: 16px;">04 — Art direction</span>
+          <h2 class="display">The elegance is in the contrast of register.</h2>
+          <p class="body" style="margin: 18px auto 0;">A near-monochrome warm-neutral scheme; two geometric faces; a single sage accent; the tooth of paper over everything.</p>
+        </div>
+
+        <div style="margin-top: clamp(48px, 9vh, 90px);">
+          <span class="eyebrow reveal">04.1 — Colour</span>
+          <div class="swatches reveal">
+            <div class="sw"><div class="sw__chip" style="background:#FFFFFF;"></div><span class="sw__name">Paper</span><span class="sw__hex">#FFFFFF</span><span class="sw__role">Page background</span></div>
+            <div class="sw"><div class="sw__chip" style="background:#F3F3F1;"></div><span class="sw__name">Paper 2</span><span class="sw__hex">#F3F3F1</span><span class="sw__role">Panels &amp; plates</span></div>
+            <div class="sw"><div class="sw__chip" style="background:#26211B; border-color:#26211B;"></div><span class="sw__name">Espresso Ink</span><span class="sw__hex">#26211B</span><span class="sw__role">Primary text</span></div>
+            <div class="sw"><div class="sw__chip" style="background:#7E8A6B; border-color:#7E8A6B;"></div><span class="sw__name">Sage</span><span class="sw__hex">#7E8A6B</span><span class="sw__role">The only accent</span></div>
+            <div class="sw"><div class="sw__chip" style="background:#5F6B4F; border-color:#5F6B4F;"></div><span class="sw__name">Sage Deep</span><span class="sw__hex">#5F6B4F</span><span class="sw__role">Hover · prices</span></div>
+            <div class="sw"><div class="sw__chip" style="background:#79736D;"></div><span class="sw__name">Ink Soft</span><span class="sw__hex">38·33·27 / 60</span><span class="sw__role">Secondary text</span></div>
+            <div class="sw"><div class="sw__chip" style="background:#D9D7D3;"></div><span class="sw__name">Hairline</span><span class="sw__hex">38·33·27 / 16</span><span class="sw__role">Rules &amp; dividers</span></div>
+          </div>
+          <p class="body reveal" style="margin-top: 26px; color: var(--ink-faint); font-size: 13.5px;">Warm greys plus a single muted sage read as organic and calm — coffee, linen, olive. Secondary tones are <em>rgba</em> tints of the one ink, so the palette never feels designed by committee. Black is softened to espresso so nothing reads as harsh.</p>
+        </div>
+
+        <div style="margin-top: clamp(56px, 11vh, 110px);">
+          <span class="eyebrow reveal">04.2 — Typography</span>
+          <div class="type-grid reveal">
+            <div class="spec"><div class="spec__big">café</div><div class="spec__meta"><span class="spec__face">Quicksand · 300</span><span class="spec__use">Display · names</span></div></div>
+            <div class="spec"><div class="spec__big spec__big--text">Aa</div><div class="spec__meta"><span class="spec__face">Jost · 300 / 500</span><span class="spec__use">Body · labels</span></div></div>
+          </div>
+          <div class="scale reveal">
+            <div class="scale__row"><span class="scale__lg">A café, composed.</span><span>Display · 300 · −0.012em</span></div>
+            <div class="scale__row"><span class="scale__md">Where to linger</span><span>Section · 300</span></div>
+            <div class="scale__row"><span class="scale__sm">Stay a while</span><span>Eyebrow · 500 · +2.6px</span></div>
+            <div class="scale__row"><span style="font-variant-numeric: tabular-nums; font-weight:500; color:var(--sage-deep);">S$ 6.50 · £ 3.80 · € 4.20</span><span>Price · 500 · tabular</span></div>
+          </div>
+          <p class="body reveal" style="margin-top: 26px; color: var(--ink-faint); font-size: 13.5px;">The luxury is the <em>range</em>: huge, airy, light display set against tiny, tightly-tracked uppercase labels. Tracking goes negative on big type to feel set, positive on small labels to feel engraved. Prices use tabular figures so digits align like a printed bill.</p>
+        </div>
+
+        <div class="spread reveal" style="margin-top: clamp(56px, 11vh, 110px); align-items: center;">
+          <div>
+            <span class="eyebrow" style="display:block; margin-bottom: 14px;">04.3 — Texture &amp; the dot</span>
+            <h3 class="lede" style="max-width: 26ch;">A fine grain makes the screen feel like a held page — and one sage dot is the brand's quietest motif.</h3>
+            <p class="body" style="margin-top: 18px;">A fixed full-page grain and a whisper vignette sit over everything like paper tooth — both <em>fixed</em>, so they stay still as content scrolls beneath, exactly like ink on paper.</p>
+          </div>
+          <div class="spread__media" style="display:flex; align-items:center; justify-content:center; gap: 28px;">
+            <span style="width:14px;height:14px;border-radius:50%;background:var(--sage);"></span>
+            <span style="background:#fff; border:1px solid var(--hair); border-radius:10px; padding: clamp(26px,4vw,46px) clamp(30px,5vw,56px); box-shadow: 0 26px 60px -44px rgba(0,0,0,0.72); display:inline-flex;">
+              <img src="Images/Linger/favicon.png" alt="The Linger wordmark — lowercase serif with the signature swash dot" style="width: clamp(140px, 18vw, 200px); height:auto; display:block;">
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <div class="seam reveal"><span></span></div>
+
+      <!-- 05 · Decisions -->
+      <section class="wrap narrow" id="s-05" data-section>
+        <div class="spread__title reveal" style="margin-bottom: 30px;">
+          <span class="eyebrow" style="display:block; margin-bottom: 14px;">05 — Selected decisions</span>
+          <h2 class="display">Design is what you choose not to do.</h2>
+        </div>
+        <div class="rules reveal">
+          <div class="rule"><span class="rule__n">—</span><div><p class="rule__t">Killed the "brand story" page</p><p class="rule__d">For a truly minimal brand the story is carried by voice, photography and atmosphere. Two pages of menu + home say more by saying less.</p></div></div>
+          <div class="rule"><span class="rule__n">—</span><div><p class="rule__t">One menu, four cafés</p><p class="rule__d">A single broadsheet reconfigures by branch — currency and availability shift on selection. Less to maintain, more delightful to use.</p></div></div>
+          <div class="rule"><span class="rule__n">—</span><div><p class="rule__t">Removed a "nice" animation</p><p class="rule__d">The hero once eased in with a 3.5% scale; on every refresh it read as a load glitch. Cutting it made the page feel solid — the most considered motion is sometimes none.</p></div></div>
+        </div>
+      </section>
+
+      <section class="wrap narrow quote reveal" style="padding-bottom: clamp(90px, 17vh, 170px);">
+        <p>Stay a while<span class="sage-dot">.</span></p>
+      </section>
+    </div>
+
+    <nav class="dock" aria-label="Primary">
+      <div class="dock__group">
+        <a class="dock__link" href="index.html">Back</a>
+        <a class="dock__link" href="#" data-calibrate>Calibrate</a>
+        <a class="dock__link" href="https://yousheng00.github.io/linger/web/index.html" target="_blank" rel="noopener">Site</a>
+      </div>
+      <button class="dock__action" type="button" aria-label="Toggle theme" data-theme-toggle>
+        <svg class="dock__icon dock__icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2.5v2.4M12 19.1v2.4M4.22 4.22l1.7 1.7M18.08 18.08l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.22 19.78l1.7-1.7M18.08 5.92l1.7-1.7"/>
+        </svg>
+        <svg class="dock__icon dock__icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>
+        </svg>
+      </button>
+    </nav>
+
+    <script src="script.js"></script>
+    <script>
+      // Make-your-own game stays inert (pointer-events:none) so the wheel never gets
+      // trapped while scrolling; clicking the veil activates it for real play.
+      (function () {
+        var ge = document.querySelector('.game-embed');
+        if (ge) {
+          var veil = ge.querySelector('.game-embed__veil');
+          var frame = document.getElementById('coffeeGame');
+          if (veil && frame) {
+            veil.addEventListener('click', function () {
+              ge.classList.add('is-live');
+              frame.style.pointerEvents = 'auto';
+              try { frame.contentWindow.focus(); } catch (e) {}
+            });
+          }
+        }
+      })();
+
+      (function () {
+        var els = Array.prototype.slice.call(document.querySelectorAll('.linger-warm .reveal'));
+        if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          els.forEach(function (el) { el.classList.add('in'); }); return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        els.forEach(function (el) { io.observe(el); });
+      })();
+
+      (function () {
+        var sections = Array.from(document.querySelectorAll('[data-section]'));
+        var calibBtn = document.querySelector('[data-calibrate]');
+        if (!calibBtn || !sections.length) return;
+        var ratios = {};
+        sections.forEach(function (s) { ratios[s.id] = 0; });
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { ratios[e.target.id] = e.intersectionRatio; });
+        }, { threshold: Array.from({ length: 21 }, function (_, i) { return i / 20; }) });
+        sections.forEach(function (s) { observer.observe(s); });
+        calibBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          var best = sections.reduce(function (a, b) { return (ratios[b.id] || 0) > (ratios[a.id] || 0) ? b : a; });
+          if (best.id === 's-00') { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+          else { best.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+        });
+      })();
+    </script>
+  </body>
+</html>

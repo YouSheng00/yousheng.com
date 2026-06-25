@@ -70,6 +70,24 @@
           </a>
         </article>
 
+        <!-- Card: Linger — café brand & editorial website; responsive hero embed.
+             linger-hero.html is fluid (clamp-based), so it scales to the card
+             without the fixed-width/scale trick the IE100 card needs. -->
+        <article class="card" data-tag="Case Study" style="--ratio: 1.78;">
+          <a class="card__link" href="linger.html" aria-label="Open project: Linger">
+            <div class="card__media">
+              <div style="container-type: inline-size;">
+                <iframe class="card__motion" src="linger-hero.html" title="Linger hero" aria-hidden="true" loading="lazy" tabindex="-1"
+                  style="position:absolute; top:0; left:0; width:1280px; height:calc(1280px / 1.78); transform-origin:top left; transform:scale(calc(100cqw / 1280px));"></iframe>
+              </div>
+            </div>
+            <footer class="card__meta">
+              <h2 class="card__title">Linger</h2>
+              <p class="card__subtitle">Café Brand &amp; Editorial Website</p>
+            </footer>
+          </a>
+        </article>
+
         <!-- Card: IE100 Club — live hero rebuild, embedded via iframe.
              The hero is a full desktop layout, so render it at a fixed 1280px
              logical width and scale it down to the card with container-query

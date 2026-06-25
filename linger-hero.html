@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Linger — hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFFFFF; --paper-2:#F3F3F1; --ink:#26211B;
+    --ink-soft:rgba(38,33,27,0.60); --ink-faint:rgba(38,33,27,0.38); --hair:rgba(38,33,27,0.16);
+    --sage:#7E8A6B; --sage-deep:#5F6B4F;
+    --serif:"Quicksand",system-ui,sans-serif; --sans:"Jost","PingFang SC",system-ui,sans-serif;
+    --ease:cubic-bezier(.2,.7,.2,1); --gutter:clamp(22px,5vw,72px);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;}
+  body{font-family:var(--sans);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  ::selection{background:rgba(126,138,107,0.26);}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;width:100%;height:100%;object-fit:cover;}
+
+  .vignette{position:fixed;inset:0;z-index:80;pointer-events:none;
+    background:radial-gradient(122% 94% at 50% 40%, transparent 56%, rgba(38,33,27,0.045) 100%);}
+  .grain{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:0.055;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .grain::after{content:"";position:absolute;inset:0;opacity:0.022;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");}
+
+  .eyebrow{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:2.6px;text-transform:uppercase;color:var(--ink-soft);}
+  .prose{font-family:var(--sans);font-weight:300;font-size:clamp(15px,1.2vw,18px);line-height:1.9;color:var(--ink-soft);}
+  .frame{position:relative;background:var(--paper-2);border:1px solid var(--hair);overflow:hidden;}
+
+  nav{position:fixed;top:0;left:0;width:100%;z-index:100;display:flex;align-items:flex-end;padding:24px var(--gutter);}
+  nav .logo{height:26px;width:auto;object-fit:contain;display:block;}
+  nav .links{display:flex;gap:34px;margin-left:clamp(28px,4.5vw,64px);}
+  nav .links a{font-family:var(--sans);font-size:10.5px;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-soft);transition:color .3s;position:relative;padding-bottom:2px;}
+  nav .links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--sage);transition:width .35s var(--ease);}
+  nav .links a:hover{color:var(--ink);} nav .links a:hover::after{width:100%;}
+  nav .cta-wrap{margin-left:auto;}
+  nav .cta{font-family:var(--sans);font-size:10.5px;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--sage);padding-bottom:3px;transition:color .3s,border-color .3s;}
+  nav .cta:hover{color:var(--sage-deep);}
+  @media(max-width:860px){ nav .links{display:none;} }
+
+  .hero{padding:150px var(--gutter) 52px;display:flex;flex-direction:column;align-items:center;}
+  .hero-frame{width:min(1112px, 92vw, (100vh - 380px) * 16 / 9);aspect-ratio:16/9;margin:0;flex:0 0 auto;box-shadow:0 44px 88px -58px rgba(38,33,27,0.30);}
+  .hero-foot{margin-top:clamp(40px,5vh,72px);display:flex;flex-direction:column;align-items:center;}
+  .welcome{max-width:600px;text-align:center;}
+  .welcome .eyebrow{color:var(--ink-soft);letter-spacing:3px;margin-bottom:14px;}
+  .welcome .lede{font-family:var(--serif);font-weight:300;font-size:clamp(20px,2.6vw,30px);line-height:1.5;letter-spacing:-.3px;color:var(--ink);}
+  .welcome .lede .hp{color:var(--sage);}
+  .welcome .sub{margin-top:14px;font-family:var(--sans);font-weight:300;font-size:12.5px;line-height:1.5;letter-spacing:1.4px;color:var(--ink-soft);}
+  .scrolldot{position:relative;top:6px;width:7px;height:7px;border-radius:50%;background:var(--sage);margin-top:clamp(16px,2.4vh,32px);animation:breathe 3.4s ease-in-out infinite;}
+  @keyframes breathe{0%,100%{opacity:.3;transform:scale(.85)}50%{opacity:.95;transform:scale(1)}}
+</style>
+</head>
+<body>
+  <div class="vignette"></div>
+  <div class="grain"></div>
+
+  <nav>
+    <a href="https://yousheng00.github.io/linger/"><img class="logo" src="https://yousheng00.github.io/linger/Ref%20Picture/linger-wordmark.png" alt="Linger" width="72" height="26" /></a>
+    <div class="links">
+      <a href="https://yousheng00.github.io/linger/">Home</a>
+      <a href="https://yousheng00.github.io/linger/web/menu.html">Menu</a>
+    </div>
+    <div class="cta-wrap"><a href="https://yousheng00.github.io/linger/web/coffee.html" class="cta">Make your own coffee</a></div>
+  </nav>
+
+  <header class="hero" id="home">
+    <div class="frame hero-frame has-img">
+      <img src="https://yousheng00.github.io/linger/Web%20pictures/Image1.jpg" alt="Inside Linger — tall windows, warm wood and a quiet morning crowd" />
+    </div>
+    <div class="hero-foot">
+      <div class="welcome">
+        <div class="eyebrow">Stay a while</div>
+        <p class="lede">A café, composed<span class="hp">.</span></p>
+        <p class="prose sub">London &middot; Barcelona &middot; Hong Kong &middot; Singapore</p>
+      </div>
+      <div class="scrolldot"></div>
+    </div>
+  </header>
+</body>
+</html>
