@@ -140,4 +140,25 @@
       io.observe(card);
     });
   }
+
+  // Container-query scale FALLBACK — the hero/card iframes are fixed 1280px
+  // desktop compositions scaled to fit via `transform: scale(100cqw / 1280px)`.
+  // Some embedded browsers (notably WeChat's built-in browser) don't support
+  // container-query units, so the scale silently fails and the frame sits at
+  // its raw 1280px — leaving a dark gap on the right. Drive the same scale from
+  // JS so it works everywhere: this inline transform overrides the cqw one and
+  // computes the identical value in modern browsers.
+  const cqFrames = document.querySelectorAll('iframe[style*="1280px"]');
+  if (cqFrames.length) {
+    const FIT_W = 1280;
+    const fitCq = () => {
+      cqFrames.forEach((frame) => {
+        const w = frame.parentElement ? frame.parentElement.clientWidth : 0;
+        if (w) frame.style.transform = `scale(${w / FIT_W})`;
+      });
+    };
+    window.addEventListener('resize', fitCq);
+    window.addEventListener('load', fitCq);
+    fitCq();
+  }
 })();
