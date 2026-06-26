@@ -197,7 +197,10 @@
         --ed-cjk: "Noto Serif SC", serif;
         --ed-ui: "Inter", "Noto Sans SC", system-ui, sans-serif;
         color: var(--cream); font-family: var(--ed-ui); font-weight: 300; line-height: 1.7;
-        margin-top: clamp(28px, 7vh, 80px);
+        /* Match the hero's container so the full-bleed bands align with it (not the
+           viewport) and the closing clears the floating dock. */
+        max-width: 1800px; margin: clamp(28px, 7vh, 80px) auto 0;
+        padding-bottom: calc(var(--nav-height) + var(--s-300));
       }
       html.theme-light .ie100-edit {
         --cream: #1d1d1f; --muted: #6e6e73; --faint: #9b9b9b;
@@ -228,7 +231,8 @@
       .ie100-edit .ed-list dd { margin: 5px 0 0; font-size: 0.88rem; line-height: 1.65; color: var(--muted); max-width: 46ch; }
 
       .ie100-edit .ed-fig { position: relative; overflow: hidden; border-radius: 4px; background: rgba(255, 255, 255, 0.03); box-shadow: 0 0 0 1px var(--hair), 0 30px 70px -46px rgba(0, 0, 0, 0.92); }
-      .ie100-edit .ed-fig img { display: block; width: 100%; height: 100%; object-fit: contain; }
+      /* Figures show at the image's natural aspect — no crop, no letterbox bars. */
+      .ie100-edit .ed-fig img { display: block; width: 100%; height: auto; }
       .ie100-edit .ed-cap { margin-top: 13px; font-size: 0.72rem; letter-spacing: 0.04em; color: var(--faint); }
 
       /* Full-bleed bands show at the image's natural aspect — never cropped. */
@@ -239,7 +243,7 @@
       .ie100-edit .ed-close__cjk { font-family: var(--ed-cjk); font-weight: 500; font-size: clamp(1.7rem, 4.4vw, 3rem); letter-spacing: 0.1em; color: #fff; }
       .ie100-edit .ed-close__en { font-family: var(--ed-display); font-size: clamp(1.1rem, 2vw, 1.5rem); color: var(--gold-2); }
 
-      .ie100-edit .ed-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 2vw, 24px); }
+      .ie100-edit .ed-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(14px, 2vw, 24px); align-items: start; }
 
       @media (max-width: 860px) {
         .ie100-edit .ed-split--7-5, .ie100-edit .ed-split--5-7 { grid-template-columns: 1fr; }
@@ -326,7 +330,7 @@
               <div><dt>Photography as positioning</dt><dd>Hotel lounges, boardrooms, rooftop gatherings — chosen for the club&rsquo;s social texture: warm but selective.</dd></div>
             </dl>
           </div>
-          <figure class="ed-fig" style="aspect-ratio: 16 / 9;">
+          <figure class="ed-fig">
             <img src="../Images/IE100v2/Image2.png" alt="IE100 Club — a private salon gathering" style="object-position: 50% 50%;">
           </figure>
         </div>
@@ -395,22 +399,22 @@
             </dl>
           </div>
           <div>
-            <figure class="ed-fig" style="aspect-ratio: 16 / 9;">
+            <figure class="ed-fig">
               <img src="../Images/IE100v2/Image10.png" alt="IE100 Club — homepage hero, the Marina Bay skyline">
             </figure>
             <p class="ed-cap">Homepage — the international hero.</p>
           </div>
         </div>
         <div class="ed-gallery" style="margin-top: clamp(16px, 3vw, 30px);">
-          <figure class="ed-fig" style="aspect-ratio: 16 / 9;"><img src="../Images/IE100v2/Image3.png" alt="IE100 Club — the three core services"></figure>
-          <figure class="ed-fig" style="aspect-ratio: 16 / 9;"><img src="../Images/IE100v2/Image8.png" alt="IE100 Club — events and activities"></figure>
+          <figure class="ed-fig"><img src="../Images/IE100v2/Image3.png" alt="IE100 Club — the three core services"></figure>
+          <figure class="ed-fig"><img src="../Images/IE100v2/Image8.png" alt="IE100 Club — events and activities"></figure>
         </div>
       </section>
 
       <!-- 04 · Operations — image-led: the backend, then the statement -->
       <section class="chapter wrap" id="s-04" data-section>
         <div class="ed-split ed-split--7-5 ed-split--center">
-          <figure class="ed-fig" style="aspect-ratio: 2 / 1;">
+          <figure class="ed-fig">
             <img src="../Images/IE100v2/Image12.png" alt="IE100 admin portal — the image library for self-serve photography">
           </figure>
           <div>
