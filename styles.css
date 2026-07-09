@@ -788,8 +788,12 @@ button {
 .project-block > video.project-block__video--crop-top {
   object-position: 50% 100%;
 }
-.project-block--auto > img,
-.project-block--auto > video {
+/* Compound selector (.project-block.project-block--auto) — needs to
+   out-specify the generic ".project-block > img" rule above, which has
+   equal specificity and would otherwise win by winning on source order,
+   silently cropping the image via object-fit:cover. */
+.project-block.project-block--auto > img,
+.project-block.project-block--auto > video {
   position: static;
   width: 100%;
   height: auto;
