@@ -4494,6 +4494,15 @@ a.about-cert:hover .about-cert__arrow {
     aspect-ratio: 4 / 3 !important;
   }
 
+  /* --auto blocks opt OUT of the forced 4:3 above — that ratio squeezed the
+     container shorter than the image's natural height, and overflow:hidden
+     silently clipped the bottom of the image. Compound selector + !important
+     needed to out-rank the rule directly above. */
+  .project-block--40.project-block--auto,
+  .project-block--60.project-block--auto {
+    aspect-ratio: auto !important;
+  }
+
   /* Ensure project-block elements inside text sections are full-width */
   .project-text .project-block {
     width: 100%;
