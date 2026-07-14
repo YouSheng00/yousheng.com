@@ -16,3 +16,10 @@ desktop.ini
 # Build / deps (in case you ever add them)
 node_modules/
 dist/
+
+# Private working files — career strategy & research notes; the repo is
+# public, these must never ship with the site
+MarketSearch/
+
+# Diagnostic logs
+*.log
