@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v3 Moodboard — CompassStu</title>
+  <!-- Rendered headlessly at 1600×900 → Images/CompassStu/v3-moodboard.png.
+       A true moodboard: six unequal ARTIFACTS collected on a white surface —
+       a type clipping, a light study, a product crop, paint chips, a quote,
+       a data scrap. Objects with shadows on a loose grid, not a layout.
+       Values verbatim from Retheme/retheme.md (Spec v3.0). -->
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=switzer@400,500,600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@1,6..72,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #14102B;
+      --muted: #9490AE;
+      --hairline: rgba(20, 16, 43, 0.08);
+      --brand: #7A5CFF;
+      --chapter-bg: #14102B;
+      --kicker: #7D8799;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'Switzer', -apple-system, sans-serif;
+      --display: 'Cabinet Grotesk', var(--sans);
+      --serif: 'Newsreader', serif;
+      /* objects on a table — one soft ambient + one contact shadow */
+      --lift: 0 24px 48px rgba(20, 16, 43, 0.09), 0 3px 8px rgba(20, 16, 43, 0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1600px;
+      height: 810px;   /* 10% shorter than the original 900 — the reduction comes
+                          out of vertical air only; artifact sizes are unchanged */
+      overflow: hidden;
+      background: #FFFFFF;
+      font-family: var(--sans);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+
+    /* ── Header / footer — whisper quiet ────────────────── */
+    .eyebrow {
+      position: absolute;
+      left: 84px; top: 46px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--kicker);
+    }
+    .eyebrow::after {
+      content: '';
+      display: block;
+      width: 24px; height: 2px;
+      border-radius: 2px;
+      background: var(--brand);
+      margin-top: 9px;
+    }
+    .head-meta {
+      position: absolute;
+      right: 84px; top: 48px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    .adjectives {
+      position: absolute;
+      left: 84px; bottom: 34px;
+      display: flex;
+      gap: 34px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--kicker);
+    }
+    .foot-right {
+      position: absolute;
+      right: 84px; bottom: 34px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    .foot-right b { color: var(--brand); font-weight: 500; }
+
+    /* tiny captions beside artifacts — two words, never sentences */
+    .cap {
+      position: absolute;
+      font-family: var(--mono);
+      font-size: 8.5px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── 1 · the type clipping — "proof." cropped by its own card ── */
+    .clip-type {
+      position: absolute;
+      left: 84px; top: 158px;
+      width: 556px; height: 290px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: inset 0 0 0 1px var(--hairline), var(--lift);
+      overflow: hidden;
+    }
+    .clip-type span {
+      position: absolute;
+      left: 38px; bottom: -66px;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 236px;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .clip-type i { font-style: normal; color: var(--brand); }
+
+    /* ── 2 · the data scrap — a ticket stub, slightly askew ── */
+    .scrap {
+      position: absolute;
+      left: 716px; top: 216px;
+      width: 178px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px 18px 15px;
+      box-shadow: inset 0 0 0 1px var(--hairline), var(--lift);
+      transform: rotate(2deg);
+    }
+    .scrap-label {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .scrap-num {
+      font-family: var(--mono);
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-top: 7px;
+      color: var(--ink);
+    }
+
+    /* ── 3 · the light study — pure atmosphere, no UI ────── */
+    .study {
+      position: absolute;
+      left: 980px; top: 130px;
+      width: 536px; height: 318px;
+      border-radius: 16px;
+      background: var(--chapter-bg);
+      overflow: hidden;
+      box-shadow: var(--lift);
+    }
+    .study::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(70% 65% at 28% 104%, rgba(79, 70, 229, 0.95), transparent 74%),
+        radial-gradient(58% 55% at 70% 108%, rgba(139, 92, 246, 0.8), transparent 74%),
+        radial-gradient(42% 48% at 97% 92%, rgba(34, 211, 238, 0.55), transparent 74%);
+      filter: blur(8px);
+    }
+
+    /* ── 4 · paint chips — a loose fan ───────────────────── */
+    .chips {
+      position: absolute;
+      left: 92px; top: 524px;
+      width: 430px; height: 224px;
+    }
+    .chip {
+      position: absolute;
+      width: 118px;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px var(--hairline), var(--lift);
+    }
+    .chip i { display: block; height: 122px; }
+    .chip span {
+      display: block;
+      padding: 10px 12px 11px;
+      font-family: var(--mono);
+      font-size: 8.5px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      background: #fff;
+      /* the fan overlaps each chip's left edge — right-align so every
+         hex stays fully visible in the exposed region */
+      text-align: right;
+    }
+    .chip--brand    { left: 0;     top: 12px; transform: rotate(-4deg);  z-index: 4; }
+    .chip--indigo   { left: 98px;  top: 2px;  transform: rotate(-1deg);  z-index: 3; }
+    .chip--ember    { left: 196px; top: 10px; transform: rotate(2deg);   z-index: 2; }
+    .chip--verified { left: 294px; top: 22px; transform: rotate(4.5deg); z-index: 1; }
+
+    /* ── 5 · the product crop — real UI in a browser frame ── */
+    .browser {
+      position: absolute;
+      left: 620px; top: 478px;
+      width: 400px;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px var(--hairline), 0 32px 64px rgba(20, 16, 43, 0.14), 0 3px 8px rgba(20, 16, 43, 0.05);
+    }
+    .browser-bar {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .browser-bar i { width: 7px; height: 7px; border-radius: 50%; background: #E6E3F0; }
+    .browser-bar .url {
+      margin-left: 8px;
+      flex: 1;
+      font-family: var(--mono);
+      font-size: 8px;
+      color: var(--muted);
+      background: #F6F5FA;
+      border-radius: 99px;
+      padding: 3px 10px;
+    }
+    .browser img { display: block; width: 100%; }
+
+    /* ── 6 · the quote clipping ──────────────────────────── */
+    .quote {
+      position: absolute;
+      left: 1132px; top: 540px;
+      width: 384px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px 32px 28px;
+      box-shadow: inset 0 0 0 1px var(--hairline), var(--lift);
+      transform: rotate(-1deg);
+    }
+    .quote p {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 500;
+      font-size: 29px;
+      line-height: 1.3;
+      letter-spacing: -0.005em;
+      color: var(--ink);
+    }
+    .quote::after {
+      content: '';
+      display: block;
+      width: 24px; height: 2px;
+      border-radius: 2px;
+      background: var(--brand);
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="eyebrow">CompassStu — Retheme v3 · Moodboard</div>
+  <div class="head-meta">SPEC v3.0 · 2026</div>
+
+  <!-- 1 · type clipping -->
+  <div class="clip-type"><span>pro<i>o</i>f.</span></div>
+
+  <!-- 2 · data scrap -->
+  <div class="scrap">
+    <div class="scrap-label">Proof Score</div>
+    <div class="scrap-num">73 / 100</div>
+  </div>
+
+  <!-- 3 · light study -->
+  <div class="study"></div>
+  <div class="cap" style="left: 984px; top: 102px;">01 · Light</div>
+
+  <!-- 4 · paint chips -->
+  <div class="chips">
+    <div class="chip chip--brand"><i style="background:#7A5CFF;"></i><span>#7A5CFF</span></div>
+    <div class="chip chip--indigo"><i style="background:#4F5BD5;"></i><span>#4F5BD5</span></div>
+    <div class="chip chip--ember"><i style="background:#F2994A;"></i><span>#F2994A</span></div>
+    <div class="chip chip--verified"><i style="background:#1E9E6A;"></i><span>#1E9E6A</span></div>
+  </div>
+  <div class="cap" style="left: 96px; top: 492px;">02 · Colour</div>
+
+  <!-- 5 · product crop -->
+  <div class="browser">
+    <div class="browser-bar">
+      <i></i><i></i><i></i>
+      <span class="url">compassstu.com</span>
+    </div>
+    <img src="../Images/CompassStu/v3-home.png" alt="CompassStu v3 landing page">
+  </div>
+  <div class="cap" style="left: 624px; top: 450px;">03 · Product</div>
+
+  <!-- 6 · quote clipping -->
+  <div class="quote">
+    <p>If it glows, ship&nbsp;it.</p>
+  </div>
+
+  <div class="adjectives">
+    <span>Luminous</span>
+    <span>Credentialed</span>
+    <span>Engineered</span>
+    <span>AI-native</span>
+    <span>Restrained</span>
+  </div>
+  <div class="foot-right"><b>#7A5CFF</b> — the one light source</div>
+
+</body>
+</html>

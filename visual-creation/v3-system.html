@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v3 Design System — CompassStu</title>
+  <!-- Rendered headlessly at 1600×900 → Images/CompassStu/v3-design-system.png.
+       The specification companion to v3-moodboard.html. Four sparse columns,
+       no panels, no borders doing layout work — air is the structure. -->
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&f[]=switzer@400,500,600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@1,6..72,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --text-strong: #14102B;
+      --text-body: #3D3660;
+      --text-muted: #9490AE;
+      --hairline: rgba(20, 16, 43, 0.08);
+      --hairline-strong: rgba(20, 16, 43, 0.16);
+      --brand: #7A5CFF;
+      --indigo: #4F5BD5;
+      --ember: #F2994A;
+      --verified: #1E9E6A;
+      --chapter-bg: #14102B;
+      --kicker: #7D8799;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'Switzer', -apple-system, sans-serif;
+      --display: 'Cabinet Grotesk', var(--sans);
+      --serif: 'Newsreader', serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1600px;
+      height: 810px;   /* 10% shorter than the original 900 — reduction comes out
+                          of the padding and inter-item air, not the content */
+      overflow: hidden;
+      background: #FFFFFF;
+      font-family: var(--sans);
+      color: var(--text-strong);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .sheet {
+      width: 100%; height: 100%;
+      padding: 48px 84px 44px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ─────────────────────────────────────────── */
+    .head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--kicker);
+    }
+    .eyebrow::after {
+      content: '';
+      display: block;
+      width: 24px; height: 2px;
+      border-radius: 2px;
+      background: var(--brand);
+      margin-top: 9px;
+    }
+    .head-meta {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    /* ── Body: four sparse columns ──────────────────────── */
+    .cols {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1.12fr 1fr 1fr;
+      gap: 84px;
+      padding-top: 60px;
+      min-height: 0;
+    }
+    .col { display: flex; flex-direction: column; min-width: 0; }
+
+    .col-label {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+
+    /* 1 · colour — six swatches, six hexes, nothing else */
+    .swatches {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px 20px;
+    }
+    .swatch i {
+      display: block;
+      height: 56px;
+      border-radius: 8px;
+    }
+    .swatch span {
+      display: block;
+      margin-top: 9px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+    .spectrum { margin-top: auto; }
+    .spectrum i {
+      display: block;
+      height: 4px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #8B5CF6, #4F46E5, #22D3EE, #D946EF);
+    }
+    .spectrum span {
+      display: block;
+      margin-top: 10px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* 2 · type — four faces, air between */
+    .face { padding: 0; }
+    .face + .face { margin-top: 26px; }
+    .face-sample { display: block; letter-spacing: -0.015em; white-space: nowrap; }
+    .face--display .face-sample { font-family: var(--display); font-weight: 800; font-size: 30px; }
+    .face--body   .face-sample { font-family: var(--sans); font-weight: 500; font-size: 25px; }
+    .face--serif  .face-sample { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 26px; }
+    .face--mono   .face-sample { font-family: var(--mono); font-weight: 400; font-size: 21px; }
+    .face-meta {
+      display: block;
+      margin-top: 8px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .type-note {
+      margin-top: auto;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* 3 · surface — two buttons, three radii, one rule */
+    .btn {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 10px;
+      padding: 12px 20px;
+      line-height: 1;
+    }
+    .btn-brand { background: var(--brand); color: #fff; }
+    .btn-secondary { border: 1px solid var(--hairline-strong); color: var(--text-strong); margin-top: 12px; }
+    .surface-note {
+      margin-top: 26px;
+      font-size: 12.5px;
+      line-height: 1.65;
+      color: var(--text-muted);
+      max-width: 240px;
+    }
+    .surface-note b { color: var(--text-body); font-weight: 500; }
+    .radii { margin-top: auto; display: flex; align-items: flex-end; gap: 14px; }
+    .radius {
+      border: 1px solid var(--hairline-strong);
+      display: grid;
+      place-items: center;
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--text-muted);
+    }
+    .radii-cap {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-left: 8px;
+      line-height: 1.7;
+    }
+
+    /* 4 · light & motion — one glow, three numbers, one creed */
+    .glow {
+      position: relative;
+      height: 92px;
+      border-radius: 12px;
+      background: var(--chapter-bg);
+      overflow: hidden;
+    }
+    .glow::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(70% 95% at 28% 112%, rgba(79, 70, 229, 0.95), transparent 74%),
+        radial-gradient(58% 85% at 68% 118%, rgba(139, 92, 246, 0.8), transparent 74%),
+        radial-gradient(44% 70% at 95% 100%, rgba(34, 211, 238, 0.55), transparent 74%);
+      filter: blur(7px);
+    }
+    .motion { margin-top: 38px; }
+    .motion-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      color: var(--text-body);
+    }
+    .motion-row + .motion-row { margin-top: 16px; }
+    .motion-row i { font-style: normal; color: var(--text-muted); }
+    .creed {
+      margin-top: auto;
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 500;
+      font-size: 16.5px;
+      line-height: 1.5;
+      color: var(--text-body);
+      max-width: 270px;
+    }
+
+    /* ── Footer ─────────────────────────────────────────── */
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-top: 44px;
+      padding-top: 26px;
+      border-top: 1px solid var(--hairline);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+
+    <div class="head">
+      <div class="eyebrow">CompassStu — Retheme v3 · Design system</div>
+      <div class="head-meta">TOKENS · TYPE · SURFACE · LIGHT</div>
+    </div>
+
+    <div class="cols">
+
+      <div class="col">
+        <div class="col-label">Colour</div>
+        <div class="swatches">
+          <div class="swatch"><i style="background:#FFFFFF; box-shadow: inset 0 0 0 1px var(--hairline-strong);"></i><span>page · #FFFFFF</span></div>
+          <div class="swatch"><i style="background:#14102B;"></i><span>ink · #14102B</span></div>
+          <div class="swatch"><i style="background:#7A5CFF;"></i><span>brand · #7A5CFF</span></div>
+          <div class="swatch"><i style="background:#4F5BD5;"></i><span>indigo · #4F5BD5</span></div>
+          <div class="swatch"><i style="background:#F2994A;"></i><span>ember · #F2994A</span></div>
+          <div class="swatch"><i style="background:#1E9E6A;"></i><span>verified · #1E9E6A</span></div>
+        </div>
+        <div class="spectrum">
+          <i></i>
+          <span>Spectrum — gradients only, never flat</span>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="col-label">Type — four faces, four jobs</div>
+        <div class="face face--display">
+          <span class="face-sample">Ends in proof.</span>
+          <span class="face-meta">Cabinet Grotesk · display ≥ 28px</span>
+        </div>
+        <div class="face face--body">
+          <span class="face-sample">Practice, graded.</span>
+          <span class="face-meta">Switzer · body, UI, buttons</span>
+        </div>
+        <div class="face face--serif">
+          <span class="face-sample">the university whisper</span>
+          <span class="face-meta">Newsreader · ≤ 3 uses per page</span>
+        </div>
+        <div class="face face--mono">
+          <span class="face-sample">73 / 100 · N 360°</span>
+          <span class="face-meta">IBM Plex Mono · data only</span>
+        </div>
+        <div class="type-note">Display 72 · body 15 · eyebrow 13</div>
+      </div>
+
+      <div class="col">
+        <div class="col-label">Surface</div>
+        <div>
+          <span class="btn btn-brand">Get my Proof Score</span><br>
+          <span class="btn btn-secondary">See an example</span>
+        </div>
+        <div class="surface-note"><b>The primary is brand — no black buttons exist.</b> Cards are hairline with no shadow at rest; shadow is earned by floating.</div>
+        <div class="radii">
+          <span class="radius" style="width:44px;height:34px;border-radius:8px;">8</span>
+          <span class="radius" style="width:44px;height:38px;border-radius:10px;">10</span>
+          <span class="radius" style="width:44px;height:44px;border-radius:16px;">16</span>
+          <span class="radii-cap">card · button · media</span>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="col-label">Light &amp; motion</div>
+        <div class="glow"></div>
+        <div class="motion">
+          <div class="motion-row"><span>Hero glow, behind the product</span><i>24s</i></div>
+          <div class="motion-row"><span>Divider light pulse</span><i>8s</i></div>
+          <div class="motion-row"><span>Buttons — colour only</span><i>150ms</i></div>
+        </div>
+        <p class="creed">Everything that moves is either light traveling, or content settling.</p>
+      </div>
+
+    </div>
+
+    <div class="foot">
+      <span>One light source · four faces · both themes first-class</span>
+      <span>CompassStu · 2026</span>
+    </div>
+
+  </div>
+</body>
+</html>

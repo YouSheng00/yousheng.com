@@ -99,7 +99,7 @@
         color-mix(in srgb, #7c5cfc 55%, transparent), #7c5cfc);
     }
 
-    /* Every section now carries its own honest number (01–15), so the old
+    /* Every section now carries its own honest number (01–19), so the old
        "demote un-numbered titles" rule is gone — all section headings are peers. */
 
     /* ════════════════════════════════════════════════════════════════
@@ -149,9 +149,9 @@
     .page--compassstu .project-text__body p { line-height: 1.72; }
     .page--compassstu .project-text__body p + p { margin-top: 1.05em; }
 
-    /* ★ STEP-CHANGE 2 — the 01–15 numbers become the page's SIGNATURE. They are the
+    /* ★ STEP-CHANGE 2 — the 01–19 numbers become the page's SIGNATURE. They are the
        ONE place the brand violet now lands at typographic SIZE: a large, light-weight
-       violet figure stacked above each white section name, repeated 15× down the
+       violet figure stacked above each white section name, repeated 19× down the
        page. Light 300 against the heavier label is a second weight contrast inside
        the mark. The only coloured anchor on an otherwise mono page — its identity. */
     .page--compassstu .project-text__section-title,
@@ -200,6 +200,12 @@
        text-heavy sections with no media row between them to break it up). */
     .page--compassstu #s-10 { padding-top: calc(var(--s-500) + var(--s-250)); }
 
+    /* Gap 13 → 14 — same problem, stronger dose: two all-text sections meet with
+       no media row between, and §13 is short, so the doubled 10rem padding reads
+       as a hole in the page. Take a step out of BOTH sides of the seam. */
+    .page--compassstu #s-13 { padding-bottom: var(--s-500); }
+    .page--compassstu #s-14 { padding-top: var(--s-500); }
+
     /* ── Section 13 (Tech Architecture) — the only all-text section, so give it
        life: a scroll-driven stagger (each line rises as it enters the viewport)
        and a violet hover that focuses one architecture decision at a time.
@@ -247,6 +253,138 @@
     }
 
     /* ════════════════════════════════════════════════════════════════
+       PART TWO — the post-launch chapters (15–18). Deliberately almost no
+       new vocabulary: the four new sections are built from components the
+       page already owns (project-text, pipeline, hub-layer, pathway-track,
+       hub-role-fit). Only two things are new — the part divider, and a
+       BEFORE/AFTER twin of the existing rubric card. */
+
+    /* The divider is the page's one un-numbered section: a hairline, a
+       violet kicker, one thesis line. It has to read as a hinge, so it
+       gets more air above than a chapter and less below. */
+    .page--compassstu .part-divider {
+      padding-block: calc(var(--s-500) + var(--s-300)) var(--s-400);
+    }
+    .page--compassstu .part-divider__kicker {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #7c5cfc;
+      margin-bottom: var(--s-200);
+    }
+
+    /* Grader before/after — two compact rubric cards at full grid width.
+       auto-fit + min(340px, 100%) collapses them to one column when the
+       cards would squeeze, without a breakpoint (and without the classic
+       minmax overflow at 390px). */
+    .page--compassstu .rubric-twin {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+      gap: var(--project-spacing);
+      padding: 0 var(--s-200);
+    }
+    .page--compassstu .rubric-twin .rubric-card { max-width: none; padding: var(--s-250); }
+    .page--compassstu .rubric-twin .rubric-card__header { margin-bottom: var(--s-250); }
+    /* "33–92" carries an en-dash, which is a line-break opportunity — left to
+       wrap it collides with its own line-box. It never breaks. */
+    .page--compassstu .rubric-twin .rubric-card__total { font-size: 30px; white-space: nowrap; }
+    .page--compassstu .rubric-twin .rubric-card__rows { gap: 13px; }
+    /* Label track sized to its content, not to a guessed rem value: "Submission 01"
+       wrapped to two lines against every fixed track that fit on desktop. */
+    .page--compassstu .rubric-twin .rubric-card__row { grid-template-columns: max-content 1fr 4ch; gap: 12px; }
+    .page--compassstu .rubric-twin .rubric-card__label { font-size: 12px; white-space: nowrap; }
+    .page--compassstu .rubric-twin .rubric-card__verified { margin-top: var(--s-250); line-height: 1.45; }
+
+    /* The "before" card IS the argument: four identical scores and no life
+       in them. Kill the fill animation and drain the colour, so it reads
+       dead next to the animated violet spread beside it. */
+    .page--compassstu .rubric-card--flat .rubric-card__fill {
+      animation: none;
+      opacity: 1;
+      transform: none;
+      background: color-mix(in srgb, var(--c-text) 26%, transparent);
+    }
+    .page--compassstu .rubric-card--flat .rubric-card__value { animation: none; opacity: 1; }
+    .page--compassstu .rubric-card--flat .rubric-card__dot {
+      background: color-mix(in srgb, var(--c-text) 35%, transparent);
+      box-shadow: none;
+    }
+
+    /* A claim in §14 is that colour became semantic — so the two words that
+       name the states are set IN those states rather than described. The only
+       non-violet colour on the page, and it earns its place by being the
+       evidence for the sentence it sits in. Light mode gets darker values;
+       the dark-mode amber/green fail contrast on a #f5f5f7 field. */
+    .page--compassstu .tone-ember,
+    .page--compassstu .tone-verified { font-style: normal; font-weight: 500; }
+    .page--compassstu .tone-ember { color: #f59e0b; }
+    .page--compassstu .tone-verified { color: #22c55e; }
+    html.theme-light .page--compassstu .tone-ember { color: #b45309; }
+    html.theme-light .page--compassstu .tone-verified { color: #15803d; }
+
+    /* Emphasis inside body copy: body is muted by design, so a <strong> that
+       only adds weight disappears. Lift it to full text colour — used once,
+       for the line the whole repositioning turns on. */
+    .page--compassstu .project-text__body strong {
+      color: var(--c-text);
+      font-weight: 600;
+    }
+
+    /* §16's Proof Score card inherits the role-fit component from §09, which was
+       tuned for a 42% column — in this 55% column its fixed 80px bars stranded
+       themselves against the right edge, a mile from their labels. Let the bar
+       span the row instead, so the weights read as one chart. */
+    .page--compassstu #s-16 .hub-role-fit { padding: var(--s-250); }
+    .page--compassstu #s-16 .hub-role-fit__roles { gap: var(--s-100); }
+    .page--compassstu #s-16 .hub-role-fit__role { grid-template-columns: 6.5rem 1fr; }
+    .page--compassstu #s-16 .hub-role-fit__bar-wrap { gap: var(--s-100); }
+    .page--compassstu #s-16 .hub-role-fit__bar { width: auto; flex: 1; height: 5px; }
+
+    /* §14's pipeline follows a subsection intro rather than a section body, so
+       its default top margin doubled up into a hole. */
+    .page--compassstu #s-14 .project-text__pipeline { margin-top: var(--s-150); }
+
+    /* The two v1 slides, demoted to a half-width pair: they are the "before"
+       now, and their size should say so before the captions do. Each card
+       keeps the slides' 21/9.9 ratio; the fixed 1100px compositions inside
+       are scaled to fit by the .slide-fit script at the end of the page. */
+    .page--compassstu .v1-pair {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--project-spacing);
+    }
+    .page--compassstu .v1-pair .labeled-card { grid-column: auto; }
+    .page--compassstu .slide-fit { position: relative; overflow: hidden; }
+    .page--compassstu .slide-fit > iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 1100px;
+      height: 518.57px;   /* 1100 × (9.9 / 21) — matches the card's aspect-ratio */
+      border: 0;
+      transform-origin: top left;
+    }
+    @media (max-width: 600px) {
+      .page--compassstu .v1-pair { grid-template-columns: 1fr; }
+    }
+
+    /* §17's two funnel screenshots — same-ratio sources, so only equal widths
+       keep both complete and flush. Plain .project-block children (no --40/--60)
+       so the base stylesheet's mobile 4:3 forcing never crops them. */
+    .page--compassstu .shot-pair {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--project-spacing);
+    }
+    .page--compassstu .shot-pair .project-block { grid-column: auto; }
+    @media (max-width: 600px) {
+      .page--compassstu .shot-pair { grid-template-columns: 1fr; }
+    }
+
+    /* ════════════════════════════════════════════════════════════════
        Responsive — the page-scoped overrides above (dramatic section padding,
        oversized display type, large violet numerals) out-specify the base mobile
        rules in styles.css, so they each need their own breakpoints. Column
@@ -258,6 +396,9 @@
       .page--compassstu .project-text,
       .page--compassstu .approach { padding-block: calc(var(--s-500) + var(--s-200)); }
       .page--compassstu #s-10 { padding-top: calc(var(--s-500) + var(--s-100)); }
+      .page--compassstu #s-13 { padding-bottom: var(--s-400); }
+      .page--compassstu #s-14 { padding-top: var(--s-400); }
+      .page--compassstu .part-divider { padding-block: calc(var(--s-500) + var(--s-100)) var(--s-350); }
     }
 
     /* Phone / tablet-portrait (zoom off, columns stacked). Pull the big intervals
@@ -266,6 +407,8 @@
       .page--compassstu .project-text,
       .page--compassstu .approach { padding-block: var(--s-400); }
       .page--compassstu #s-10 { padding-top: var(--s-400); }
+      .page--compassstu #s-13 { padding-bottom: var(--s-400); }
+      .page--compassstu #s-14 { padding-top: var(--s-400); }
       /* The Proof Layer is a 2-col grid the base never stacks — stack it here. */
       .page--compassstu .proof-layer { padding-block: var(--s-300); grid-template-columns: 1fr; }
       .page--compassstu .project-text__lead {
@@ -273,6 +416,10 @@
       }
       .page--compassstu .project-text__num,
       .page--compassstu .approach__num { font-size: 1.5rem; }
+      /* Divider: keep it a hinge, not a chapter — it should still feel like
+         a breath even once the chapters themselves are tight. */
+      .page--compassstu .part-divider { padding-block: calc(var(--s-400) + var(--s-200)) var(--s-300); }
+      .page--compassstu .rubric-twin { padding: 0 var(--s-100); gap: var(--s-250); }
     }
 
     /* Small phone — tighten further. */
@@ -280,10 +427,30 @@
       .page--compassstu .project-text,
       .page--compassstu .approach { padding-block: var(--s-300); }
       .page--compassstu #s-10 { padding-top: var(--s-300); }
+      .page--compassstu #s-13 { padding-bottom: var(--s-300); }
+      .page--compassstu #s-14 { padding-top: var(--s-300); }
       .page--compassstu .project-text__lead { font-size: clamp(1.55rem, 8vw, 2.1rem); }
       .page--compassstu .project-text__thesis { font-size: clamp(1.35rem, 6vw, 1.75rem); }
       .page--compassstu .project-text__num,
       .page--compassstu .approach__num { font-size: 1.3rem; }
+      .page--compassstu .part-divider { padding-block: var(--s-400) var(--s-250); }
+      .page--compassstu .part-divider__kicker { font-size: 0.68rem; letter-spacing: 0.16em; }
+      .page--compassstu .rubric-twin { grid-template-columns: 1fr; }
+      .page--compassstu .rubric-twin .rubric-card { padding: var(--s-200); }
+      .page--compassstu .rubric-twin .rubric-card__row { gap: 10px; }
+      .page--compassstu .rubric-twin .rubric-card__label { font-size: 11px; }
+      /* The header is a baseline row of title + total; at 390px the title needs
+         two lines and shoves the number off its own baseline. Stack them —
+         number first, caption under it. */
+      .page--compassstu .rubric-twin .rubric-card__header {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: var(--s-050);
+      }
+      .page--compassstu .rubric-twin .rubric-card__title { font-size: 11px; letter-spacing: 0.11em; }
+      .page--compassstu .rubric-twin .rubric-card__total { font-size: 28px; line-height: 1.1; }
+      /* Bars fill whatever the nowrap label leaves behind. */
+      .page--compassstu #s-16 .hub-role-fit__role { grid-template-columns: 5.5rem 1fr; }
     }
   </style>
 
@@ -1016,32 +1183,441 @@
           </h3>
 
           <p class="project-text__thesis">
-            One typeface. One violet accent. Restraint as a design position, not a limitation.
+            Restraint as a design position, not a limitation — first with one typeface, then with a system.
           </p>
 
           <div class="project-text__body">
-            <p>Alpha-based neutrals throughout — one palette, dark or light. Nothing competes with the work.</p>
+            <p>v1 was one typeface, one violet accent, alpha-based neutrals. It held the product together through launch — and ran out of range the moment the product had more to say.</p>
+
+            <h4 class="project-text__subsection-title">
+              <span>v3 — the redesign</span>
+            </h4>
+            <p>A full system, shipped across the live product in under a week.</p>
           </div>
+
+          <dl class="project-text__pipeline">
+            <dt>Eight production pages, one pass.</dt>
+            <dd>Landing, catalog, pricing, how-it-works, course overview, profile, bridge tasks, learning hub. Proven by shipping it, not by a style guide.</dd>
+            <dt>Four typefaces, self-hosted, on shared tokens.</dt>
+            <dd>Cabinet Grotesk, Switzer, IBM Plex Mono, Newsreader. All data — scores, dates, counts — now reads in mono.</dd>
+            <dt>One luminous signature per page.</dt>
+            <dd>A single deliberate light event on each, instead of decoration everywhere.</dd>
+            <dt>Colour became semantic.</dt>
+            <dd>No red in the palette. A failed evaluation renders as <em class="tone-ember">ember</em> — retryable, not broken. A pass renders as <em class="tone-verified">verified</em>.</dd>
+            <dt>Verified, not assumed.</dt>
+            <dd>Both themes, desktop and 390&thinsp;px, a static reduced-motion pass. Six native <code>alert()</code> dialogs in auth became one inline, screen-reader-announced message.</dd>
+          </dl>
         </div>
       </section>
 
-      <!-- Section 14 visuals: two slides at full grid width, but with
-             a wider aspect-ratio (21:9 instead of 16:9) so they read as
-             shorter horizontal banners rather than tall full-bleed cards. -->
-      <div class="project-block project-block--full slide-embed" style="aspect-ratio: 21 / 9.9;">
-        <iframe src="../visual-creation/brand-overview-1.html" title="CompassStu brand foundations" loading="lazy"></iframe>
+      <!-- Section 14 visuals: the two v1 slides at HALF width, side by side —
+             they're the historical record now, and the smaller size says so
+             before the captions do. The inner pages are fixed 1100px-wide
+             compositions, so .slide-fit renders each at 1100px and scales it
+             to its card (own JS below — script.js only does this ≤768px). -->
+      <div class="v1-pair">
+        <div class="labeled-card">
+          <div class="labeled-card__label">Brand foundations &middot; v1, at launch</div>
+          <div class="project-block slide-fit labeled-card__media" style="aspect-ratio: 21 / 9.9;">
+            <iframe src="../visual-creation/brand-overview-1.html" title="CompassStu brand foundations" loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <div class="labeled-card">
+          <div class="labeled-card__label">Product surfaces &middot; v1, at launch</div>
+          <div class="project-block slide-fit labeled-card__media" style="aspect-ratio: 21 / 9.9;">
+            <iframe src="../visual-creation/brand-overview-2.html" title="CompassStu product surfaces" loading="lazy"></iframe>
+          </div>
+        </div>
       </div>
 
-      <div class="project-block project-block--full slide-embed" style="aspect-ratio: 21 / 9.9;">
-        <iframe src="../visual-creation/brand-overview-2.html" title="CompassStu product surfaces" loading="lazy"></iframe>
+      <!-- Section 14 visuals, part two: v3 as a system — the moodboard (intent)
+             and the spec sheet (execution), reverse-engineered from retheme.md
+             and the live product. Rendered from visual-creation/v3-moodboard.html
+             and v3-system.html at 3200×1620; shipped as flat PNGs for scroll
+             perf (regenerate via headless screenshot if the sources change). -->
+      <div class="labeled-card">
+        <div class="labeled-card__label">v3 &middot; the moodboard — luminous, credentialed, engineered, restrained</div>
+        <div class="project-block project-block--full project-block--auto labeled-card__media">
+          <img src="../Images/CompassStu/v3-moodboard.png" alt="CompassStu v3 moodboard: the two-tone headline voice, one violet light source, the dark chapter with real product UI, the one-line test, four typefaces, and the discipline rules" />
+        </div>
       </div>
 
-      <!-- Section 15: Results & Reflection — shipped facts on the left,
-             honest PM reflection on the right. -->
+      <div class="labeled-card">
+        <div class="labeled-card__label">v3 &middot; the design system — tokens, type, surface, guided light</div>
+        <div class="project-block project-block--full project-block--auto labeled-card__media">
+          <img src="../Images/CompassStu/v3-design-system.png" alt="CompassStu v3 design system sheet: theme-aware colour tokens in light and dark, four typefaces with their jobs, buttons and components, and the guided-light motion rules" />
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════════════════════════════
+             PART TWO — After Launch (15–18).
+             Everything above is the designed product. Everything below is
+             what the live product argued with. Un-numbered divider: it is
+             a hinge, not a chapter, so it takes no numeral — and points the
+             Calibrate button at the first chapter after it (data-target).
+             ══════════════════════════════════════════════════════════════ -->
+      <section class="project-text project-text--center project-text--chapter part-divider"
+               data-section data-target="s-15" style="grid-template-columns: 1fr;">
+        <div class="project-text__center">
+          <span class="part-divider__kicker">Part Two — After Launch</span>
+          <p class="project-text__thesis">
+            Everything above is what I designed. Everything below is what the live product proved wrong.
+          </p>
+        </div>
+      </section>
+
+      <!-- Section 15: Recalibrating the Grader — the AI product's central
+             failure and its fix. Left: the diagnosis. Right: the rebuild.
+             The before/after twin below carries the evidence. -->
       <section class="project-text" id="s-15" data-section style="grid-template-columns: 45fr 55fr;">
         <div class="project-text__left">
           <h3 class="project-text__section-title">
             <span class="project-text__num">15</span>
+            <span class="project-text__label">Recalibrating the Grader</span>
+          </h3>
+
+          <p class="project-text__thesis">
+            Four different submissions. Four identical 85s.
+          </p>
+
+          <div class="project-text__body">
+            <p>&ldquo;Be encouraging&rdquo; in the prompt, no anchors to score against — so the model found the safe middle and parked there.</p>
+            <p>A grade nobody can fail is not a grade. The whole product rests on this number.</p>
+          </div>
+        </div>
+
+        <div class="project-text__right">
+          <dl class="project-text__pipeline">
+            <dt>Anchored dimensions.</dt>
+            <dd>Each dimension scores independently against written anchors — what a 30 looks like, what a 90 looks like.</dd>
+            <dt>Computed, not generated.</dt>
+            <dd>The model judges the dimensions; code applies the weights. Every score is auditable back to its parts.</dd>
+            <dt>Evidence is a hard gate.</dt>
+            <dd>No paste-blocking, no detection theatre. Below 50 on situational specificity caps at a fail, however fluent the prose. Pasted-and-polished fails. Messy-but-real passes.</dd>
+          </dl>
+        </div>
+      </section>
+
+      <!-- Section 15 evidence: the same four submissions, before and after
+             the rebuild. Reuses the §08 rubric-card verbatim — the "before"
+             card just has its animation drained, which is the whole point. -->
+      <div class="rubric-twin">
+        <div class="rubric-card rubric-card--flat">
+          <div class="rubric-card__header">
+            <span class="rubric-card__title">Before · four submissions</span>
+            <span class="rubric-card__total">85</span>
+          </div>
+          <ul class="rubric-card__rows">
+            <li class="rubric-card__row">
+              <span class="rubric-card__label">Submission 01</span>
+              <div class="rubric-card__bar"><div class="rubric-card__fill" style="--score: 85%;"></div></div>
+              <span class="rubric-card__value">85</span>
+            </li>
+            <li class="rubric-card__row">
+              <span class="rubric-card__label">Submission 02</span>
+              <div class="rubric-card__bar"><div class="rubric-card__fill" style="--score: 85%;"></div></div>
+              <span class="rubric-card__value">85</span>
+            </li>
+            <li class="rubric-card__row">
+              <span class="rubric-card__label">Submission 03</span>
+              <div class="rubric-card__bar"><div class="rubric-card__fill" style="--score: 85%;"></div></div>
+              <span class="rubric-card__value">85</span>
+            </li>
+            <li class="rubric-card__row">
+              <span class="rubric-card__label">Submission 04</span>
+              <div class="rubric-card__bar"><div class="rubric-card__fill" style="--score: 85%;"></div></div>
+              <span class="rubric-card__value">85</span>
+            </li>
+          </ul>
+          <div class="rubric-card__verified">
+            <span class="rubric-card__dot"></span>
+            <span>Uncalibrated &middot; no anchors, no spread</span>
+          </div>
+        </div>
+
+        <div class="rubric-card">
+          <div class="rubric-card__header">
+            <span class="rubric-card__title">After · the same four</span>
+            <span class="rubric-card__total">33&ndash;92</span>
+          </div>
+          <ul class="rubric-card__rows">
+            <li class="rubric-card__row">
+              <span class="rubric-card__label">Submission 01</span>
+              <div class="rubric-card__bar"><div class="rubric-card__fill" style="--score: 33%;"></div></div>
+              <span class="rubric-card__value">33</span>
+            </li>
+            <li class="rubric-card__row">
+              <span class="rubric-card__label">Submission 02</span>
+              <div class="rubric-card__bar"><div class="rubric-card__fill" style="--score: 58%;"></div></div>
+              <span class="rubric-card__value">58</span>
+            </li>
+            <li class="rubric-card__row">
+              <span class="rubric-card__label">Submission 03</span>
+              <div class="rubric-card__bar"><div class="rubric-card__fill" style="--score: 76%;"></div></div>
+              <span class="rubric-card__value">76</span>
+            </li>
+            <li class="rubric-card__row">
+              <span class="rubric-card__label">Submission 04</span>
+              <div class="rubric-card__bar"><div class="rubric-card__fill" style="--score: 92%;"></div></div>
+              <span class="rubric-card__value">92</span>
+            </li>
+          </ul>
+          <div class="rubric-card__verified">
+            <span class="rubric-card__dot"></span>
+            <span>Anchored &middot; weights applied in code</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 16: Making the Positioning True — the free diagnostic and
+             the Challenge route. Two product decisions that closed the gap
+             between what the marketing claimed and what the product did. -->
+      <section class="project-text" id="s-16" data-section style="grid-template-columns: 45fr 55fr;">
+        <div class="project-text__left">
+          <h3 class="project-text__section-title">
+            <span class="project-text__num">16</span>
+            <span class="project-text__label">Making the Positioning True</span>
+          </h3>
+
+          <p class="project-text__thesis">
+            The pitch said your existing skill counts. The product still started you at lesson one.
+          </p>
+
+          <div class="project-text__body">
+            <h4 class="project-text__subsection-title">
+              <span>From readiness check to Proof Score</span>
+            </h4>
+            <p>The free diagnostic asked whether you were good enough. Wrong question — the people it was built for already are. It now measures whether you can <em>show</em> it: <strong>you&rsquo;re not underqualified, you&rsquo;re under-documented.</strong></p>
+            <p>Printing the formula on the page bought a trade a black box never could: the number is free, forever. The interpretation is the sign-up. Then 43% of the copy went — every line that only restated its own label.</p>
+
+            <h4 class="project-text__subsection-title">
+              <span>The Challenge route</span>
+            </h4>
+            <p>Skip the lessons, go straight to the graded task. Same rubric, same pass bar. A failed challenge deep-links to the lesson that closes the gap — so the pitch lands when the learner feels it, not when a landing page claims it.</p>
+          </div>
+        </div>
+
+        <div class="project-text__right">
+          <div class="learning-hub-layers">
+            <div class="hub-layer">
+              <span class="hub-layer__num">A</span>
+              <div>
+                <p class="hub-layer__title">The lesson route</p>
+                <p class="hub-layer__body">Learn → Simulate → Prove. Unchanged, and still the default.</p>
+              </div>
+            </div>
+            <div class="hub-layer">
+              <span class="hub-layer__num">B</span>
+              <div>
+                <p class="hub-layer__title">The Challenge route</p>
+                <p class="hub-layer__body">Straight to the graded, certificate-earning task. No shortcut on the standard — only on the syllabus.</p>
+                <span class="hub-layer__feature">Fail → the exact lesson that closes the gap</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hub-role-fit">
+            <p class="hub-role-fit__title">Proof Score · how it is computed</p>
+            <p style="font-size: 12px; color: var(--c-text-muted); margin: 0 0 var(--s-100);">Deterministic. Printed on the page the visitor is reading.</p>
+            <div class="hub-role-fit__roles">
+              <div class="hub-role-fit__role">
+                <span class="hub-role-fit__role-name">Evidence</span>
+                <div class="hub-role-fit__bar-wrap">
+                  <div class="hub-role-fit__bar"><div class="hub-role-fit__fill" style="width: 55%;"></div></div>
+                  <span class="hub-role-fit__pct">55%</span>
+                </div>
+              </div>
+              <div class="hub-role-fit__role">
+                <span class="hub-role-fit__role-name">Capability</span>
+                <div class="hub-role-fit__bar-wrap">
+                  <div class="hub-role-fit__bar"><div class="hub-role-fit__fill" style="width: 30%;"></div></div>
+                  <span class="hub-role-fit__pct">30%</span>
+                </div>
+              </div>
+              <div class="hub-role-fit__role">
+                <span class="hub-role-fit__role-name">Application</span>
+                <div class="hub-role-fit__bar-wrap">
+                  <div class="hub-role-fit__bar"><div class="hub-role-fit__fill" style="width: 15%;"></div></div>
+                  <span class="hub-role-fit__pct">15%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 16 evidence: the live Proof Score result. One image carries the
+             whole growth trade — the number is there, free; the four things that
+             interpret it (verdict, gap, path, first move) sit locked behind the
+             sign-in. Nothing to argue: the page IS the argument. -->
+      <div class="labeled-card">
+        <div class="labeled-card__label">Proof Score &middot; the number is free. The interpretation is the ask.</div>
+        <div class="project-block project-block--full project-block--auto labeled-card__media">
+          <img src="../Images/CompassStu/v3-proof-score.png" alt="The live Proof Score result: a score of 73 with Evidence, Capability and Application scored, and four locked panels — the verdict, the biggest gap, the path, and the first move — behind sign-in" />
+        </div>
+      </div>
+
+      <!-- Section 17: Owning the Funnel — first-party acquisition analytics.
+             Left: the four decisions. Right: the funnel itself, reusing the
+             pathway-track chain (it already draws a linked sequence). -->
+      <section class="project-text" id="s-17" data-section style="grid-template-columns: 45fr 55fr;">
+        <div class="project-text__left">
+          <h3 class="project-text__section-title">
+            <span class="project-text__num">17</span>
+            <span class="project-text__label">Owning the Funnel</span>
+          </h3>
+
+          <p class="project-text__thesis">
+            An ad platform will tell you what converted. It will never tell you where you lost them.
+          </p>
+
+          <div class="project-text__body">
+            <p>So the funnel became first-party — two new pages at the top, one session ID through all of it, and an event vocabulary the database refuses to get wrong.</p>
+          </div>
+
+          <dl class="project-text__pipeline">
+            <dt>A real front door.</dt>
+            <dd><code>/start</code> for campaigns, <code>/proof/example</code> as the sample. Clean URLs, OG cards, live.</dd>
+            <dt>One joinable funnel.</dt>
+            <dd>Landing and diagnosis share a session ID. Drop-off is visible per question, not per page — and the data is ours, not the ad platform&rsquo;s.</dd>
+            <dt>17 events, enforced by the database.</dt>
+            <dd>A <code>CHECK</code> constraint bounds the event names. A frontend typo fails loudly instead of quietly rotting the funnel.</dd>
+            <dt>One less page to maintain.</dt>
+            <dd>Account management merged into pricing. The dead-end &ldquo;Manage plan&rdquo; became an inline panel, and a designed two-step cancel.</dd>
+          </dl>
+        </div>
+
+        <div class="project-text__right" style="position: sticky; top: var(--s-300);">
+          <div class="pathway-track">
+            <div class="pathway-track__header">
+              <span class="pathway-track__domain">Acquisition Funnel</span>
+              <span class="pathway-track__tag">First-party</span>
+            </div>
+
+            <div class="pathway-tier pathway-tier--foundation">
+              <div class="pathway-tier__stripe"></div>
+              <div class="pathway-tier__body">
+                <div class="pathway-tier__meta">
+                  <span class="pathway-tier__num">01</span>
+                  <span class="pathway-tier__level">Ad</span>
+                </div>
+                <p class="pathway-tier__title">Campaign click</p>
+                <p class="pathway-tier__desc">The last step the ad platform can see on its own.</p>
+              </div>
+            </div>
+
+            <div class="pathway-unlock">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                <path d="M5 1v8M2 6l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Session ID issued here
+            </div>
+
+            <div class="pathway-tier pathway-tier--foundation">
+              <div class="pathway-tier__stripe"></div>
+              <div class="pathway-tier__body">
+                <div class="pathway-tier__meta">
+                  <span class="pathway-tier__num">02</span>
+                  <span class="pathway-tier__level">Landing</span>
+                </div>
+                <p class="pathway-tier__title">/start</p>
+                <p class="pathway-tier__desc">The campaign page. One promise, one action.</p>
+              </div>
+            </div>
+
+            <div class="pathway-unlock">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                <path d="M5 1v8M2 6l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Same session ID carried forward
+            </div>
+
+            <div class="pathway-tier pathway-tier--practitioner">
+              <div class="pathway-tier__stripe"></div>
+              <div class="pathway-tier__body">
+                <div class="pathway-tier__meta">
+                  <span class="pathway-tier__num">03</span>
+                  <span class="pathway-tier__level">Diagnosis</span>
+                </div>
+                <p class="pathway-tier__title">Proof Score</p>
+                <p class="pathway-tier__desc">Drop-off instrumented per question, not just per page.</p>
+              </div>
+            </div>
+
+            <div class="pathway-unlock">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+                <path d="M5 1v8M2 6l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              The score is free. The interpretation is the ask.
+            </div>
+
+            <div class="pathway-tier pathway-tier--specialist">
+              <div class="pathway-tier__stripe"></div>
+              <div class="pathway-tier__body">
+                <div class="pathway-tier__meta">
+                  <span class="pathway-tier__num">04</span>
+                  <span class="pathway-tier__level">Conversion</span>
+                </div>
+                <p class="pathway-tier__title">Sign-up</p>
+                <p class="pathway-tier__desc">One joinable path, ad to account — every step queryable in our own database.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 17 evidence: the two new pages at the top of the funnel —
+             the campaign door, and the sample proof it sends people to.
+             Both shots share one ratio, so any asymmetric split forces a crop
+             on one of them. Equal widths is the only arrangement where both
+             stay complete AND flush — same pair pattern as the v1 slides. -->
+      <div class="shot-pair">
+        <div class="project-block project-block--auto">
+          <img src="../Images/CompassStu/v3-start.png" alt="The /start campaign landing page: Certificates say you finished. Proof says you can do the job." />
+        </div>
+        <div class="project-block project-block--auto">
+          <img src="../Images/CompassStu/v3-proof-example.png" alt="The /proof/example sample proof page — a graded take-home with every point lost" />
+        </div>
+      </div>
+
+      <!-- Section 18: Operating Honestly — the copy audit, the RLS leak, and
+             the defensibility memo. All text: this is the judgment chapter,
+             and it should read like a memo, not a feature. -->
+      <section class="project-text" id="s-18" data-section style="grid-template-columns: 45fr 55fr;">
+        <div class="project-text__left">
+          <h3 class="project-text__section-title">
+            <span class="project-text__num">18</span>
+            <span class="project-text__label">Operating Honestly</span>
+          </h3>
+
+          <p class="project-text__thesis">
+            The fastest way to lose a user is to promise something the code does not do.
+          </p>
+
+          <div class="project-text__body">
+            <p>So I audited every customer-facing page against the live code and the live database — then went looking for what else I had assumed was true.</p>
+          </div>
+        </div>
+
+        <div class="project-text__right">
+          <dl class="project-text__pipeline">
+            <dt>Claims audited against the code.</dt>
+            <dd>A &ldquo;2-course limit&rdquo; no code enforced. &ldquo;Partner companies&rdquo; that don&rsquo;t exist. Both deleted. The copy now says only what the system does.</dd>
+            <dt>A live leak, found by probing — not reading.</dt>
+            <dd>The policies said the table was protected. Production said otherwise: Postgres views run with their owner&rsquo;s privileges, so analytics views over it were readable with the public anon key. Closed with <code>security_invoker</code> and explicit revokes.</dd>
+            <dt>Wedge, not moat.</dt>
+            <dd>Learn → Simulate → Prove is a real differentiator and not yet defensible. What would compound — outcomes data, a two-sided employer network, tamper-evident proof — is named, and none of it is built.</dd>
+          </dl>
+        </div>
+      </section>
+
+      <!-- Section 19: Results & Reflection — shipped facts on the left,
+             honest PM reflection on the right. -->
+      <section class="project-text" id="s-19" data-section style="grid-template-columns: 45fr 55fr;">
+        <div class="project-text__left">
+          <h3 class="project-text__section-title">
+            <span class="project-text__num">19</span>
             <span class="project-text__label">Results</span>
           </h3>
 
@@ -1050,7 +1626,7 @@
           </p>
 
           <div class="project-text__body">
-            <p>It runs end-to-end today — adaptive lessons, AI grading, verifiable proof, and a no-developer CMS, in English and Mandarin.</p>
+            <p>It runs end-to-end today — adaptive lessons, AI grading, verifiable proof, and a no-developer CMS, in English and Mandarin. Part Two shipped on top of it, live.</p>
           </div>
         </div>
 
@@ -1058,12 +1634,14 @@
           <dl class="project-text__pipeline">
             <dt>What shipped.</dt>
             <dd>The full loop — auth, runtime, AI grading, permanent certificates, CMS — by one person.</dd>
+            <dt>What Part Two changed.</dt>
+            <dd>The grader, the entry point, the funnel, the copy. Not the loop. The design held; the calibration didn&rsquo;t — and calibration is what only shipping finds.</dd>
             <dt>What I&rsquo;d measure first.</dt>
             <dd>Whether the proof carries: do employers open the link, and does it change a screening decision.</dd>
             <dt>What I&rsquo;d revisit.</dt>
-            <dd>The five-attempt advance — it protects momentum but pulls against the fixed standard.</dd>
+            <dd>The five-attempt advance. The evidence gate stops fluent-but-empty work, but attempts still buy their way toward a fixed standard.</dd>
             <dt>What&rsquo;s next.</dt>
-            <dd>An employer-side view: rubric evidence and work samples, built for a ninety-second read.</dd>
+            <dd>The employer side: rubric evidence and work samples, built for a ninety-second read.</dd>
           </dl>
         </div>
       </section>
@@ -1089,6 +1667,23 @@
   </nav>
 
   <script src="../script.js"></script>
+  <script>
+    // Scale-fit for the half-width v1 slides — same trick script.js applies to
+    // .slide-embed below 768px, but these cards are half width at EVERY size,
+    // so they need it at every size. (They use .slide-fit, not .slide-embed,
+    // precisely so script.js's desktop reset doesn't fight this.)
+    (function () {
+      var frames = document.querySelectorAll('.slide-fit > iframe');
+      if (!frames.length) return;
+      var fit = function () {
+        frames.forEach(function (f) {
+          f.style.transform = 'scale(' + (f.parentElement.clientWidth / 1100) + ')';
+        });
+      };
+      window.addEventListener('resize', fit);
+      fit();
+    })();
+  </script>
   <script>
     (function () {
       var sections = Array.from(document.querySelectorAll('[data-section]'));
