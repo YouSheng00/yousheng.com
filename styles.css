@@ -419,6 +419,8 @@ iframe.card__motion.is-shown { opacity: 1; }
 /* Header band — mirrors the index intro: 52vh, flex-centered, room to breathe. */
 .project__header {
   min-height: 52vh;
+  /* (case-study pages keep 52vh; About gets the index's deeper fresh-load
+     breathing room via the .page--about overrides below/at breakpoints) */
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -428,6 +430,10 @@ iframe.card__motion.is-shown { opacity: 1; }
   max-width: 130ch;
   margin: 0 auto;
 }
+
+/* About page: same fresh-load breathing room as the index intro —
+   72vh declared ≈ 58% rendered under the desktop body{zoom:0.8}. */
+.page--about .project__header { min-height: 72vh; }
 
 /* Back pill — floats top-left over content so it's always reachable
    without breaking the centered header band. Same surface as the dock. */
@@ -2197,6 +2203,7 @@ iframe.card__motion.is-shown { opacity: 1; }
      the scroll. svh = stable viewport, so iOS toolbars don't jump it. */
   .intro { min-height: 58vh; min-height: 58svh; padding-block: var(--s-300); }
   .project__header { min-height: auto; padding-block: var(--s-300); }
+  .page--about .project__header { min-height: 58vh; min-height: 58svh; }
   .project__back { top: var(--s-100); left: var(--s-100); }
 }
 
@@ -4255,6 +4262,7 @@ a.about-cert:hover .about-cert__arrow {
 @media (max-width: 1024px) {
   .intro           { min-height: 65vh; } /* ×0.8 zoom ≈ 52% effective */
   .project__header { min-height: 42vh; }
+  .page--about .project__header { min-height: 65vh; }
 }
 
 /* ── 768px — tablet portrait; zoom normalised ─────────────── */
@@ -4294,6 +4302,7 @@ a.about-cert:hover .about-cert__arrow {
     min-height: 34vh;
     padding: var(--s-200) var(--s-150);
   }
+  .page--about .project__header { min-height: 48vh; }
 
   /* The 800px rule stacks project-text but keeps ~8rem top padding —
      at zoom:1 that is 104px. Also some sections set grid-template-
@@ -4648,6 +4657,9 @@ a.about-cert:hover .about-cert__arrow {
     min-height: 58svh;
     padding: var(--s-100) var(--s-050);
   }
+  /* About header keeps the same phone fresh-load depth (must live here,
+     late in the file, so the 768px 48vh rule above doesn't win). */
+  .page--about .project__header { min-height: 58vh; min-height: 58svh; }
 
   /* Wordmark + tagline: slightly smaller on very narrow screens.
      Tagline sized down (var --desc-shrink) so the wordmark dominates. */
