@@ -187,10 +187,18 @@
     const smallScreen = window.matchMedia('(max-width: 900px)');
 
     const mountFrame = (f) => {
-      if (!f.getAttribute('src') && f.dataset.src) f.setAttribute('src', f.dataset.src);
+      if (!f.getAttribute('src') && f.dataset.src) {
+        // Fade the iframe in over its poster only once it has painted, so there
+        // is no flash of a blank/loading frame.
+        f.addEventListener('load', () => f.classList.add('is-shown'), { once: true });
+        f.setAttribute('src', f.dataset.src);
+      } else if (f.getAttribute('src')) {
+        f.classList.add('is-shown');
+      }
     };
     const unmountFrame = (f) => {
-      // Dropping src frees the iframe's entire render context in WebKit.
+      // Fade back to the poster, then drop src to free the WebKit render context.
+      f.classList.remove('is-shown');
       if (f.getAttribute('src')) f.removeAttribute('src');
     };
     const playVideo = (v) => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };

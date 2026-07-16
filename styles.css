@@ -264,12 +264,24 @@ button {
    through to the parent card link. */
 .card__motion {
   border: 0;
-  /* Neutral (not black): shows while a lazy embed is unmounted/loading, so
-     off-screen cards read as quiet tiles rather than black holes. */
-  background: var(--c-card-background);
+  background: transparent;   /* the poster (or card bg) shows behind */
   pointer-events: none;
   object-fit: cover;
 }
+
+/* Static poster frame behind each live embed — so every card always shows its
+   project, even when its embed is unmounted (single-live on mobile keeps only
+   the on-screen card's iframe/video mounted to survive iOS Safari's memory cap). */
+.card__poster { z-index: 0; }
+
+/* iframe embeds fade in over their poster once loaded, and hide again (poster
+   shows) when they are not the live card. Videos use their native poster attr. */
+iframe.card__motion {
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+iframe.card__motion.is-shown { opacity: 1; }
 
 .card__placeholder {
   display: grid;
