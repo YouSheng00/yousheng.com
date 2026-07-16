@@ -50,6 +50,11 @@
     }
     if (!Array.isArray(segments) || segments.length === 0) return;
 
+    // Set the start position up front: before metadata loads this becomes the
+    // browser's "default playback start position", so the very first frame
+    // shown is already inside the loop window — no flash of the pre-roll.
+    try { v.currentTime = segments[0][0]; } catch (e) {}
+
     let i = 0;
     const seekTo = (idx) => {
       const [s] = segments[idx];
@@ -59,9 +64,14 @@
     };
     v.addEventListener('loadedmetadata', () => seekTo(0));
     v.addEventListener('timeupdate', () => {
-      const [, e] = segments[i];
+      const [s, e] = segments[i];
       if (v.currentTime >= e) {
         i = (i + 1) % segments.length;
+        seekTo(i);
+      } else if (v.currentTime < s - 0.35) {
+        // Self-heal: with preload="none" the loadedmetadata seek can land
+        // before anything is seekable and get silently dropped — if playback
+        // is running below the segment window, jump back into it.
         seekTo(i);
       }
     });
@@ -208,21 +218,28 @@
     const reconcile = () => {
       const vh = window.innerHeight || document.documentElement.clientHeight;
       if (smallScreen.matches) {
-        // Phones: exactly ONE live embed — the card nearest the viewport centre
-        // (i.e. the one you're looking at). A hard cap of one heavy context is
-        // what keeps iOS Safari under its per-tab memory budget; every card
-        // still animates as it scrolls through the middle of the screen.
+        // Phones: at most ONE live embed — the one nearest the viewport
+        // centre — to stay under iOS Safari's per-tab memory budget.
+        // iframes marked data-poster-only never mount on phones at all:
+        // those are the homepage cards, where a static poster is the mobile
+        // design (a full webpage shrunk into a tile reads as documentation)
+        // and motion comes from the video — the upset.ch mobile behaviour.
+        // Unmarked iframes (project-page embeds with no poster behind them)
+        // keep the single-live treatment so they never go blank.
+        const posterOnly = ({ el, isFrame }) => isFrame && el.hasAttribute('data-poster-only');
         const centre = vh / 2;
         let best = null;
         let bestDist = Infinity;
-        embeds.forEach(({ el }) => {
-          const r = el.getBoundingClientRect();
+        embeds.forEach((item) => {
+          if (posterOnly(item)) return;
+          const r = item.el.getBoundingClientRect();
           if (!isVisible(r, vh)) return;
           const dist = Math.abs((r.top + r.bottom) / 2 - centre);
-          if (dist < bestDist) { bestDist = dist; best = el; }
+          if (dist < bestDist) { bestDist = dist; best = item.el; }
         });
-        embeds.forEach(({ el, isFrame }) => {
-          const live = el === best;
+        embeds.forEach((item) => {
+          const { el, isFrame } = item;
+          const live = el === best && !posterOnly(item);
           if (isFrame) { live ? mountFrame(el) : unmountFrame(el); }
           else { live ? playVideo(el) : pauseVideo(el); }
         });

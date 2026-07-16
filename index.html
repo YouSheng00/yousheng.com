@@ -44,12 +44,15 @@
             <div class="card__media">
               <!-- preload="none" + no autoplay: the media manager in script.js
                    plays this only while it's on screen and pauses it off screen,
-                   so iOS Safari never decodes it alongside the other embeds. -->
+                   so iOS Safari never decodes it alongside the other embeds.
+                   Loop window skips the 0–6.5s title cards straight into the
+                   apron gameplay, matching the A380 poster frame. -->
               <video class="card__motion"
                 muted loop playsinline
                 aria-hidden="true"
                 preload="none"
                 data-lazy-video
+                data-loop-start="7.4" data-loop-end="12.4"
                 poster="Images/card-posters/sats.jpg"
                 style="object-position: 65% 65%;">
                 <source src="Video/SatsApron1.mp4" type="video/mp4">
@@ -70,7 +73,7 @@
                    bloom on white) and dark (compass-intro-v3.html, chapter +
                    aurora); the v1 explosion is preserved at compass-intro.html. -->
               <img class="card__poster" src="Images/card-posters/compassstu.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
-              <iframe class="card__motion" data-src="compassstu/compass-intro-v3-light.html" title="CompassStu intro" aria-hidden="true" loading="lazy" tabindex="-1"></iframe>
+              <iframe class="card__motion" data-src="compassstu/compass-intro-v3-light.html" data-poster-only title="CompassStu intro" aria-hidden="true" loading="lazy" tabindex="-1"></iframe>
             </div>
             <footer class="card__meta">
               <h2 class="card__title">CompassStu</h2>
@@ -87,7 +90,7 @@
             <div class="card__media">
               <img class="card__poster" src="Images/card-posters/linger.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
               <div style="container-type: inline-size;">
-                <iframe class="card__motion" data-src="linger-hero.html" title="Linger hero" aria-hidden="true" loading="lazy" tabindex="-1"
+                <iframe class="card__motion" data-src="linger-hero.html" data-poster-only title="Linger hero" aria-hidden="true" loading="lazy" tabindex="-1"
                   style="position:absolute; top:0; left:0; width:1280px; height:calc(1280px / 1.78); transform-origin:top left; transform:scale(calc(100cqw / 1280px));"></iframe>
               </div>
             </div>
@@ -109,7 +112,7 @@
             <div class="card__media">
               <img class="card__poster" src="Images/card-posters/ie100.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
               <div style="container-type: inline-size;">
-                <iframe class="card__motion" data-src="ie100/ie100-hero.html"
+                <iframe class="card__motion" data-src="ie100/ie100-hero.html" data-poster-only
                   title="IE100 Club hero" aria-hidden="true" loading="lazy" tabindex="-1"
                   style="position:absolute; top:0; left:0; width:1280px; height:calc(1280px / 1.78); transform-origin:top left; transform:scale(calc(100cqw / 1280px));"></iframe>
               </div>
