@@ -46,7 +46,7 @@ body { zoom: 0.8; }
   /* Component */
   --site-border-radius: 0.625rem;
   --site-text-hover-opacity: 0.6;
-  --nav-height: 3rem;
+  --nav-height: 2.75rem; /* slimmed from 3rem — quieter dock presence */
   --nav-padding-inline: 13px;
   --section-spacing: 60px;
   --project-spacing: var(--main-inline-s);
@@ -2078,11 +2078,13 @@ iframe.card__motion.is-shown { opacity: 1; }
 .dock__group,
 .dock__action {
   height: var(--nav-height);
-  background: rgba(120, 120, 120, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  /* Deep, calm glass (the upset.ch weight) — not milky grey. Same surface
+     on both themes: a dark pill reads as one quiet object on any ground. */
+  background: rgba(24, 26, 29, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.04) inset,
-    0 8px 24px rgba(0, 0, 0, 0.35);
+    0 6px 20px rgba(0, 0, 0, 0.28);
   backdrop-filter: blur(18px) saturate(140%);
   -webkit-backdrop-filter: blur(18px) saturate(140%);
 }
@@ -2107,7 +2109,10 @@ iframe.card__motion.is-shown { opacity: 1; }
   border-radius: 999px;
   font-size: 13px;
   letter-spacing: 0.02em;
-  color: var(--c-light-white);
+  /* Inactive links sit back; the active one is simply full-white text.
+     Tone carries the state — no filled pill behind it (that solid grey
+     blob was the "豆腐" heaviness the reference nav doesn't have). */
+  color: rgba(255, 255, 255, 0.55);
   transition:
     background 0.2s ease,
     color 0.25s ease,
@@ -2115,7 +2120,7 @@ iframe.card__motion.is-shown { opacity: 1; }
 }
 
 .dock__link:hover {
-  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.9);
   opacity: 1;
 }
 
@@ -2127,8 +2132,7 @@ iframe.card__motion.is-shown { opacity: 1; }
 .dock__link:active { transform: scale(0.97); }
 
 .dock__link.is-active {
-  background: var(--c-light-gray-muted);
-  color: var(--c-light-white);
+  color: #fff;
 }
 
 /* Standalone action button (theme toggle). */
@@ -2184,8 +2188,11 @@ iframe.card__motion.is-shown { opacity: 1; }
   /* More air between project tiles — meta needs room to breathe before
      the next poster starts. */
   .card { margin-bottom: var(--s-300); }
-  /* Phones don't need a full 50vh intro band. */
-  .intro { min-height: auto; padding-block: var(--s-300); }
+  /* Fresh-load composition (the upset.ch rhythm): the intro holds the top
+     ~58% of the first viewport as quiet space — wordmark + tagline floating
+     in it — so the first card only peeks in at the bottom edge and invites
+     the scroll. svh = stable viewport, so iOS toolbars don't jump it. */
+  .intro { min-height: 58vh; min-height: 58svh; padding-block: var(--s-300); }
   .project__header { min-height: auto; padding-block: var(--s-300); }
   .project__back { top: var(--s-100); left: var(--s-100); }
 }
@@ -4256,8 +4263,11 @@ a.about-cert:hover .about-cert__arrow {
   body { zoom: 1; }
 
   /* ---- Index ---- */
+  /* Fresh-load composition: intro holds the upper half-plus of the first
+     viewport as quiet space (the upset.ch rhythm) — the first card only
+     peeks in at the bottom and invites the scroll. */
   .intro {
-    min-height: 38vh;
+    min-height: 48vh;
     padding: var(--s-200) var(--s-150);
   }
 
@@ -4626,9 +4636,13 @@ a.about-cert:hover .about-cert__arrow {
 /* ── 480px — small phone ───────────────────────────────────── */
 @media (max-width: 480px) {
 
-  /* Intro: minimal height */
+  /* Intro: the phone fresh-load composition — wordmark + tagline floating
+     in the top ~58% of the viewport, first card peeking at the bottom
+     (svh so iOS toolbars don't jump it). Was 22vh, which crammed the first
+     card into the opening view and lost the upset.ch breathing room. */
   .intro {
-    min-height: 22vh;
+    min-height: 58vh;
+    min-height: 58svh;
     padding: var(--s-100) var(--s-050);
   }
 
