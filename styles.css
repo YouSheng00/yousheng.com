@@ -264,7 +264,9 @@ button {
    through to the parent card link. */
 .card__motion {
   border: 0;
-  background: #000;
+  /* Neutral (not black): shows while a lazy embed is unmounted/loading, so
+     off-screen cards read as quiet tiles rather than black holes. */
+  background: var(--c-card-background);
   pointer-events: none;
   object-fit: cover;
 }

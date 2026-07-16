@@ -42,10 +42,14 @@
         <article class="card" data-tag="Case Study" style="--ratio: 1.78;">
           <a class="card__link" href="sats/" aria-label="Open project: SATS Cargo Loading Simulation">
             <div class="card__media">
+              <!-- preload="none" + no autoplay: the media manager in script.js
+                   plays this only while it's on screen and pauses it off screen,
+                   so iOS Safari never decodes it alongside the other embeds. -->
               <video class="card__motion"
-                autoplay muted loop playsinline
+                muted loop playsinline
                 aria-hidden="true"
-                preload="auto"
+                preload="none"
+                data-lazy-video
                 style="object-position: 65% 65%;">
                 <source src="Video/SatsApron1.mp4" type="video/mp4">
               </video>
@@ -64,7 +68,7 @@
               <!-- v3 retheme intro. Two variants exist — light (hero-field
                    bloom on white) and dark (compass-intro-v3.html, chapter +
                    aurora); the v1 explosion is preserved at compass-intro.html. -->
-              <iframe class="card__motion" src="compassstu/compass-intro-v3-light.html" title="CompassStu intro" aria-hidden="true" loading="lazy" tabindex="-1"></iframe>
+              <iframe class="card__motion" data-src="compassstu/compass-intro-v3-light.html" title="CompassStu intro" aria-hidden="true" loading="lazy" tabindex="-1"></iframe>
             </div>
             <footer class="card__meta">
               <h2 class="card__title">CompassStu</h2>
@@ -80,7 +84,7 @@
           <a class="card__link" href="linger.html" aria-label="Open project: Linger">
             <div class="card__media">
               <div style="container-type: inline-size;">
-                <iframe class="card__motion" src="linger-hero.html" title="Linger hero" aria-hidden="true" loading="lazy" tabindex="-1"
+                <iframe class="card__motion" data-src="linger-hero.html" title="Linger hero" aria-hidden="true" loading="lazy" tabindex="-1"
                   style="position:absolute; top:0; left:0; width:1280px; height:calc(1280px / 1.78); transform-origin:top left; transform:scale(calc(100cqw / 1280px));"></iframe>
               </div>
             </div>
@@ -101,7 +105,7 @@
           <a class="card__link" href="ie100/" aria-label="Open project: IE100 Club">
             <div class="card__media">
               <div style="container-type: inline-size;">
-                <iframe class="card__motion" src="ie100/ie100-hero.html"
+                <iframe class="card__motion" data-src="ie100/ie100-hero.html"
                   title="IE100 Club hero" aria-hidden="true" loading="lazy" tabindex="-1"
                   style="position:absolute; top:0; left:0; width:1280px; height:calc(1280px / 1.78); transform-origin:top left; transform:scale(calc(100cqw / 1280px));"></iframe>
               </div>
@@ -117,7 +121,7 @@
         <article class="card card--accent" data-tag="Case Study" style="--ratio: 0.94; grid-row: span 2;">
           <a class="card__link" href="#" data-wip aria-label="Open project: Atelier">
             <div class="card__media">
-              <img src="Images/CompassStu/Atelierfull.png" alt="Atelier — personal branding studio">
+              <img src="Images/CompassStu/Atelierfull.png" alt="Atelier — personal branding studio" loading="lazy" decoding="async">
             </div>
             <footer class="card__meta">
               <h2 class="card__title">Atelier</h2>
@@ -130,7 +134,7 @@
         <article class="card card--small" data-tag="Case Study">
           <a class="card__link" href="3d-design/" aria-label="Open project: 3D Environment &amp; World Design Showcase">
             <div class="card__media">
-              <img src="Images/FC.png" alt="3D Environment &amp; World Design Showcase" />
+              <img src="Images/FC.png" alt="3D Environment &amp; World Design Showcase" loading="lazy" decoding="async" />
             </div>
             <footer class="card__meta">
               <h2 class="card__title">3D Environment &amp; World Design Showcase</h2>

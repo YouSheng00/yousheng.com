@@ -161,4 +161,84 @@
     window.addEventListener('load', fitCq);
     fitCq();
   }
+
+  // ---------------------------------------------------------------------------
+  // Lazy, memory-safe media embeds — the mobile-Safari crash fix.
+  //
+  // The homepage cards used to mount THREE live <iframe> documents (each a full
+  // desktop page in its own render context, one running 7 infinite animations)
+  // plus an autoplay preload="auto" <video>, all at once. On iOS Safari that
+  // blows the per-tab memory budget: the page loads, then dies on scroll with
+  // "A problem repeatedly occurred". (Instagram's in-app webview gets a bigger
+  // budget, which is why it survived there.)
+  //
+  // Fix mirrors the reference site (upset.ch): nothing preloads, and only the
+  // embed currently on screen is live. iframes carry data-src instead of src so
+  // they load nothing until observed; the video is preload="none" with no
+  // autoplay. We mount/play on enter and, on small screens, unmount/pause on
+  // exit — so at most ~one heavy context is ever alive. Desktop has memory to
+  // spare, so there we mount-and-keep (no teardown) to preserve the live feel.
+  const lazyFrames = Array.from(document.querySelectorAll('iframe[data-src]'));
+  const lazyVideos = Array.from(document.querySelectorAll('video[data-lazy-video]'));
+  const embeds = lazyFrames.map((el) => ({ el, isFrame: true }))
+    .concat(lazyVideos.map((el) => ({ el, isFrame: false })));
+
+  if (embeds.length) {
+    const smallScreen = window.matchMedia('(max-width: 900px)');
+
+    const mountFrame = (f) => {
+      if (!f.getAttribute('src') && f.dataset.src) f.setAttribute('src', f.dataset.src);
+    };
+    const unmountFrame = (f) => {
+      // Dropping src frees the iframe's entire render context in WebKit.
+      if (f.getAttribute('src')) f.removeAttribute('src');
+    };
+    const playVideo = (v) => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+    const pauseVideo = (v) => { try { v.pause(); } catch (e) {} };
+    const isVisible = (r, vh) => r.bottom > 0 && r.top < vh && r.height > 0;
+
+    const reconcile = () => {
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      if (smallScreen.matches) {
+        // Phones: exactly ONE live embed — the card nearest the viewport centre
+        // (i.e. the one you're looking at). A hard cap of one heavy context is
+        // what keeps iOS Safari under its per-tab memory budget; every card
+        // still animates as it scrolls through the middle of the screen.
+        const centre = vh / 2;
+        let best = null;
+        let bestDist = Infinity;
+        embeds.forEach(({ el }) => {
+          const r = el.getBoundingClientRect();
+          if (!isVisible(r, vh)) return;
+          const dist = Math.abs((r.top + r.bottom) / 2 - centre);
+          if (dist < bestDist) { bestDist = dist; best = el; }
+        });
+        embeds.forEach(({ el, isFrame }) => {
+          const live = el === best;
+          if (isFrame) { live ? mountFrame(el) : unmountFrame(el); }
+          else { live ? playVideo(el) : pauseVideo(el); }
+        });
+      } else {
+        // Desktop has memory to spare: mount frames as they enter and keep them
+        // (preserves the always-live feel); videos play while visible.
+        embeds.forEach(({ el, isFrame }) => {
+          const visible = isVisible(el.getBoundingClientRect(), vh);
+          if (isFrame) { if (visible) mountFrame(el); }
+          else { visible ? playVideo(el) : pauseVideo(el); }
+        });
+      }
+    };
+
+    // rAF-throttle so the scroll stays smooth on low-end phones.
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => { ticking = false; reconcile(); });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    smallScreen.addEventListener('change', reconcile);
+    reconcile();
+  }
 })();
