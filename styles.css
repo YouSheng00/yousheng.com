@@ -124,7 +124,10 @@ button {
    roughly half the viewport on first load. The cards below are free to
    overflow past the fold. */
 .intro {
-  min-height: 52vh;
+  /* Fresh-load composition: hold the top ~58% of the first viewport as
+     quiet space, first card row peeking at the bottom. Declared 72vh
+     because desktop runs body{zoom:0.8} — it renders at 72 × 0.8 ≈ 58%. */
+  min-height: 72vh;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -4250,7 +4253,7 @@ a.about-cert:hover .about-cert__arrow {
 
 /* ── 1024px — tablet landscape ────────────────────────────── */
 @media (max-width: 1024px) {
-  .intro           { min-height: 46vh; }
+  .intro           { min-height: 65vh; } /* ×0.8 zoom ≈ 52% effective */
   .project__header { min-height: 42vh; }
 }
 
