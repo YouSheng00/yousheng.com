@@ -2188,8 +2188,7 @@ iframe.card__motion.is-shown { opacity: 1; }
      upset.ch reference). !important so these beat the per-card inline
      --ratio values that tune the two-column desktop grid. */
   .card { --ratio: 1.5 !important; }
-  .card--tall { --ratio: 1.3 !important; }    /* CompassStu — matches its poster crop */
-  .card--accent { --ratio: 0.94 !important; } /* Atelier stays portrait */
+  .card--tall { --ratio: 1.3 !important; } /* CompassStu — matches its poster crop */
   /* More air between project tiles — meta needs room to breathe before
      the next poster starts. */
   .card { margin-bottom: var(--s-300); }
@@ -4370,12 +4369,6 @@ a.about-cert:hover .about-cert__arrow {
   /* ---- Index ---- */
   .intro {
     padding: var(--s-150) var(--s-100);
-  }
-
-  /* Atelier card: grid-row: span 2 is meaningless in 1-col grid.
-     Inline style requires !important to override. */
-  .card--accent {
-    grid-row: auto !important;
   }
 
   /* ---- About ---- */
