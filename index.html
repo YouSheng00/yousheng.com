@@ -129,7 +129,16 @@
         <article class="card" data-tag="Case Study" style="--ratio: 1.78;">
           <a class="card__link" href="#" data-wip aria-label="Open project: ClearSign">
             <div class="card__media">
-              <img src="Images/card-posters/clearsign.jpg" alt="ClearSign — compliance platform for property transactions" loading="lazy" decoding="async">
+              <!-- Poster (Images/card-posters/clearsign.jpg) is the dashboard
+                   screenshot with its top nav bar cropped off — the product's
+                   own "ClearSign" wordmark sat exactly where this site's
+                   "Case Study" chip is anchored, and the two collided. The
+                   remaining crop is wider than any card ratio, so
+                   object-fit:cover always trims width; object-position is
+                   nudged left (not 0, not centered) so the headline text
+                   stays fully intact while the trimmed edge falls on the
+                   least-important stat pill on the right. -->
+              <img src="Images/card-posters/clearsign.jpg" alt="ClearSign — compliance platform for property transactions" loading="lazy" decoding="async" style="object-position: 14% center;">
             </div>
             <footer class="card__meta">
               <h2 class="card__title">ClearSign</h2>
