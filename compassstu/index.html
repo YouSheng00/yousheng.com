@@ -99,6 +99,10 @@
         color-mix(in srgb, #7c5cfc 55%, transparent), #7c5cfc);
     }
 
+    /* §07's track legend reuses the skill-state component; the Standard track
+       gets the brand violet (shared styles.css only ships grey/blue/amber/green). */
+    .page--compassstu .skill-state--track-standard .skill-state__dot { background: #7c5cfc; }
+
     /* Every section now carries its own honest number (01–19), so the old
        "demote un-numbered titles" rule is gone — all section headings are peers. */
 
@@ -754,11 +758,17 @@
       </section>
 
       <!-- Section 07: Adaptive AI Engine — image left (48%), text right (52%).
-             Expanded: adds Skill Map four-state legend below the pipeline. -->
+             The image is the live Learning Journey card (profile.html): two
+             module chains with score badges and the AI-signal lines — avg 85
+             → Advanced track, avg 83 → Standard track — one shot proving the
+             routing claim. CSS-cropped via object-position (trims the page's
+             left margin + theme toggle; source PNG untouched). -->
       <section class="project-text" id="s-07" data-section style="grid-template-columns: 48fr 52fr;">
         <div class="project-text__left">
-          <div class="project-block" style="aspect-ratio: 1048 / 720;">
-            <img src="../Images/CompassStu/CompassStu7.png" alt="CompassStu adaptive engine view" />
+          <div class="project-block" style="aspect-ratio: 1.53;">
+            <img src="../Images/CompassStu/LearningJourney.png"
+              alt="CompassStu learning journey: two course module chains with score badges — avg 85 routed to the Advanced track starting at lesson 3, avg 83 routed to the Standard track with the full sequence"
+              style="object-position: 45% 50%;" />
           </div>
         </div>
 
@@ -769,48 +779,44 @@
           </h3>
 
           <div class="project-text__body">
-            <p>After each module, the score routes the learner — Advanced (≥&nbsp;85%), Standard (70–84%), or
-              Foundation (&lt;&nbsp;70%). The bar never moves; only the scaffolding adapts.</p>
+            <p>After each module, the learner&rsquo;s average score on AI-graded work routes them automatically —
+              Advanced (≥&nbsp;85), Standard (70–84), or Foundation (&lt;&nbsp;70). The bar for a certificate never
+              moves; only the path adapts.</p>
           </div>
 
           <dl class="project-text__pipeline">
-            <dt>Real-Time Recalibration.</dt>
-            <dd>Route assigned instantly — no wait, no manual review.</dd>
-            <dt>Smart Recommendations.</dt>
-            <dd>AI queues the next highest-priority skill automatically.</dd>
+            <dt>Score-Based Routing.</dt>
+            <dd>Every module completion recalculates the track from real graded work — no self-assessment, no manual review.</dd>
+            <dt>Three Tracks, One Bar.</dt>
+            <dd>Advanced skips straight to lesson 3; Foundation injects extra groundwork; the pass mark stays 70 for everyone.</dd>
             <dt>AI Path Diagnosis.</dt>
-            <dd>A first-sign-in assessment builds the path before they pick a course.</dd>
+            <dd>A first-sign-in assessment builds a personalised course path before the learner ever picks a course.</dd>
           </dl>
 
           <h4 class="project-text__subsection-title" style="margin-top: var(--s-300);">
-            <span>Skill Map</span>
+            <span>The three tracks</span>
           </h4>
           <p class="project-text__body" style="margin-bottom: 0;">
             <span style="display:block; font-size: clamp(0.8rem, 0.95vw, 0.9rem); line-height: 1.55; color: var(--c-text-muted);">
-              Every course auto-generates a live skill graph — each node in one of four states, updated as you go.
+              The learner never chooses a track — their scores do. The assigned track is named right on their learning journey, with what it changes.
             </span>
           </p>
 
-          <div class="skill-map-states" role="list" aria-label="Skill states">
-            <div class="skill-state skill-state--locked" role="listitem">
+          <div class="skill-map-states" role="list" aria-label="Adaptive tracks">
+            <div class="skill-state skill-state--mastered" role="listitem">
               <span class="skill-state__dot"></span>
-              <span class="skill-state__label">Locked</span>
-              <span class="skill-state__desc">Prerequisites not yet met</span>
+              <span class="skill-state__label">Advanced</span>
+              <span class="skill-state__desc">avg ≥ 85 — skips lessons 1–2, straight to advanced material</span>
             </div>
-            <div class="skill-state skill-state--available" role="listitem">
+            <div class="skill-state skill-state--track-standard" role="listitem">
               <span class="skill-state__dot"></span>
-              <span class="skill-state__label">Available</span>
-              <span class="skill-state__desc">Ready to attempt</span>
+              <span class="skill-state__label">Standard</span>
+              <span class="skill-state__desc">avg 70–84 — full lesson sequence</span>
             </div>
             <div class="skill-state skill-state--progress" role="listitem">
               <span class="skill-state__dot"></span>
-              <span class="skill-state__label">In Progress</span>
-              <span class="skill-state__desc">Active learning underway</span>
-            </div>
-            <div class="skill-state skill-state--mastered" role="listitem">
-              <span class="skill-state__dot"></span>
-              <span class="skill-state__label">Mastered</span>
-              <span class="skill-state__desc">Bridge task cleared, cert issued</span>
+              <span class="skill-state__label">Foundation</span>
+              <span class="skill-state__desc">avg &lt; 70 — remedial Lesson 0 injected before the module</span>
             </div>
           </div>
         </div>
