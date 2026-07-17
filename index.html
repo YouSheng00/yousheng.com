@@ -130,15 +130,20 @@
           <a class="card__link" href="#" data-wip aria-label="Open project: ClearSign">
             <div class="card__media">
               <!-- Poster (Images/card-posters/clearsign.jpg) is the dashboard
-                   screenshot with its top nav bar cropped off — the product's
-                   own "ClearSign" wordmark sat exactly where this site's
-                   "Case Study" chip is anchored, and the two collided. The
-                   remaining crop is wider than any card ratio, so
-                   object-fit:cover always trims width; object-position is
-                   nudged left (not 0, not centered) so the headline text
-                   stays fully intact while the trimmed edge falls on the
-                   least-important stat pill on the right. -->
-              <img src="Images/card-posters/clearsign.jpg" alt="ClearSign — compliance platform for property transactions" loading="lazy" decoding="async" style="object-position: 14% center;">
+                   screenshot with two crops baked in: (1) the top nav bar
+                   removed — the product's own "ClearSign" wordmark sat
+                   exactly where this site's "Case Study" chip is anchored,
+                   and the two collided; (2) the page's own light-cream side
+                   margins removed (measured by pixel-sampling: real content
+                   spans x:[106,2744] of the 2850-wide source) so the file is
+                   genuinely full-bleed — without this, object-fit:cover's
+                   crop was preferentially eating real content on one edge
+                   while leaving the OTHER edge's dead margin on-screen.
+                   The remaining image is still wider than any card ratio, so
+                   cover always trims width live; object-position is nudged
+                   left just enough to keep the headline fully intact at the
+                   narrowest (mobile) card ratio. -->
+              <img src="Images/card-posters/clearsign.jpg" alt="ClearSign — compliance platform for property transactions" loading="lazy" decoding="async" style="object-position: 9% center;">
             </div>
             <footer class="card__meta">
               <h2 class="card__title">ClearSign</h2>
