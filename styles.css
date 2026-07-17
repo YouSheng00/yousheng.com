@@ -4279,6 +4279,11 @@ a.about-cert:hover .about-cert__arrow {
     padding: var(--s-200) var(--s-150);
   }
 
+  /* ---- About: timeline ---- */
+  /* Desktop's 48px indent leaves the green status dot floating far from
+     the role title on narrow screens — pull the text in close. */
+  .about-timeline__item { padding-left: 22px; }
+
   /* ---- About hero ---- */
   /* 440px hardcoded min-width overflows every phone and most tablets */
   .about-hero__cta {

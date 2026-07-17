@@ -159,7 +159,8 @@
           <div class="proof-layer__main">
             <div class="about-now-badge">
               <span class="about-now-badge__dot"></span>
-              <span>Now · May 2026</span>
+              <!-- Text is replaced by JS with the real current month on load -->
+              <span data-now-label>Now · May 2026</span>
             </div>
 
             <h3 class="project-text__section-title" style="margin-top: var(--s-200);">
@@ -173,10 +174,11 @@
 
             <ol class="about-timeline" aria-label="Current role">
               <li class="about-timeline__item about-timeline__item--current">
-                <h4 class="about-timeline__title">Senior Project Executive</h4>
+                <h4 class="about-timeline__title">Senior Project Executive (IT &amp; Marketing)</h4>
                 <p class="about-timeline__meta">
                   <span class="about-timeline__date">Jan 2026 – Present</span>
-                  <span class="about-timeline__duration">5 mos</span>
+                  <!-- Duration is recomputed by JS from data-since (LinkedIn-style inclusive count) -->
+                  <span class="about-timeline__duration" data-since="2026-01">5 mos</span>
                 </p>
               </li>
             </ol>
@@ -200,7 +202,7 @@
             <dl class="about-meta__list">
               <div class="about-meta__row">
                 <dt>Role</dt>
-                <dd>Senior Project Executive</dd>
+                <dd>Senior Project Executive (IT &amp; Marketing)</dd>
               </div>
               <div class="about-meta__row">
                 <dt>Org</dt>
@@ -619,6 +621,27 @@
     <script>
       (function () {
         var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // 0. Live dates — the "Now" badge and the current-role duration
+        // compute themselves from today's date, so the page never goes stale.
+        var nowLabel = document.querySelector('[data-now-label]');
+        var duration = document.querySelector('[data-since]');
+        var today = new Date();
+        if (nowLabel) {
+          var mon = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+          nowLabel.textContent = 'Now · ' + mon[today.getMonth()] + ' ' + today.getFullYear();
+        }
+        if (duration) {
+          var since = duration.dataset.since.split('-');
+          // LinkedIn-style inclusive count: Jan → Jul reads as 7 mos.
+          var total = (today.getFullYear() - +since[0]) * 12 + (today.getMonth() + 1 - +since[1]) + 1;
+          if (total > 0) {
+            var yrs = Math.floor(total / 12), rem = total % 12;
+            duration.textContent = yrs > 0
+              ? yrs + ' yr' + (rem ? ' ' + rem + ' mos' : '')
+              : total + (total === 1 ? ' mo' : ' mos');
+          }
+        }
 
         // 1. Hero — wrap each word in a span, stagger reveal on load.
         var lead = document.querySelector('[data-hero-lead]');
