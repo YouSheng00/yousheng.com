@@ -130,20 +130,18 @@
           <a class="card__link" href="#" data-wip aria-label="Open project: ClearSign">
             <div class="card__media">
               <!-- Poster (Images/card-posters/clearsign.jpg) is the dashboard
-                   screenshot with two crops baked in: (1) the top nav bar
-                   removed — the product's own "ClearSign" wordmark sat
-                   exactly where this site's "Case Study" chip is anchored,
-                   and the two collided; (2) the page's own light-cream side
-                   margins removed (measured by pixel-sampling: real content
-                   spans x:[106,2744] of the 2850-wide source) so the file is
-                   genuinely full-bleed — without this, object-fit:cover's
-                   crop was preferentially eating real content on one edge
-                   while leaving the OTHER edge's dead margin on-screen.
-                   The remaining image is still wider than any card ratio, so
-                   cover always trims width live; object-position is nudged
-                   left just enough to keep the headline fully intact at the
-                   narrowest (mobile) card ratio. -->
-              <img src="Images/card-posters/clearsign.jpg" alt="ClearSign — compliance platform for property transactions" loading="lazy" decoding="async" style="object-position: 9% center;">
+                   screenshot with its top nav bar and the page's own
+                   light-cream side margins removed (the wordmark collided
+                   with this site's "Case Study" chip; the margins were dead
+                   space). Unlike every other card here, this source is a
+                   real UI screenshot with meaningful text pinned to its
+                   edges (headline, stat pills, table columns) — any
+                   object-fit:cover crop trades off clipping one side or the
+                   other. object-fit:contain shows 100% of it instead, at the
+                   cost of thin letterbox bars (using the same dark
+                   --c-card-background as every other card's empty state, so
+                   they read as intentional framing, not a bug). -->
+              <img src="Images/card-posters/clearsign.jpg" alt="ClearSign — compliance platform for property transactions" loading="lazy" decoding="async" style="object-fit: contain;">
             </div>
             <footer class="card__meta">
               <h2 class="card__title">ClearSign</h2>
