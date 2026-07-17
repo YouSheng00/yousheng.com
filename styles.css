@@ -2677,6 +2677,9 @@ a.about-prior__item:hover {
   margin: 0;
   font-size: 1.05rem;
   font-weight: 500;
+  /* Without this the title inherits the body's 1rem line-height — smaller
+     than its own 1.05rem type, so wrapped lines visually fuse together. */
+  line-height: 1.35;
   letter-spacing: -0.01em;
   color: var(--c-text);
   overflow-wrap: break-word;
