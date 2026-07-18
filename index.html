@@ -125,23 +125,18 @@
         </article>
 
         <!-- Card: ClearSign — case-study page not built yet, so the click
-             intercept shows a "coming soon" notice instead of a dead link. -->
-        <article class="card" data-tag="Case Study" style="--ratio: 1.78;">
+             intercept shows a "coming soon" notice instead of a dead link.
+             --ratio 1.809 is NOT arbitrary: it's the poster crop's exact
+             native ratio (2375x1313, Homepage2.png minus nav + margins).
+             Image ratio == card ratio means object-fit:cover is a perfect
+             1:1 fit — no cropping, no letterbox bars, at any width. The
+             mobile 1.5 override is excluded for this card in styles.css
+             (.card--clearsign) for the same reason. If the poster is ever
+             regenerated with a different crop, update BOTH ratios. -->
+        <article class="card card--clearsign" data-tag="Case Study" style="--ratio: 1.809;">
           <a class="card__link" href="#" data-wip aria-label="Open project: ClearSign">
             <div class="card__media">
-              <!-- Poster (Images/card-posters/clearsign.jpg) is the dashboard
-                   screenshot with its top nav bar and the page's own
-                   light-cream side margins removed (the wordmark collided
-                   with this site's "Case Study" chip; the margins were dead
-                   space). Unlike every other card here, this source is a
-                   real UI screenshot with meaningful text pinned to its
-                   edges (headline, stat pills, table columns) — any
-                   object-fit:cover crop trades off clipping one side or the
-                   other. object-fit:contain shows 100% of it instead, at the
-                   cost of thin letterbox bars (using the same dark
-                   --c-card-background as every other card's empty state, so
-                   they read as intentional framing, not a bug). -->
-              <img src="Images/card-posters/clearsign.jpg" alt="ClearSign — compliance platform for property transactions" loading="lazy" decoding="async" style="object-fit: contain;">
+              <img src="Images/card-posters/clearsign.jpg" alt="ClearSign — compliance platform for property transactions" loading="lazy" decoding="async">
             </div>
             <footer class="card__meta">
               <h2 class="card__title">ClearSign</h2>
