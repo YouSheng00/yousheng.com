@@ -38,8 +38,9 @@
       </header>
 
       <section class="grid" aria-label="Selected work">
-        <!-- Card: 16:9 video loop, left -->
-        <article class="card" data-tag="Case Study" style="--ratio: 1.78;">
+        <!-- Card: video loop, left. Ratio matches the CompassStu card beside it
+             (1.9452) so the row's two tiles stay the same height. -->
+        <article class="card" data-tag="Case Study" style="--ratio: 1.9452;">
           <a class="card__link" href="sats/" aria-label="Open project: SATS Cargo Loading Simulation">
             <div class="card__media">
               <!-- preload="none" + no autoplay: the media manager in script.js
@@ -66,16 +67,17 @@
         </article>
 
         <!-- Card: large, right -->
-        <article class="card card--tall" data-tag="Case Study">
+        <article class="card card--tall" data-tag="Case Study" style="--ratio: 1.9452;">
           <a class="card__link" href="compassstu/" aria-label="Open project: CompassStu">
             <div class="card__media">
-              <!-- Static cover: the compassstu.com hero, cropped from
-                   Images/CompassStu/Compassstu_newcover.png (nav bar removed so
-                   the "Case Study" tag doesn't sit on the logo; top padded to
-                   rebalance). Exactly 1.78 — the card's ratio at every width.
-                   The old animated intros are still on disk
+              <!-- Static cover: Images/CompassStu/Compassstu_newcover.png exactly
+                   as supplied (2840×1460), only re-encoded to JPG — no crop, no
+                   recomposition. Card ratio = the image's own 1.9452 at every
+                   width (mobile override in styles.css), so it shows 1:1.
+                   New filename (-v2) so browsers can't serve the old cached
+                   poster. Old animated intros are still on disk
                    (compassstu/compass-intro-v3-light.html etc.). -->
-              <img src="Images/card-posters/compassstu.jpg" alt="CompassStu — Learning that ends in proof" loading="lazy" decoding="async">
+              <img src="Images/card-posters/compassstu-v2.jpg" alt="CompassStu — Learning that ends in proof" loading="lazy" decoding="async">
             </div>
             <footer class="card__meta">
               <h2 class="card__title">CompassStu</h2>

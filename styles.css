@@ -2188,7 +2188,7 @@ iframe.card__motion.is-shown { opacity: 1; }
      upset.ch reference). !important so these beat the per-card inline
      --ratio values that tune the two-column desktop grid. */
   .card { --ratio: 1.5 !important; }
-  .card--tall { --ratio: 1.78 !important; } /* CompassStu — poster is exactly 1.78, shown uncropped */
+  .card--tall { --ratio: 1.9452 !important; } /* CompassStu — poster's exact ratio, shown uncropped */
   /* ClearSign: keeps its poster's exact native ratio at every width so the
      screenshot fits 1:1 — no crop, no letterbox (see index.html comment). */
   .card--clearsign { --ratio: 1.809 !important; }
