@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CompassStu hero</title>
+  <!-- LIVE EMBED for the homepage CompassStu card.
+       A copy of the compassstu.com hero (CompassStu Platform/index.html, light
+       theme): nav, headline, path card with the job tabs cycling on their own,
+       proof-page card, drifting glow, tick-rule pulse, compass HUD, theme
+       switch. Same markup, same CSS values, same motion — only the parts
+       the hero doesn't use (sections below, dark theme, auth, analytics,
+       modals) are left out, and the compass needle springs to N 001° once
+       instead of tracking scroll (the embed never scrolls).
+       Designed for a 1420×730 viewport (the card's 1.9452 ratio); index.html
+       renders the iframe at that size and scales it to the card. Fonts and
+       logo are local copies in hero-assets/. -->
+  <style>
+    @font-face { font-family: 'Switzer'; src: url('hero-assets/switzer-400.woff2') format('woff2'); font-weight: 400; font-display: block; }
+    @font-face { font-family: 'Switzer'; src: url('hero-assets/switzer-500.woff2') format('woff2'); font-weight: 500; font-display: block; }
+    @font-face { font-family: 'Switzer'; src: url('hero-assets/switzer-600.woff2') format('woff2'); font-weight: 600; font-display: block; }
+    @font-face { font-family: 'Cabinet Grotesk'; src: url('hero-assets/cabinet-grotesk-700.woff2') format('woff2'); font-weight: 700; font-display: block; }
+    @font-face { font-family: 'IBM Plex Mono'; src: url('hero-assets/ibm-plex-mono-500-latin.woff2') format('woff2'); font-weight: 500; font-display: block; }
+
+    /* ── shared.css: reset + base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --page-bg: #FFFFFF;
+      --kicker: #66707F;
+      --nav-bg: rgba(255, 255, 255, 0.72);
+      --text-strong: #14102B;
+      --text-body: #3D3660;
+      --text-muted: #9490AE;
+      --hairline: rgba(20, 16, 43, 0.08);
+      --hairline-strong: rgba(20, 16, 43, 0.16);
+      --brand: #7A5CFF;
+      --brand-hover: #6243E8;
+      --verified: #1E9E6A;
+      --spec-violet: #8B5CF6;
+      --spec-cyan: #22D3EE;
+      --shadow-float: 0 24px 64px rgba(20, 16, 43, 0.14);
+      --radius-btn: 10px;
+      --radius-media: 16px;
+      --maxw: 1120px;
+    }
+
+    html, body { overflow: hidden; }
+    body {
+      background: var(--page-bg);
+      color: var(--text-body);
+      font-family: 'Switzer', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      font-size: 15px; font-weight: 400; line-height: 1.6; letter-spacing: -0.003em;
+      font-feature-settings: 'cv11' 1, 'ss01' 1, 'ss03' 1, 'calt' 1;
+      font-variant-ligatures: common-ligatures contextual;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+    body > *:not(.theme-switch):not(nav) { position: relative; z-index: 1; }
+
+    /* ── NAV (shared.css base + index.html overrides) ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px; height: 64px;
+      background: transparent; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .nav-logo {
+      display: flex; align-items: center; line-height: 1; gap: 0.35em; text-decoration: none;
+      color: var(--text-strong); font-weight: 500; letter-spacing: -0.01em; font-size: 15px;
+    }
+    .nav-logo-img { height: 1.2em; width: auto; flex-shrink: 0; display: block; }
+    .nav-links {
+      display: flex; align-items: center; gap: 28px; list-style: none;
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    }
+    .nav-links a { color: var(--text-muted); font-weight: 500; font-size: 14px; text-decoration: none; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .nav-actions .btn-ghost {
+      background: none; border: none; font-family: inherit; font-size: 14px; font-weight: 500;
+      color: var(--text-body); padding: 8px 12px; border-radius: 8px;
+    }
+    .nav-actions .btn-primary {
+      background: var(--brand); color: #fff; border: none;
+      font-family: inherit; font-size: 14px; font-weight: 600;
+      padding: 10px 18px; border-radius: var(--radius-btn);
+    }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+
+    /* ── TYPE ── */
+    .display { font-family: 'Cabinet Grotesk', 'Switzer', sans-serif; }
+    .eyebrow {
+      font-family: 'Switzer', 'Inter', -apple-system, sans-serif;
+      font-size: 13px; line-height: 1.2; font-weight: 600; letter-spacing: -0.01em;
+      color: var(--kicker); margin-bottom: 20px; text-transform: uppercase;
+    }
+    .eyebrow::after {
+      content: ''; display: block; width: 24px; height: 2px; border-radius: 2px;
+      background: var(--brand); margin-top: 8px;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: inherit; font-size: 15px; font-weight: 600; line-height: 1;
+      padding: 13px 22px; border-radius: var(--radius-btn); border: 1px solid transparent;
+    }
+    .btn-brand { background: var(--brand); color: #fff; }
+
+    /* ── TICK-RULE DIVIDER + pulse ── */
+    .tick-rule { position: relative; max-width: var(--maxw); margin: 0 auto; height: 1px; background: var(--hairline); overflow: hidden; }
+    .tick-rule::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 6px; background-image: repeating-linear-gradient(90deg, var(--hairline) 0 1px, transparent 1px 8px); }
+    .tick-rule::after { content: ''; position: absolute; inset: 0 0 auto 0; height: 10px; background-image: repeating-linear-gradient(90deg, var(--hairline-strong) 0 1px, transparent 1px 40px); }
+    .tick-rule .pulse {
+      position: absolute; top: -1px; left: 0; width: 140px; height: 3px; border-radius: 3px;
+      background: linear-gradient(90deg, transparent, var(--spec-violet), var(--spec-cyan), transparent);
+      opacity: 0; transform: translateX(-160px);
+      animation: dividerSweep 8s ease-in-out infinite;
+    }
+    @keyframes dividerSweep {
+      0%, 84% { transform: translateX(-160px); opacity: 0; }
+      85% { opacity: 0; }
+      87% { opacity: 1; }
+      99% { transform: translateX(1180px); opacity: 1; }
+      100% { transform: translateX(1180px); opacity: 0; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; overflow: hidden;
+      min-height: calc(100vh - 40px);
+      display: flex; align-items: center;
+      padding: 64px 0;
+    }
+    .hero-inner {
+      max-width: var(--maxw); margin: 0 auto; padding: 0 24px;
+      display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 48px; align-items: center;
+    }
+    .hero-field {
+      position: absolute; top: -20px; right: -60px;
+      width: 620px; height: 500px; z-index: 0; pointer-events: none;
+      opacity: 0.85; filter: blur(54px);
+      background:
+        radial-gradient(closest-side at 55% 42%, #9668FF 0%, transparent 68%),
+        radial-gradient(closest-side at 38% 64%, #6C6FE3 0%, transparent 62%),
+        radial-gradient(closest-side at 78% 58%, #35CFEA 0%, transparent 58%);
+      background-size: 135% 135%;
+      animation: fieldDrift 23s ease-in-out infinite alternate, fieldIn 800ms 700ms both ease;
+    }
+    @keyframes fieldDrift {
+      0%   { background-position: 0% 0%;    transform: scale(1);     filter: blur(54px) hue-rotate(0deg); }
+      100% { background-position: 85% 47%;  transform: scale(1.051); filter: blur(59px) hue-rotate(14deg); }
+    }
+    @keyframes fieldIn { from { opacity: 0; } to { opacity: 0.85; } }
+    .hero-left { position: relative; z-index: 2; }
+    .hero-right { position: relative; z-index: 1; min-height: 380px; display: flex; align-items: center; justify-content: flex-end; }
+
+    .hero h1 { margin: 0 0 30px; }
+    .hero h1 .ink {
+      display: block; font-family: 'Cabinet Grotesk', 'Switzer', sans-serif;
+      font-size: clamp(44px, 5.6vw, 72px); line-height: 1.02; font-weight: 700;
+      letter-spacing: -0.03em; color: var(--text-strong);
+    }
+    .hero h1 .slate {
+      display: block; margin-top: 16px; font-family: 'Switzer', sans-serif;
+      font-size: clamp(20px, 2.2vw, 28px); line-height: 1.35; font-weight: 500;
+      letter-spacing: -0.01em; color: var(--text-muted);
+    }
+    .hero h1 .slate .brand { color: var(--brand); font-weight: 600; font-style: normal; white-space: nowrap; }
+    .hero-cta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+
+    /* Floating product cards */
+    .float-card { position: absolute; background: #fff; border: 1px solid rgba(20, 16, 43, 0.10); border-radius: var(--radius-media); box-shadow: var(--shadow-float); }
+    @keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+    .pc-stack { position: relative; width: min(420px, calc(100% - 32px)); margin: 48px 32px 0 0; }
+    .pc-stack .float-card { position: relative; }
+
+    .pc-back { position: absolute !important; z-index: 1; top: -48px; bottom: 48px; left: 32px; right: -32px;
+      display: flex; align-items: flex-start; gap: 8px; padding: 13px 18px 13px 16px; border-radius: 18px;
+      background: #fff; border-color: rgba(20, 16, 43, 0.08); box-shadow: 0 12px 32px rgba(20, 16, 43, 0.10);
+      animation: floatY 6s ease-in-out -2.5s infinite; }
+    .pc-seal { width: 22px; height: 22px; flex: none; border-radius: 50%; background: #EFEBFF; color: #7A5CFF; display: grid; place-items: center; }
+    .pc-seal svg { width: 14px; height: 14px; }
+    .pc-back-title { white-space: nowrap; font-size: 13px; line-height: 22px; font-weight: 600; letter-spacing: -0.01em; color: #14102B; }
+    .pc-back-sub { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; font-size: 13px; line-height: 22px; color: #7D8799; }
+    .pc-back-tag { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 12px; line-height: 22px; font-weight: 500; color: #1E9E6A; }
+    .pc-back-tag i { width: 6px; height: 6px; border-radius: 50%; background: #1E9E6A; box-shadow: 0 0 0 3px rgba(30, 158, 106, 0.15); }
+
+    .path-card { z-index: 2; width: 100%; padding: 24px; border-radius: 24px; border-color: rgba(20, 16, 43, 0.07);
+      animation: floatY 6s ease-in-out infinite; overflow: hidden; }
+    .path-card::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 1px; pointer-events: none;
+      background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.55) 30%, rgba(34, 211, 238, 0.45) 70%, transparent); }
+
+    .pc-q { margin: 0 0 16px; font-size: 15px; line-height: 20px; font-weight: 600; letter-spacing: -0.01em; color: #14102B; }
+
+    .pc-seg { display: flex; gap: 2px; padding: 3px; background: #F3F2F8; border-radius: 12px; }
+    .pc-tab { position: relative; overflow: hidden; flex: 1 1 0; min-height: 32px; padding: 0 8px; border: 0; border-radius: 9px; background: transparent;
+      font: 500 13px/1 'Switzer', sans-serif; letter-spacing: -0.005em; color: #6B6585; white-space: nowrap;
+      transition: background-color 200ms ease, color 200ms ease, box-shadow 200ms ease; }
+    .pc-tab[aria-selected="true"] { background: #fff; color: #14102B; font-weight: 600;
+      box-shadow: 0 1px 2px rgba(20, 16, 43, 0.10), 0 2px 8px rgba(20, 16, 43, 0.06); }
+    /* While the card plays on its own, the chosen tab fills with a hairline of light; when it is full, the next job shows. */
+    .pc-tab::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: 3px; height: 2px; border-radius: 2px;
+      background: linear-gradient(90deg, #8B5CF6, #22D3EE); transform: scaleX(0); transform-origin: left; opacity: 0; }
+    .path-card.auto .pc-tab.run::after { opacity: 1; animation: pcFill 3800ms linear forwards; }
+    @keyframes pcFill { to { transform: scaleX(1); } }
+
+    .pc-stage { margin-top: 24px; min-height: 96px; }
+    .pc-stage.out { opacity: 0; transform: translateY(4px); }
+    .pc-stage.in { transition: opacity 260ms ease, transform 260ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+    .pc-head { display: flex; align-items: center; gap: 8px; height: 28px; margin-bottom: 12px; }
+    .pc-ic { width: 28px; height: 28px; flex: none; border-radius: 8px; background: #EFEBFF; color: #7A5CFF; display: grid; place-items: center; }
+    .pc-glyph { width: 16px; height: 16px; display: none; }
+    .pc-glyph.on { display: block; }
+    .pc-course { font-size: 13px; font-weight: 500; color: #7D8799; letter-spacing: -0.005em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pc-outcome { margin: 0; font-size: 21px; line-height: 28px; font-weight: 600; letter-spacing: -0.02em; color: #14102B; text-wrap: balance; }
+
+    .pc-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      margin: 20px -24px -24px; padding: 14px 24px 16px; border-top: 1px solid rgba(20, 16, 43, 0.06); background: #FCFCFE; }
+    .pc-meta { font-size: 13px; line-height: 20px; color: #9490AE; }
+    .pc-go { display: inline-flex; align-items: center; gap: 2px; font-size: 15px; line-height: 20px; font-weight: 600; letter-spacing: -0.01em;
+      color: #4F5BD5; text-decoration: none; white-space: nowrap; }
+    .pc-go svg { width: 16px; height: 16px; }
+
+    @media (max-width: 1200px) { .pc-outcome { font-size: 19px; line-height: 26px; } .pc-stage { min-height: 90px; } }
+
+    /* ── THEME SWITCH (light theme → moon) ── */
+    .theme-switch {
+      position: fixed; right: 20px; bottom: 20px; z-index: 9999;
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--nav-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--hairline-strong); display: grid; place-items: center;
+      color: var(--text-body);
+    }
+    .theme-switch svg { width: 18px; height: 18px; }
+
+    /* ── COMPASS BEARING HUD ── */
+    #compass-hud {
+      position: fixed; left: 30px; bottom: 30px; z-index: 40;
+      width: 72px;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      background: none; border: none; padding: 0; margin: 0; font: inherit;
+    }
+    #compass-hud svg { display: block; overflow: visible; }
+    #compass-hud #ch-needle { transform-origin: 48px 48px; }
+    #compass-hud .ch-ring { stroke: var(--hairline-strong); }
+    #compass-hud .ch-ticks line { stroke: rgba(20, 16, 43, 0.32); }
+    #compass-hud .ch-north { stroke: var(--brand); }
+    #compass-hud .ch-south { stroke: rgba(20, 16, 43, 0.22); }
+    #compass-hud .ch-dot { fill: var(--brand); }
+    #compass-hud #ch-deg { display: block; width: 72px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; font-weight: 500; letter-spacing: 0.06em; color: var(--text-body); line-height: 1.6; }
+    #compass-hud #ch-label {
+      display: block; width: 72px; text-align: center;
+      font-family: 'Switzer', 'Inter', -apple-system, sans-serif;
+      font-size: 9px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+      white-space: nowrap; color: var(--text-muted); line-height: 1.6;
+    }
+
+    /* ── MOTION — "Guided Light" ── */
+    @keyframes riseIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .hero-left > * { animation: riseIn 500ms both cubic-bezier(0, 0, 0.2, 1); }
+    .hero-left .eyebrow { animation-delay: 110ms; }
+    @keyframes riseSlide { from { transform: translateY(14px); } to { transform: none; } }
+    .hero-left h1 { animation-name: riseSlide; animation-delay: 190ms; }
+    .hero-left .hero-cta { animation-delay: 420ms; }
+    .hero-right { animation: riseIn 600ms 500ms both cubic-bezier(0, 0, 0.2, 1); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-left > *, .hero-right, .path-card, .pc-back, .tick-rule .pulse { animation: none !important; }
+      .hero-field { animation: none !important; opacity: 0.85 !important; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a class="nav-logo">
+      <img src="hero-assets/compassstulogo.png" class="nav-logo-img" alt="CompassStu" width="440" height="466"> CompassStu
+    </a>
+    <ul class="nav-links">
+      <li><a>Courses</a></li>
+      <li><a>How it works</a></li>
+      <li><a>Pricing</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-ghost" tabindex="-1">Sign in</button>
+      <button class="btn-primary" tabindex="-1">Start free</button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="eyebrow">AI skills for working professionals</div>
+        <h1 class="display">
+          <span class="ink">Learning that ends in proof.</span>
+          <span class="slate">Short lessons. Real tasks. <em class="brand">Work you can show.</em></span>
+        </h1>
+        <div class="hero-cta">
+          <button class="btn btn-brand" tabindex="-1">Discover my path</button>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-field" aria-hidden="true"></div>
+        <div class="pc-stack">
+          <div class="float-card pc-back" aria-hidden="true">
+            <span class="pc-seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 005.66 0l3-3a4 4 0 00-5.66-5.66l-1 1"/><path d="M14 10a4 4 0 00-5.66 0l-3 3a4 4 0 005.66 5.66l1-1"/></svg></span>
+            <span class="pc-back-title">Proof page</span>
+            <span class="pc-back-sub">One link to all your graded work</span>
+            <span class="pc-back-tag"><i></i>Shared</span>
+          </div>
+          <div class="float-card path-card auto">
+            <p class="pc-q">Put AI to work in your job.</p>
+            <div class="pc-seg" id="pc-seg"></div>
+            <div class="pc-stage" id="pc-stage">
+              <div class="pc-head"><span class="pc-ic"><svg class="pc-glyph" data-k="ops" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4.5" width="14" height="16" rx="2.5"/><path d="M9 4.5h6v3H9z"/><path d="M9 13.5l2 2 4-4"/></svg><svg class="pc-glyph" data-k="sales" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></svg><svg class="pc-glyph" data-k="product" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l7.5 4.25v8.5L12 20.5l-7.5-4.25v-8.5z"/><path d="M4.5 7.75L12 12l7.5-4.25"/><path d="M12 12v8.5"/></svg><svg class="pc-glyph" data-k="any" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9-1.9 5.1-1.9-5.1-5.1-1.9 5.1-1.9z"/><path d="M18.5 16v4"/><path d="M16.5 18h4"/></svg></span><span class="pc-course" id="pc-course"></span></div>
+              <p class="pc-outcome" id="pc-outcome"></p>
+            </div>
+            <div class="pc-foot">
+              <span class="pc-meta">Learn by applying, not watching.</span>
+              <a class="pc-go">Start free<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap"><div class="tick-rule"><span class="pulse"></span></div></div>
+
+  <div id="compass-hud" aria-hidden="true">
+    <svg width="72" height="72" viewBox="0 0 96 96" fill="none" aria-hidden="true">
+      <circle class="ch-ring" cx="48" cy="48" r="42" fill="none" stroke-width="1.5"></circle>
+      <g class="ch-ticks" stroke-width="1.5" stroke-linecap="round">
+        <line x1="48" y1="6" x2="48" y2="13"></line>
+        <line x1="90" y1="48" x2="83" y2="48"></line>
+        <line x1="48" y1="90" x2="48" y2="83"></line>
+        <line x1="6" y1="48" x2="13" y2="48"></line>
+      </g>
+      <g id="ch-needle">
+        <line class="ch-north" x1="48" y1="48" x2="48" y2="20" stroke-width="1.5" stroke-linecap="round"></line>
+        <line class="ch-south" x1="48" y1="48" x2="48" y2="66" stroke-width="1.5" stroke-linecap="round"></line>
+        <circle class="ch-dot" cx="48" cy="48" r="2.5"></circle>
+      </g>
+    </svg>
+    <span id="ch-deg">N 001°</span>
+    <span id="ch-label">Overview</span>
+  </div>
+
+  <div class="theme-switch" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 3a6.5 6.5 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+    </svg>
+  </div>
+
+  <script>
+    var REDUCE = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Compass needle: same spring as the live HUD (starts at -140°, settles on
+    // the top-of-page bearing). The embed never scrolls, so once it settles the
+    // loop stops instead of running every frame.
+    (function () {
+      var needle = document.getElementById('ch-needle');
+      var STIFF = 0.02, DAMP = 0.88, angle = REDUCE ? 0 : -140, vel = 0;
+      function frame() {
+        vel += (0 - angle) * STIFF; vel *= DAMP; angle += vel;
+        needle.style.transform = 'rotate(' + angle.toFixed(2) + 'deg)';
+        if (Math.abs(angle) > 0.05 || Math.abs(vel) > 0.05) requestAnimationFrame(frame);
+        else needle.style.transform = 'rotate(0deg)';
+      }
+      needle.style.transform = 'rotate(' + angle + 'deg)';
+      if (!REDUCE) requestAnimationFrame(frame);
+    })();
+
+    // Hero path card: one job per tab; the tab's fill bar is the clock — when it
+    // completes, the card moves on to the next job (same as the live site).
+    (function () {
+      var PATHS = [
+        { job: 'Operations', icon: 'ops', course: 'AI for Operations & Admin Professionals',
+          outcome: 'Replies, minutes and reports, drafted with AI and checked by you.' },
+        { job: 'Sales', icon: 'sales', course: 'B2B Sales Mastery with AI',
+          outcome: 'AI does the research groundwork. You make the judgement calls.' },
+        { job: 'Product', icon: 'product', course: 'Claude Code for Product Development',
+          outcome: 'From PRD to working prototype, built with Claude Code.' },
+        { job: 'Any role', icon: 'any', course: 'Applied AI: Agents & Automation',
+          outcome: 'Direct AI agents and automate real work.' }
+      ];
+      var card = document.querySelector('.path-card');
+      var seg = document.getElementById('pc-seg');
+      var stage = document.getElementById('pc-stage');
+      var current = 0;
+      if (REDUCE) card.classList.remove('auto');
+
+      PATHS.forEach(function (p) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'pc-tab'; b.textContent = p.job; b.tabIndex = -1;
+        b.addEventListener('animationend', function () { if (card.classList.contains('auto')) show((current + 1) % PATHS.length, true); });
+        seg.appendChild(b);
+      });
+
+      function fill(i) {
+        var p = PATHS[i];
+        document.getElementById('pc-course').textContent = p.course;
+        document.getElementById('pc-outcome').textContent = p.outcome;
+        Array.prototype.forEach.call(document.querySelectorAll('.pc-glyph'), function (g) { g.classList.toggle('on', g.getAttribute('data-k') === p.icon); });
+      }
+      function select(i) {
+        Array.prototype.forEach.call(seg.children, function (t, k) {
+          t.setAttribute('aria-selected', k === i ? 'true' : 'false');
+          t.classList.remove('run');
+        });
+        void seg.offsetWidth;
+        seg.children[i].classList.add('run');
+      }
+      function show(i, animate) {
+        current = i; select(i);
+        if (!animate || REDUCE) { fill(i); return; }
+        stage.classList.remove('in'); stage.classList.add('out');
+        setTimeout(function () {
+          fill(i);
+          stage.classList.add('in');
+          requestAnimationFrame(function () { stage.classList.remove('out'); });
+        }, 160);
+      }
+      show(0, false);
+    })();
+  </script>
+</body>
+</html>

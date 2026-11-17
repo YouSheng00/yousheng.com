@@ -70,14 +70,21 @@
         <article class="card card--tall" data-tag="Case Study" style="--ratio: 1.9452;">
           <a class="card__link" href="compassstu/" aria-label="Open project: CompassStu">
             <div class="card__media">
-              <!-- Static cover: Images/CompassStu/Compassstu_newcover.png exactly
-                   as supplied (2840×1460), only re-encoded to JPG — no crop, no
-                   recomposition. Card ratio = the image's own 1.9452 at every
-                   width (mobile override in styles.css), so it shows 1:1.
-                   New filename (-v2) so browsers can't serve the old cached
-                   poster. Old animated intros are still on disk
-                   (compassstu/compass-intro-v3-light.html etc.). -->
-              <img src="Images/card-posters/compassstu-v2.jpg" alt="CompassStu — Learning that ends in proof" loading="lazy" decoding="async">
+              <!-- Live embed: compassstu/compassstu-hero.html is a code copy of
+                   the compassstu.com hero (same markup, CSS and motion). It's
+                   laid out at the 1420×730 viewport the cover screenshot was
+                   taken at, then scaled to the card with container-query units
+                   (same trick as the IE100/Linger cards). Card ratio 1420/730 =
+                   1.9452 at every width (mobile override in styles.css).
+                   Poster = Images/CompassStu/Compassstu_newcover.png as supplied
+                   (re-encoded to JPG) — the same hero, so it's a seamless
+                   stand-in on phones and before the iframe loads. -->
+              <img class="card__poster" src="Images/card-posters/compassstu-v2.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async">
+              <div style="container-type: inline-size;">
+                <iframe class="card__motion" data-src="compassstu/compassstu-hero.html" data-poster-only
+                  title="CompassStu hero" aria-hidden="true" loading="lazy" tabindex="-1"
+                  style="position:absolute; top:0; left:0; width:1420px; height:730px; transform-origin:top left; transform:scale(calc(100cqw / 1420px));"></iframe>
+              </div>
             </div>
             <footer class="card__meta">
               <h2 class="card__title">CompassStu</h2>
